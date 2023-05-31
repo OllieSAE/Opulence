@@ -550,6 +550,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2325111965651565196, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -2325111965651565196, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1584120731, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1048529260058701012, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_Name
       value: Player Avatar
@@ -1029,6 +1041,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99af74f356389c94db6a3582665adc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  jumpValue: 5
 --- !u!114 &1584120733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1058,10 +1072,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 07d7741e-7cbc-464c-bab7-73f2570dc2ea
     m_ActionName: Keyboard/Left Move[/Keyboard/a,/Keyboard/leftArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 18bdc1b1-7714-4a27-ac29-431e769f95c2
-    m_ActionName: Keyboard/Right Move[/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1584120732}
