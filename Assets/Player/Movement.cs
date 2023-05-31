@@ -40,7 +40,10 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody.velocity += new Vector2(inputVector.x * speed * Time.fixedDeltaTime, rigidbody.velocity.y);
+        //this is preventing Dash from working
+        rigidbody.velocity = new Vector2(inputVector.x * speed * Time.fixedDeltaTime, rigidbody.velocity.y);
+        
+        //remove this when we have L/R sprites
         if (inputVector.x > 0 && facingLeft)
         {
             Flip();
