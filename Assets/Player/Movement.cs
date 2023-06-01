@@ -12,8 +12,16 @@ public class Movement : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private Vector2 inputVector;
 
+    public Transform groundCheck;
+    public Transform wallCheck;
+    public float groundCheckRadius;
+    public LayerMask groundLayer;
+    private bool isTouchingGround;
+
     //delete once L/R sprites exist
     private bool facingLeft;
+
+    private bool dashing;
     
     public float speed;
     public float jumpValue;
@@ -31,17 +39,23 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Movement.performed += Move;
         playerInputActions.Player.Dash.performed += Dash;
         playerInputActions.Player.Crouch.performed += Crouch;
+
+        dashing = false;
     }
 
     private void Update()
     {
         inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
+        isTouchingGround = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius, groundLayer);
     }
 
     private void FixedUpdate()
     {
-        //this is preventing Dash from working
-        rigidbody.velocity = new Vector2(inputVector.x * speed * Time.fixedDeltaTime, rigidbody.velocity.y);
+        if (!dashing)
+        {
+            rigidbody.velocity = new Vector2(inputVector.x * speed * Time.fixedDeltaTime, rigidbody.velocity.y);
+        }
+        
         
         //remove this when we have L/R sprites
         if (inputVector.x > 0 && facingLeft)
@@ -57,7 +71,7 @@ public class Movement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && isTouchingGround)
         {
             rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
         }
@@ -75,6 +89,7 @@ public class Movement : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
+        StartCoroutine(DashingCoroutine());
         if (context.performed)
         {
             if (!facingLeft)
@@ -89,6 +104,16 @@ public class Movement : MonoBehaviour
                 print("dash left" + rigidbody.velocity.x);
             }
         }
+    }
+
+    private IEnumerator DashingCoroutine()
+    {
+        dashing = true;
+        rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        yield return new WaitForSeconds(0.5f);
+        dashing = false;
+        rigidbody.constraints = RigidbodyConstraints2D.None;
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void Crouch(InputAction.CallbackContext context)
