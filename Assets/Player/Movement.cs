@@ -22,6 +22,8 @@ public class Movement : MonoBehaviour
     private bool facingLeft;
 
     private bool dashing;
+    private bool doubleJump;
+    private bool midairDash;
     
     public float speed;
     public float jumpValue;
@@ -41,12 +43,15 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Crouch.performed += Crouch;
 
         dashing = false;
+        doubleJump = false;
+        midairDash = false;
     }
 
     private void Update()
     {
         inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius, groundLayer);
+        if (isTouchingGround) midairDash = true;
     }
 
     private void FixedUpdate()
@@ -71,9 +76,20 @@ public class Movement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && isTouchingGround)
+        if (context.performed)
         {
-            rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
+            if (!isTouchingGround && doubleJump)
+            {
+                rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
+                rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
+                doubleJump = false;
+            }
+            else if (isTouchingGround)
+            {
+                rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
+                doubleJump = true;
+            }
+            
         }
     }
 
@@ -89,19 +105,34 @@ public class Movement : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        StartCoroutine(DashingCoroutine());
         if (context.performed)
         {
-            if (!facingLeft)
+            if (!isTouchingGround && midairDash)
             {
-                rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
-                print("dash right" + rigidbody.velocity.x);
-            }
+                midairDash = false;
+                StartCoroutine(DashingCoroutine());
+                if (!facingLeft)
+                {
+                    rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
+                }
 
-            if (facingLeft)
+                if (facingLeft)
+                {
+                    rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
+                }
+            }
+            else if (isTouchingGround)
             {
-                rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
-                print("dash left" + rigidbody.velocity.x);
+                StartCoroutine(DashingCoroutine());
+                if (!facingLeft)
+                {
+                    rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
+                }
+
+                if (facingLeft)
+                {
+                    rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
+                }
             }
         }
     }
@@ -110,7 +141,7 @@ public class Movement : MonoBehaviour
     {
         dashing = true;
         rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         dashing = false;
         rigidbody.constraints = RigidbodyConstraints2D.None;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
