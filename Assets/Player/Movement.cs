@@ -6,11 +6,12 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-
     private Rigidbody2D rigidbody;
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
     private Vector2 inputVector;
+
+    public Animator animator;
 
     public Transform groundCheck;
     public Transform wallCheck;
@@ -38,7 +39,7 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Enable();
         playerInputActions.Player.Jump.performed += Jump;
         playerInputActions.Player.Jump.canceled += ArrestJump;
-        playerInputActions.Player.Movement.performed += Move;
+        //playerInputActions.Player.Movement.performed += Move;
         playerInputActions.Player.Dash.performed += Dash;
         playerInputActions.Player.Crouch.performed += Crouch;
 
@@ -51,7 +52,24 @@ public class Movement : MonoBehaviour
     {
         inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius, groundLayer);
-        if (isTouchingGround) midairDash = true;
+        if (isTouchingGround)
+        {
+            midairDash = true;
+            
+        }
+
+        //TODO: fix the animations to work properly
+        // need back outs/exits that work appropriately
+        // play around with paper prototype maybe
+        
+        
+        animator.SetFloat("Y velocity", rigidbody.velocity.y);
+        
+        if ((rigidbody.velocity.x > 0 || rigidbody.velocity.x < 0) && isTouchingGround)
+        {
+            animator.SetBool("Running", true);
+        }
+        else animator.SetBool("Running", false);
     }
 
     private void FixedUpdate()
@@ -89,13 +107,23 @@ public class Movement : MonoBehaviour
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
                 doubleJump = true;
             }
-            
         }
     }
 
-    public void Move(InputAction.CallbackContext context)
+    public void StartMove(InputAction.CallbackContext context)
     {
-        
+        if (context.started)
+        {
+            //StartCoroutine();
+        }
+    }
+
+    public void StopMove(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            //StopCoroutine();
+        }
     }
 
     public void ArrestJump(InputAction.CallbackContext context)
