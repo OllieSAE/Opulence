@@ -139,6 +139,7 @@ public class Movement : MonoBehaviour
             {
                 midairDash = false;
                 StartCoroutine(DashingCoroutine());
+                animator.SetBool("Dashing", true);
                 if (!facingLeft)
                 {
                     rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
@@ -152,6 +153,7 @@ public class Movement : MonoBehaviour
             else if (isTouchingGround)
             {
                 StartCoroutine(DashingCoroutine());
+                animator.SetBool("Dashing", true);
                 if (!facingLeft)
                 {
                     rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
@@ -168,9 +170,11 @@ public class Movement : MonoBehaviour
     private IEnumerator DashingCoroutine()
     {
         dashing = true;
+        
         rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(0.25f);
         dashing = false;
+        animator.SetBool("Dashing", false);
         rigidbody.constraints = RigidbodyConstraints2D.None;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
