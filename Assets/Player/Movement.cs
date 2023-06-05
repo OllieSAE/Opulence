@@ -96,7 +96,7 @@ public class Movement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!isTouchingGround && doubleJump)
+            if (!isTouchingGround && doubleJump && !dashing)
             {
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
