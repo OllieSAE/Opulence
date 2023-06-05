@@ -131,6 +131,7 @@ public class Movement : MonoBehaviour
         if(rigidbody.velocity.y > 0) rigidbody.velocity = new Vector2(rigidbody.velocity.x,0);
     }
 
+    //TODO: Add invulnerability to Dash, maybe with a cooldown too
     public void Dash(InputAction.CallbackContext context)
     {
         if (context.performed)

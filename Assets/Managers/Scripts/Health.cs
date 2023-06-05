@@ -6,13 +6,16 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float currentHealth;
-    public bool isDead;
 
     public float maxHealth;
-
+    
+    private Animator animator;
+    
     private void Awake()
     {
         currentHealth = maxHealth;
+        animator = GetComponentInChildren<Animator>();
+        animator.SetBool("Dead", false);
     }
 
     public void ChangeHealth(float amount, GameObject whoDealtDamage)
@@ -26,7 +29,7 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            isDead = true;
+            animator.SetBool("Dead",true);
         }
     }
 }

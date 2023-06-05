@@ -7,6 +7,7 @@ using UnityEngine;
 public class DamageAOETest : MonoBehaviour
 {
     public float damageRate;
+    public float timer;
 
     private List<Health> availableTargets;
 
@@ -17,8 +18,10 @@ public class DamageAOETest : MonoBehaviour
 
     private void Update()
     {
-        if (availableTargets.Count > 0)
+        timer += Time.deltaTime;
+        if (availableTargets.Count > 0 && timer >= 1)
         {
+            timer = 0;
             DealDamage();
         }
     }
