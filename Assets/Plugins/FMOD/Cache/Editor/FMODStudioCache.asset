@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8105635003343760583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Character.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/Character.bank
+  Name: Character
+  StudioPath: bank:/Character
+  lastModified: 638215757409547190
+  FileSizes:
+  - Name: Desktop
+    Value: 7328
+  Exists: 1
+--- !u!114 &-5030747096660162948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Character Jump
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Character Jump
+  Guid:
+    Data1: -462897359
+    Data2: 1190910065
+    Data3: 594209193
+    Data4: 1116400619
+  Banks:
+  - {fileID: -8105635003343760583}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3776995134910596407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +62,7 @@ MonoBehaviour:
   Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 638214051000586528
+  lastModified: 638215757408344610
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -65,15 +112,17 @@ MonoBehaviour:
   - {fileID: -3776995134910596407}
   - {fileID: 927275283074777944}
   - {fileID: 8502231297472408076}
+  - {fileID: -8105635003343760583}
   EditorEvents:
   - {fileID: -1942979387381948819}
   - {fileID: 3650156888475599221}
+  - {fileID: -5030747096660162948}
   EditorParameters: []
   MasterBanks:
   - {fileID: 927275283074777944}
   StringsBanks:
   - {fileID: 4535093183242707299}
-  cacheTime: 638214051000833996
+  cacheTime: 638215757409547190
   cacheVersion: 131601
 --- !u!114 &927275283074777944
 MonoBehaviour:
@@ -90,7 +139,7 @@ MonoBehaviour:
   Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638214051000625830
+  lastModified: 638215757408367664
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -137,10 +186,10 @@ MonoBehaviour:
   Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/ATMOS.bank
   Name: ATMOS
   StudioPath: bank:/ATMOS
-  lastModified: 638214051000562117
+  lastModified: 638215757408321966
   FileSizes:
   - Name: Desktop
-    Value: 792352
+    Value: 1010880
   Exists: 1
 --- !u!114 &4535093183242707299
 MonoBehaviour:
@@ -157,10 +206,10 @@ MonoBehaviour:
   Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638214051000635310
+  lastModified: 638215757408376488
   FileSizes:
   - Name: Desktop
-    Value: 944
+    Value: 1028
   Exists: 1
 --- !u!114 &8502231297472408076
 MonoBehaviour:
@@ -177,7 +226,7 @@ MonoBehaviour:
   Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638214051000833996
+  lastModified: 638215757408687125
   FileSizes:
   - Name: Desktop
     Value: 12704
