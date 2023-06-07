@@ -16,8 +16,10 @@ public class Movement : MonoBehaviour
     public Transform groundCheck;
     public Transform wallCheck;
     public float groundCheckRadius;
+    public float wallCheckRadius;
     public LayerMask groundLayer;
-    private bool isTouchingGround;
+    public bool isTouchingGround;
+    public bool isTouchingWall;
 
     //delete once L/R sprites exist
     private bool facingLeft;
@@ -25,10 +27,16 @@ public class Movement : MonoBehaviour
     private bool dashing;
     private bool doubleJump;
     private bool midairDash;
+    public bool isSliding;
+    private bool wallJumping;
+    private bool inputAllowed;
     
     public float speed;
     public float jumpValue;
     public float dashValue;
+    public float wallSlidingSpeed;
+    public float wallJumpDuration;
+    public Vector2 wallJumpForce;
 
     private void Awake()
     {
@@ -46,17 +54,46 @@ public class Movement : MonoBehaviour
         dashing = false;
         doubleJump = false;
         midairDash = false;
+        wallJumping = false;
+        inputAllowed = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(groundCheck.position,new Vector3(groundCheck.position.x,groundCheck.position.y - groundCheckRadius,groundCheck.position.z));
+        }
+
+        if (wallCheck != null && facingLeft)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(wallCheck.position,new Vector3(wallCheck.position.x - wallCheckRadius,wallCheck.position.y,wallCheck.position.z));
+        }
+        
+        if (wallCheck != null && !facingLeft)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(wallCheck.position,new Vector3(wallCheck.position.x + wallCheckRadius,wallCheck.position.y,wallCheck.position.z));
+        }
     }
 
     private void Update()
     {
         inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius, groundLayer);
+        isTouchingWall = Physics2D.OverlapCircle(wallCheck.position,wallCheckRadius, groundLayer);
         if (isTouchingGround)
         {
             midairDash = true;
-            
         }
+
+        if (!isTouchingGround && isTouchingWall)
+        {
+            isSliding = true;
+        }
+        else isSliding = false;
 
         //TODO: fix the animations to work properly
         // need back outs/exits that work appropriately
@@ -74,13 +111,36 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!dashing)
+        if (isSliding)
         {
-            rigidbody.velocity = new Vector2(inputVector.x * speed * Time.fixedDeltaTime, rigidbody.velocity.y);
+            rigidbody.velocity = new Vector2(rigidbody.velocity.x,
+                Mathf.Clamp(rigidbody.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
-        
-        
-        //remove this when we have L/R sprites
+
+        if (wallJumping)
+        {
+            inputAllowed = false;
+            StartCoroutine(WallJumpDelayCoroutine());
+            if (facingLeft)
+            {
+                //rigidbody.velocity = new Vector2(wallJumpForce.x, wallJumpForce.y);
+                rigidbody.AddForce(wallJumpForce,ForceMode2D.Impulse);
+            }
+
+            if (!facingLeft)
+            {
+                //rigidbody.velocity = new Vector2(-wallJumpForce.x, wallJumpForce.y);
+                rigidbody.AddForce(new Vector2(-wallJumpForce.x,wallJumpForce.y),ForceMode2D.Impulse);
+            }
+        }
+
+        else if (!dashing && !isSliding)
+        {
+            if (inputAllowed) rigidbody.velocity = new Vector2(inputVector.x * speed * Time.fixedDeltaTime, rigidbody.velocity.y);
+        }
+
+
+            //remove this when we have L/R sprites
         if (inputVector.x > 0 && facingLeft)
         {
             Flip();
@@ -96,7 +156,7 @@ public class Movement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!isTouchingGround && doubleJump && !dashing)
+            if (!isTouchingGround && !isTouchingWall && doubleJump && !dashing)
             {
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
@@ -107,7 +167,26 @@ public class Movement : MonoBehaviour
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
                 doubleJump = true;
             }
+            else if (isSliding)
+            {
+                wallJumping = true;
+                Invoke("StopWallJump", wallJumpDuration);
+            }
         }
+    }
+
+    void StopWallJump()
+    {
+        wallJumping = false;
+    }
+
+    public IEnumerator WallJumpDelayCoroutine()
+    {
+        inputAllowed = false;
+        print("controls locked");
+        yield return new WaitForSeconds(0.5f);
+        print("controls unlocked");
+        inputAllowed = true;
     }
 
     public void StartMove(InputAction.CallbackContext context)
