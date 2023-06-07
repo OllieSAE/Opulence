@@ -36,6 +36,7 @@ public class Movement : MonoBehaviour
     public float dashValue;
     public float wallSlidingSpeed;
     public float wallJumpDuration;
+    public float controlLockDuration;
     public Vector2 wallJumpForce;
 
     private void Awake()
@@ -62,20 +63,23 @@ public class Movement : MonoBehaviour
     {
         if (groundCheck != null)
         {
-            Gizmos.color = Color.red;
             Gizmos.DrawLine(groundCheck.position,new Vector3(groundCheck.position.x,groundCheck.position.y - groundCheckRadius,groundCheck.position.z));
+            if (!isTouchingGround) Gizmos.color = Color.red;
+            else Gizmos.color = Color.green;
         }
 
         if (wallCheck != null && facingLeft)
         {
-            Gizmos.color = Color.blue;
             Gizmos.DrawLine(wallCheck.position,new Vector3(wallCheck.position.x - wallCheckRadius,wallCheck.position.y,wallCheck.position.z));
+            if (!isTouchingWall) Gizmos.color = Color.red;
+            else Gizmos.color = Color.green;
         }
         
         if (wallCheck != null && !facingLeft)
         {
-            Gizmos.color = Color.blue;
             Gizmos.DrawLine(wallCheck.position,new Vector3(wallCheck.position.x + wallCheckRadius,wallCheck.position.y,wallCheck.position.z));
+            if (!isTouchingWall) Gizmos.color = Color.red;
+            else Gizmos.color = Color.green;
         }
     }
 
@@ -184,7 +188,7 @@ public class Movement : MonoBehaviour
     {
         inputAllowed = false;
         print("controls locked");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(controlLockDuration);
         print("controls unlocked");
         inputAllowed = true;
     }

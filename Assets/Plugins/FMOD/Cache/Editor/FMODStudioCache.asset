@@ -1,46 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9111141496919367352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Character.bank
-  m_EditorClassIdentifier: 
-  Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/Character.bank
-  Name: Character
-  StudioPath: bank:/Character
-  lastModified: 638215757409547190
-  FileSizes:
-  - Name: Desktop
-    Value: 7328
-  Exists: 1
---- !u!114 &-4914534417691987420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
-  m_EditorClassIdentifier: 
-  Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638215757408687125
-  FileSizes:
-  - Name: Desktop
-    Value: 12704
-  Exists: 1
---- !u!114 &-3744106086331518050
+--- !u!114 &-6730281161051416117
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/ATMOS.bank
   m_EditorClassIdentifier: 
-  Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/ATMOS.bank
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/ATMOS.bank
   Name: ATMOS
   StudioPath: bank:/ATMOS
-  lastModified: 638215757408321966
+  lastModified: 638217477808165355
   FileSizes:
   - Name: Desktop
     Value: 1010880
@@ -79,7 +39,7 @@ MonoBehaviour:
     Data3: 594209193
     Data4: 1116400619
   Banks:
-  - {fileID: -9111141496919367352}
+  - {fileID: 4203479998521938176}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -87,6 +47,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1077207190084824891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/DX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/DX.bank
+  Name: DX
+  StudioPath: bank:/DX
+  lastModified: 638217477808205516
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,24 +80,64 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 2358812352062585771}
-  - {fileID: -3744106086331518050}
-  - {fileID: -9111141496919367352}
-  - {fileID: 1906606311557418343}
-  - {fileID: 1066460487905972507}
-  - {fileID: -4914534417691987420}
+  - {fileID: 7639460619246295564}
+  - {fileID: -6730281161051416117}
+  - {fileID: 4203479998521938176}
+  - {fileID: -1077207190084824891}
+  - {fileID: 5984861608027102301}
+  - {fileID: 4229628943013474520}
   EditorEvents:
   - {fileID: 9089094159260204132}
   - {fileID: -2203572334895851879}
   - {fileID: 6069202247332239584}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 1066460487905972507}
+  - {fileID: 5984861608027102301}
   StringsBanks:
-  - {fileID: 2358812352062585771}
-  cacheTime: 638215757409547190
+  - {fileID: 7639460619246295564}
+  cacheTime: 638217477808245417
   cacheVersion: 131603
---- !u!114 &1066460487905972507
+--- !u!114 &4203479998521938176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Character.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Character.bank
+  Name: Character
+  StudioPath: bank:/Character
+  lastModified: 638217477808195544
+  FileSizes:
+  - Name: Desktop
+    Value: 7328
+  Exists: 1
+--- !u!114 &4229628943013474520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638217477808245417
+  FileSizes:
+  - Name: Desktop
+    Value: 12704
+  Exists: 1
+--- !u!114 &5984861608027102301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,53 +149,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
   m_EditorClassIdentifier: 
-  Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/Master.bank
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638215757408367664
+  lastModified: 638217477808225190
   FileSizes:
   - Name: Desktop
     Value: 1036
-  Exists: 1
---- !u!114 &1906606311557418343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/DX.bank
-  m_EditorClassIdentifier: 
-  Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/DX.bank
-  Name: DX
-  StudioPath: bank:/DX
-  lastModified: 638215757408344610
-  FileSizes:
-  - Name: Desktop
-    Value: 494
-  Exists: 1
---- !u!114 &2358812352062585771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ../../../Desktop/Opulence FMOD for Unity/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638215757408376488
-  FileSizes:
-  - Name: Desktop
-    Value: 1028
   Exists: 1
 --- !u!114 &6069202247332239584
 MonoBehaviour:
@@ -196,7 +176,7 @@ MonoBehaviour:
     Data3: 544151975
     Data4: 43627201
   Banks:
-  - {fileID: -4914534417691987420}
+  - {fileID: 4229628943013474520}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -204,6 +184,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7639460619246295564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638217477808235487
+  FileSizes:
+  - Name: Desktop
+    Value: 1028
+  Exists: 1
 --- !u!114 &9089094159260204132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
     Data3: -2043683654
     Data4: -432998206
   Banks:
-  - {fileID: -3744106086331518050}
+  - {fileID: -6730281161051416117}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
