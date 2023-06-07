@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -127,13 +129,11 @@ public class Movement : MonoBehaviour
             StartCoroutine(WallJumpDelayCoroutine());
             if (facingLeft)
             {
-                //rigidbody.velocity = new Vector2(wallJumpForce.x, wallJumpForce.y);
                 rigidbody.AddForce(wallJumpForce,ForceMode2D.Impulse);
             }
 
             if (!facingLeft)
             {
-                //rigidbody.velocity = new Vector2(-wallJumpForce.x, wallJumpForce.y);
                 rigidbody.AddForce(new Vector2(-wallJumpForce.x,wallJumpForce.y),ForceMode2D.Impulse);
             }
         }
@@ -164,16 +164,19 @@ public class Movement : MonoBehaviour
             {
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Dash");
                 doubleJump = false;
             }
             else if (isTouchingGround)
             {
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Dash");
                 doubleJump = true;
             }
             else if (isSliding)
             {
                 wallJumping = true;
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Dash");
                 Invoke("StopWallJump", wallJumpDuration);
             }
         }

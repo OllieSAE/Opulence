@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +31,7 @@ public class ObjectPickUpTest : MonoBehaviour
         if (other.GetComponentInParent<PlayerInput>() != null)
         {
             ObjectPickUp?.Invoke();
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/ObjectPickup");
             Destroy(this.gameObject);
         }
     }
