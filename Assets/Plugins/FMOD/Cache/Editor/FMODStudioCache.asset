@@ -15,11 +15,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/ATMOS.bank
   Name: ATMOS
   StudioPath: bank:/ATMOS
-  lastModified: 638217477808165355
+  lastModified: 638217517932432233
   FileSizes:
   - Name: Desktop
     Value: 1010880
   Exists: 1
+--- !u!114 &-5572361900279118234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Dash
+  Guid:
+    Data1: 981950420
+    Data2: 1161471377
+    Data3: 42333080
+    Data4: -263883321
+  Banks:
+  - {fileID: 4203479998521938176}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2203572334895851879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +89,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 638217477808205516
+  lastModified: 638217517932627034
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -90,12 +117,13 @@ MonoBehaviour:
   - {fileID: 9089094159260204132}
   - {fileID: -2203572334895851879}
   - {fileID: 6069202247332239584}
+  - {fileID: -5572361900279118234}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5984861608027102301}
   StringsBanks:
   - {fileID: 7639460619246295564}
-  cacheTime: 638217477808245417
+  cacheTime: 638217517932828123
   cacheVersion: 131603
 --- !u!114 &4203479998521938176
 MonoBehaviour:
@@ -112,10 +140,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638217477808195544
+  lastModified: 638217517932613834
   FileSizes:
   - Name: Desktop
-    Value: 7328
+    Value: 13952
   Exists: 1
 --- !u!114 &4229628943013474520
 MonoBehaviour:
@@ -132,7 +160,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638217477808245417
+  lastModified: 638217517932828123
   FileSizes:
   - Name: Desktop
     Value: 12704
@@ -152,7 +180,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638217477808225190
+  lastModified: 638217517932650122
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -199,10 +227,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638217477808235487
+  lastModified: 638217517932665512
   FileSizes:
   - Name: Desktop
-    Value: 1028
+    Value: 1064
   Exists: 1
 --- !u!114 &9089094159260204132
 MonoBehaviour:
