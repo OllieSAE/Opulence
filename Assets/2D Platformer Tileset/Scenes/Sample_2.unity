@@ -460,6 +460,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 716414380}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: objectPickUpTest
       value: 
       objectReference: {fileID: 2130316033}
@@ -849,6 +853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Avatar
       objectReference: {fileID: 0}
+    - target: {fileID: 2666934854866716956, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6330115352583211059, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -976,6 +984,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 223b07155cb6fee43936b27a5847888e, type: 3}
+--- !u!1 &716414380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1048529260058701012, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+  m_PrefabInstance: {fileID: 624414327}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &780488497
 GameObject:
   m_ObjectHideFlags: 0

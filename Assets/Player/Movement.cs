@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     private Vector2 inputVector;
 
     public Animator animator;
+    private Health health;
 
     public Transform groundCheck;
     public Transform wallCheck;
@@ -45,6 +46,7 @@ public class Movement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
+        health = GetComponent<Health>();
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -59,6 +61,21 @@ public class Movement : MonoBehaviour
         midairDash = false;
         wallJumping = false;
         inputAllowed = true;
+    }
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.playerRespawnEvent += Respawn;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.playerRespawnEvent -= Respawn;
     }
 
     private void OnDrawGizmos()
@@ -153,6 +170,13 @@ public class Movement : MonoBehaviour
         {
             Flip();
         }
+    }
+
+    public void Respawn()
+    {
+        print("player movement tried to respawn");
+        animator.SetBool("Dead", false);
+        health.currentHealth = health.maxHealth;
     }
 
 

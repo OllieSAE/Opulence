@@ -10,6 +10,9 @@ public class Health : MonoBehaviour
     public float maxHealth;
     
     private Animator animator;
+
+    public delegate void DeathEvent(GameObject parent);
+    public event DeathEvent deathEvent;
     
     private void Awake()
     {
@@ -29,7 +32,13 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            animator.SetBool("Dead",true);
+            Death(this.gameObject);
         }
+    }
+
+    public void Death(GameObject go)
+    {
+        animator.SetBool("Dead",true);
+        deathEvent?.Invoke(go);
     }
 }
