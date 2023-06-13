@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class Movement : MonoBehaviour
 {
@@ -12,10 +14,11 @@ public class Movement : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
     private Vector2 inputVector;
-
-    public Animator animator;
     private Health health;
-
+    [Header("Animation")]
+    public Animator animator;
+    
+    [Header("Environment Checks")]
     public Transform groundCheck;
     public Transform wallCheck;
     public float groundCheckRadius;
@@ -33,11 +36,12 @@ public class Movement : MonoBehaviour
     private bool dashing;
     private bool doubleJump;
     private bool midairDash;
-    public bool isSliding;
+    private bool isSliding;
     private bool wallJumping;
     private bool inputAllowed;
     private bool isDead;
     
+    [Header("Movement Values")]
     public float speed;
     public float jumpValue;
     public float dashValue;
@@ -45,6 +49,8 @@ public class Movement : MonoBehaviour
     public float wallJumpDuration;
     public float controlLockDuration;
     public Vector2 wallJumpForce;
+    
+    private FMOD.Studio.EventInstance playerWalk;
 
     private void Awake()
     {
@@ -67,6 +73,9 @@ public class Movement : MonoBehaviour
         respawnCR = false;
         isDead = false;
         playerRespawnPos = transform.position;
+
+        playerWalk = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Footsteps");
+        
     }
 
     private void OnEnable()
@@ -82,6 +91,7 @@ public class Movement : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.playerRespawnEvent -= Respawn;
+        playerWalk.release();
     }
 
     private void OnDrawGizmos()
@@ -134,9 +144,20 @@ public class Movement : MonoBehaviour
         if ((rigidbody.velocity.x > 0 || rigidbody.velocity.x < 0) && isTouchingGround)
         {
             animator.SetBool("Running", true);
+            if (!FmodExtensions.IsPlaying(playerWalk))
+            {
+                playerWalk.start();
+                print("starting walk sound");
+            }
         }
-        else animator.SetBool("Running", false);
+        else
+        {
+            animator.SetBool("Running", false);
+            playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
+        }
     }
+    
+    
 
     private void FixedUpdate()
     {
