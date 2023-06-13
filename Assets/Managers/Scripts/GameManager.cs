@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
 
     public ObjectPickUpTest objectPickUpTest;
     public GameObject player;
-    public Transform playerRespawnPos;
+    public Vector3 playerRespawnPos;
     public bool testObjectPickedUp;
+    
     private static GameManager _instance;
 
     public static GameManager Instance
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
         //TODO:
         //subscribe to other Health's death events when they're created
         
-        playerRespawnPos = player.transform;
+        playerRespawnPos = player.transform.position;
     }
 
     private void ObjectPickedUp()
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
         if (deadThing.layer == 6)
         {
             RespawnPlayer();
-            print(deadThing.ToString() + " has died!");
+            //print(deadThing.ToString() + " has died!");
         }
         else
         {
@@ -68,10 +69,6 @@ public class GameManager : MonoBehaviour
 
     private void RespawnPlayer()
     {
-        player.transform.position = playerRespawnPos.position;
         playerRespawnEvent?.Invoke();
-        print("respawn event invoked from GM");
     }
-    
-    
 }

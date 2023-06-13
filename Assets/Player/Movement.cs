@@ -24,6 +24,9 @@ public class Movement : MonoBehaviour
     public bool isTouchingGround;
     public bool isTouchingWall;
 
+    private Vector3 playerRespawnPos;
+    private bool respawnCR;
+
     //delete once L/R sprites exist
     private bool facingLeft;
 
@@ -33,6 +36,7 @@ public class Movement : MonoBehaviour
     public bool isSliding;
     private bool wallJumping;
     private bool inputAllowed;
+    private bool isDead;
     
     public float speed;
     public float jumpValue;
@@ -52,7 +56,6 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Enable();
         playerInputActions.Player.Jump.performed += Jump;
         playerInputActions.Player.Jump.canceled += ArrestJump;
-        //playerInputActions.Player.Movement.performed += Move;
         playerInputActions.Player.Dash.performed += Dash;
         playerInputActions.Player.Crouch.performed += Crouch;
 
@@ -61,6 +64,9 @@ public class Movement : MonoBehaviour
         midairDash = false;
         wallJumping = false;
         inputAllowed = true;
+        respawnCR = false;
+        isDead = false;
+        playerRespawnPos = transform.position;
     }
 
     private void OnEnable()
@@ -174,15 +180,35 @@ public class Movement : MonoBehaviour
 
     public void Respawn()
     {
-        print("player movement tried to respawn");
-        animator.SetBool("Dead", false);
-        health.currentHealth = health.maxHealth;
+        StartCoroutine(RespawnCoroutine());
     }
+
+    private IEnumerator RespawnCoroutine()
+    {
+        if (respawnCR == false)
+        {
+            respawnCR = true;
+            isDead = true;
+            rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            yield return new WaitForSeconds(3f);
+            transform.position = playerRespawnPos;
+            animator.SetBool("Dead", false);
+            print("player movement tried to respawn");
+            respawnCR = false;
+            isDead = false;
+            yield return new WaitForSeconds(0.2f);
+            animator.SetBool("Dead", false);
+            rigidbody.constraints = RigidbodyConstraints2D.None;
+            rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            health.currentHealth = health.maxHealth;
+        }
+    }
+    
 
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !isDead)
         {
             if (!isTouchingGround && !isTouchingWall && doubleJump && !dashing)
             {
@@ -244,7 +270,7 @@ public class Movement : MonoBehaviour
     //TODO: Add invulnerability to Dash, maybe with a cooldown too
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !isDead)
         {
             if (!isTouchingGround && midairDash)
             {
@@ -254,11 +280,17 @@ public class Movement : MonoBehaviour
                 if (!facingLeft)
                 {
                     rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
+                    
+                    
+                    //RuntimeManager.PlayOneShot("");
                 }
 
                 if (facingLeft)
                 {
                     rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
+                    
+                    
+                    //RuntimeManager.PlayOneShot("");
                 }
             }
             else if (isTouchingGround)
@@ -268,11 +300,17 @@ public class Movement : MonoBehaviour
                 if (!facingLeft)
                 {
                     rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
+                    
+                    
+                    //RuntimeManager.PlayOneShot("");
                 }
 
                 if (facingLeft)
                 {
                     rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
+                    
+                    
+                    //RuntimeManager.PlayOneShot("");
                 }
             }
         }
