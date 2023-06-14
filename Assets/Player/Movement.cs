@@ -94,7 +94,9 @@ public class Movement : MonoBehaviour
         playerWalk.release();
     }
 
-    private void OnDrawGizmos()
+    #region Gizmos
+
+    /*private void OnDrawGizmos()
     {
         if (groundCheck != null)
         {
@@ -116,8 +118,9 @@ public class Movement : MonoBehaviour
             if (!isTouchingWall) Gizmos.color = Color.red;
             else Gizmos.color = Color.green;
         }
-    }
-
+    }*/
+    #endregion
+    
     private void Update()
     {
         inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
