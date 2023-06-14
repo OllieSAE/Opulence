@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
 
     public ObjectPickUpTest objectPickUpTest;
+    public ZhiaHeadCheck zhiaSkeleton;
     public GameObject player;
     public Vector3 playerRespawnPos;
     public bool testObjectPickedUp;
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
     private void ObjectPickedUp()
     {
         testObjectPickedUp = true;
+        zhiaSkeleton.playerHasObject = true;
     }
 
     private void SomethingDied(GameObject deadThing)
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         if (deadThing.layer == 6)
         {
             RespawnPlayer();
+            RespawnObject();
             //print(deadThing.ToString() + " has died!");
         }
         else
@@ -70,5 +73,11 @@ public class GameManager : MonoBehaviour
     private void RespawnPlayer()
     {
         playerRespawnEvent?.Invoke();
+    }
+
+    private void RespawnObject()
+    {
+        objectPickUpTest.gameObject.SetActive(true);
+        zhiaSkeleton.playerHasObject = false;
     }
 }

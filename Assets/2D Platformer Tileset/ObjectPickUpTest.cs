@@ -32,7 +32,7 @@ public class ObjectPickUpTest : MonoBehaviour
         {
             ObjectPickUp?.Invoke();
             RuntimeManager.PlayOneShot("event:/SOUND EVENTS/ObjectPickup");
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }
