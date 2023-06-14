@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8331971158457588631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Footsteps pitch
+  m_EditorClassIdentifier: 
+  Name: Footsteps pitch
+  StudioPath: 
+  Min: 1
+  Max: 4
+  Default: 2
+  ID:
+    data1: 582111831
+    data2: 593626947
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-6362281536366243990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,10 +66,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638221575620745965
+  lastModified: 638223381225387261
   FileSizes:
   - Name: Desktop
-    Value: 13952
+    Value: 35168
   Exists: 1
 --- !u!114 &-3337688838205976797
 MonoBehaviour:
@@ -62,10 +86,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638222634394959209
+  lastModified: 638223381225421486
   FileSizes:
   - Name: Desktop
-    Value: 1080
+    Value: 1120
   Exists: 1
 --- !u!114 &-1828036729265133605
 MonoBehaviour:
@@ -82,7 +106,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638221575620770167
+  lastModified: 638223381225412928
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -164,12 +188,13 @@ MonoBehaviour:
   - {fileID: -6362281536366243990}
   - {fileID: -293801989424842038}
   - {fileID: -436751811692161425}
+  - {fileID: 7397799452261780516}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1828036729265133605}
   StringsBanks:
   - {fileID: -3337688838205976797}
-  cacheTime: 638222634394962790
+  cacheTime: 638223381225430078
   cacheVersion: 131603
 --- !u!114 &712698009279880602
 MonoBehaviour:
@@ -186,10 +211,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/ATMOS.bank
   Name: ATMOS
   StudioPath: bank:/ATMOS
-  lastModified: 638222634394939738
+  lastModified: 638223381225106674
   FileSizes:
   - Name: Desktop
-    Value: 1624064
+    Value: 2147008
   Exists: 1
 --- !u!114 &6902208581302103451
 MonoBehaviour:
@@ -206,11 +231,39 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 638221575620755349
+  lastModified: 638223381225398390
   FileSizes:
   - Name: Desktop
     Value: 494
   Exists: 1
+--- !u!114 &7397799452261780516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Footsteps
+  Guid:
+    Data1: 1879160537
+    Data2: 1266255266
+    Data3: 1624298667
+    Data4: 1701319856
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8331971158457588631}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8380320410098705603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +279,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638222634394962790
+  lastModified: 638223381225430078
   FileSizes:
   - Name: Desktop
     Value: 494
