@@ -1016,7 +1016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7246989514009116390, guid: 6b4b3cdb721b28941a25f29b36a45f5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.707
+      value: -2.63
       objectReference: {fileID: 0}
     - target: {fileID: 7246989514009116390, guid: 6b4b3cdb721b28941a25f29b36a45f5b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3770,6 +3770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHasObject: 0
+  hasBeenTriggered: 0
   dialogueManager: {fileID: 498069207}
 --- !u!61 &1822213561
 BoxCollider2D:
@@ -9752,7 +9753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7246989514009116390, guid: 6b4b3cdb721b28941a25f29b36a45f5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.707
+      value: -2.63
       objectReference: {fileID: 0}
     - target: {fileID: 7246989514009116390, guid: 6b4b3cdb721b28941a25f29b36a45f5b, type: 3}
       propertyPath: m_LocalPosition.z
