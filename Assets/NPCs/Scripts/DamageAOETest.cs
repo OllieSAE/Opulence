@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DamageAOETest : MonoBehaviour
 {
-    public float damageRate;
+    public int damageRate;
     public float timer;
 
     private List<Health> availableTargets;

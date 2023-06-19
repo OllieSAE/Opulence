@@ -39,6 +39,21 @@ public class DialogueManager : MonoBehaviour
         finalDialogueUnlocked = false;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (zhiaContinueButton.activeInHierarchy)
+            {
+                TriggerContinueFaeDialogue();
+            }
+            else if (faeContinueButton.activeInHierarchy)
+            {
+                TriggerContinueZhiaDialogue();
+            }
+        }
+    }
+
     private IEnumerator StartDialogue()
     {
         if (finalDialogueUnlocked)

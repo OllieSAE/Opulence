@@ -229,6 +229,7 @@ public class Movement : MonoBehaviour
 
     public void GamePauseStart()
     {
+        animator.SetBool("Running", false);
         playerWalk.setPaused(true);
         Time.timeScale = 0;
     }
@@ -261,6 +262,7 @@ public class Movement : MonoBehaviour
             rigidbody.constraints = RigidbodyConstraints2D.None;
             rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
             health.currentHealth = health.maxHealth;
+            health.healthBar.SetHealth(health.maxHealth);
         }
     }
     
