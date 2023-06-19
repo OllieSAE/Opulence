@@ -105,6 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &809879197912341610
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2194741793953705292
 Transform:
   m_ObjectHideFlags: 0
@@ -130,8 +131,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809879197912341610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8, y: 0.21, z: -0.056617904}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.6401, y: 0.0573, z: -0.056617904}
+  m_LocalScale: {x: 0.6802, y: 0.6946, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6330115352583211059}
@@ -178,7 +179,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8258baf3547ab88478f72d496a2a5e15, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fafb32c82dc430c448069c44665dbb39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -290,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 100000
+  maxHealth: 30
 --- !u!114 &1584120732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,20 +308,20 @@ MonoBehaviour:
   groundCheck: {fileID: 6041202890415409332}
   wallCheck: {fileID: 5705518602417250313}
   groundCheckRadius: 0.1
-  wallCheckRadius: 0.25
+  wallCheckRadius: 0.125
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   isTouchingGround: 0
   isTouchingWall: 0
-  isSliding: 0
+  inputAllowed: 0
   speed: 125
   jumpValue: 7
   dashValue: 4
   wallSlidingSpeed: 0.5
   wallJumpDuration: 0.1
-  controlLockDuration: 0
-  wallJumpForce: {x: 1, y: 2}
+  controlLockDuration: 0.25
+  wallJumpForce: {x: 4, y: 6}
 --- !u!114 &1584120733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8453692376023438174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.092, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
