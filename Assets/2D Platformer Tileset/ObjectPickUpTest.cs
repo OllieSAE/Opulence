@@ -31,7 +31,7 @@ public class ObjectPickUpTest : MonoBehaviour
         if (other.GetComponentInParent<PlayerInput>() != null)
         {
             ObjectPickUp?.Invoke();
-            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/ObjectPickup");
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Item Pickup");
             this.gameObject.SetActive(false);
         }
     }

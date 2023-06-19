@@ -78,7 +78,7 @@ public class Movement : MonoBehaviour
         playerRespawnPos = transform.position;
 
         playerWalk = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Footsteps");
-        
+        RuntimeManager.AttachInstanceToGameObject(playerWalk, transform, rigidbody);
     }
 
     private void OnEnable()
@@ -229,11 +229,13 @@ public class Movement : MonoBehaviour
 
     public void GamePauseStart()
     {
+        playerWalk.setPaused(true);
         Time.timeScale = 0;
     }
 
     public void GamePauseEnd()
     {
+        playerWalk.setPaused(false);
         Time.timeScale = 1;
     }
 
