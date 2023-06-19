@@ -142,12 +142,14 @@ public class DialogueManager : MonoBehaviour
         {
             zhiaDialogueText.text = string.Empty;
             zhiaSpeechBubbleAnimator.SetTrigger("Close");
+            GameManager.Instance.DialogueManagerEvent();
         }
         else if (finalDialogueUnlocked && faeIndex >= faeDialogueSentences.Length - 1)
         {
-            print("final dialogue done");
+            
             zhiaDialogueText.text = string.Empty;
             zhiaSpeechBubbleAnimator.SetTrigger("Close");
+            
         }
         else StartCoroutine(ContinueFaeDialogue());
     }
@@ -159,13 +161,12 @@ public class DialogueManager : MonoBehaviour
         {
             faeDialogueText.text = string.Empty;
             faeSpeechBubbleAnimator.SetTrigger("Close");
-            print("first dialogue done");
         }
         else if (finalDialogueUnlocked && zhiaIndex >= zhiaDialogueSentences.Length - 1)
         {
-            
             faeDialogueText.text = string.Empty;
             faeSpeechBubbleAnimator.SetTrigger("Close");
+            GameManager.Instance.EndTutorial();
         }
         
         else StartCoroutine(ContinueZhiaDialogue());

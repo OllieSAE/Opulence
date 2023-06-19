@@ -12,6 +12,12 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public Vector3 playerRespawnPos;
     public bool testObjectPickedUp;
+
+    public bool isPaused;
+    public GameObject pauseUI;
+    //Tutorial testing only
+    public GameObject tutorialStartUI;
+    public GameObject tutorialEndUI;
     
     private static GameManager _instance;
 
@@ -30,12 +36,29 @@ public class GameManager : MonoBehaviour
     
     public delegate void PlayerRespawnEvent();
     public event PlayerRespawnEvent playerRespawnEvent;
+
+    public delegate void TutorialDialogueFinishedEvent();
+    public event TutorialDialogueFinishedEvent tutorialDialogueFinishedEvent;
+
+    public delegate void EndTutorialEvent();
+    public event EndTutorialEvent endTutorialEvent;
+
+    public delegate void PauseStartEvent();
+
+    public event PauseStartEvent pauseStartEvent;
     
+    public delegate void PauseEndEvent();
+
+    public event PauseEndEvent pauseEndEvent;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
         testObjectPickedUp = false;
         _instance = this;
+        tutorialStartUI.SetActive(false);
+        tutorialEndUI.SetActive(false);
+        pauseUI.SetActive(false);
     }
 
     //this will break when GM exists before level loaded
@@ -48,6 +71,14 @@ public class GameManager : MonoBehaviour
         //subscribe to other Health's death events when they're created
         
         playerRespawnPos = player.transform.position;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseUI();
+        }
     }
 
     private void ObjectPickedUp()
@@ -79,5 +110,44 @@ public class GameManager : MonoBehaviour
     {
         objectPickUpTest.gameObject.SetActive(true);
         zhiaSkeleton.playerHasObject = false;
+    }
+
+    public void DialogueManagerEvent()
+    {
+        tutorialStartUI.SetActive(true);
+    }
+
+    public void BeginTutorial()
+    {
+        tutorialStartUI.SetActive(false);
+        tutorialDialogueFinishedEvent?.Invoke();
+    }
+
+    public void EndTutorial()
+    {
+        tutorialEndUI.SetActive(true);
+        endTutorialEvent?.Invoke();
+    }
+
+    public void PauseUI()
+    {
+        if (isPaused)
+        {
+            pauseUI.SetActive(false);
+            pauseEndEvent?.Invoke();
+        }
+        else if (!isPaused)
+        {
+            pauseUI.SetActive(true);
+            pauseStartEvent?.Invoke();
+        }
+
+        isPaused = !isPaused;
+
+    }
+
+    public void ExitProgram()
+    {
+        Application.Quit();
     }
 }

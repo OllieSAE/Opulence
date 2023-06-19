@@ -38,7 +38,8 @@ public class Movement : MonoBehaviour
     private bool midairDash;
     private bool isSliding;
     private bool wallJumping;
-    private bool inputAllowed;
+    private bool controlsSet;
+    public bool inputAllowed;
     private bool isDead;
     
     [Header("Movement Values")]
@@ -65,11 +66,13 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Dash.performed += Dash;
         playerInputActions.Player.Crouch.performed += Crouch;
 
+        controlsSet = false;
+        
         dashing = false;
         doubleJump = false;
         midairDash = false;
         wallJumping = false;
-        inputAllowed = true;
+        inputAllowed = false;
         respawnCR = false;
         isDead = false;
         playerRespawnPos = transform.position;
@@ -86,11 +89,32 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.playerRespawnEvent += Respawn;
+        GameManager.Instance.tutorialDialogueFinishedEvent += TutorialDialogueFinished;
+        GameManager.Instance.endTutorialEvent += TutorialFinished;
+        GameManager.Instance.pauseStartEvent += GamePauseStart;
+        GameManager.Instance.pauseEndEvent += GamePauseEnd;
+        //SetUpControls();
+    }
+
+    public void SetUpControls()
+    {
+        controlsSet = true;
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Jump.performed += Jump;
+        playerInputActions.Player.Jump.canceled += ArrestJump;
+        playerInputActions.Player.Dash.performed += Dash;
+        playerInputActions.Player.Crouch.performed += Crouch;
+
     }
 
     private void OnDisable()
     {
         GameManager.Instance.playerRespawnEvent -= Respawn;
+        GameManager.Instance.tutorialDialogueFinishedEvent -= TutorialDialogueFinished;
+        GameManager.Instance.endTutorialEvent -= TutorialFinished;
+        GameManager.Instance.pauseStartEvent -= GamePauseStart;
+        GameManager.Instance.pauseEndEvent -= GamePauseEnd;
         playerWalk.release();
     }
 
@@ -150,7 +174,6 @@ public class Movement : MonoBehaviour
             if (!FmodExtensions.IsPlaying(playerWalk))
             {
                 playerWalk.start();
-                print("starting walk sound");
             }
         }
         else
@@ -176,12 +199,14 @@ public class Movement : MonoBehaviour
             StartCoroutine(WallJumpDelayCoroutine());
             if (facingLeft)
             {
-                rigidbody.AddForce(wallJumpForce,ForceMode2D.Impulse);
+                //rigidbody.AddForce(wallJumpForce,ForceMode2D.Impulse);
+                rigidbody.velocity = new Vector2(-transform.localScale.x * wallJumpForce.x, wallJumpForce.y);
             }
 
             if (!facingLeft)
             {
-                rigidbody.AddForce(new Vector2(-wallJumpForce.x,wallJumpForce.y),ForceMode2D.Impulse);
+                //rigidbody.AddForce(new Vector2(-wallJumpForce.x,wallJumpForce.y),ForceMode2D.Impulse);
+                rigidbody.velocity = new Vector2(-transform.localScale.x * wallJumpForce.x, wallJumpForce.y);
             }
         }
 
@@ -202,6 +227,16 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void GamePauseStart()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void GamePauseEnd()
+    {
+        Time.timeScale = 1;
+    }
+
     public void Respawn()
     {
         StartCoroutine(RespawnCoroutine());
@@ -217,7 +252,6 @@ public class Movement : MonoBehaviour
             yield return new WaitForSeconds(3f);
             transform.position = playerRespawnPos;
             animator.SetBool("Dead", false);
-            print("player movement tried to respawn");
             respawnCR = false;
             isDead = false;
             yield return new WaitForSeconds(0.2f);
@@ -232,7 +266,7 @@ public class Movement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDead)
+        if (context.performed && !isDead && inputAllowed)
         {
             if (!isTouchingGround && !isTouchingWall && doubleJump && !dashing)
             {
@@ -256,6 +290,16 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void TutorialDialogueFinished()
+    {
+        inputAllowed = true;
+    }
+
+    public void TutorialFinished()
+    {
+        inputAllowed = false;
+    }
+
     void StopWallJump()
     {
         wallJumping = false;
@@ -264,9 +308,7 @@ public class Movement : MonoBehaviour
     public IEnumerator WallJumpDelayCoroutine()
     {
         inputAllowed = false;
-        print("controls locked");
         yield return new WaitForSeconds(controlLockDuration);
-        print("controls unlocked");
         inputAllowed = true;
     }
 
@@ -294,7 +336,7 @@ public class Movement : MonoBehaviour
     //TODO: Add invulnerability to Dash, maybe with a cooldown too
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDead)
+        if (context.performed && !isDead && inputAllowed)
         {
             if (!isTouchingGround && midairDash)
             {
