@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Tutorial Stuff")]
     public bool tutorialTestEnable;
+    public bool toggleEnemyMovement;
     public ObjectPickUpTest objectPickUpTest;
     public GameObject tutorialStartUI;
     public GameObject tutorialEndUI;
@@ -52,6 +53,15 @@ public class GameManager : MonoBehaviour
 
     public event PauseEndEvent pauseEndEvent;
 
+    public delegate void EnableEnemyPatrolEvent();
+
+    public event EnableEnemyPatrolEvent enableEnemyPatrolEvent;
+    
+    public delegate void DisableEnemyPatrolEvent();
+
+    public event DisableEnemyPatrolEvent disableEnemyPatrolEvent;
+    
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -72,6 +82,7 @@ public class GameManager : MonoBehaviour
         //subscribe to other Health's death events when they're created
         
         playerRespawnPos = player.transform.position;
+        
     }
 
     private void Update()
@@ -79,6 +90,20 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseUI();
+        }
+    }
+
+    public void ToggleEnemyMovement()
+    {
+        toggleEnemyMovement = !toggleEnemyMovement;
+        if (toggleEnemyMovement)
+        {
+            enableEnemyPatrolEvent?.Invoke();
+        }
+
+        if (!toggleEnemyMovement)
+        {
+            disableEnemyPatrolEvent?.Invoke();
         }
     }
 
