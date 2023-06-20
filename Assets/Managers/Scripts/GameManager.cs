@@ -6,19 +6,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    public ObjectPickUpTest objectPickUpTest;
-    public ZhiaHeadCheck zhiaSkeleton;
+    
     public GameObject player;
     public Vector3 playerRespawnPos;
-    public bool testObjectPickedUp;
-
     public bool isPaused;
     public GameObject pauseUI;
-    //Tutorial testing only
+    
+    [Header("Tutorial Stuff")]
     public bool tutorialTestEnable;
+    public ObjectPickUpTest objectPickUpTest;
     public GameObject tutorialStartUI;
     public GameObject tutorialEndUI;
+    public ZhiaHeadCheck zhiaSkeleton;
+    public bool testObjectPickedUp;
     
     private static GameManager _instance;
 
