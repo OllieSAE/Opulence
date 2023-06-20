@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public GameObject pauseUI;
     //Tutorial testing only
+    public bool tutorialTestEnable;
     public GameObject tutorialStartUI;
     public GameObject tutorialEndUI;
     
