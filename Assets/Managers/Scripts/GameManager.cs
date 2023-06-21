@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
     {
         if (deadThing.layer == 6)
         {
+            
             RespawnPlayer();
             RespawnObject();
             //print(deadThing.ToString() + " has died!");

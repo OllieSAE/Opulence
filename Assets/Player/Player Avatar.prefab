@@ -666,12 +666,11 @@ GameObject:
   - component: {fileID: 6330115352583211059}
   - component: {fileID: -2325111965651565196}
   - component: {fileID: 1584120731}
+  - component: {fileID: 451397470}
   - component: {fileID: 2666934854866716956}
   - component: {fileID: 1584120732}
   - component: {fileID: 1584120733}
   - component: {fileID: 2575634471455701375}
-  - component: {fileID: 451397470}
-  - component: {fileID: 124962278067159535}
   m_Layer: 6
   m_Name: Player Avatar
   m_TagString: Player
@@ -696,6 +695,7 @@ Transform:
   - {fileID: 5705518602417250313}
   - {fileID: 2194741793953705292}
   - {fileID: 2051897553077874494}
+  - {fileID: 2731262880608830011}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -746,6 +746,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3789773, y: 0.4500122}
   m_EdgeRadius: 0
+--- !u!114 &451397470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048529260058701012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245e136e9bcd94e4baa9e17243495013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 0.4
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  meleeAttackPower: 10
+  meleeAttackPoint: {fileID: 2051897553077874494}
+  meleeAttackRange: 0.24
+  meleeHitDelay: 0.25
+  rangedAttackPower: 10
+  launchPoint: {fileID: 2731262880608830011}
+  rangedAttackRange: 0
+  rangedHitDelay: 0
+  projectilePrefab: {fileID: 4786924577641686911, guid: ef8ab564bf53e9543abe35df872d7452, type: 3}
 --- !u!114 &2666934854866716956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,39 +905,37 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.097955614}
   serializedVersion: 2
   m_Radius: 0.1610218
---- !u!114 &451397470
-MonoBehaviour:
+--- !u!1 &1351646737490570182
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048529260058701012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245e136e9bcd94e4baa9e17243495013, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  attackCooldown: 0.4
-  meleeAttackPower: 10
-  meleeAttackPoint: {fileID: 2051897553077874494}
-  meleeAttackRange: 0.24
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  hitDelay: 0.25
---- !u!114 &124962278067159535
-MonoBehaviour:
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2731262880608830011}
+  m_Layer: 6
+  m_Name: RangedAttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2731262880608830011
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048529260058701012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fd3c984995b1b0408f56450a17998db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_GameObject: {fileID: 1351646737490570182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.338, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6330115352583211059}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8163614113733903961
 GameObject:
   m_ObjectHideFlags: 0

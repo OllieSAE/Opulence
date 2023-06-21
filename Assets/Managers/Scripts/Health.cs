@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
 
     private Animator animator;
     private bool thisIsPlayer = false;
+    private bool deathCR = false;
     public HealthBar healthBar;
     public LayerMask playerLayer;
 
@@ -41,13 +42,14 @@ public class Health : MonoBehaviour
         
         if (amount < 0 && currentHealth >= 0 && thisIsPlayer)
         {
-            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
-            print(this.gameObject + " took damage from " +whoDealtDamage);
+            //check who dealt damage, play appropriate sound
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Damage");
+            
         }
         else if (amount < 0 && currentHealth >= 0 && !thisIsPlayer)
         {
             //RuntimeManager.PlayOneShot("enemy takes damage sound")
-            print(gameObject.name + " took " + amount + " damage from Player!");
+            
             StartCoroutine(EnemyDamagedCoroutine());
         }
         
@@ -59,7 +61,7 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = -1;
-            Death(this.gameObject);
+            StartCoroutine(Death(this.gameObject));
         }
     }
 
@@ -72,9 +74,18 @@ public class Health : MonoBehaviour
         transform.localScale = Vector3.one;
     }
 
-    public void Death(GameObject go)
+    public IEnumerator Death(GameObject go)
     {
-        animator.SetBool("Dead",true);
-        deathEvent?.Invoke(go);
+        if (!deathCR)
+        {
+            print("player respawn coroutine started");
+            deathCR = true;
+            animator.SetBool("Dead",true);
+            deathEvent?.Invoke(go);
+            if(thisIsPlayer) RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Death");
+            yield return new WaitForSeconds(5f);
+            deathCR = false;
+        }
+        
     }
 }
