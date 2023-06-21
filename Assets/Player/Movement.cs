@@ -397,7 +397,6 @@ public class Movement : MonoBehaviour
     private IEnumerator DashingCoroutine()
     {
         dashing = true;
-        
         rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(0.25f);
         dashing = false;

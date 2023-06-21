@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Tutorial Stuff")]
     public bool tutorialTestEnable;
-    public bool toggleEnemyMovement;
+    private bool toggleEnemyMovement;
     public ObjectPickUpTest objectPickUpTest;
     public GameObject tutorialStartUI;
     public GameObject tutorialEndUI;

@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class MeleeCombat : MonoBehaviour
 {
+    private PlayerInputActions playerInputActions;
+    
     public Animator animator;
     private bool currentlyAttacking;
     public float attackCooldown;
@@ -13,7 +15,23 @@ public class MeleeCombat : MonoBehaviour
     public Transform meleeAttackPoint;
     public float meleeAttackRange;
     public LayerMask enemyLayers;
-    
+    public float hitDelay;
+
+    private void Awake()
+    {
+        if (gameObject.CompareTag("Player"))
+        {
+            playerInputActions = new PlayerInputActions();
+            playerInputActions.Enable();
+            playerInputActions.Player.MeleeAttack.performed += MeleeAttack;
+        }
+    }
+
+    private void OnDisable()
+    {
+        playerInputActions.Player.MeleeAttack.performed -= MeleeAttack;
+    }
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -22,22 +40,26 @@ public class MeleeCombat : MonoBehaviour
     
     void Update()
     {
-        //replace with new input system shenanigans
-        if (Input.GetMouseButtonDown(0))
+        //enemy AI stuff
+    }
+
+    public void MeleeAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
-            MeleeAttack();
+            StartCoroutine(MeleeAttackCoroutine());
         }
     }
 
-    void MeleeAttack()
+    private IEnumerator MeleeAttackCoroutine()
     {
         if (!currentlyAttacking)
         {
             currentlyAttacking = true;
             StartCoroutine(MeleeAttackCooldownCoroutine());
-            
             animator.SetTrigger("MeleeAttack");
-            
+
+            yield return new WaitForSeconds(hitDelay);
             //Detect enemies in range of attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, meleeAttackRange, enemyLayers);
 
@@ -52,6 +74,7 @@ public class MeleeCombat : MonoBehaviour
     private IEnumerator MeleeAttackCooldownCoroutine()
     {
         yield return new WaitForSeconds(attackCooldown);
+        
         currentlyAttacking = false;
     }
 

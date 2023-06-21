@@ -23,12 +23,9 @@ public class Health : MonoBehaviour
         if (GetComponentInChildren<HealthBar>() != null)
         {
             healthBar = GetComponentInChildren<HealthBar>();
-        }
-
-        if (gameObject.layer == playerLayer)
-        {
             thisIsPlayer = true;
         }
+
         
         currentHealth = maxHealth;
         animator = GetComponentInChildren<Animator>();
@@ -51,6 +48,7 @@ public class Health : MonoBehaviour
         {
             //RuntimeManager.PlayOneShot("enemy takes damage sound")
             print(gameObject.name + " took " + amount + " damage from Player!");
+            StartCoroutine(EnemyDamagedCoroutine());
         }
         
         if (currentHealth > maxHealth)
@@ -63,6 +61,15 @@ public class Health : MonoBehaviour
             currentHealth = -1;
             Death(this.gameObject);
         }
+    }
+
+    private IEnumerator EnemyDamagedCoroutine()
+    {
+        //this is fucking the -1 flip direction
+        //take it's current X value and multiply by 0.75 (since it's either 1 or -1)
+        transform.localScale = new Vector3(0.75f, 0.75f, 1);
+        yield return new WaitForSeconds(0.2f);
+        transform.localScale = Vector3.one;
     }
 
     public void Death(GameObject go)
