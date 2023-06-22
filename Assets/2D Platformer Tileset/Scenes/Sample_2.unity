@@ -1403,6 +1403,10 @@ PrefabInstance:
       propertyPath: objectPickUpTest
       value: 
       objectReference: {fileID: 2130316033}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: tutorialTestEnable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2417026086825389793, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_Name
       value: Game Manager
@@ -2711,6 +2715,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 170866397, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181317841, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181317841, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1048529260058701012, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_Name
       value: Player Avatar

@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack 1",
+                    "name": "MeleeAttack",
                     "type": "Button",
                     "id": "25827cf3-facb-4d79-b654-860dc4df7f26",
                     "expectedControlType": "Button",
@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack 2",
+                    "name": "RangedAttack",
                     "type": "Button",
                     "id": "83d5da63-46e4-4e15-a211-dcdcb72fb679",
                     "expectedControlType": "Button",
@@ -132,7 +132,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack 1",
+                    "action": "MeleeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -143,7 +143,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack 2",
+                    "action": "RangedAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

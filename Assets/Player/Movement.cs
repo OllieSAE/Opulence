@@ -67,12 +67,10 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Crouch.performed += Crouch;
 
         controlsSet = false;
-        
         dashing = false;
         doubleJump = false;
         midairDash = false;
         wallJumping = false;
-        inputAllowed = false;
         respawnCR = false;
         isDead = false;
         playerRespawnPos = transform.position;
@@ -88,6 +86,11 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.Instance.tutorialTestEnable)
+        {
+            inputAllowed = false;
+        }
+        else inputAllowed = true;
         GameManager.Instance.playerRespawnEvent += Respawn;
         GameManager.Instance.tutorialDialogueFinishedEvent += TutorialDialogueFinished;
         GameManager.Instance.endTutorialEvent += TutorialFinished;
@@ -189,10 +192,15 @@ public class Movement : MonoBehaviour
     {
         if (isSliding)
         {
+            animator.SetBool("WallSlide", true);
             rigidbody.velocity = new Vector2(rigidbody.velocity.x,
                 Mathf.Clamp(rigidbody.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
+        //this might be inefficient
+        else animator.SetBool("WallSlide", false);
+        
 
+        
         if (wallJumping)
         {
             inputAllowed = false;
@@ -340,7 +348,7 @@ public class Movement : MonoBehaviour
     //TODO: Add invulnerability to Dash, maybe with a cooldown too
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDead && inputAllowed)
+        if (context.performed && !isDead && inputAllowed && !isSliding)
         {
             if (!isTouchingGround && midairDash)
             {
@@ -389,7 +397,6 @@ public class Movement : MonoBehaviour
     private IEnumerator DashingCoroutine()
     {
         dashing = true;
-        
         rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(0.25f);
         dashing = false;

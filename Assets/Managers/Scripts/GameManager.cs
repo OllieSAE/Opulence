@@ -1,23 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    public ObjectPickUpTest objectPickUpTest;
-    public ZhiaHeadCheck zhiaSkeleton;
+    
     public GameObject player;
     public Vector3 playerRespawnPos;
-    public bool testObjectPickedUp;
-
     public bool isPaused;
     public GameObject pauseUI;
-    //Tutorial testing only
+    
+    [Header("Tutorial Stuff")]
+    public bool tutorialTestEnable;
+    private bool toggleEnemyMovement;
+    public ObjectPickUpTest objectPickUpTest;
     public GameObject tutorialStartUI;
     public GameObject tutorialEndUI;
+    public ZhiaHeadCheck zhiaSkeleton;
+    public bool testObjectPickedUp;
     
     private static GameManager _instance;
 
@@ -51,6 +54,15 @@ public class GameManager : MonoBehaviour
 
     public event PauseEndEvent pauseEndEvent;
 
+    public delegate void EnableEnemyPatrolEvent();
+
+    public event EnableEnemyPatrolEvent enableEnemyPatrolEvent;
+    
+    public delegate void DisableEnemyPatrolEvent();
+
+    public event DisableEnemyPatrolEvent disableEnemyPatrolEvent;
+    
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -71,6 +83,7 @@ public class GameManager : MonoBehaviour
         //subscribe to other Health's death events when they're created
         
         playerRespawnPos = player.transform.position;
+        
     }
 
     private void Update()
@@ -78,6 +91,20 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseUI();
+        }
+    }
+
+    public void ToggleEnemyMovement()
+    {
+        toggleEnemyMovement = !toggleEnemyMovement;
+        if (toggleEnemyMovement)
+        {
+            enableEnemyPatrolEvent?.Invoke();
+        }
+
+        if (!toggleEnemyMovement)
+        {
+            disableEnemyPatrolEvent?.Invoke();
         }
     }
 
@@ -91,6 +118,7 @@ public class GameManager : MonoBehaviour
     {
         if (deadThing.layer == 6)
         {
+            
             RespawnPlayer();
             RespawnObject();
             //print(deadThing.ToString() + " has died!");
