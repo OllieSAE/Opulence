@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_Toon
+  m_Name: m_Toon 2
   m_Shader: {fileID: -6465566751694194690, guid: 94497eea0bf15b64da110bc66378a98a, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Ambient_Strength: 0.89
+    - _Ambient_Strength: 0.7
     - _DistanceAtten: 1
     - _EnableExternalAlpha: 0
     - _Falloff_Amount: 0
@@ -68,7 +68,7 @@ Material:
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _Fresnel_Colour: {r: 1, g: 1, b: 1, a: 1}
     - _LightCol: {r: 1, g: 1, b: 1, a: 0}
-    - _Light_Direction: {r: 0.1, g: 9.59, b: 0.25, a: 0}
+    - _Light_Direction: {r: -0.5, g: 0.5, b: 0.8, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Specular_Colour: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
+    - _Specular_Colour: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
