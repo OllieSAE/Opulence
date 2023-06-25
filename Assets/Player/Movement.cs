@@ -44,6 +44,7 @@ public class Movement : MonoBehaviour
     
     [Header("Movement Values")]
     public float speed;
+    public float velocity;
     public float jumpValue;
     public float dashValue;
     public float wallSlidingSpeed;
@@ -167,11 +168,19 @@ public class Movement : MonoBehaviour
         //TODO: fix the animations to work properly
         // need back outs/exits that work appropriately
         // play around with paper prototype maybe
-        
+
+        if (isTouchingGround)
+        {
+            animator.SetBool("Landed", true);
+        }
+        else
+        {
+            animator.SetBool("Landed", false);
+        }
         
         animator.SetFloat("Y velocity", rigidbody.velocity.y);
-        
-        if ((rigidbody.velocity.x > 0 || rigidbody.velocity.x < 0) && isTouchingGround)
+        // need to figure out why the playerwalk is playing a single footstep after some dashes
+        if ((rigidbody.velocity.x > 0 || rigidbody.velocity.x < 0) && isTouchingGround && !dashing)
         {
             animator.SetBool("Running", true);
             if (!FmodExtensions.IsPlaying(playerWalk))
@@ -179,11 +188,18 @@ public class Movement : MonoBehaviour
                 playerWalk.start();
             }
         }
+        else if (rigidbody.velocity.x == 0 && isTouchingGround)
+        {
+            animator.SetBool("Running", false);
+            playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
+        }
         else
         {
             animator.SetBool("Running", false);
             playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
         }
+        // Added to check vel when debugging animator
+        //Debug.Log(rigidbody.velocity.y);
     }
     
     
