@@ -2075,10 +2075,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451397470, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1181317841, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2094,14 +2090,6 @@ PrefabInstance:
     - target: {fileID: 1185707649, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1584120732, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 16384
-      objectReference: {fileID: 0}
-    - target: {fileID: 1584120732, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
-      propertyPath: stationaryDashValue
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1048529260058701012, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_Name
