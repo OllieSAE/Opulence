@@ -42,7 +42,7 @@ public class Health : MonoBehaviour
         
         if (healthBar != null) healthBar.SetHealth(currentHealth);
         
-        if (amount < 0 && currentHealth >= 0 && thisIsPlayer)
+        if (amount < 0 && currentHealth > 0 && thisIsPlayer)
         {
             //check who dealt damage, play appropriate sound
             RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Damage");
