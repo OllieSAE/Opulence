@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -33,7 +34,12 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //check if Enemy layer
+        if (other.gameObject.layer == 8)
+        {
+            Health enemyHealth = other.GetComponent<Health>();
+            enemyHealth.ChangeHealth(-damage,owner);
+            Destroy(this.gameObject);
+        }
         
     }
 

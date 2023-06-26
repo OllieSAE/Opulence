@@ -23,11 +23,16 @@ public class Combat : MonoBehaviour
     
     [Header("Ranged Combat")]
     public int rangedAttackPower;
+    public int rangedMaxAmmo;
+    private int rangedCurrentAmmo;
+    public float rechargeAmmoTime;
+    private AmmoBar ammoBar; 
     public Transform launchPoint;
     public float flightTime;
     public float rangedHitDelay;
     public GameObject projectilePrefab;
     public Vector2 projectileSpeed;
+    private bool rechargingAmmo;
 
     private void Awake()
     {
@@ -37,6 +42,10 @@ public class Combat : MonoBehaviour
             playerInputActions.Enable();
             playerInputActions.Player.MeleeAttack.performed += MeleeAttack;
             playerInputActions.Player.RangedAttack.performed += RangedAttack;
+            rangedCurrentAmmo = rangedMaxAmmo;
+            ammoBar = GetComponentInChildren<AmmoBar>();
+            ammoBar.SetMaxAmmo(rangedMaxAmmo);
+            ammoBar.SetAmmo(rangedMaxAmmo);
         }
     }
 
@@ -50,6 +59,7 @@ public class Combat : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         currentlyAttacking = false;
+        rechargingAmmo = false;
     }
     
     void Update()
@@ -103,14 +113,19 @@ public class Combat : MonoBehaviour
         if (context.performed)
         {
             StartCoroutine(RangedAttackCoroutine());
+            if (!rechargingAmmo)
+            {
+                StartCoroutine(RechargeAmmo());
+            }
         }
     }
 
     private IEnumerator RangedAttackCoroutine()
     {
-        if (!currentlyAttacking)
+        if (!currentlyAttacking && rangedCurrentAmmo > 0)
         {
             currentlyAttacking = true;
+            rangedCurrentAmmo -= 1;
             StartCoroutine(RangedAttackCooldownCoroutine());
             animator.SetTrigger("RangedAttack");
 
@@ -123,6 +138,7 @@ public class Combat : MonoBehaviour
     
     public void FireProjectile()
     {
+        ammoBar.SetAmmo(rangedCurrentAmmo);
         GameObject go = Instantiate(projectilePrefab, launchPoint.position, projectilePrefab.transform.rotation);
         go.GetComponent<Projectile>()
             .SetProjectileValues(flightTime, this.gameObject, projectileSpeed, rangedAttackPower);
@@ -135,6 +151,26 @@ public class Combat : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
         
         currentlyAttacking = false;
+    }
+
+    
+    //if we add something that forcibly changes the ammo value (eg, a powerup/pickup)
+    //we'll need to manually stop this coroutine most likely
+    private IEnumerator RechargeAmmo()
+    {
+        rechargingAmmo = true;
+        yield return new WaitForSeconds(rechargeAmmoTime);
+        if (rangedCurrentAmmo < rangedMaxAmmo)
+        {
+            rangedCurrentAmmo++;
+            StartCoroutine(RechargeAmmo());
+            ammoBar.SetAmmo(rangedCurrentAmmo);
+        }
+        else if (rangedCurrentAmmo == rangedMaxAmmo)
+        {
+            rechargingAmmo = false;
+            ammoBar.SetAmmo(rangedCurrentAmmo);
+        }
     }
 
     #endregion

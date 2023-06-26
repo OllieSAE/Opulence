@@ -47,6 +47,7 @@ public class Movement : MonoBehaviour
     public float velocity;
     public float jumpValue;
     public float dashValue;
+    public float stationaryDashValue;
     public float wallSlidingSpeed;
     public float wallJumpDuration;
     public float controlLockDuration;
@@ -92,6 +93,7 @@ public class Movement : MonoBehaviour
             inputAllowed = false;
         }
         else inputAllowed = true;
+        
         GameManager.Instance.playerRespawnEvent += Respawn;
         GameManager.Instance.tutorialDialogueFinishedEvent += TutorialDialogueFinished;
         GameManager.Instance.endTutorialEvent += TutorialFinished;
@@ -180,7 +182,7 @@ public class Movement : MonoBehaviour
         
         animator.SetFloat("Y velocity", rigidbody.velocity.y);
         // need to figure out why the playerwalk is playing a single footstep after some dashes
-        if ((rigidbody.velocity.x > 0 || rigidbody.velocity.x < 0) && isTouchingGround && !dashing)
+        if ((rigidbody.velocity.x > 0.01f || rigidbody.velocity.x < -0.01f) && isTouchingGround && !dashing)
         {
             animator.SetBool("Running", true);
             if (!FmodExtensions.IsPlaying(playerWalk))
@@ -387,6 +389,9 @@ public class Movement : MonoBehaviour
                     //RuntimeManager.PlayOneShot("");
                 }
             }
+            //TODO:
+            //if dash feels bad after we fix the tile collider
+            //look at adding double force IF STATIONARY
             else if (isTouchingGround)
             {
                 StartCoroutine(DashingCoroutine());
@@ -394,8 +399,11 @@ public class Movement : MonoBehaviour
                 if (!facingLeft)
                 {
                     rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
-                    
-                    
+
+                    if (rigidbody.velocity.x is < 0.01f and > -0.01f)
+                    {
+                        rigidbody.AddForce(Vector3.right * stationaryDashValue, ForceMode2D.Impulse);
+                    }
                     //RuntimeManager.PlayOneShot("");
                 }
 
@@ -403,7 +411,10 @@ public class Movement : MonoBehaviour
                 {
                     rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
                     
-                    
+                    if (rigidbody.velocity.x is < 0.01f and > -0.01f)
+                    {
+                        rigidbody.AddForce(Vector3.left * stationaryDashValue, ForceMode2D.Impulse);
+                    }
                     //RuntimeManager.PlayOneShot("");
                 }
             }

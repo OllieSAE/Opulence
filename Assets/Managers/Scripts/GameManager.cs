@@ -76,13 +76,9 @@ public class GameManager : MonoBehaviour
     //this will break when GM exists before level loaded
     private void OnEnable()
     {
-        objectPickUpTest.ObjectPickUp += ObjectPickedUp;
-        player.GetComponent<Health>().deathEvent += SomethingDied;
-        
-        //TODO:
-        //subscribe to other Health's death events when they're created
-        
-        playerRespawnPos = player.transform.position;
+        if(objectPickUpTest != null) objectPickUpTest.ObjectPickUp += ObjectPickedUp;
+
+        if(player != null) playerRespawnPos = player.transform.position;
         
     }
 
@@ -92,6 +88,11 @@ public class GameManager : MonoBehaviour
         {
             PauseUI();
         }
+    }
+
+    public void SubscribeToDeathEvents(Health health)
+    {
+        health.deathEvent += SomethingDied;
     }
 
     public void ToggleEnemyMovement()
@@ -118,14 +119,14 @@ public class GameManager : MonoBehaviour
     {
         if (deadThing.layer == 6)
         {
-            
             RespawnPlayer();
-            RespawnObject();
-            //print(deadThing.ToString() + " has died!");
+            if(objectPickUpTest!=null)RespawnObject();
         }
-        else
+        else if (deadThing.layer == 8)
         {
-            //print(deadThing.ToString() + " has died!");
+            print(deadThing.ToString() + " has died!");
+            deadThing.GetComponent<DamageAOETest>().enabled = false;
+            deadThing.GetComponent<BasicEnemyPatrol>().enabled = false;
         }
     }
 

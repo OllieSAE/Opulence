@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemyDontUse : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D rigidbody;

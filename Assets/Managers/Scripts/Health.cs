@@ -32,6 +32,8 @@ public class Health : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("Dead", false);
         if(healthBar!=null) healthBar.SetMaxHealth(maxHealth);
+        
+        GameManager.Instance.SubscribeToDeathEvents(this);
     }
 
     public void ChangeHealth(int amount, GameObject whoDealtDamage)
@@ -67,18 +69,20 @@ public class Health : MonoBehaviour
 
     private IEnumerator EnemyDamagedCoroutine()
     {
-        //this is fucking the -1 flip direction
-        //take it's current X value and multiply by 0.75 (since it's either 1 or -1)
-        transform.localScale = new Vector3(0.75f, 0.75f, 1);
+        Vector3 scale = transform.localScale;
+        float xScale = scale.x;
+        float yScale = scale.y;
+        float zScale = scale.z;
+        
+        transform.localScale = new Vector3(xScale * 0.75f, yScale * 0.75f, zScale);
         yield return new WaitForSeconds(0.2f);
-        transform.localScale = Vector3.one;
+        transform.localScale = scale;
     }
 
     public IEnumerator Death(GameObject go)
     {
         if (!deathCR)
         {
-            print("player respawn coroutine started");
             deathCR = true;
             animator.SetBool("Dead",true);
             deathEvent?.Invoke(go);
@@ -86,6 +90,10 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(5f);
             deathCR = false;
         }
-        
+
+        if (!thisIsPlayer)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

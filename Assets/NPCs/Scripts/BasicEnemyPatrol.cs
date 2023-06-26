@@ -11,11 +11,13 @@ public class BasicEnemyPatrol : MonoBehaviour
     public float groundCheckRadius;
     public float wallCheckRadius;
     public LayerMask groundLayer;
+    public LayerMask playerLayer;
     public bool isGroundAhead;
     public bool isWallAhead;
+    public bool isPlayerAhead;
     private Rigidbody2D rigidbody;
     private Animator animator;
-    private bool facingLeft;
+    public bool facingLeft;
     public bool patrolling = false;
     
     void Start()
@@ -24,6 +26,9 @@ public class BasicEnemyPatrol : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         GameManager.Instance.enableEnemyPatrolEvent += EnablePatrolling;
         GameManager.Instance.disableEnemyPatrolEvent += DisablePatrolling;
+        groundLayer = LayerMask.GetMask("Ground");
+        playerLayer = LayerMask.GetMask("Player");
+        isPlayerAhead = false;
     }
 
     private void OnDisable()
@@ -47,29 +52,38 @@ public class BasicEnemyPatrol : MonoBehaviour
     {
         isGroundAhead = Physics2D.OverlapCircle(groundAheadCheck.position,groundCheckRadius, groundLayer);
         isWallAhead = Physics2D.OverlapCircle(wallAheadCheck.position,wallCheckRadius, groundLayer);
+        isPlayerAhead = Physics2D.OverlapCircle(wallAheadCheck.position,wallCheckRadius, playerLayer);
         if(patrolling) Patrol();
     }
 
     void Patrol()
     {
-        if (isGroundAhead && !facingLeft && !isWallAhead)
+        if (isPlayerAhead)
+        {
+            animator.SetTrigger("Attack");
+        }
+        else if (isGroundAhead && !facingLeft && !isWallAhead && !isPlayerAhead)
         {
             transform.Translate(Vector3.right * Time.deltaTime);
             animator.SetBool("Running", true);
+            //animator.SetBool("Attack", false);
         }
-        else if (isGroundAhead && facingLeft && !isWallAhead)
+        else if (isGroundAhead && facingLeft && !isWallAhead && !isPlayerAhead)
         {
             transform.Translate(Vector3.left * Time.deltaTime);
             animator.SetBool("Running", true);
+            //animator.SetBool("Attack", false);
         }
-        else if (!isGroundAhead || isWallAhead)
+        else if ((!isGroundAhead || isWallAhead) && !isPlayerAhead)
         {
             Flip();
+            //animator.SetBool("Attack", false);
         }
     }
 
     void Flip()
     {
+        print("tried to flip");
         facingLeft = !facingLeft;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;

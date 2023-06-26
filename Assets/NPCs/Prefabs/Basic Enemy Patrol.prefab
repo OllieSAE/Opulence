@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4331296779273578421}
   - component: {fileID: 8624167207764215785}
   - component: {fileID: 1834814332}
-  - component: {fileID: 6439862800166437587}
   - component: {fileID: 7720254892969092249}
   m_Layer: 8
   m_Name: Basic Enemy Patrol
@@ -138,7 +137,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.71875, y: 0.4921875}
+  m_Size: {x: 0.53405195, y: 0.4921875}
   m_EdgeRadius: 0
 --- !u!114 &4331296779273578421
 MonoBehaviour:
@@ -172,9 +171,14 @@ MonoBehaviour:
   wallCheckRadius: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   isGroundAhead: 0
   isWallAhead: 0
+  isPlayerAhead: 0
+  facingLeft: 0
   patrolling: 0
 --- !u!50 &1834814332
 Rigidbody2D:
@@ -197,18 +201,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 6
---- !u!114 &6439862800166437587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4331296779273578422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc4cda7a278a6e149ac35498eea2842a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7720254892969092249
 MonoBehaviour:
   m_ObjectHideFlags: 0
