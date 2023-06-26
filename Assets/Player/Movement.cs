@@ -34,6 +34,7 @@ public class Movement : MonoBehaviour
     private bool facingLeft;
 
     private bool dashing;
+    private bool dashCooldown;
     private bool doubleJump;
     private bool midairDash;
     private bool isSliding;
@@ -49,6 +50,7 @@ public class Movement : MonoBehaviour
     public float jumpValue;
     public float dashValue;
     public float stationaryDashValue;
+    public float dashCooldownDuration;
     public float wallSlidingSpeed;
     public float wallJumpDuration;
     public float controlLockDuration;
@@ -374,8 +376,9 @@ public class Movement : MonoBehaviour
     //TODO: Add invulnerability to Dash, maybe with a cooldown too
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDead && inputAllowed && !isSliding)
+        if (context.performed && !isDead && inputAllowed && !isSliding && !dashCooldown)
         {
+            dashCooldown = true;
             if (!isTouchingGround && midairDash)
             {
                 midairDash = false;
@@ -397,9 +400,6 @@ public class Movement : MonoBehaviour
                     //RuntimeManager.PlayOneShot("");
                 }
             }
-            //TODO:
-            //if dash feels bad after we fix the tile collider
-            //look at adding double force IF STATIONARY
             else if (isTouchingGround)
             {
                 StartCoroutine(DashingCoroutine());
@@ -438,6 +438,8 @@ public class Movement : MonoBehaviour
         animator.SetBool("Dashing", false);
         rigidbody.constraints = RigidbodyConstraints2D.None;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        yield return new WaitForSeconds(dashCooldownDuration);
+        dashCooldown = false;
     }
 
     public void Crouch(InputAction.CallbackContext context)

@@ -1125,9 +1125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCooldown: 0.4
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 256
   meleeAttackPower: 10
   meleeAttackPoint: {fileID: 2051897553077874494}
   meleeAttackRange: 0.24
@@ -1186,6 +1183,7 @@ MonoBehaviour:
   jumpValue: 7
   dashValue: 6
   stationaryDashValue: 12
+  dashCooldownDuration: 0.5
   wallSlidingSpeed: 0.5
   wallJumpDuration: 0.1
   controlLockDuration: 0.25
