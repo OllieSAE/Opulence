@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface iHealth
+
+
+public interface IHealth
 {
     public void TakeDamage(int amount);
 }
 
-public interface iDamageable
+public interface IDamageable
 {
     
 }
+

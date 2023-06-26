@@ -20,6 +20,18 @@ public class BasicEnemyPatrol : MonoBehaviour
     private Combat combat;
     public bool facingLeft;
     public bool patrolling = false;
+    public bool isAttacking = false;
+    public float attackDelay;
+    
+    public enum EnemyType
+    {
+        Melee,
+        Ranged,
+        Charger,
+        Boss
+    }
+
+    [SerializeField] public EnemyType enemyType;
     
     void Start()
     {
@@ -60,10 +72,9 @@ public class BasicEnemyPatrol : MonoBehaviour
 
     void Patrol()
     {
-        if (isPlayerAhead)
+        if (isPlayerAhead && !isAttacking)
         {
-            
-            animator.SetTrigger("Attack");
+            StartCoroutine(EnemyAttackCoroutine());
         }
         else if (isGroundAhead && !facingLeft && !isWallAhead && !isPlayerAhead)
         {
@@ -82,6 +93,14 @@ public class BasicEnemyPatrol : MonoBehaviour
             Flip();
             //animator.SetBool("Attack", false);
         }
+    }
+
+    private IEnumerator EnemyAttackCoroutine()
+    {
+        isAttacking = true;
+        combat.EnemyAttack(enemyType);
+        yield return new WaitForSeconds(attackDelay);
+        isAttacking = false;
     }
 
     void Flip()

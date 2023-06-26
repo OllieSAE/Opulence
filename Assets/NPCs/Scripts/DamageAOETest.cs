@@ -30,7 +30,10 @@ public class DamageAOETest : MonoBehaviour
     {
         foreach (Health target in availableTargets)
         {
-            target.ChangeHealth(-damageRate,this.GameObject());
+            if (target.gameObject.CompareTag("Player"))
+            {
+                target.ChangeHealth(-damageRate,this.GameObject());
+            }
         }
     }
 

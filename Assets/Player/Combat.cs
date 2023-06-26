@@ -55,8 +55,11 @@ public class Combat : MonoBehaviour
 
     private void OnDisable()
     {
-        playerInputActions.Player.MeleeAttack.performed -= MeleeAttack;
-        playerInputActions.Player.RangedAttack.performed -= RangedAttack;
+        if (gameObject.CompareTag("Player"))
+        {
+            playerInputActions.Player.MeleeAttack.performed -= MeleeAttack;
+            playerInputActions.Player.RangedAttack.performed -= RangedAttack;
+        }
     }
 
     void Start()
@@ -65,20 +68,54 @@ public class Combat : MonoBehaviour
         currentlyAttacking = false;
         rechargingAmmo = false;
     }
-    
-    void Update()
+
+    public void EnemyAttack(BasicEnemyPatrol.EnemyType value)
     {
-        //enemy AI stuff
+        if (value == BasicEnemyPatrol.EnemyType.Melee)
+        {
+            EnemyMeleeAttack();
+        }
+
+        if (value == BasicEnemyPatrol.EnemyType.Ranged)
+        {
+            EnemyRangedAttack();
+        }
+        
+        if (value == BasicEnemyPatrol.EnemyType.Charger)
+        {
+            EnemyChargerAttack();
+        }
+
+        if (value == BasicEnemyPatrol.EnemyType.Boss)
+        {
+            EnemyBossAttack();
+        }
     }
 
-    public void EnemyMeleeAttack()
+    private void EnemyMeleeAttack()
     {
-        
+        print("melee attack");
+        animator.SetTrigger("Attack");
     }
 
-    public void EnemyRangedAttack()
+    private void EnemyRangedAttack()
     {
-        
+        StartCoroutine(RangedAttackCoroutine());
+        if (!rechargingAmmo)
+        {
+            StartCoroutine(RechargeAmmo());
+        }
+        print("ranged attack");
+    }
+
+    private void EnemyChargerAttack()
+    {
+        print("charger attack");
+    }
+
+    private void EnemyBossAttack()
+    {
+        print("boss attack");
     }
 
     #region Melee
@@ -138,6 +175,7 @@ public class Combat : MonoBehaviour
     {
         if (!currentlyAttacking && rangedCurrentAmmo > 0)
         {
+            print("ranged attack CR started");
             currentlyAttacking = true;
             rangedCurrentAmmo -= 1;
             StartCoroutine(RangedAttackCooldownCoroutine());
@@ -152,7 +190,7 @@ public class Combat : MonoBehaviour
     
     public void FireProjectile()
     {
-        ammoBar.SetAmmo(rangedCurrentAmmo);
+        if (gameObject.CompareTag("Player")) ammoBar.SetAmmo(rangedCurrentAmmo);
         GameObject go = Instantiate(projectilePrefab, launchPoint.position, projectilePrefab.transform.rotation);
         go.GetComponent<Projectile>()
             .SetProjectileValues(flightTime, this.gameObject, projectileSpeed, rangedAttackPower);
@@ -178,12 +216,12 @@ public class Combat : MonoBehaviour
         {
             rangedCurrentAmmo++;
             StartCoroutine(RechargeAmmo());
-            ammoBar.SetAmmo(rangedCurrentAmmo);
+            if (gameObject.CompareTag("Player")) ammoBar.SetAmmo(rangedCurrentAmmo);
         }
         else if (rangedCurrentAmmo == rangedMaxAmmo)
         {
             rechargingAmmo = false;
-            ammoBar.SetAmmo(rangedCurrentAmmo);
+            if (gameObject.CompareTag("Player")) ammoBar.SetAmmo(rangedCurrentAmmo);
         }
     }
 

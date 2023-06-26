@@ -34,13 +34,13 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.GetComponent<Health>() != null && other.gameObject.layer != owner.gameObject.layer)
         {
             Health enemyHealth = other.GetComponent<Health>();
             enemyHealth.ChangeHealth(-damage,owner);
+            print("i hit something");
             Destroy(this.gameObject);
         }
-        
     }
 
     private IEnumerator DestroySelf()
