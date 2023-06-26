@@ -17,6 +17,7 @@ public class BasicEnemyPatrol : MonoBehaviour
     public bool isPlayerAhead;
     private Rigidbody2D rigidbody;
     private Animator animator;
+    private Combat combat;
     public bool facingLeft;
     public bool patrolling = false;
     
@@ -24,6 +25,7 @@ public class BasicEnemyPatrol : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         rigidbody = GetComponent<Rigidbody2D>();
+        combat = GetComponent<Combat>();
         GameManager.Instance.enableEnemyPatrolEvent += EnablePatrolling;
         GameManager.Instance.disableEnemyPatrolEvent += DisablePatrolling;
         groundLayer = LayerMask.GetMask("Ground");
@@ -60,6 +62,7 @@ public class BasicEnemyPatrol : MonoBehaviour
     {
         if (isPlayerAhead)
         {
+            
             animator.SetTrigger("Attack");
         }
         else if (isGroundAhead && !facingLeft && !isWallAhead && !isPlayerAhead)

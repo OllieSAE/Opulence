@@ -13,7 +13,8 @@ public class Combat : MonoBehaviour
     [Header("General Combat")]
     private bool currentlyAttacking;
     public float attackCooldown;
-    public LayerMask enemyLayers;
+    private LayerMask enemyLayer;
+    private LayerMask playerLayer;
     
     [Header("Melee Combat")]
     public int meleeAttackPower;
@@ -47,6 +48,9 @@ public class Combat : MonoBehaviour
             ammoBar.SetMaxAmmo(rangedMaxAmmo);
             ammoBar.SetAmmo(rangedMaxAmmo);
         }
+
+        enemyLayer = LayerMask.GetMask("Enemies");
+        playerLayer = LayerMask.GetMask("Player");
     }
 
     private void OnDisable()
@@ -65,6 +69,16 @@ public class Combat : MonoBehaviour
     void Update()
     {
         //enemy AI stuff
+    }
+
+    public void EnemyMeleeAttack()
+    {
+        
+    }
+
+    public void EnemyRangedAttack()
+    {
+        
     }
 
     #region Melee
@@ -87,7 +101,7 @@ public class Combat : MonoBehaviour
 
             yield return new WaitForSeconds(meleeHitDelay);
             //Detect enemies in range of attack
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, meleeAttackRange, enemyLayers);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, meleeAttackRange, enemyLayer);
 
             //Damage them
             foreach (Collider2D enemy in hitEnemies)

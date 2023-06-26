@@ -39,6 +39,7 @@ public class Movement : MonoBehaviour
     private bool isSliding;
     private bool wallJumping;
     private bool controlsSet;
+    private bool wallJumpDelayCR;
     public bool inputAllowed;
     private bool isDead;
     
@@ -75,6 +76,7 @@ public class Movement : MonoBehaviour
         wallJumping = false;
         respawnCR = false;
         isDead = false;
+        wallJumpDelayCR = false;
         playerRespawnPos = transform.position;
 
         playerWalk = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Footsteps");
@@ -222,7 +224,10 @@ public class Movement : MonoBehaviour
         if (wallJumping)
         {
             inputAllowed = false;
-            StartCoroutine(WallJumpDelayCoroutine());
+            if (!wallJumpDelayCR)
+            {
+                StartCoroutine(WallJumpDelayCoroutine());
+            }
             if (facingLeft)
             {
                 //rigidbody.AddForce(wallJumpForce,ForceMode2D.Impulse);
@@ -337,9 +342,12 @@ public class Movement : MonoBehaviour
 
     public IEnumerator WallJumpDelayCoroutine()
     {
+        wallJumpDelayCR = true;
         inputAllowed = false;
         yield return new WaitForSeconds(controlLockDuration);
+        Flip();
         inputAllowed = true;
+        wallJumpDelayCR = false;
     }
 
     public void StartMove(InputAction.CallbackContext context)
