@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 346022781ac63ab40804e0e315833cac
+guid: 770d32b39606c534abdcceb6da0ac619
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,59 +101,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bulkyIdleV1_0
+      name: lankyIdleV2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36372883442382c4fabeacb7f5933d54
-      internalID: -862321545
+      spriteID: 78d8849c980208446a07da0645525cd9
+      internalID: 2110531784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_1
+      name: lankyIdleV2_1
       rect:
         serializedVersion: 2
         x: 256
@@ -188,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7d3b25114a468e41ab2c9f26cc1f6a4
-      internalID: -1137219069
+      spriteID: 8e3c021417b87744d9f301e2d3c02f49
+      internalID: 1174689317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_2
+      name: lankyIdleV2_2
       rect:
         serializedVersion: 2
         x: 512
@@ -209,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 126d530b58491ab408ad0d1db39bcd2b
-      internalID: 226043475
+      spriteID: 9f866066cac547c489ac3c8c2c4da053
+      internalID: 871240523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_3
+      name: lankyIdleV2_3
       rect:
         serializedVersion: 2
         x: 768
@@ -230,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ca48f967f424084d8003c803e1db3e8
-      internalID: -1652734357
+      spriteID: d33f2753befd19e4a9293da0de39620c
+      internalID: -987172867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_4
+      name: lankyIdleV2_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -251,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aaa7cd94cb79d7449a79f61d1f5dfb14
-      internalID: 939387410
+      spriteID: 307ef55c556532e4ca7e5b5e1e98f5a1
+      internalID: -2077353393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_5
+      name: lankyIdleV2_5
       rect:
         serializedVersion: 2
         x: 1280
@@ -272,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1d98cf14ac419e4f82308352fb18b01
-      internalID: -864287610
+      spriteID: 226cba52ada5070409ed5ace9e745c65
+      internalID: -730083239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_6
+      name: lankyIdleV2_6
       rect:
         serializedVersion: 2
         x: 1536
@@ -293,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf68d74de2caf744ebe728befac74ee7
-      internalID: -1946129573
+      spriteID: f6c0afa4aa6a79d4fb6bcd8373f83b2e
+      internalID: 471427701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_7
+      name: lankyIdleV2_7
       rect:
         serializedVersion: 2
         x: 1792
@@ -314,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c68a9a6b0366f74f9cc9872389c6401
-      internalID: -616657005
+      spriteID: bae32359ef8230a4f99b157b294d3cf6
+      internalID: -1803492600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_8
+      name: lankyIdleV2_8
       rect:
         serializedVersion: 2
         x: 2048
@@ -335,14 +287,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8e2967d71be6384687e8e68fb4ff05d
-      internalID: 697449236
+      spriteID: b433f102e98fa0d498e9353379c78e96
+      internalID: -260515309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_9
+      name: lankyIdleV2_9
       rect:
         serializedVersion: 2
         x: 2304
@@ -356,14 +308,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9800e9c882131ea498c254c1467ec326
-      internalID: 1152347796
+      spriteID: 54e4f0d5d98fb754cb39805376f6d490
+      internalID: -1455410569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_10
+      name: lankyIdleV2_10
       rect:
         serializedVersion: 2
         x: 2560
@@ -377,14 +329,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acadb24b4c175d049b93ad0fab3d8ed5
-      internalID: 1333560113
+      spriteID: 5cc85173e229d5c4ebecfc65575e804c
+      internalID: -793217076
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_11
+      name: lankyIdleV2_11
       rect:
         serializedVersion: 2
         x: 2816
@@ -398,14 +350,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4b44a813076125408fbecbf78adb7a2
-      internalID: -871642832
+      spriteID: a8a0cc726675c794b8ad195e6298782e
+      internalID: 1954718645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_12
+      name: lankyIdleV2_12
       rect:
         serializedVersion: 2
         x: 3072
@@ -419,14 +371,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe9d91c914e87f34a9994efa667171c3
-      internalID: -1997456890
+      spriteID: 29bfa8649636c8c4dac0e2f74780a50e
+      internalID: 1274622454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_13
+      name: lankyIdleV2_13
       rect:
         serializedVersion: 2
         x: 3328
@@ -440,14 +392,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b0345753c489374ab054213e48a0c46
-      internalID: -1267509470
+      spriteID: 314c38aed41959d448bce3b9ab0e2394
+      internalID: 286277700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_14
+      name: lankyIdleV2_14
       rect:
         serializedVersion: 2
         x: 3584
@@ -461,14 +413,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d9f89b4a4442ac4ab04b209f354d4aa
-      internalID: -2079306824
+      spriteID: 1de652b4c714bce4f89832d8d3cc742c
+      internalID: -66165177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_15
+      name: lankyIdleV2_15
       rect:
         serializedVersion: 2
         x: 3840
@@ -482,14 +434,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a586dbd8d1db9cf4b866c71afc05f176
-      internalID: 1469599847
+      spriteID: 1be0d1497f3fd7e448a080a6a6e59f9f
+      internalID: -1005355868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_16
+      name: lankyIdleV2_16
       rect:
         serializedVersion: 2
         x: 4096
@@ -503,14 +455,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fda4ad65d7d358441ab374547fc8551e
-      internalID: 727643260
+      spriteID: de8868beaabd1b846b89b5fcc708438a
+      internalID: -394446911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_17
+      name: lankyIdleV2_17
       rect:
         serializedVersion: 2
         x: 4352
@@ -524,14 +476,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d50248ac17535f142b91496c2202e135
-      internalID: -911172240
+      spriteID: bbd65e8db8f399f4990bc28677c76456
+      internalID: 1970297262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_18
+      name: lankyIdleV2_18
       rect:
         serializedVersion: 2
         x: 4608
@@ -545,14 +497,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e02fe39f6848144ba79288cc2d218df
-      internalID: -1725332568
+      spriteID: 145e2d2b60ff51c409cbae80d1191303
+      internalID: 2057220686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_19
+      name: lankyIdleV2_19
       rect:
         serializedVersion: 2
         x: 4864
@@ -566,14 +518,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b9b1105b6f0c68499c3b61c7625cfae
-      internalID: -241270602
+      spriteID: 40559a70aaf44474195dbb098cfaa541
+      internalID: 1440263651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_20
+      name: lankyIdleV2_20
       rect:
         serializedVersion: 2
         x: 5120
@@ -587,14 +539,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 461ffdf09c50d974fb58232cfa8b0c6c
-      internalID: -49663007
+      spriteID: 73ba3be64eda489438b781c2342ae903
+      internalID: -1268151261
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_21
+      name: lankyIdleV2_21
       rect:
         serializedVersion: 2
         x: 5376
@@ -608,14 +560,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b9f1972b77b7154fb01e1c75c08adce
-      internalID: -529298077
+      spriteID: 8a2c385d70b346d4aaa8e1bad1145ac4
+      internalID: 574146504
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_22
+      name: lankyIdleV2_22
       rect:
         serializedVersion: 2
         x: 5632
@@ -629,14 +581,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f698a857245b5bb47ad04a7bee3c7b87
-      internalID: -399562836
+      spriteID: c85c2967216d8484089b231852157b28
+      internalID: 1635871387
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_23
+      name: lankyIdleV2_23
       rect:
         serializedVersion: 2
         x: 5888
@@ -650,14 +602,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fe46a8038af47f45a97d7998972077c
-      internalID: 237641044
+      spriteID: d72b2b413ed60264ca3d01b14bbb2382
+      internalID: -1873269134
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_24
+      name: lankyIdleV2_24
       rect:
         serializedVersion: 2
         x: 6144
@@ -671,14 +623,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63b932a1e4e26314ebc0de96848e78e9
-      internalID: 238465150
+      spriteID: 115ba3c4c6406074ab311de075c8616d
+      internalID: 708455244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_25
+      name: lankyIdleV2_25
       rect:
         serializedVersion: 2
         x: 6400
@@ -692,14 +644,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af51b519c6a91844ba47f7deab173e9f
-      internalID: -1860415437
+      spriteID: f7bbe57127d36b94bb8617bf373e4fb3
+      internalID: 1804979021
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_26
+      name: lankyIdleV2_26
       rect:
         serializedVersion: 2
         x: 6656
@@ -713,14 +665,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4870e608b83b8284eaa186561ca2bf85
-      internalID: -295029448
+      spriteID: b1781d9d507d7694185545629fbcac59
+      internalID: 1385972750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_27
+      name: lankyIdleV2_27
       rect:
         serializedVersion: 2
         x: 6912
@@ -734,14 +686,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ded9b71e0709d94795dd88f49570a6a
-      internalID: -1080460091
+      spriteID: d98c8c6f75e572f47acc93284b0b2559
+      internalID: -1575839479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_28
+      name: lankyIdleV2_28
       rect:
         serializedVersion: 2
         x: 7168
@@ -755,14 +707,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a094619cd701f52418eea33a7f37780e
-      internalID: -1437673539
+      spriteID: ca8283ceddaf3394280850e4a2332019
+      internalID: 1270647689
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_29
+      name: lankyIdleV2_29
       rect:
         serializedVersion: 2
         x: 7424
@@ -776,14 +728,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ff02928352322a42b483cc231d29aab
-      internalID: -1847532293
+      spriteID: a50198cfb1021d344b82d6bcbdb13fb7
+      internalID: -1377488490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_30
+      name: lankyIdleV2_30
       rect:
         serializedVersion: 2
         x: 7680
@@ -797,14 +749,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfa0a133b5c0a6d49933f03dae73b177
-      internalID: -582028595
+      spriteID: 9f0eaf20a13a2554985c702289b62cbd
+      internalID: -1857510550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyIdleV1_31
+      name: lankyIdleV2_31
       rect:
         serializedVersion: 2
         x: 7936
@@ -818,8 +770,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 546b1e19755687241856f7e0c4fcda95
-      internalID: 1148437151
+      spriteID: 3d704f86951e05947b1b24afae9ce739
+      internalID: -908092729
       vertices: []
       indices: 
       edges: []
@@ -833,40 +785,42 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: bbf9b3799b0551a49bdc00f8520ed61f, type: 3}
+      name: _Normal
     nameFileIdTable:
-      bulkyIdleV1_0: -862321545
-      bulkyIdleV1_1: -1137219069
-      bulkyIdleV1_10: 1333560113
-      bulkyIdleV1_11: -871642832
-      bulkyIdleV1_12: -1997456890
-      bulkyIdleV1_13: -1267509470
-      bulkyIdleV1_14: -2079306824
-      bulkyIdleV1_15: 1469599847
-      bulkyIdleV1_16: 727643260
-      bulkyIdleV1_17: -911172240
-      bulkyIdleV1_18: -1725332568
-      bulkyIdleV1_19: -241270602
-      bulkyIdleV1_2: 226043475
-      bulkyIdleV1_20: -49663007
-      bulkyIdleV1_21: -529298077
-      bulkyIdleV1_22: -399562836
-      bulkyIdleV1_23: 237641044
-      bulkyIdleV1_24: 238465150
-      bulkyIdleV1_25: -1860415437
-      bulkyIdleV1_26: -295029448
-      bulkyIdleV1_27: -1080460091
-      bulkyIdleV1_28: -1437673539
-      bulkyIdleV1_29: -1847532293
-      bulkyIdleV1_3: -1652734357
-      bulkyIdleV1_30: -582028595
-      bulkyIdleV1_31: 1148437151
-      bulkyIdleV1_4: 939387410
-      bulkyIdleV1_5: -864287610
-      bulkyIdleV1_6: -1946129573
-      bulkyIdleV1_7: -616657005
-      bulkyIdleV1_8: 697449236
-      bulkyIdleV1_9: 1152347796
+      lankyIdleV2_0: 2110531784
+      lankyIdleV2_1: 1174689317
+      lankyIdleV2_10: -793217076
+      lankyIdleV2_11: 1954718645
+      lankyIdleV2_12: 1274622454
+      lankyIdleV2_13: 286277700
+      lankyIdleV2_14: -66165177
+      lankyIdleV2_15: -1005355868
+      lankyIdleV2_16: -394446911
+      lankyIdleV2_17: 1970297262
+      lankyIdleV2_18: 2057220686
+      lankyIdleV2_19: 1440263651
+      lankyIdleV2_2: 871240523
+      lankyIdleV2_20: -1268151261
+      lankyIdleV2_21: 574146504
+      lankyIdleV2_22: 1635871387
+      lankyIdleV2_23: -1873269134
+      lankyIdleV2_24: 708455244
+      lankyIdleV2_25: 1804979021
+      lankyIdleV2_26: 1385972750
+      lankyIdleV2_27: -1575839479
+      lankyIdleV2_28: 1270647689
+      lankyIdleV2_29: -1377488490
+      lankyIdleV2_3: -987172867
+      lankyIdleV2_30: -1857510550
+      lankyIdleV2_31: -908092729
+      lankyIdleV2_4: -2077353393
+      lankyIdleV2_5: -730083239
+      lankyIdleV2_6: 471427701
+      lankyIdleV2_7: -1803492600
+      lankyIdleV2_8: -260515309
+      lankyIdleV2_9: -1455410569
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

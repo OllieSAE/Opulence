@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d0059a1e12efb404e82a72b483357974
+guid: 7e2414ca99044084cbcbbf775ab25199
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,59 +101,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bulkyWalkv2_0
+      name: lankyWalkV2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81811d1d95a510847b6dc090aedc892f
-      internalID: -1988984584
+      spriteID: 0d0a916feb22b834bb0a76af832cfea0
+      internalID: 570108081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_1
+      name: lankyWalkV2_1
       rect:
         serializedVersion: 2
         x: 256
@@ -188,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdcb4eed9d420d443b931e863f525bd3
-      internalID: 1378206377
+      spriteID: 3dddae7cbbf7b6b4da0d2fa90460a783
+      internalID: -1492748227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_2
+      name: lankyWalkV2_2
       rect:
         serializedVersion: 2
         x: 512
@@ -209,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73603e50a0db8fc4db38d68a479739fd
-      internalID: 915536836
+      spriteID: ad67f8512d56a15459387ef5cb54c824
+      internalID: 977292653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_3
+      name: lankyWalkV2_3
       rect:
         serializedVersion: 2
         x: 768
@@ -230,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f76bfb1868dc28f4e971598259d303dd
-      internalID: -1840715722
+      spriteID: 0dfe1a2c782083f4ebbd63ba6ce4e63d
+      internalID: 1865953111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_4
+      name: lankyWalkV2_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -251,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21c7b78b13653c548aa82cf029b0d9fd
-      internalID: 1521249497
+      spriteID: fa9ce8c0799f2064faf1963d1ca7604b
+      internalID: 969059342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_5
+      name: lankyWalkV2_5
       rect:
         serializedVersion: 2
         x: 1280
@@ -272,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f8d1c10778ea4947b9b5be0b4e5ff23
-      internalID: -1139950406
+      spriteID: a1691ebdb1918c14a92d15b01eae0d10
+      internalID: -506247294
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_6
+      name: lankyWalkV2_6
       rect:
         serializedVersion: 2
         x: 1536
@@ -293,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1ff7a0611db7b54b8669a655a16b33e
-      internalID: -1376621572
+      spriteID: 25b27d4f999f73c4a805645b28598882
+      internalID: -1122293381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_7
+      name: lankyWalkV2_7
       rect:
         serializedVersion: 2
         x: 1792
@@ -314,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36900e827c3c90e4fa197c74f0983c5a
-      internalID: 2000757420
+      spriteID: d7073d49c0f1ca34b85ba7fc4afd2c4a
+      internalID: 697695414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_8
+      name: lankyWalkV2_8
       rect:
         serializedVersion: 2
         x: 2048
@@ -335,14 +287,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d00bc96c843bde748a9f56eddb4981ee
-      internalID: 1501134140
+      spriteID: 947b8b2c8d4d1bf41adc604f99e6cba0
+      internalID: 1858313873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_9
+      name: lankyWalkV2_9
       rect:
         serializedVersion: 2
         x: 2304
@@ -356,14 +308,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 096990dd912810d488e0d59c3ba61168
-      internalID: 201485738
+      spriteID: 1af12b00b160e0846845e88be3c4c7d8
+      internalID: 1564871014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_10
+      name: lankyWalkV2_10
       rect:
         serializedVersion: 2
         x: 2560
@@ -377,14 +329,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a434ee0693bc8764aa6f80680c8239ca
-      internalID: -1021344559
+      spriteID: eadbd4fd621a1054796155b91db53916
+      internalID: -1743135702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_11
+      name: lankyWalkV2_11
       rect:
         serializedVersion: 2
         x: 2816
@@ -398,14 +350,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9d1a993ac45b744dbfb24cecc7603a9
-      internalID: -202851180
+      spriteID: ceea70835bdb75343a7a29aa4111c207
+      internalID: 962464138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_12
+      name: lankyWalkV2_12
       rect:
         serializedVersion: 2
         x: 3072
@@ -419,14 +371,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 609b1467026e622479887d87aa3d3b34
-      internalID: 1571291175
+      spriteID: b0015c0c48ac05841a5b8f15571690ea
+      internalID: -951697629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_13
+      name: lankyWalkV2_13
       rect:
         serializedVersion: 2
         x: 3328
@@ -440,14 +392,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51d859531823f4444b7955e490d0ed40
-      internalID: -6793699
+      spriteID: 36bf4b39f73ef134e96bba58619b3557
+      internalID: -700610728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_14
+      name: lankyWalkV2_14
       rect:
         serializedVersion: 2
         x: 3584
@@ -461,14 +413,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54bb3613538d90a4083351e5d5e98785
-      internalID: 2007536265
+      spriteID: 8eea28076f824ea418d8b4e1ed9180c1
+      internalID: 1318278949
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_15
+      name: lankyWalkV2_15
       rect:
         serializedVersion: 2
         x: 3840
@@ -482,14 +434,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 912069e5564da1547877607625ba659f
-      internalID: 659536553
+      spriteID: a4ef3611daf4cfa49917a6c79e71330b
+      internalID: 1172576667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_16
+      name: lankyWalkV2_16
       rect:
         serializedVersion: 2
         x: 4096
@@ -503,14 +455,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8980ee41998b7c146b63796b72f0ce62
-      internalID: 1325235064
+      spriteID: 5f26fd7d300602f428c1218ce21c8ced
+      internalID: 2144664326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_17
+      name: lankyWalkV2_17
       rect:
         serializedVersion: 2
         x: 4352
@@ -524,14 +476,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7d954ed7455dbb4f8a5a994eadebdf4
-      internalID: 1900829256
+      spriteID: b09936517f18e9d48a76ccee5008ffc7
+      internalID: 391833205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_18
+      name: lankyWalkV2_18
       rect:
         serializedVersion: 2
         x: 4608
@@ -545,14 +497,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a051927397cc43e4db45bdf5461e8cf8
-      internalID: 1061518334
+      spriteID: 7665633346043dc4fa2ea0907b8defbe
+      internalID: 13814011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_19
+      name: lankyWalkV2_19
       rect:
         serializedVersion: 2
         x: 4864
@@ -566,14 +518,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bea8b0299484024897fb9c8860ea68e
-      internalID: -1050148277
+      spriteID: 66aa2080af4a8094786ab00ab96d3190
+      internalID: -1936502916
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_20
+      name: lankyWalkV2_20
       rect:
         serializedVersion: 2
         x: 5120
@@ -587,14 +539,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59266a982c8ee384bbb216abcacb5360
-      internalID: 1623668912
+      spriteID: d93065857257ec4428251a0d0b79f6b2
+      internalID: -856162108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_21
+      name: lankyWalkV2_21
       rect:
         serializedVersion: 2
         x: 5376
@@ -608,14 +560,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41badba33baccf540b23c48327723700
-      internalID: 917450957
+      spriteID: 0d7e97be5d792b34994aefc5759e4c9b
+      internalID: -1496733201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_22
+      name: lankyWalkV2_22
       rect:
         serializedVersion: 2
         x: 5632
@@ -629,14 +581,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc44213ed07b65546a0a5b5fe5be3c25
-      internalID: 1008842258
+      spriteID: 842ced0ecf6917441bd351d2fc54e41c
+      internalID: -2042526146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_23
+      name: lankyWalkV2_23
       rect:
         serializedVersion: 2
         x: 5888
@@ -650,14 +602,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02a75901d825bef4c82998f70c7c4200
-      internalID: 254950593
+      spriteID: c7958d76ff92fba4182cec5473a91b54
+      internalID: 283427625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_24
+      name: lankyWalkV2_24
       rect:
         serializedVersion: 2
         x: 6144
@@ -671,14 +623,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7188abca52a027c43b427f6a85bcfc15
-      internalID: -182060007
+      spriteID: 15c2bf95135904d409bebbafa86b8767
+      internalID: 1305426870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_25
+      name: lankyWalkV2_25
       rect:
         serializedVersion: 2
         x: 6400
@@ -692,14 +644,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 555e52daa5659064eb5102f54afe87f0
-      internalID: -144375719
+      spriteID: a7fa7b61ca9f7d5438d19f8f86ed37b4
+      internalID: 1322735401
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_26
+      name: lankyWalkV2_26
       rect:
         serializedVersion: 2
         x: 6656
@@ -713,14 +665,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 599a7238899637a4ab81c9e50a6efab7
-      internalID: 645758115
+      spriteID: 9a2799e1b9807e74c9593e4b727fca0d
+      internalID: 1497637765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_27
+      name: lankyWalkV2_27
       rect:
         serializedVersion: 2
         x: 6912
@@ -734,14 +686,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 162226fa42f94d6449d3d4634f147830
-      internalID: 1356623705
+      spriteID: ab1db0120b82bc742a803b622852421f
+      internalID: -489664870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_28
+      name: lankyWalkV2_28
       rect:
         serializedVersion: 2
         x: 7168
@@ -755,14 +707,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aae66ac4e3fe5534c96e99eda12cc849
-      internalID: -2011683670
+      spriteID: 194369adbf7a1e444bb18e15e3a1cc56
+      internalID: -1930475604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_29
+      name: lankyWalkV2_29
       rect:
         serializedVersion: 2
         x: 7424
@@ -776,14 +728,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05be054d7305335429d2857f042e098f
-      internalID: -118725355
+      spriteID: 6a6585f8af97105429123d0f9aabf5ea
+      internalID: -300951881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_30
+      name: lankyWalkV2_30
       rect:
         serializedVersion: 2
         x: 7680
@@ -797,14 +749,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6e05f01d5ceacc4299e172b73da1eac
-      internalID: -102766765
+      spriteID: 09f99e2359a31e44786ad724e6054c0d
+      internalID: 108833824
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulkyWalkv2_31
+      name: lankyWalkV2_31
       rect:
         serializedVersion: 2
         x: 7936
@@ -818,8 +770,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30a609cda208a4a43b2481d0af271a86
-      internalID: -569304920
+      spriteID: 7d72b357ab21ae44d91aad97a1e24768
+      internalID: -736428134
       vertices: []
       indices: 
       edges: []
@@ -833,40 +785,42 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: c83368d60fbaeb84f9a4316603963f7b, type: 3}
+      name: _Normal
     nameFileIdTable:
-      bulkyWalkv2_0: -1988984584
-      bulkyWalkv2_1: 1378206377
-      bulkyWalkv2_10: -1021344559
-      bulkyWalkv2_11: -202851180
-      bulkyWalkv2_12: 1571291175
-      bulkyWalkv2_13: -6793699
-      bulkyWalkv2_14: 2007536265
-      bulkyWalkv2_15: 659536553
-      bulkyWalkv2_16: 1325235064
-      bulkyWalkv2_17: 1900829256
-      bulkyWalkv2_18: 1061518334
-      bulkyWalkv2_19: -1050148277
-      bulkyWalkv2_2: 915536836
-      bulkyWalkv2_20: 1623668912
-      bulkyWalkv2_21: 917450957
-      bulkyWalkv2_22: 1008842258
-      bulkyWalkv2_23: 254950593
-      bulkyWalkv2_24: -182060007
-      bulkyWalkv2_25: -144375719
-      bulkyWalkv2_26: 645758115
-      bulkyWalkv2_27: 1356623705
-      bulkyWalkv2_28: -2011683670
-      bulkyWalkv2_29: -118725355
-      bulkyWalkv2_3: -1840715722
-      bulkyWalkv2_30: -102766765
-      bulkyWalkv2_31: -569304920
-      bulkyWalkv2_4: 1521249497
-      bulkyWalkv2_5: -1139950406
-      bulkyWalkv2_6: -1376621572
-      bulkyWalkv2_7: 2000757420
-      bulkyWalkv2_8: 1501134140
-      bulkyWalkv2_9: 201485738
+      lankyWalkV2_0: 570108081
+      lankyWalkV2_1: -1492748227
+      lankyWalkV2_10: -1743135702
+      lankyWalkV2_11: 962464138
+      lankyWalkV2_12: -951697629
+      lankyWalkV2_13: -700610728
+      lankyWalkV2_14: 1318278949
+      lankyWalkV2_15: 1172576667
+      lankyWalkV2_16: 2144664326
+      lankyWalkV2_17: 391833205
+      lankyWalkV2_18: 13814011
+      lankyWalkV2_19: -1936502916
+      lankyWalkV2_2: 977292653
+      lankyWalkV2_20: -856162108
+      lankyWalkV2_21: -1496733201
+      lankyWalkV2_22: -2042526146
+      lankyWalkV2_23: 283427625
+      lankyWalkV2_24: 1305426870
+      lankyWalkV2_25: 1322735401
+      lankyWalkV2_26: 1497637765
+      lankyWalkV2_27: -489664870
+      lankyWalkV2_28: -1930475604
+      lankyWalkV2_29: -300951881
+      lankyWalkV2_3: 1865953111
+      lankyWalkV2_30: 108833824
+      lankyWalkV2_31: -736428134
+      lankyWalkV2_4: 969059342
+      lankyWalkV2_5: -506247294
+      lankyWalkV2_6: -1122293381
+      lankyWalkV2_7: 697695414
+      lankyWalkV2_8: 1858313873
+      lankyWalkV2_9: 1564871014
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
