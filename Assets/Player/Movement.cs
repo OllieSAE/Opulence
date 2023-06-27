@@ -309,19 +309,19 @@ public class Movement : MonoBehaviour
             {
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
-                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Dash");
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
                 doubleJump = false;
             }
             else if (isTouchingGround)
             {
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
-                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Dash");
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
                 doubleJump = true;
             }
             else if (isSliding)
             {
                 wallJumping = true;
-                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Dash");
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
                 Invoke("StopWallJump", wallJumpDuration);
             }
         }
@@ -389,7 +389,7 @@ public class Movement : MonoBehaviour
                     rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
                     
                     
-                    //RuntimeManager.PlayOneShot("");
+                    RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Dash");
                 }
 
                 if (facingLeft)
@@ -397,7 +397,7 @@ public class Movement : MonoBehaviour
                     rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
                     
                     
-                    //RuntimeManager.PlayOneShot("");
+                    RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Dash");
                 }
             }
             else if (isTouchingGround)
@@ -412,7 +412,7 @@ public class Movement : MonoBehaviour
                     {
                         rigidbody.AddForce(Vector3.right * stationaryDashValue, ForceMode2D.Impulse);
                     }
-                    //RuntimeManager.PlayOneShot("");
+                    RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Dash");
                 }
 
                 if (facingLeft)
@@ -423,7 +423,7 @@ public class Movement : MonoBehaviour
                     {
                         rigidbody.AddForce(Vector3.left * stationaryDashValue, ForceMode2D.Impulse);
                     }
-                    //RuntimeManager.PlayOneShot("");
+                    RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Dash");
                 }
             }
         }

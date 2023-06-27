@@ -26,13 +26,15 @@ public class Health : MonoBehaviour
             healthBar = GetComponentInChildren<HealthBar>();
             thisIsPlayer = true;
         }
-
         
         currentHealth = maxHealth;
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("Dead", false);
         if(healthBar!=null) healthBar.SetMaxHealth(maxHealth);
-        
+    }
+
+    private void Start()
+    {
         GameManager.Instance.SubscribeToDeathEvents(this);
     }
 
@@ -44,8 +46,14 @@ public class Health : MonoBehaviour
         
         if (amount < 0 && currentHealth > 0 && thisIsPlayer)
         {
-            //check who dealt damage, play appropriate sound
-            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Damage");
+            if (whoDealtDamage.CompareTag("Hazard"))
+            {
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Damage");
+            }
+            else if (whoDealtDamage.CompareTag("Enemy"))
+            {
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Placeholder");
+            }
             
         }
         else if (amount < 0 && currentHealth >= 0 && !thisIsPlayer)

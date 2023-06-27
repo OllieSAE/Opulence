@@ -2663,6 +2663,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basic Enemy Patrol
       objectReference: {fileID: 0}
+    - target: {fileID: 4331296779273578422, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578425, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -3257,6 +3261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Charger Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4123682042663585797, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4123682042663585802, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -3357,10 +3365,6 @@ PrefabInstance:
     - target: {fileID: 1158638353165944239, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1897294870171380922, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
-      propertyPath: flightTime
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}

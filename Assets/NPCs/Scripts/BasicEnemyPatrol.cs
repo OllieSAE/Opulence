@@ -6,22 +6,31 @@ using UnityEngine;
 
 public class BasicEnemyPatrol : MonoBehaviour
 {
+    [Header ("Environment Checks")]
     public Transform groundAheadCheck;
     public Transform wallAheadCheck;
     public float groundCheckRadius;
     public float wallCheckRadius;
-    public LayerMask groundLayer;
-    public LayerMask playerLayer;
-    public bool isGroundAhead;
-    public bool isWallAhead;
-    public bool isPlayerAhead;
+    private LayerMask groundLayer;
+    private LayerMask playerLayer;
+    private bool isGroundAhead;
+    private bool isWallAhead;
     private Rigidbody2D rigidbody;
     private Animator animator;
     private Combat combat;
-    public bool facingLeft;
-    public bool patrolling = false;
-    public bool isAttacking = false;
+    private bool facingLeft;
+    private bool patrolling = false;
+    private bool isAttacking = false;
+
+    [Header("Move/Combat Stuff")]
+    public float defaultSpeed;
+    public float aggroSpeed;
+    private float currentSpeed;
     public float attackDelay;
+    public float sightDistance;
+    public float attackRange;
+    public bool isPlayerInSight;
+    public bool isPlayerInRange;
     
     public enum EnemyType
     {
@@ -42,7 +51,8 @@ public class BasicEnemyPatrol : MonoBehaviour
         GameManager.Instance.disableEnemyPatrolEvent += DisablePatrolling;
         groundLayer = LayerMask.GetMask("Ground");
         playerLayer = LayerMask.GetMask("Player");
-        isPlayerAhead = false;
+        isPlayerInRange = false;
+        currentSpeed = defaultSpeed;
     }
 
     private void OnDisable()
@@ -66,32 +76,64 @@ public class BasicEnemyPatrol : MonoBehaviour
     {
         isGroundAhead = Physics2D.OverlapCircle(groundAheadCheck.position,groundCheckRadius, groundLayer);
         isWallAhead = Physics2D.OverlapCircle(wallAheadCheck.position,wallCheckRadius, groundLayer);
-        isPlayerAhead = Physics2D.OverlapCircle(wallAheadCheck.position,wallCheckRadius, playerLayer);
+        //isPlayerAhead = Physics2D.OverlapCircle(wallAheadCheck.position,wallCheckRadius, playerLayer);
         if(patrolling) Patrol();
+    }
+
+    private void FixedUpdate()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+            origin: transform.position,
+            direction: new Vector2(transform.localScale.x, 0),
+            distance: sightDistance,
+            layerMask: playerLayer);
+        
+        if (hit.collider != null)
+        {
+            isPlayerInSight = true;
+            //need some sort of visual feedback indicating this Enemy can see the Player
+            //maybe change speed?
+            currentSpeed = aggroSpeed;
+            
+            float distance = Vector2.Distance(transform.position, hit.collider.gameObject.transform.position);
+            if (distance < attackRange && distance > -attackRange)
+            {
+                isPlayerInRange = true;
+            }
+            
+            //print("distance to " + hit.collider.name + " is " + distance);
+        }
+        else
+        {
+            isPlayerInSight = false;
+            currentSpeed = defaultSpeed;
+            isPlayerInRange = false;
+        }
+        
+        //Just to visualize the direction/length of the Ray
+        Vector3 forward = new Vector3(transform.localScale.x, 0, 0);
+        Debug.DrawRay(wallAheadCheck.position,forward * sightDistance);
     }
 
     void Patrol()
     {
-        if (isPlayerAhead && !isAttacking)
+        if (isPlayerInRange && !isAttacking)
         {
             StartCoroutine(EnemyAttackCoroutine());
         }
-        else if (isGroundAhead && !facingLeft && !isWallAhead && !isPlayerAhead)
+        else if (isGroundAhead && !facingLeft && !isWallAhead && !isPlayerInRange)
         {
-            transform.Translate(Vector3.right * Time.deltaTime);
+            transform.Translate(Vector3.right * currentSpeed * Time.deltaTime);
             animator.SetBool("Running", true);
-            //animator.SetBool("Attack", false);
         }
-        else if (isGroundAhead && facingLeft && !isWallAhead && !isPlayerAhead)
+        else if (isGroundAhead && facingLeft && !isWallAhead && !isPlayerInRange)
         {
-            transform.Translate(Vector3.left * Time.deltaTime);
+            transform.Translate(Vector3.left * currentSpeed * Time.deltaTime);
             animator.SetBool("Running", true);
-            //animator.SetBool("Attack", false);
         }
-        else if ((!isGroundAhead || isWallAhead) && !isPlayerAhead)
+        else if ((!isGroundAhead || isWallAhead) && !isPlayerInRange)
         {
             Flip();
-            //animator.SetBool("Attack", false);
         }
     }
 

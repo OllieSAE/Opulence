@@ -179,7 +179,8 @@ public class Combat : MonoBehaviour
             currentlyAttacking = true;
             rangedCurrentAmmo -= 1;
             StartCoroutine(RangedAttackCooldownCoroutine());
-            animator.SetTrigger("RangedAttack");
+            if(gameObject.CompareTag("Player")) animator.SetTrigger("RangedAttack");
+            if(gameObject.CompareTag("Enemy")) animator.SetTrigger("Attack");
 
             yield return new WaitForSeconds(rangedHitDelay);
             

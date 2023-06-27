@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 1897294870171380922}
   m_Layer: 8
   m_Name: Ranged Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,19 +170,13 @@ MonoBehaviour:
   wallAheadCheck: {fileID: 4343191213374169977}
   groundCheckRadius: 0.1
   wallCheckRadius: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  isGroundAhead: 0
-  isWallAhead: 0
-  isPlayerAhead: 0
-  facingLeft: 0
-  patrolling: 0
-  isAttacking: 0
+  defaultSpeed: 1
+  aggroSpeed: 2
   attackDelay: 2
+  sightDistance: 6
+  attackRange: 3
+  isPlayerInSight: 0
+  isPlayerInRange: 0
   enemyType: 1
 --- !u!50 &3174919029024467306
 Rigidbody2D:
@@ -237,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 0
   meleeAttackPower: 0
-  meleeAttackPoint: {fileID: 0}
+  meleeAttackPoint: {fileID: 4343191213374169977}
   meleeAttackRange: 0
   meleeHitDelay: 0
   rangedAttackPower: 10
@@ -245,7 +239,7 @@ MonoBehaviour:
   rechargeAmmoTime: 3
   launchPoint: {fileID: 4343191213374169977}
   flightTime: 2
-  rangedHitDelay: 0
+  rangedHitDelay: 0.8
   projectilePrefab: {fileID: 1753633947148026603, guid: 866bc660b2a574c4aa12b3a45ed9e16e, type: 3}
   projectileSpeed: {x: 3, y: 0}
 --- !u!1 &6024986424192824089
