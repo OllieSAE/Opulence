@@ -38,16 +38,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Gamma: 0.1
-    - _PIxel_Constant: 50
-    - _Pizelate_Amount: 0.904
+    - _Edge_Max: 0.05
+    - _Edge_Min: 2.74
+    - _Gamma: 1
+    - _Noise_Scale: 43.3
+    - _PIxel_Constant: 256
+    - _Pizelate_Amount: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 20
-    - _Sections: 10
+    - _Scale: 32.4
+    - _Sections: 1.5
+    - _smoothness: 0.48
     m_Colors:
-    - _Colour_1: {r: 0.6886792, g: 0.14726466, b: 0.14726466, a: 0}
-    - _Scale_Speed: {r: 0, g: 0.01, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Noise_Speed: {r: 0, g: -0.3, b: 0, a: 0}
+    - _Scale_Speed: {r: -0.1, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2287720191835639988
 MonoBehaviour:
