@@ -1127,7 +1127,7 @@ MonoBehaviour:
   attackCooldown: 0.4
   meleeAttackPower: 10
   meleeAttackPoint: {fileID: 2051897553077874494}
-  meleeAttackRange: 0.24
+  meleeAttackRange: 0.3
   meleeHitDelay: 0.25
   rangedAttackPower: 10
   rangedMaxAmmo: 5
@@ -1137,6 +1137,7 @@ MonoBehaviour:
   rangedHitDelay: 0
   projectilePrefab: {fileID: 4786924577641686911, guid: ef8ab564bf53e9543abe35df872d7452, type: 3}
   projectileSpeed: {x: 6, y: 0}
+  chargerCollider: {fileID: 0}
 --- !u!114 &2666934854866716956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,6 +1178,9 @@ MonoBehaviour:
     m_Bits: 16384
   isTouchingGround: 0
   isTouchingWall: 0
+  dashing: 0
+  dashCooldown: 0
+  midairDash: 0
   inputAllowed: 0
   speed: 125
   velocity: 0

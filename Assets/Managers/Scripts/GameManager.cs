@@ -15,12 +15,16 @@ public class GameManager : MonoBehaviour
     
     [Header("Tutorial Stuff")]
     public bool tutorialTestEnable;
+    public bool combatTutorialTestEnable;
     private bool toggleEnemyMovement;
     public ObjectPickUpTest objectPickUpTest;
     public GameObject tutorialStartUI;
     public GameObject tutorialEndUI;
+    public GameObject startCombatUI;
     public ZhiaHeadCheck zhiaSkeleton;
     public bool testObjectPickedUp;
+    public GameObject firstFloor;
+    public GameObject secondFloor;
     
     private static GameManager _instance;
 
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
         tutorialStartUI.SetActive(false);
         tutorialEndUI.SetActive(false);
         pauseUI.SetActive(false);
+        startCombatUI.SetActive(false);
     }
 
     //this will break when GM exists before level loaded
@@ -80,6 +85,11 @@ public class GameManager : MonoBehaviour
 
         if(player != null) playerRespawnPos = player.transform.position;
         
+    }
+
+    private void Start()
+    {
+        if (combatTutorialTestEnable) startCombatUI.SetActive(true);
     }
 
     private void Update()
@@ -107,6 +117,8 @@ public class GameManager : MonoBehaviour
         {
             disableEnemyPatrolEvent?.Invoke();
         }
+
+        if (combatTutorialTestEnable) startCombatUI.SetActive(false);
     }
 
     private void ObjectPickedUp()
@@ -128,6 +140,16 @@ public class GameManager : MonoBehaviour
             deadThing.GetComponent<DamageAOETest>().enabled = false;
             deadThing.GetComponent<BasicEnemyPatrol>().enabled = false;
         }
+    }
+
+    public void DestroyFirstFloor()
+    {
+        if (firstFloor != null) Destroy(firstFloor);
+    }
+
+    public void DestroySecondFloor()
+    {
+        if (secondFloor != null) Destroy(secondFloor);
     }
 
     private void RespawnPlayer()

@@ -72,6 +72,9 @@ public class Health : MonoBehaviour
         {
             currentHealth = -1;
             StartCoroutine(Death(this.gameObject));
+            
+            //combat tutorial only
+            CombatTestManager.Instance.KilledEnemy(this.gameObject);
         }
     }
 
@@ -103,5 +106,7 @@ public class Health : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        
+        
     }
 }

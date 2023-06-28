@@ -14,5 +14,15 @@ public class GameManagerEditor : Editor
         {
             ((GameManager) target).ToggleEnemyMovement();
         }
+
+        if (GUILayout.Button("Destroy First Floor"))
+        {
+            ((GameManager) target).DestroyFirstFloor();
+        }
+        
+        if (GUILayout.Button("Destroy Second Floor"))
+        {
+            ((GameManager) target).DestroySecondFloor();
+        }
     }
 }

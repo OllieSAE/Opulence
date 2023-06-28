@@ -27,6 +27,7 @@ public class BasicEnemyPatrol : MonoBehaviour
     public float defaultSpeed;
     public float aggroSpeed;
     public float currentSpeed;
+    public bool patrolOnly;
     public float attackDelay;
     public float sightDistance;
     public float rearSightDistance;
@@ -86,47 +87,53 @@ public class BasicEnemyPatrol : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit2D frontHit = Physics2D.Raycast(
-            origin: transform.position,
-            direction: new Vector2(transform.localScale.x, 0),
-            distance: sightDistance,
-            layerMask: playerLayer);
-        RaycastHit2D backHit = Physics2D.Raycast(
-            origin: transform.position,
-            direction: new Vector2(-transform.localScale.x, 0),
-            distance: rearSightDistance,
-            layerMask: playerLayer);
-        
-        if (frontHit.collider != null)
+        if (!patrolOnly)
         {
-            isPlayerInSight = true;
-            
-            if(enemyType != EnemyType.Charger) currentSpeed = aggroSpeed;
-            
-            float distance = Vector2.Distance(transform.position, frontHit.collider.gameObject.transform.position);
-            if ((distance < attackRange && distance > -attackRange) && !flipCR)
+            RaycastHit2D frontHit = Physics2D.Raycast(
+                origin: transform.position,
+                direction: new Vector2(transform.localScale.x, 0),
+                distance: sightDistance,
+                layerMask: playerLayer);
+        
+        
+            if (frontHit.collider != null)
             {
-                isPlayerInRange = true;
+                isPlayerInSight = true;
+            
+                if(enemyType != EnemyType.Charger) currentSpeed = aggroSpeed;
+            
+                float distance = Vector2.Distance(transform.position, frontHit.collider.gameObject.transform.position);
+                if ((distance < attackRange && distance > -attackRange) && !flipCR)
+                {
+                    isPlayerInRange = true;
+                }
+                else isPlayerInRange = false;
             }
-            else isPlayerInRange = false;
-        }
-        else
-        {
-            isPlayerInSight = false;
-            isPlayerInRange = false;
-            if(enemyType != EnemyType.Charger) currentSpeed = defaultSpeed;
-        }
+            else
+            {
+                isPlayerInSight = false;
+                isPlayerInRange = false;
+                if(enemyType != EnemyType.Charger) currentSpeed = defaultSpeed;
+            }
 
-        if (backHit.collider != null && enemyType != EnemyType.Charger)
-        {
-            StartCoroutine(FlipCoroutine());
-            //Flip();
-        }
+            #region Rear View Vision + Flip
+            // RaycastHit2D backHit = Physics2D.Raycast(
+            //     origin: transform.position,
+            //     direction: new Vector2(-transform.localScale.x, 0),
+            //     distance: rearSightDistance,
+            //     layerMask: playerLayer);
+            // if (backHit.collider != null && enemyType != EnemyType.Charger)
+            // {
+            //     StartCoroutine(FlipCoroutine());
+            //     //Flip();
+            // }
+            #endregion
         
-        //Just to visualize the direction/length of the Ray
-        Vector3 forward = new Vector3(transform.localScale.x, 0, 0);
-        Debug.DrawRay(wallAheadCheck.position,forward * sightDistance);
-        Debug.DrawRay(wallAheadCheck.position,-forward * rearSightDistance);
+            //Just to visualize the direction/length of the Ray
+            Vector3 forward = new Vector3(transform.localScale.x, 0, 0);
+            Debug.DrawRay(wallAheadCheck.position,forward * sightDistance);
+            //Debug.DrawRay(wallAheadCheck.position,-forward * rearSightDistance);
+        }
     }
 
     private IEnumerator FlipCoroutine()
@@ -148,7 +155,7 @@ public class BasicEnemyPatrol : MonoBehaviour
         {
             currentSpeed = defaultSpeed;
         }
-        if (isPlayerInRange && !isAttacking)
+        if (isPlayerInRange && !isAttacking && !patrolOnly)
         {
             StartCoroutine(EnemyAttackCoroutine());
             currentSpeed = aggroSpeed;

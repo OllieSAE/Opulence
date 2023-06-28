@@ -33,10 +33,10 @@ public class Movement : MonoBehaviour
     //delete once L/R sprites exist
     private bool facingLeft;
 
-    private bool dashing;
-    private bool dashCooldown;
+    public bool dashing;
+    public bool dashCooldown;
     private bool doubleJump;
-    private bool midairDash;
+    public bool midairDash;
     private bool isSliding;
     private bool wallJumping;
     private bool controlsSet;
@@ -378,9 +378,9 @@ public class Movement : MonoBehaviour
     {
         if (context.performed && !isDead && inputAllowed && !isSliding && !dashCooldown)
         {
-            dashCooldown = true;
             if (!isTouchingGround && midairDash)
             {
+                dashCooldown = true;
                 midairDash = false;
                 StartCoroutine(DashingCoroutine());
                 animator.SetBool("Dashing", true);
@@ -402,6 +402,7 @@ public class Movement : MonoBehaviour
             }
             else if (isTouchingGround)
             {
+                dashCooldown = true;
                 StartCoroutine(DashingCoroutine());
                 animator.SetBool("Dashing", true);
                 if (!facingLeft)
