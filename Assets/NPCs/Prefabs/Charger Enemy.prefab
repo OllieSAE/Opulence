@@ -38,6 +38,7 @@ Transform:
   m_Children:
   - {fileID: 6052633223331693143}
   - {fileID: 1542501478319828700}
+  - {fileID: 8623818843008773515}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -170,19 +171,16 @@ MonoBehaviour:
   wallAheadCheck: {fileID: 1542501478319828700}
   groundCheckRadius: 0.1
   wallCheckRadius: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  isGroundAhead: 0
-  isWallAhead: 0
-  isPlayerAhead: 0
-  facingLeft: 0
-  patrolling: 0
-  isAttacking: 0
-  attackDelay: 2
+  defaultSpeed: 0.25
+  aggroSpeed: 4
+  currentSpeed: 0
+  attackDelay: 1
+  sightDistance: 3
+  rearSightDistance: 0
+  rearViewFlipDelay: 0.5
+  attackRange: 3
+  isPlayerInSight: 0
+  isPlayerInRange: 0
   enemyType: 2
 --- !u!50 &369745422201578703
 Rigidbody2D:
@@ -235,11 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245e136e9bcd94e4baa9e17243495013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 0
-  meleeAttackPower: 0
-  meleeAttackPoint: {fileID: 0}
+  attackCooldown: 2
+  meleeAttackPower: 5
+  meleeAttackPoint: {fileID: 1542501478319828700}
   meleeAttackRange: 0
-  meleeHitDelay: 0
+  meleeHitDelay: 0.8
   rangedAttackPower: 0
   rangedMaxAmmo: 0
   rechargeAmmoTime: 0
@@ -248,6 +246,68 @@ MonoBehaviour:
   rangedHitDelay: 0
   projectilePrefab: {fileID: 0}
   projectileSpeed: {x: 0, y: 0}
+  chargerCollider: {fileID: 7021041561296149607}
+--- !u!1 &7021041561296149607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8623818843008773515}
+  - component: {fileID: 7434270363374965159}
+  - component: {fileID: 1836617090}
+  m_Layer: 8
+  m_Name: ChargerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8623818843008773515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7021041561296149607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4123682042663585802}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &7434270363374965159
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7021041561296149607}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.14185457
+--- !u!114 &1836617090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7021041561296149607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdfbc4bceb42604aaaf986de3129325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8554008158381152975
 GameObject:
   m_ObjectHideFlags: 0
