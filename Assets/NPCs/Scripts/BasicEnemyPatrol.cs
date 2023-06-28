@@ -19,15 +19,18 @@ public class BasicEnemyPatrol : MonoBehaviour
     private Animator animator;
     private Combat combat;
     private bool facingLeft;
+    private bool flipCR;
     private bool patrolling = false;
     private bool isAttacking = false;
 
     [Header("Move/Combat Stuff")]
     public float defaultSpeed;
     public float aggroSpeed;
-    private float currentSpeed;
+    public float currentSpeed;
     public float attackDelay;
     public float sightDistance;
+    public float rearSightDistance;
+    public float rearViewFlipDelay;
     public float attackRange;
     public bool isPlayerInSight;
     public bool isPlayerInRange;
@@ -52,6 +55,7 @@ public class BasicEnemyPatrol : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         playerLayer = LayerMask.GetMask("Player");
         isPlayerInRange = false;
+        flipCR = false;
         currentSpeed = defaultSpeed;
     }
 
@@ -82,53 +86,80 @@ public class BasicEnemyPatrol : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(
+        RaycastHit2D frontHit = Physics2D.Raycast(
             origin: transform.position,
             direction: new Vector2(transform.localScale.x, 0),
             distance: sightDistance,
             layerMask: playerLayer);
+        RaycastHit2D backHit = Physics2D.Raycast(
+            origin: transform.position,
+            direction: new Vector2(-transform.localScale.x, 0),
+            distance: rearSightDistance,
+            layerMask: playerLayer);
         
-        if (hit.collider != null)
+        if (frontHit.collider != null)
         {
             isPlayerInSight = true;
-            //need some sort of visual feedback indicating this Enemy can see the Player
-            //maybe change speed?
-            currentSpeed = aggroSpeed;
             
-            float distance = Vector2.Distance(transform.position, hit.collider.gameObject.transform.position);
-            if (distance < attackRange && distance > -attackRange)
+            if(enemyType != EnemyType.Charger) currentSpeed = aggroSpeed;
+            
+            float distance = Vector2.Distance(transform.position, frontHit.collider.gameObject.transform.position);
+            if ((distance < attackRange && distance > -attackRange) && !flipCR)
             {
                 isPlayerInRange = true;
             }
-            
-            //print("distance to " + hit.collider.name + " is " + distance);
+            else isPlayerInRange = false;
         }
         else
         {
             isPlayerInSight = false;
-            currentSpeed = defaultSpeed;
             isPlayerInRange = false;
+            if(enemyType != EnemyType.Charger) currentSpeed = defaultSpeed;
+        }
+
+        if (backHit.collider != null && enemyType != EnemyType.Charger)
+        {
+            StartCoroutine(FlipCoroutine());
+            //Flip();
         }
         
         //Just to visualize the direction/length of the Ray
         Vector3 forward = new Vector3(transform.localScale.x, 0, 0);
         Debug.DrawRay(wallAheadCheck.position,forward * sightDistance);
+        Debug.DrawRay(wallAheadCheck.position,-forward * rearSightDistance);
+    }
+
+    private IEnumerator FlipCoroutine()
+    {
+        if (!flipCR)
+        {
+            print("flip CR");
+            flipCR = true;
+            Flip();
+            yield return new WaitForSeconds(rearViewFlipDelay);
+            flipCR = false;
+        }
     }
 
     void Patrol()
     {
+        Vector3 targetDirection = new Vector3(transform.localScale.x, 0, 0);
+        if (!isGroundAhead || isWallAhead)
+        {
+            currentSpeed = defaultSpeed;
+        }
         if (isPlayerInRange && !isAttacking)
         {
             StartCoroutine(EnemyAttackCoroutine());
+            currentSpeed = aggroSpeed;
         }
-        else if (isGroundAhead && !facingLeft && !isWallAhead && !isPlayerInRange)
+        else if (isAttacking && isGroundAhead && !isWallAhead && enemyType == EnemyType.Charger)
         {
-            transform.Translate(Vector3.right * currentSpeed * Time.deltaTime);
-            animator.SetBool("Running", true);
+            transform.Translate(targetDirection * currentSpeed * Time.deltaTime);
         }
-        else if (isGroundAhead && facingLeft && !isWallAhead && !isPlayerInRange)
+        else if (isGroundAhead && !isWallAhead && !isPlayerInRange && !isAttacking)
         {
-            transform.Translate(Vector3.left * currentSpeed * Time.deltaTime);
+            transform.Translate(targetDirection * currentSpeed * Time.deltaTime);
             animator.SetBool("Running", true);
         }
         else if ((!isGroundAhead || isWallAhead) && !isPlayerInRange)
@@ -140,14 +171,15 @@ public class BasicEnemyPatrol : MonoBehaviour
     private IEnumerator EnemyAttackCoroutine()
     {
         isAttacking = true;
-        combat.EnemyAttack(enemyType);
+        animator.SetBool("Running", false);
+        combat.EnemyAttack(enemyType, aggroSpeed);
         yield return new WaitForSeconds(attackDelay);
         isAttacking = false;
+        currentSpeed = defaultSpeed;
     }
 
     void Flip()
     {
-        print("tried to flip");
         facingLeft = !facingLeft;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;

@@ -172,9 +172,11 @@ MonoBehaviour:
   wallCheckRadius: 0.1
   defaultSpeed: 1
   aggroSpeed: 2
+  currentSpeed: 0
   attackDelay: 2
-  sightDistance: 6
-  attackRange: 3
+  sightDistance: 3.5
+  rearSightDistance: 2
+  attackRange: 2.5
   isPlayerInSight: 0
   isPlayerInRange: 0
   enemyType: 1

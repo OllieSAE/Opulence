@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 53591
+--- !u!114 &-8609358556318376652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Sword Swing Air
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Sword Swing Air
+  Guid:
+    Data1: -1783952351
+    Data2: 1223160160
+    Data3: -534805314
+    Data4: -3901567
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8331971158457588631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,6 +78,60 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-6472139594049749927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Sword Swing Enemy
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Sword Swing Enemy
+  Guid:
+    Data1: -2052258653
+    Data2: 1193232671
+    Data3: 607080333
+    Data4: -699978018
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5775634451018956011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Placeholder
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Placeholder
+  Guid:
+    Data1: -651817071
+    Data2: 1278761007
+    Data3: 955685547
+    Data4: -1486676777
+  Banks:
+  - {fileID: 8380320410098705603}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5174326945422079278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,10 +174,30 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638228680520397793
+  lastModified: 638234812836110030
   FileSizes:
   - Name: Desktop
-    Value: 48096
+    Value: 107136
+  Exists: 1
+--- !u!114 &-4703593653948068669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/COMBAT.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/COMBAT.bank
+  Name: COMBAT
+  StudioPath: bank:/COMBAT
+  lastModified: 638234812836724745
+  FileSizes:
+  - Name: Desktop
+    Value: 24160
   Exists: 1
 --- !u!114 &-3337688838205976797
 MonoBehaviour:
@@ -113,10 +214,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638228680520429533
+  lastModified: 638234812836141012
   FileSizes:
   - Name: Desktop
-    Value: 1192
+    Value: 1526
   Exists: 1
 --- !u!114 &-1828036729265133605
 MonoBehaviour:
@@ -133,38 +234,11 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638228680520421796
+  lastModified: 638234812836133060
   FileSizes:
   - Name: Desktop
     Value: 964
   Exists: 1
---- !u!114 &-436751811692161425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SOUND EVENTS/Dash
-  m_EditorClassIdentifier: 
-  Path: event:/SOUND EVENTS/Dash
-  Guid:
-    Data1: 981950420
-    Data2: 1161471377
-    Data3: 42333080
-    Data4: -263883321
-  Banks:
-  - {fileID: -5132297831122044077}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-293801989424842038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,19 +286,26 @@ MonoBehaviour:
   - {fileID: -1828036729265133605}
   - {fileID: 8380320410098705603}
   - {fileID: 8652311888287359776}
+  - {fileID: -4703593653948068669}
   EditorEvents:
   - {fileID: -293801989424842038}
-  - {fileID: -436751811692161425}
   - {fileID: 7397799452261780516}
   - {fileID: -5174326945422079278}
   - {fileID: -9077551120531397955}
   - {fileID: 3649273788860696837}
+  - {fileID: 7458236732572193858}
+  - {fileID: 4149181485515530461}
+  - {fileID: 7406381183786980771}
+  - {fileID: -5775634451018956011}
+  - {fileID: -8609358556318376652}
+  - {fileID: 4674270526348022349}
+  - {fileID: -6472139594049749927}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1828036729265133605}
   StringsBanks:
   - {fileID: -3337688838205976797}
-  cacheTime: 638228680521318565
+  cacheTime: 638234812836724745
   cacheVersion: 131603
 --- !u!114 &712698009279880602
 MonoBehaviour:
@@ -241,7 +322,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/ATMOS.bank
   Name: ATMOS
   StudioPath: bank:/ATMOS
-  lastModified: 638228680519637048
+  lastModified: 638234812835712168
   FileSizes:
   - Name: Desktop
     Value: 2149376
@@ -273,6 +354,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4149181485515530461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Character Death
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Character Death
+  Guid:
+    Data1: 1220769364
+    Data2: 1123062960
+    Data3: -883892338
+    Data4: 1766409376
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2407
+--- !u!114 &4674270526348022349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Enemy Bug Die
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Enemy Bug Die
+  Guid:
+    Data1: 1452481081
+    Data2: 1113948429
+    Data3: -406112115
+    Data4: 666011239
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 998
 --- !u!114 &6902208581302103451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +423,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 638228680520408808
+  lastModified: 638234812836122128
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -321,6 +456,60 @@ MonoBehaviour:
   MinDistance: 3350
   MaxDistance: 10000
   Length: 0
+--- !u!114 &7406381183786980771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Character Dash
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Character Dash
+  Guid:
+    Data1: 445058587
+    Data2: 1170549377
+    Data3: -823390022
+    Data4: 216048348
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7458236732572193858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Character Damage
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Character Damage
+  Guid:
+    Data1: -922449128
+    Data2: 1121015035
+    Data3: -435143528
+    Data4: 578969566
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 949
 --- !u!114 &8380320410098705603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,10 +525,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638228680521318565
+  lastModified: 638234812836489216
   FileSizes:
   - Name: Desktop
-    Value: 4128
+    Value: 10720
   Exists: 1
 --- !u!114 &8652311888287359776
 MonoBehaviour:
@@ -356,7 +545,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/MUSIC.bank
   Name: MUSIC
   StudioPath: bank:/MUSIC
-  lastModified: 638228680520663998
+  lastModified: 638234812836304610
   FileSizes:
   - Name: Desktop
     Value: 1107520

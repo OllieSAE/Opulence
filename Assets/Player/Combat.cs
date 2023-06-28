@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -9,6 +10,7 @@ public class Combat : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
     private Animator animator;
+    private DamageAOETest damageAoeTest;
     
     [Header("General Combat")]
     private bool currentlyAttacking;
@@ -21,6 +23,8 @@ public class Combat : MonoBehaviour
     public Transform meleeAttackPoint;
     public float meleeAttackRange;
     public float meleeHitDelay;
+    //this is set as BasicEnemyPatrol "Aggro Speed" on the Charger Prefab
+    private float chargerAttackSpeed;
     
     [Header("Ranged Combat")]
     public int rangedAttackPower;
@@ -35,6 +39,9 @@ public class Combat : MonoBehaviour
     public Vector2 projectileSpeed;
     private bool rechargingAmmo;
 
+    [Header("Charger Enemy Combat")]
+    public GameObject chargerCollider;
+
     private void Awake()
     {
         if (gameObject.CompareTag("Player"))
@@ -43,12 +50,14 @@ public class Combat : MonoBehaviour
             playerInputActions.Enable();
             playerInputActions.Player.MeleeAttack.performed += MeleeAttack;
             playerInputActions.Player.RangedAttack.performed += RangedAttack;
-            rangedCurrentAmmo = rangedMaxAmmo;
             ammoBar = GetComponentInChildren<AmmoBar>();
             ammoBar.SetMaxAmmo(rangedMaxAmmo);
             ammoBar.SetAmmo(rangedMaxAmmo);
         }
 
+        if (chargerCollider != null) chargerCollider.SetActive(false);
+        damageAoeTest = GetComponent<DamageAOETest>();
+        rangedCurrentAmmo = rangedMaxAmmo;
         enemyLayer = LayerMask.GetMask("Enemies");
         playerLayer = LayerMask.GetMask("Player");
     }
@@ -69,7 +78,7 @@ public class Combat : MonoBehaviour
         rechargingAmmo = false;
     }
 
-    public void EnemyAttack(BasicEnemyPatrol.EnemyType value)
+    public void EnemyAttack(BasicEnemyPatrol.EnemyType value, float aggroSpeed)
     {
         if (value == BasicEnemyPatrol.EnemyType.Melee)
         {
@@ -84,6 +93,7 @@ public class Combat : MonoBehaviour
         if (value == BasicEnemyPatrol.EnemyType.Charger)
         {
             EnemyChargerAttack();
+            chargerAttackSpeed = aggroSpeed;
         }
 
         if (value == BasicEnemyPatrol.EnemyType.Boss)
@@ -94,8 +104,7 @@ public class Combat : MonoBehaviour
 
     private void EnemyMeleeAttack()
     {
-        print("melee attack");
-        animator.SetTrigger("Attack");
+        StartCoroutine(MeleeAttackCoroutine());
     }
 
     private void EnemyRangedAttack()
@@ -110,6 +119,7 @@ public class Combat : MonoBehaviour
 
     private void EnemyChargerAttack()
     {
+        StartCoroutine(ChargerAttackCoroutine());
         print("charger attack");
     }
 
@@ -134,16 +144,35 @@ public class Combat : MonoBehaviour
         {
             currentlyAttacking = true;
             StartCoroutine(MeleeAttackCooldownCoroutine());
-            animator.SetTrigger("MeleeAttack");
-
-            yield return new WaitForSeconds(meleeHitDelay);
-            //Detect enemies in range of attack
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, meleeAttackRange, enemyLayer);
-
-            //Damage them
-            foreach (Collider2D enemy in hitEnemies)
+            if (gameObject.CompareTag("Player"))
             {
-                enemy.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
+                animator.SetTrigger("MeleeAttack");
+                yield return new WaitForSeconds(meleeHitDelay);
+                //Detect enemies in range of attack
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, meleeAttackRange, enemyLayer);
+
+                //Damage them
+                foreach (Collider2D enemy in hitEnemies)
+                {
+                    print(gameObject + " dealt " + meleeAttackPower + " damage to " + enemy.gameObject);
+                    enemy.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
+                }
+            }
+
+            if (gameObject.CompareTag("Enemy"))
+            {
+                animator.SetTrigger("Attack");
+                yield return new WaitForSeconds(meleeHitDelay);
+                
+                //Detect enemies in range of attack
+                Collider2D hitEnemy = Physics2D.OverlapCircle(meleeAttackPoint.position, meleeAttackRange, playerLayer);
+
+                //Damage them
+                if (hitEnemy != null)
+                {
+                    print(gameObject + " dealt " + meleeAttackPower + " damage to " + hitEnemy.gameObject);
+                    hitEnemy.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
+                }
             }
         }
     }
@@ -153,6 +182,26 @@ public class Combat : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
         
         currentlyAttacking = false;
+    }
+
+    private IEnumerator ChargerAttackCoroutine()
+    {
+        if (!currentlyAttacking)
+        {
+            print("charger attack CR started");
+            currentlyAttacking = true;
+            StartCoroutine(MeleeAttackCooldownCoroutine());
+            //if (gameObject.CompareTag("Player")) ;
+            if(gameObject.CompareTag("Enemy")) animator.SetTrigger("Attack");
+
+            
+            if (chargerCollider != null) chargerCollider.SetActive(true);
+            int tempDamage = damageAoeTest.damageRate;
+            damageAoeTest.damageRate = 0;
+            yield return new WaitForSeconds(meleeHitDelay);
+            if (chargerCollider != null) chargerCollider.SetActive(false);
+            damageAoeTest.damageRate = tempDamage;
+        }
     }
 
     #endregion
