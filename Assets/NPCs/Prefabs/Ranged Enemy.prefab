@@ -61,7 +61,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 8a05c4b096949dd428f87b9987d54395, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1377a5a18434dca46b7a811603bcb51a, type: 3}
+  m_Sprite: {fileID: 2110531784, guid: 770d32b39606c534abdcceb6da0ac619, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,7 +103,7 @@ Animator:
   m_GameObject: {fileID: 1158638353165944224}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97d9df0bb4651764997c1789556d70d1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 74fc772eae70f934693316e37e59faea, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.71875, y: 0.4921875}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.71875, y: 0.4921875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -173,9 +173,11 @@ MonoBehaviour:
   defaultSpeed: 1
   aggroSpeed: 2
   currentSpeed: 0
+  patrolOnly: 0
   attackDelay: 2
   sightDistance: 3.5
   rearSightDistance: 2
+  rearViewFlipDelay: 0
   attackRange: 2.5
   isPlayerInSight: 0
   isPlayerInRange: 0
@@ -244,6 +246,7 @@ MonoBehaviour:
   rangedHitDelay: 0.8
   projectilePrefab: {fileID: 1753633947148026603, guid: 866bc660b2a574c4aa12b3a45ed9e16e, type: 3}
   projectileSpeed: {x: 3, y: 0}
+  chargerCollider: {fileID: 0}
 --- !u!1 &6024986424192824089
 GameObject:
   m_ObjectHideFlags: 0
