@@ -12,9 +12,12 @@ public class CinemachineConfiner : MonoBehaviour
     public float offsetX;
     public float offsetY;
 
+    
+    //TODO:
+    //this will need to be reupdated on every scene load!
     private void Start()
     {
-        tilemapBoundary = FindObjectOfType<TilemapCollider2D>();
+        tilemapBoundary = FindObjectOfType<CompositeCollider2D>();
         confinerBoundary = GetComponent<PolygonCollider2D>();
         SetConfinerBounds();
     }

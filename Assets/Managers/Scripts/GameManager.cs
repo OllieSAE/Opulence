@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-    
+    #region Event Delegates
     public delegate void PlayerRespawnEvent();
     public event PlayerRespawnEvent playerRespawnEvent;
 
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
     public delegate void DisableEnemyPatrolEvent();
 
     public event DisableEnemyPatrolEvent disableEnemyPatrolEvent;
-    
+    #endregion
 
     private void Awake()
     {
