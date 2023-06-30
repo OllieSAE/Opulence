@@ -322,8 +322,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Dashing
     m_EventTreshold: 0
-  - m_ConditionMode: 4
-    m_ConditionEvent: Y velocity
+  - m_ConditionMode: 2
+    m_ConditionEvent: Landed
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Dead
@@ -334,9 +334,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.14285713
+  m_TransitionDuration: 0.004804611
+  m_TransitionOffset: 0.008327826
+  m_ExitTime: 0.9886292
   m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -1508,7 +1508,7 @@ AnimatorStateMachine:
     m_Position: {x: -300, y: -400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -937224444250551033}
-    m_Position: {x: -600, y: -710, z: 0}
+    m_Position: {x: -440, y: -690, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1537538526408313182}
     m_Position: {x: 100, y: -100, z: 0}
