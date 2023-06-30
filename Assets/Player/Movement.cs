@@ -85,13 +85,14 @@ public class Movement : MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(playerWalk, transform, rigidbody);
     }
 
-    private void OnEnable()
+    private void OnLevelLoad()
     {
         
     }
 
     private void Start()
     {
+        GameManager.Instance.onLevelLoadedEvent += OnLevelLoad;
         if (GameManager.Instance.tutorialTestEnable)
         {
             inputAllowed = false;
@@ -103,23 +104,16 @@ public class Movement : MonoBehaviour
         GameManager.Instance.endTutorialEvent += TutorialFinished;
         GameManager.Instance.pauseStartEvent += GamePauseStart;
         GameManager.Instance.pauseEndEvent += GamePauseEnd;
-        //SetUpControls();
-    }
-
-    public void SetUpControls()
-    {
-        controlsSet = true;
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Enable();
-        playerInputActions.Player.Jump.performed += Jump;
-        playerInputActions.Player.Jump.canceled += ArrestJump;
-        playerInputActions.Player.Dash.performed += Dash;
-        playerInputActions.Player.Crouch.performed += Crouch;
-
     }
 
     private void OnDisable()
     {
+        playerInputActions.Player.Disable();
+        playerInputActions.Player.Jump.performed -= Jump;
+        playerInputActions.Player.Jump.canceled -= ArrestJump;
+        playerInputActions.Player.Dash.performed -= Dash;
+        playerInputActions.Player.Crouch.performed -= Crouch;
+        
         GameManager.Instance.playerRespawnEvent -= Respawn;
         GameManager.Instance.tutorialDialogueFinishedEvent -= TutorialDialogueFinished;
         GameManager.Instance.endTutorialEvent -= TutorialFinished;

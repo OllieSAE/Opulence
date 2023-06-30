@@ -15,3 +15,18 @@ public interface IDamageable
     
 }
 
+public interface ITrainingDummy
+{
+    
+}
+
+public interface IPatrolEnemy
+{
+    
+}
+
+public interface IHostileEnemy
+{
+    
+}
+

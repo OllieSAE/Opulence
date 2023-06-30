@@ -30,6 +30,20 @@ public class CombatTestManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+    }
+    
+    private void Start()
+    {
+        GameManager.Instance.onLevelLoadedEvent += OnLevelLoad;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.onLevelLoadedEvent -= OnLevelLoad;
+    }
+
+    private void OnLevelLoad()
+    {
         combatUI.SetActive(false);
         finalCombatUI.SetActive(false);
     }

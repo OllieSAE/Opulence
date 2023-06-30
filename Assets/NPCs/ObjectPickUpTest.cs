@@ -28,7 +28,7 @@ public class ObjectPickUpTest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponentInParent<PlayerInput>() != null)
+        if (other.CompareTag("Player"))
         {
             ObjectPickUp?.Invoke();
             RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Item Pickup");
