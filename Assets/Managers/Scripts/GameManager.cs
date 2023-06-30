@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial Stuff")]
     public bool tutorialTestEnable;
     public bool combatTutorialTestEnable;
-    private bool toggleEnemyMovement;
+    public bool toggleEnemyMovement;
     public ObjectPickUpTest objectPickUpTest;
     public GameObject mainMenuUI;
     private string sceneToLoad;
@@ -143,9 +143,11 @@ public class GameManager : MonoBehaviour
         if (combatTutorialTestEnable)
         {
             startCombatUI.SetActive(true);
+            player.GetComponent<Combat>().enabled = true;
             CombatTestManager.Instance.combatUI = combatUI;
             CombatTestManager.Instance.finalCombatUI = tutorialEndUI;
         }
+        else player.GetComponent<Combat>().enabled = false;
         onLevelLoadedEvent?.Invoke();
     }
 
@@ -169,6 +171,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleEnemyMovement()
     {
+        print("enemy movement toggled");
         toggleEnemyMovement = !toggleEnemyMovement;
         if (toggleEnemyMovement)
         {
@@ -237,6 +240,7 @@ public class GameManager : MonoBehaviour
     public void BeginTutorial()
     {
         tutorialStartUI.SetActive(false);
+        ToggleEnemyMovement();
         tutorialDialogueFinishedEvent?.Invoke();
     }
 

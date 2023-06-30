@@ -84,6 +84,12 @@ public class BasicEnemyPatrol : MonoBehaviour
         //isPlayerAhead = Physics2D.OverlapCircle(wallAheadCheck.position,wallCheckRadius, playerLayer);
         if(patrolling) Patrol();
     }
+    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(groundAheadCheck.position, groundCheckRadius);
+        Gizmos.DrawWireSphere(wallAheadCheck.position, wallCheckRadius);
+    }
 
     private void FixedUpdate()
     {
