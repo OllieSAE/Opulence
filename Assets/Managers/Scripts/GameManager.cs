@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -13,15 +14,21 @@ public class GameManager : MonoBehaviour
     public Vector3 playerRespawnPos;
     public bool isPaused;
     public GameObject pauseUI;
+    private AsyncOperation loadingOperation;
     
     [Header("Tutorial Stuff")]
     public bool tutorialTestEnable;
     public bool combatTutorialTestEnable;
     private bool toggleEnemyMovement;
     public ObjectPickUpTest objectPickUpTest;
+    public GameObject mainMenuUI;
+    private string sceneToLoad;
+    private string currentScene;
     public GameObject tutorialStartUI;
     public GameObject tutorialEndUI;
     public GameObject startCombatUI;
+    public GameObject combatUI;
+    public GameObject finalCombatUI;
     public ZhiaHeadCheck zhiaSkeleton;
     public bool testObjectPickedUp;
     public GameObject firstFloor;
@@ -42,6 +49,9 @@ public class GameManager : MonoBehaviour
         }
     }
     #region Event Delegates
+
+    public delegate void OnLevelLoadedEvent();
+    public event OnLevelLoadedEvent onLevelLoadedEvent;
     public delegate void PlayerRespawnEvent();
     public event PlayerRespawnEvent playerRespawnEvent;
 
@@ -79,18 +89,69 @@ public class GameManager : MonoBehaviour
         startCombatUI.SetActive(false);
     }
 
-    //this will break when GM exists before level loaded
-    private void OnEnable()
-    {
-        if(objectPickUpTest != null) objectPickUpTest.ObjectPickUp += ObjectPickedUp;
+    #region Level Select/Load
 
+    public void SelectMovementLevel()
+    {
+        sceneToLoad = "MovementTestScene";
+        tutorialTestEnable = true;
+        combatTutorialTestEnable = false;
+        StartCoroutine(LoadLevelCoroutine());
+    }
+
+    public void SelectCombatLevel()
+    {
+        sceneToLoad = "CombatTestScene";
+        tutorialTestEnable = false;
+        combatTutorialTestEnable = true;
+        StartCoroutine(LoadLevelCoroutine());
+    }
+
+    private IEnumerator LoadLevelCoroutine()
+    {
+        mainMenuUI.SetActive(false);
+        print("loading level CR started");
+        yield return new WaitForSeconds(1f);
+        print("loading level CR finished");
+        StartCoroutine(LoadSceneAsync());
+    }
+    
+    private IEnumerator LoadSceneAsync()
+    {
+        //loading screen SetActive true
+        loadingOperation = SceneManager.LoadSceneAsync(sceneToLoad,LoadSceneMode.Additive);
+        while (!loadingOperation.isDone)
+        {
+            yield return null;
+        }
+        OnLevelLoaded();
+        //loading screen SetActive false
+    }
+
+    #endregion
+    
+    private void OnLevelLoaded()
+    {
+        currentScene = sceneToLoad;
+        player = GameObject.FindGameObjectWithTag("Player");
+        objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
+        zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
+        firstFloor = GameObject.FindGameObjectWithTag("First Floor");
+        secondFloor = GameObject.FindGameObjectWithTag("Second Floor");
+        if(objectPickUpTest != null) objectPickUpTest.ObjectPickUp += ObjectPickedUp;
         if(player != null) playerRespawnPos = player.transform.position;
-        
+        if (combatTutorialTestEnable)
+        {
+            startCombatUI.SetActive(true);
+            CombatTestManager.Instance.combatUI = combatUI;
+            CombatTestManager.Instance.finalCombatUI = tutorialEndUI;
+        }
+        onLevelLoadedEvent?.Invoke();
     }
 
     private void Start()
     {
-        if (combatTutorialTestEnable) startCombatUI.SetActive(true);
+        
     }
 
     private void Update()
@@ -119,13 +180,17 @@ public class GameManager : MonoBehaviour
             disableEnemyPatrolEvent?.Invoke();
         }
 
-        if (combatTutorialTestEnable) startCombatUI.SetActive(false);
+        if (combatTutorialTestEnable)
+        {
+            startCombatUI.SetActive(false);
+            enableEnemyPatrolEvent?.Invoke();
+        }
     }
 
     private void ObjectPickedUp()
     {
         testObjectPickedUp = true;
-        zhiaSkeleton.playerHasObject = true;
+        if(zhiaSkeleton!=null) zhiaSkeleton.playerHasObject = true;
     }
 
     private void SomethingDied(GameObject deadThing)
@@ -195,7 +260,17 @@ public class GameManager : MonoBehaviour
         }
 
         isPaused = !isPaused;
+    }
 
+    public void ExitLevel()
+    {
+        if (currentScene != "LevelSelectScene")
+        {
+            if(isPaused) PauseUI();
+            tutorialEndUI.SetActive(false);
+            SceneManager.UnloadSceneAsync(currentScene);
+            mainMenuUI.SetActive(true);
+        }
     }
 
     public void ExitProgram()

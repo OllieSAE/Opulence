@@ -2,26 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class CinemachineConfiner : MonoBehaviour
 {
-    private Collider2D tilemapBoundary;
-    private PolygonCollider2D confinerBoundary;
+    public Collider2D tilemapBoundary;
+    public PolygonCollider2D confinerBoundary;
     public float offsetX;
     public float offsetY;
 
-    
-    //TODO:
-    //this will need to be reupdated on every scene load!
     private void Start()
     {
-        tilemapBoundary = FindObjectOfType<CompositeCollider2D>();
+        GameManager.Instance.onLevelLoadedEvent += OnLevelLoaded;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.onLevelLoadedEvent -= OnLevelLoaded;
+    }
+
+    private void OnLevelLoaded()
+    {
+        tilemapBoundary = GameObject.FindGameObjectWithTag("Tilemap Collider").GetComponent<CompositeCollider2D>();
         confinerBoundary = GetComponent<PolygonCollider2D>();
         SetConfinerBounds();
     }
 
+    //NOTE: If you think this has stopped working - CHECK PARENT OBJECT TRANSFORM
     private void SetConfinerBounds()
     {
         Vector2[] points = confinerBoundary.points;

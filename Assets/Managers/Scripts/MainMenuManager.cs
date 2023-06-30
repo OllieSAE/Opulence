@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public Scene movementLevel;
-    public Scene combatLevel;
+    
     public string sceneToLoad;
     public GameObject mainMenuCanvas;
 
