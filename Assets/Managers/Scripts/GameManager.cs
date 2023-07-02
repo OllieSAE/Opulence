@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialTestEnable;
     public bool combatTutorialTestEnable;
     public bool toggleEnemyMovement;
+    public bool mainMenuEnabled;
     public ObjectPickUpTest objectPickUpTest;
     public GameObject mainMenuUI;
     private string sceneToLoad;
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
         tutorialEndUI.SetActive(false);
         pauseUI.SetActive(false);
         startCombatUI.SetActive(false);
+        if(!mainMenuEnabled) mainMenuUI.SetActive(false);
     }
 
     #region Level Select/Load
