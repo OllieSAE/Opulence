@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     private bool deathCR = false;
     public HealthBar healthBar;
     public LayerMask playerLayer;
+    private SpriteFlash flashEffect;
 
     public delegate void DeathEvent(GameObject parent);
     public event DeathEvent deathEvent;
@@ -26,7 +27,11 @@ public class Health : MonoBehaviour
             healthBar = GetComponentInChildren<HealthBar>();
             thisIsPlayer = true;
         }
-        
+
+        if (GetComponent<SpriteFlash>() != null)
+        {
+            flashEffect = GetComponent<SpriteFlash>();
+        }
         currentHealth = maxHealth;
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("Dead", false);
@@ -59,8 +64,8 @@ public class Health : MonoBehaviour
         else if (amount < 0 && currentHealth >= 0 && !thisIsPlayer)
         {
             //RuntimeManager.PlayOneShot("enemy takes damage sound")
-            
-            StartCoroutine(EnemyDamagedCoroutine());
+            flashEffect.Flash();
+            //StartCoroutine(EnemyDamagedCoroutine());
         }
         
         if (currentHealth > maxHealth)
@@ -71,6 +76,7 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = -1;
+            flashEffect.Flash();
             StartCoroutine(Death(this.gameObject));
             
             //combat tutorial only
@@ -78,7 +84,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    private IEnumerator EnemyDamagedCoroutine()
+    private IEnumerator EnemyDamagedShrinkCoroutine()
     {
         Vector3 scale = transform.localScale;
         float xScale = scale.x;

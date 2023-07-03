@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 1834814332}
   - component: {fileID: 7720254892969092249}
   - component: {fileID: 3916759110233673388}
+  - component: {fileID: 1869363823}
   m_Layer: 8
   m_Name: Training Dummy
   m_TagString: Enemy
@@ -279,6 +280,20 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileSpeed: {x: 0, y: 0}
   chargerCollider: {fileID: 0}
+--- !u!114 &1869363823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331296779273578422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367537049b5c4874f971de59f147687f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 6fd7e46e279ee9443b0322d4b6e55930, type: 2}
+  duration: 0.125
 --- !u!1 &8328396619819119996
 GameObject:
   m_ObjectHideFlags: 0

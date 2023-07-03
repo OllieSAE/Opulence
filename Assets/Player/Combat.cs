@@ -192,8 +192,8 @@ public class Combat : MonoBehaviour
             currentlyAttacking = true;
             StartCoroutine(MeleeAttackCooldownCoroutine());
             //if (gameObject.CompareTag("Player")) ;
-            if(gameObject.CompareTag("Enemy")) animator.SetTrigger("Attack");
-
+            if(gameObject.CompareTag("Enemy")) animator.SetBool("Charge", true);
+            
             
             if (chargerCollider != null) chargerCollider.SetActive(true);
             int tempDamage = damageAoeTest.damageRate;
@@ -201,6 +201,7 @@ public class Combat : MonoBehaviour
             yield return new WaitForSeconds(meleeHitDelay);
             if (chargerCollider != null) chargerCollider.SetActive(false);
             damageAoeTest.damageRate = tempDamage;
+            if(gameObject.CompareTag("Enemy")) animator.SetBool("Charge", false);
         }
     }
 

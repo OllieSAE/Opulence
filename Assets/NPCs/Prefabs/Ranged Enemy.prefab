@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3174919029024467306}
   - component: {fileID: 5128560810789455503}
   - component: {fileID: 1897294870171380922}
+  - component: {fileID: 7897379715669634826}
   m_Layer: 8
   m_Name: Ranged Enemy
   m_TagString: Enemy
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 2110531784, guid: 770d32b39606c534abdcceb6da0ac619, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -243,10 +244,24 @@ MonoBehaviour:
   rechargeAmmoTime: 3
   launchPoint: {fileID: 4343191213374169977}
   flightTime: 2
-  rangedHitDelay: 0.8
+  rangedHitDelay: 1.65
   projectilePrefab: {fileID: 1753633947148026603, guid: 866bc660b2a574c4aa12b3a45ed9e16e, type: 3}
-  projectileSpeed: {x: 3, y: 0}
+  projectileSpeed: {x: 7, y: 0}
   chargerCollider: {fileID: 0}
+--- !u!114 &7897379715669634826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158638353165944224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367537049b5c4874f971de59f147687f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 6fd7e46e279ee9443b0322d4b6e55930, type: 2}
+  duration: 0.1
 --- !u!1 &6024986424192824089
 GameObject:
   m_ObjectHideFlags: 0
