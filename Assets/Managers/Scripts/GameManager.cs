@@ -89,12 +89,12 @@ public class GameManager : MonoBehaviour
         pauseUI.SetActive(false);
         startCombatUI.SetActive(false);
         if(!mainMenuEnabled) mainMenuUI.SetActive(false);
-        OnLevelLoaded();
+        
     }
 
     private void Start()
     {
-        onLevelLoadedEvent?.Invoke();
+        OnLevelLoaded();
     }
 
     #region Level Select/Load
@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
             CombatTestManager.Instance.combatUI = combatUI;
             CombatTestManager.Instance.finalCombatUI = tutorialEndUI;
         }
-        else player.GetComponent<Combat>().enabled = false;
+        else if (player != null) player.GetComponent<Combat>().enabled = false;
         onLevelLoadedEvent?.Invoke();
     }
 
@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            print("button pressed");
             PauseUI();
         }
     }
@@ -255,6 +256,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseUI()
     {
+        print("pause test");
         if (isPaused)
         {
             pauseUI.SetActive(false);

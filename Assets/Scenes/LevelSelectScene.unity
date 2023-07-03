@@ -216,23 +216,6 @@ PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 732037379, guid: 81df457d65ef04042942728167ca4758, type: 3}
   m_PrefabInstance: {fileID: 1902371211}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1138114302 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4741526429948534558, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
-  m_PrefabInstance: {fileID: 4741526429722797922}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1138114310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138114302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d03e284ad8a4fdf4cbc1ebeea6cf9594, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1380553974
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +475,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: mainMenuEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: tutorialTestEnable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: toggleEnemyMovement
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: combatTutorialTestEnable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2417026086825389793, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_Name
       value: Game Manager
@@ -505,25 +504,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4741526429948534557, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741526429948534557, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
-      propertyPath: near clip plane
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741526429948534557, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
-      propertyPath: orthographic size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534558, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741526429948534752, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
-      propertyPath: target
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534754, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_RootOrder
@@ -569,14 +552,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4741526429948534755, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
-      propertyPath: m_CameraType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741526429948534755, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
-      propertyPath: m_RenderShadows
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4741526429948534752, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}

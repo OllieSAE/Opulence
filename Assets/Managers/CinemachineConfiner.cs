@@ -25,9 +25,12 @@ public class CinemachineConfiner : MonoBehaviour
 
     private void OnLevelLoaded()
     {
-        tilemapBoundary = GameObject.FindGameObjectWithTag("Tilemap Collider").GetComponent<CompositeCollider2D>();
-        confinerBoundary = GetComponent<PolygonCollider2D>();
-        SetConfinerBounds();
+        if (GameObject.FindGameObjectWithTag("Tilemap Collider") != null)
+        {
+            tilemapBoundary = GameObject.FindGameObjectWithTag("Tilemap Collider").GetComponent<CompositeCollider2D>();
+            confinerBoundary = GetComponent<PolygonCollider2D>();
+            SetConfinerBounds();
+        }
     }
 
     //NOTE: If you think this has stopped working - CHECK PARENT OBJECT TRANSFORM
