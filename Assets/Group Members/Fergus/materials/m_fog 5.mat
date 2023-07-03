@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_fog
+  m_Name: m_fog 5
   m_Shader: {fileID: -6465566751694194690, guid: e3cd1993f4669734eadf8c76063c6141, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -38,7 +38,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.219
+    - _Alpha: 0.33
     - _Gamma: 0.5
     - _Noise_Scale: 256
     - _Pixelization: 452.28
@@ -46,7 +46,7 @@ Material:
     - _QueueOffset: 0
     - _Steps: 5.39
     m_Colors:
-    - _Color: {r: 0.58282894, g: 0.7655065, b: 0.8867924, a: 0}
+    - _Color: {r: 0.32069534, g: 0.38488737, b: 0.4433962, a: 0}
     - _Noise_Speed: {r: -0.02, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2287720191835639988
