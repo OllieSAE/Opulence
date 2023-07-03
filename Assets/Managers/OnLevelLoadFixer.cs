@@ -13,6 +13,16 @@ public class OnLevelLoadFixer : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.onLevelLoadedEvent += OnLevelLoad;
+        try
+        {
+            GetComponent<CinemachineVirtualCamera>().m_Follow =
+                GameObject.FindGameObjectWithTag("Player").gameObject.transform;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     private void OnDisable()

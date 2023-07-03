@@ -89,6 +89,12 @@ public class GameManager : MonoBehaviour
         pauseUI.SetActive(false);
         startCombatUI.SetActive(false);
         if(!mainMenuEnabled) mainMenuUI.SetActive(false);
+        OnLevelLoaded();
+    }
+
+    private void Start()
+    {
+        onLevelLoadedEvent?.Invoke();
     }
 
     #region Level Select/Load
@@ -151,11 +157,6 @@ public class GameManager : MonoBehaviour
         }
         else player.GetComponent<Combat>().enabled = false;
         onLevelLoadedEvent?.Invoke();
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void Update()
