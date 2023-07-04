@@ -115,7 +115,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2128920894, guid: 58e25f653fbe0644785d5187b333159f, type: 3}
+  m_Sprite: {fileID: -34574313, guid: 0177d2f4077c37848b36c216e946a259, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 50
+  maxHealth: 30
   healthBar: {fileID: 0}
   playerLayer:
     serializedVersion: 2
