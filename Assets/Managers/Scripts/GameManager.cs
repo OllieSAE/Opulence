@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public GameObject startCombatUI;
     public GameObject combatUI;
     public GameObject finalCombatUI;
+    public GameObject creditsUI;
+    public GameObject controlsUI;
     public ZhiaHeadCheck zhiaSkeleton;
     public bool testObjectPickedUp;
     public GameObject firstFloor;
@@ -88,8 +90,10 @@ public class GameManager : MonoBehaviour
         tutorialEndUI.SetActive(false);
         pauseUI.SetActive(false);
         startCombatUI.SetActive(false);
-        if(!mainMenuEnabled) mainMenuUI.SetActive(false);
-        
+        creditsUI.SetActive(false);
+        if (!mainMenuEnabled) mainMenuUI.SetActive(false);
+        else mainMenuUI.SetActive(true);
+
     }
 
     private void Start()
@@ -115,12 +119,38 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadLevelCoroutine());
     }
 
+    public void SelectAudioLevel()
+    {
+        sceneToLoad = "AudioPedestalScene 1";
+        tutorialTestEnable = false;
+        combatTutorialTestEnable = false;
+        StartCoroutine(LoadLevelCoroutine());
+    }
+
+    public void SelectCreditsUI()
+    {
+        mainMenuUI.SetActive(false);
+        creditsUI.SetActive(true);
+    }
+
+    public void SelectControlsUI()
+    {
+        mainMenuUI.SetActive(false);
+        controlsUI.SetActive(true);
+    }
+
+    public void ExitCreditsOrControls()
+    {
+        creditsUI.SetActive(false);
+        controlsUI.SetActive(false);
+        mainMenuUI.SetActive(true);
+    }
+    
+
     private IEnumerator LoadLevelCoroutine()
     {
         mainMenuUI.SetActive(false);
-        print("loading level CR started");
         yield return new WaitForSeconds(1f);
-        print("loading level CR finished");
         StartCoroutine(LoadSceneAsync());
     }
     
@@ -163,8 +193,11 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            print("button pressed");
-            PauseUI();
+            //like a wild chicken, this is FOUL
+            if (mainMenuUI.activeSelf || tutorialStartUI.activeSelf || tutorialEndUI.activeSelf ||
+                startCombatUI.activeSelf || combatUI.activeSelf || finalCombatUI.activeSelf || creditsUI.activeSelf ||
+                controlsUI.activeSelf) return;
+                PauseUI();
         }
     }
 
@@ -175,7 +208,6 @@ public class GameManager : MonoBehaviour
 
     public void ToggleEnemyMovement()
     {
-        print("enemy movement toggled");
         toggleEnemyMovement = !toggleEnemyMovement;
         if (toggleEnemyMovement)
         {
@@ -209,7 +241,6 @@ public class GameManager : MonoBehaviour
         }
         else if (deadThing.layer == 8)
         {
-            print(deadThing.ToString() + " has died!");
             deadThing.GetComponent<DamageAOETest>().enabled = false;
             deadThing.GetComponent<BasicEnemyPatrol>().enabled = false;
         }
@@ -256,7 +287,6 @@ public class GameManager : MonoBehaviour
 
     public void PauseUI()
     {
-        print("pause test");
         if (isPaused)
         {
             pauseUI.SetActive(false);
