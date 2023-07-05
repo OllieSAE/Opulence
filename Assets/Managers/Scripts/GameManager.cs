@@ -187,6 +187,7 @@ public class GameManager : MonoBehaviour
         }
         else if (player != null) player.GetComponent<Combat>().enabled = false;
         onLevelLoadedEvent?.Invoke();
+        enableEnemyPatrolEvent?.Invoke();
     }
 
     private void Update()
@@ -275,7 +276,6 @@ public class GameManager : MonoBehaviour
     public void BeginTutorial()
     {
         tutorialStartUI.SetActive(false);
-        ToggleEnemyMovement();
         tutorialDialogueFinishedEvent?.Invoke();
     }
 

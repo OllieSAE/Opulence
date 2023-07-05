@@ -19,7 +19,6 @@ public class ChargerCollider : MonoBehaviour
         Collider2D hitEnemy = Physics2D.OverlapCircle(transform.position, 0.5f, LayerMask.GetMask("Player"));
         if (hitEnemy != null)
         {
-            print("i charged into something and dealt dmg x " + meleeAttackPower);
             hitEnemy.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
             gameObject.SetActive(false);
         }

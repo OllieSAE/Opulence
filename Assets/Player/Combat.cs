@@ -17,6 +17,7 @@ public class Combat : MonoBehaviour
     public float attackCooldown;
     private LayerMask enemyLayer;
     private LayerMask playerLayer;
+    private Health health;
     
     [Header("Melee Combat")]
     public int meleeAttackPower;
@@ -60,6 +61,7 @@ public class Combat : MonoBehaviour
         rangedCurrentAmmo = rangedMaxAmmo;
         enemyLayer = LayerMask.GetMask("Enemies");
         playerLayer = LayerMask.GetMask("Player");
+        health = GetComponent<Health>();
     }
 
     private void OnDisable()
@@ -114,13 +116,11 @@ public class Combat : MonoBehaviour
         {
             StartCoroutine(RechargeAmmo());
         }
-        print("ranged attack");
     }
 
     private void EnemyChargerAttack()
     {
         StartCoroutine(ChargerAttackCoroutine());
-        print("charger attack");
     }
 
     private void EnemyBossAttack()
@@ -154,7 +154,6 @@ public class Combat : MonoBehaviour
                 //Damage them
                 foreach (Collider2D enemy in hitEnemies)
                 {
-                    print(gameObject + " dealt " + meleeAttackPower + " damage to " + enemy.gameObject);
                     enemy.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
                 }
             }
@@ -170,7 +169,6 @@ public class Combat : MonoBehaviour
                 //Damage them
                 if (hitEnemy != null)
                 {
-                    print(gameObject + " dealt " + meleeAttackPower + " damage to " + hitEnemy.gameObject);
                     hitEnemy.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
                 }
             }
@@ -188,7 +186,7 @@ public class Combat : MonoBehaviour
     {
         if (!currentlyAttacking)
         {
-            print("charger attack CR started");
+            
             currentlyAttacking = true;
             StartCoroutine(MeleeAttackCooldownCoroutine());
             //if (gameObject.CompareTag("Player")) ;
@@ -225,7 +223,7 @@ public class Combat : MonoBehaviour
     {
         if (!currentlyAttacking && rangedCurrentAmmo > 0)
         {
-            print("ranged attack CR started");
+            
             currentlyAttacking = true;
             rangedCurrentAmmo -= 1;
             StartCoroutine(RangedAttackCooldownCoroutine());
@@ -234,8 +232,7 @@ public class Combat : MonoBehaviour
 
             yield return new WaitForSeconds(rangedHitDelay);
             
-            FireProjectile();
-            
+            if (health.currentHealth > 0) FireProjectile();
         }
     }
     

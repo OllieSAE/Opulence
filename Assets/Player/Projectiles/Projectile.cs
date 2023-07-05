@@ -37,7 +37,6 @@ public class Projectile : MonoBehaviour
         {
             Health enemyHealth = other.GetComponent<Health>();
             enemyHealth.ChangeHealth(-damage,owner);
-            print("i hit something");
             Destroy(this.gameObject);
         }
     }

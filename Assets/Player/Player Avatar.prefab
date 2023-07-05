@@ -841,6 +841,7 @@ GameObject:
   - component: {fileID: 2039286898}
   - component: {fileID: 2039286897}
   - component: {fileID: 2039286896}
+  - component: {fileID: 334087569}
   m_Layer: 6
   m_Name: View
   m_TagString: Untagged
@@ -937,6 +938,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &334087569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039286895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367537049b5c4874f971de59f147687f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 6fd7e46e279ee9443b0322d4b6e55930, type: 2}
+  duration: 0.1
 --- !u!1 &809879197912341610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1149,7 @@ MonoBehaviour:
   rangedMaxAmmo: 5
   rechargeAmmoTime: 3
   launchPoint: {fileID: 2731262880608830011}
-  flightTime: 2
+  flightTime: 0.6
   rangedHitDelay: 0
   projectilePrefab: {fileID: 4786924577641686911, guid: ef8ab564bf53e9543abe35df872d7452, type: 3}
   projectileSpeed: {x: 6, y: 0}

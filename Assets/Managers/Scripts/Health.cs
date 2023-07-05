@@ -28,10 +28,13 @@ public class Health : MonoBehaviour
             thisIsPlayer = true;
         }
 
-        if (GetComponent<SpriteFlash>() != null)
+        
+        if (thisIsPlayer)
         {
-            flashEffect = GetComponent<SpriteFlash>();
+            flashEffect = GetComponentInChildren<SpriteFlash>();
         }
+        else flashEffect = GetComponent<SpriteFlash>();
+    
         currentHealth = maxHealth;
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("Dead", false);
@@ -51,6 +54,7 @@ public class Health : MonoBehaviour
         
         if (amount < 0 && currentHealth > 0 && thisIsPlayer)
         {
+            flashEffect.Flash();
             if (whoDealtDamage.CompareTag("Hazard"))
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Damage");
@@ -76,7 +80,6 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = -1;
-            flashEffect.Flash();
             StartCoroutine(Death(this.gameObject));
             
             //combat tutorial only
@@ -100,9 +103,15 @@ public class Health : MonoBehaviour
     {
         if (!deathCR)
         {
+            flashEffect.Flash();
             deathCR = true;
             animator.SetBool("Dead",true);
             deathEvent?.Invoke(go);
+            if (!thisIsPlayer)
+            {
+                GetComponent<Combat>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
             if(thisIsPlayer) RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Death");
             yield return new WaitForSeconds(5f);
             deathCR = false;
