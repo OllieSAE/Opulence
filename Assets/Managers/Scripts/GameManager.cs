@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public GameObject pauseUI;
     private AsyncOperation loadingOperation;
+    public GameObject loadingScreen;
     
     [Header("Tutorial Stuff")]
     public bool tutorialTestEnable;
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
         creditsUI.SetActive(false);
         if (!mainMenuEnabled) mainMenuUI.SetActive(false);
         else mainMenuUI.SetActive(true);
-
+        loadingScreen.SetActive(false);
     }
 
     private void Start()
@@ -150,20 +152,21 @@ public class GameManager : MonoBehaviour
     private IEnumerator LoadLevelCoroutine()
     {
         mainMenuUI.SetActive(false);
+        loadingScreen.SetActive(true);
         yield return new WaitForSeconds(1f);
         StartCoroutine(LoadSceneAsync());
     }
     
     private IEnumerator LoadSceneAsync()
     {
-        //loading screen SetActive true
+        
         loadingOperation = SceneManager.LoadSceneAsync(sceneToLoad,LoadSceneMode.Additive);
         while (!loadingOperation.isDone)
         {
             yield return null;
         }
         OnLevelLoaded();
-        //loading screen SetActive false
+        loadingScreen.SetActive(false);
     }
 
     #endregion
@@ -172,6 +175,7 @@ public class GameManager : MonoBehaviour
     {
         currentScene = sceneToLoad;
         player = GameObject.FindGameObjectWithTag("Player");
+        if( player != null ) player.SetActive(true);
         objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
         zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
         firstFloor = GameObject.FindGameObjectWithTag("First Floor");
@@ -306,6 +310,8 @@ public class GameManager : MonoBehaviour
         if (currentScene != "LevelSelectScene")
         {
             if(isPaused) PauseUI();
+            player.SetActive(false);
+            player.GetComponent<Movement>().playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
             tutorialEndUI.SetActive(false);
             SceneManager.UnloadSceneAsync(currentScene);
             mainMenuUI.SetActive(true);

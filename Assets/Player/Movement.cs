@@ -56,7 +56,7 @@ public class Movement : MonoBehaviour
     public float controlLockDuration;
     public Vector2 wallJumpForce;
     
-    private FMOD.Studio.EventInstance playerWalk;
+    public FMOD.Studio.EventInstance playerWalk;
 
     private void Awake()
     {
