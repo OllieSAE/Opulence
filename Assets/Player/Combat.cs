@@ -18,15 +18,18 @@ public class Combat : MonoBehaviour
     private LayerMask enemyLayer;
     private LayerMask playerLayer;
     private Health health;
-    
+    //private BasicEnemyPatrol basicEnemyPatrol;
+
     [Header("Melee Combat")]
     public int meleeAttackPower;
     public Transform meleeAttackPoint;
     public float meleeAttackRange;
     public float meleeHitDelay;
+    public float chargeTransitionDelay;
+
     //this is set as BasicEnemyPatrol "Aggro Speed" on the Charger Prefab
     private float chargerAttackSpeed;
-    
+
     [Header("Ranged Combat")]
     public int rangedAttackPower;
     public int rangedMaxAmmo;
@@ -55,6 +58,7 @@ public class Combat : MonoBehaviour
             ammoBar.SetMaxAmmo(rangedMaxAmmo);
             ammoBar.SetAmmo(rangedMaxAmmo);
         }
+        //else basicEnemyPatrol = GetComponent<BasicEnemyPatrol>();
 
         if (chargerCollider != null) chargerCollider.SetActive(false);
         damageAoeTest = GetComponent<DamageAOETest>();
@@ -191,15 +195,15 @@ public class Combat : MonoBehaviour
             StartCoroutine(MeleeAttackCooldownCoroutine());
             //if (gameObject.CompareTag("Player")) ;
             if(gameObject.CompareTag("Enemy")) animator.SetBool("Charge", true);
-            
-            
             if (chargerCollider != null) chargerCollider.SetActive(true);
             int tempDamage = damageAoeTest.damageRate;
             damageAoeTest.damageRate = 0;
             yield return new WaitForSeconds(meleeHitDelay);
             if (chargerCollider != null) chargerCollider.SetActive(false);
             damageAoeTest.damageRate = tempDamage;
+            yield return new WaitForSeconds(chargeTransitionDelay);
             if(gameObject.CompareTag("Enemy")) animator.SetBool("Charge", false);
+            
         }
     }
 

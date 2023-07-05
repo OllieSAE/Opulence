@@ -183,6 +183,7 @@ MonoBehaviour:
   attackRange: 3
   isPlayerInSight: 0
   isPlayerInRange: 0
+  isTransitioning: 0
   enemyType: 2
 --- !u!50 &369745422201578703
 Rigidbody2D:
@@ -240,6 +241,7 @@ MonoBehaviour:
   meleeAttackPoint: {fileID: 1542501478319828700}
   meleeAttackRange: 0
   meleeHitDelay: 0.8
+  chargeTransitionDelay: 1
   rangedAttackPower: 0
   rangedMaxAmmo: 0
   rechargeAmmoTime: 0

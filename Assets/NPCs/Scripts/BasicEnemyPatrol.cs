@@ -35,6 +35,7 @@ public class BasicEnemyPatrol : MonoBehaviour
     public float attackRange;
     public bool isPlayerInSight;
     public bool isPlayerInRange;
+    public bool isTransitioning;
     
     public enum EnemyType
     {
@@ -58,6 +59,7 @@ public class BasicEnemyPatrol : MonoBehaviour
         isPlayerInRange = false;
         flipCR = false;
         currentSpeed = defaultSpeed;
+        isTransitioning = false;
     }
 
     private void OnDisable()
@@ -166,7 +168,11 @@ public class BasicEnemyPatrol : MonoBehaviour
             StartCoroutine(EnemyAttackCoroutine());
             currentSpeed = aggroSpeed;
         }
-        else if (isAttacking && isGroundAhead && !isWallAhead && enemyType == EnemyType.Charger)
+        else if (isTransitioning)
+        {
+            //if (!isPlayerInRange) isAttacking = false;
+        }
+        else if (isAttacking && isGroundAhead && !isWallAhead && enemyType == EnemyType.Charger)// && !isTransitioning)
         {
             transform.Translate(targetDirection * currentSpeed * Time.deltaTime);
         }
@@ -183,9 +189,15 @@ public class BasicEnemyPatrol : MonoBehaviour
 
     private IEnumerator EnemyAttackCoroutine()
     {
-        isAttacking = true;
         animator.SetBool("Running", false);
         combat.EnemyAttack(enemyType, aggroSpeed);
+        if (enemyType == EnemyType.Charger)
+        {
+            isTransitioning = true;
+            yield return new WaitForSeconds(combat.chargeTransitionDelay);
+            isTransitioning = false;
+        }
+        isAttacking = true;
         yield return new WaitForSeconds(attackDelay);
         isAttacking = false;
         currentSpeed = defaultSpeed;
