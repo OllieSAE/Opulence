@@ -431,7 +431,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 717350748, guid: 81df457d65ef04042942728167ca4758, type: 3}
+    - target: {fileID: 185526575568314158, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496414304929031360, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -479,25 +483,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
-      propertyPath: mainMenuEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
-      propertyPath: tutorialTestEnable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
-      propertyPath: toggleEnemyMovement
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
-      propertyPath: combatTutorialTestEnable
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2417026086825389793, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617646239408021210, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381735078834748849, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 226.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381735078834748849, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961120161415301492, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9064251617201708203, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81df457d65ef04042942728167ca4758, type: 3}

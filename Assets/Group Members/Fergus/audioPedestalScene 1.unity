@@ -2219,7 +2219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6330115352583211059, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.58
+      value: -5.97
       objectReference: {fileID: 0}
     - target: {fileID: 6330115352583211059, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13789,7 +13789,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 17271
 --- !u!114 &1946314878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13802,7 +13802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
