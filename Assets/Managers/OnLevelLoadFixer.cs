@@ -39,7 +39,10 @@ public class OnLevelLoadFixer : MonoBehaviour
         camera = GetComponent<CinemachineVirtualCamera>();
         confiner = GetComponent<CinemachineConfiner2D>();
 
-        if (camera != null) camera.m_Follow = GameManager.Instance.player.transform;
+        if (camera != null)
+        {
+            if(GameManager.Instance.player != null) camera.m_Follow = GameManager.Instance.player.transform;
+        }
 
         if (confiner != null) StartCoroutine(InvalidateCache());
     }

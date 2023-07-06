@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 9.53}
+  m_AnchoredPosition: {x: 0, y: 18.8}
   m_SizeDelta: {x: 311.1, y: 50.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &234510771
@@ -67,7 +67,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: We would love it if you could fill out the feedback form located on the
-    Itch.IO game page
+    Itch.IO game page, but play the other levels first!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
   m_sharedMaterial: {fileID: 1873666951679318708, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
@@ -925,10 +925,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 113.05, y: -75}
+  m_SizeDelta: {x: 226.1, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &630692784
 CanvasRenderer:
@@ -1115,7 +1115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &717350749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1392,10 +1392,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 113.05, y: -25}
+  m_SizeDelta: {x: 226.1, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &920456900
 CanvasRenderer:
@@ -2532,7 +2532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038146973, y: 48.9}
+  m_AnchoredPosition: {x: 0.0000038146973, y: 66.7}
   m_SizeDelta: {x: 371.55, y: 121.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1767429690
@@ -2577,7 +2577,10 @@ MonoBehaviour:
 
 
     Ranged Attack: Right
-    Mouse (Combat Only)'
+    Mouse (Combat Only)
+
+
+    Escape - Pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
   m_sharedMaterial: {fileID: 1873666951679318708, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
@@ -2705,14 +2708,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.06672883, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0f2075bc1f6a6e1479a141cf3454aa26, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3236,7 +3239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &920160323551202173
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3972,10 +3975,10 @@ RectTransform:
   m_Father: {fileID: 3402756288212127024}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 111.745, y: -25}
+  m_SizeDelta: {x: 223.49, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4818993096707312621
 CanvasRenderer:
@@ -4443,9 +4446,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You are ready to face
-
-    the dangers of Opulence...'
+  m_text: We would love it if you could fill out the feedback form located on the
+    Itch.IO game page, but play the other levels first!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
   m_sharedMaterial: {fileID: 1873666951679318708, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
@@ -4679,9 +4681,9 @@ MonoBehaviour:
   pauseUI: {fileID: 2019520484}
   loadingScreen: {fileID: 1769350847}
   tutorialTestEnable: 0
-  combatTutorialTestEnable: 1
+  combatTutorialTestEnable: 0
   toggleEnemyMovement: 0
-  mainMenuEnabled: 0
+  mainMenuEnabled: 1
   objectPickUpTest: {fileID: 0}
   mainMenuUI: {fileID: 717350748}
   tutorialStartUI: {fileID: 301267178}
@@ -4731,10 +4733,10 @@ RectTransform:
   m_Father: {fileID: 3402756288212127024}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 111.745, y: -75}
+  m_SizeDelta: {x: 223.49, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1336803468054265097
 CanvasRenderer:
@@ -4865,10 +4867,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 113.05, y: -125}
+  m_SizeDelta: {x: 226.1, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2388290452524937575
 CanvasRenderer:
@@ -5332,7 +5334,11 @@ MonoBehaviour:
     Melee Attack: Left Mouse
 
 
-    Ranged Attack: Right Mouse'
+    Ranged Attack: Right Mouse
+
+
+    Pause/Exit:
+    Escape Key'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
   m_sharedMaterial: {fileID: 1873666951679318708, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
@@ -5518,7 +5524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -8.4}
+  m_AnchoredPosition: {x: 0, y: -0.2}
   m_SizeDelta: {x: 702.4, y: 226.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &956093429509400228
@@ -5829,7 +5835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6544,7 +6550,10 @@ MonoBehaviour:
 
 
     Ranged
-    Attack'
+    Attack
+
+
+    Pause/Exit'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
   m_sharedMaterial: {fileID: 1873666951679318708, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
@@ -7278,7 +7287,10 @@ MonoBehaviour:
 
 
     Right
-    Mouse'
+    Mouse
+
+
+    Escape'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
   m_sharedMaterial: {fileID: 1873666951679318708, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
@@ -8386,13 +8398,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8176858595789726580}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8927,10 +8939,10 @@ RectTransform:
   m_Father: {fileID: 3402756288212127024}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 111.745, y: -125}
+  m_SizeDelta: {x: 223.49, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &122063242442610171
 CanvasRenderer:
