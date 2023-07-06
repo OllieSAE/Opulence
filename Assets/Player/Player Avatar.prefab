@@ -1145,6 +1145,7 @@ MonoBehaviour:
   meleeAttackPoint: {fileID: 2051897553077874494}
   meleeAttackRange: 0.3
   meleeHitDelay: 0.25
+  chargeTransitionDelay: 0
   rangedAttackPower: 30
   rangedMaxAmmo: 5
   rechargeAmmoTime: 3
@@ -1187,7 +1188,7 @@ MonoBehaviour:
   animator: {fileID: 2039286896}
   groundCheck: {fileID: 6041202890415409332}
   wallCheck: {fileID: 5705518602417250313}
-  groundCheckRadius: 0.1
+  groundCheckRadius: 0.05
   wallCheckRadius: 0.125
   groundLayer:
     serializedVersion: 2

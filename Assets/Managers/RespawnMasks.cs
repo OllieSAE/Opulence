@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class RespawnMasks : MonoBehaviour
 {
-    public GameObject mask1, mask2, mask3, mask4;
+    public GameObject mask1, mask2, mask4;
 
     public Button respawnMasks;
 
@@ -21,13 +21,12 @@ public class RespawnMasks : MonoBehaviour
     {
         mask1.SetActive(true);
         mask2.SetActive(true);
-        mask3.SetActive(true);
         mask4.SetActive(true);
     }
 
     private void Update()
     {
-        if (!mask1.activeSelf && !mask2.activeSelf && !mask3.activeSelf && !mask4.activeSelf)
+        if (!mask1.activeSelf && !mask2.activeSelf && !mask4.activeSelf)
         {
             respawnMasks.gameObject.SetActive(true);
         }
