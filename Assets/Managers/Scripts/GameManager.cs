@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public bool testObjectPickedUp;
     public GameObject firstFloor;
     public GameObject secondFloor;
+    public GameObject mainCamera;
     
     private static GameManager _instance;
 
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         testObjectPickedUp = false;
         _instance = this;
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         tutorialStartUI.SetActive(false);
         tutorialEndUI.SetActive(false);
         pauseUI.SetActive(false);
@@ -176,6 +178,7 @@ public class GameManager : MonoBehaviour
         currentScene = sceneToLoad;
         player = GameObject.FindGameObjectWithTag("Player");
         if( player != null ) player.SetActive(true);
+        mainCamera.GetComponent<StudioListener>().attenuationObject = player;
         objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
         zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
         firstFloor = GameObject.FindGameObjectWithTag("First Floor");

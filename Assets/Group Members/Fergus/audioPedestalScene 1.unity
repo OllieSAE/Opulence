@@ -522,9 +522,9 @@ MonoBehaviour:
   Preload: 1
   AllowNonRigidbodyDoppler: 0
   Params: []
-  OverrideAttenuation: 0
+  OverrideAttenuation: 1
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 3
 --- !u!58 &272417716
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -944,9 +944,9 @@ MonoBehaviour:
   Preload: 1
   AllowNonRigidbodyDoppler: 0
   Params: []
-  OverrideAttenuation: 0
+  OverrideAttenuation: 1
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 3
 --- !u!58 &535533117
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 1
+  OverrideMinDistance: 5
   OverrideMaxDistance: 20
 --- !u!1 &797448736
 GameObject:
@@ -1410,7 +1410,7 @@ MonoBehaviour:
       Data4: -496301785
     Path: event:/MASK TEST
   Event: 
-  PlayEvent: 1
+  PlayEvent: 5
   StopEvent: 6
   AllowFadeout: 1
   TriggerOnce: 0
@@ -1460,7 +1460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818979062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.299, y: -4.279, z: 0}
+  m_LocalPosition: {x: 1.65, y: -4.279, z: 0}
   m_LocalScale: {x: 1.47, y: 1.47, z: 1.47}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1804,7 +1804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106063454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.192, y: -4.26, z: 0}
+  m_LocalPosition: {x: -0.43, y: -4.26, z: 0}
   m_LocalScale: {x: 1.47, y: 1.47, z: 1.47}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2160,9 +2160,9 @@ MonoBehaviour:
   Preload: 1
   AllowNonRigidbodyDoppler: 0
   Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0.1
+  OverrideMaxDistance: 1.15
 --- !u!58 &1226977528
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2208,8 +2208,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 100
 --- !u!1001 &1316497745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2251,7 +2251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6330115352583211059, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.97
+      value: 9.95
       objectReference: {fileID: 0}
     - target: {fileID: 6330115352583211059, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_LocalPosition.y

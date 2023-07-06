@@ -23,7 +23,7 @@ public class ObjectPickUpTest : MonoBehaviour
 
     private void Update()
     {
-        transform.position = new Vector2(posX, posY + myCurve.Evaluate((Time.time * myCurve.length)));
+        if(GetComponent<Animator>() == null) transform.position = new Vector2(posX, posY + myCurve.Evaluate((Time.time * myCurve.length)));
     }
 
     private void OnTriggerEnter2D(Collider2D other)
