@@ -1340,11 +1340,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1622771515
-      Data2: 1248952362
-      Data3: -1481719667
-      Data4: -1432778257
-    Path: event:/SOUND EVENTS/Mask Glow
+      Data1: 59312443
+      Data2: 1190890189
+      Data3: -2012530787
+      Data4: -496301785
+    Path: event:/MASK TEST
   Event: 
   PlayEvent: 0
   StopEvent: 12
@@ -1354,8 +1354,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 4
-  OverrideMaxDistance: 10
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &797448736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,22 +1404,22 @@ MonoBehaviour:
   CollisionTag: Player
   EventReference:
     Guid:
-      Data1: -1622771515
-      Data2: 1248952362
-      Data3: -1481719667
-      Data4: -1432778257
-    Path: event:/SOUND EVENTS/Mask Glow
+      Data1: 59312443
+      Data2: 1190890189
+      Data3: -2012530787
+      Data4: -496301785
+    Path: event:/MASK TEST
   Event: 
-  PlayEvent: 5
+  PlayEvent: 1
   StopEvent: 6
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 1
   AllowNonRigidbodyDoppler: 0
   Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 4
-  OverrideMaxDistance: 10
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 3
 --- !u!58 &797448739
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1433,9 +1433,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.23, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 1.57
 --- !u!1 &818979062
 GameObject:
   m_ObjectHideFlags: 0
