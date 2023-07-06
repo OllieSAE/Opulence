@@ -523,8 +523,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 1
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 3
+  OverrideMinDistance: 0.1
+  OverrideMaxDistance: 3.2
 --- !u!58 &272417716
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 2.09
 --- !u!1 &363565807
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363565807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19, y: -4.26, z: 0}
+  m_LocalPosition: {x: -3.16, y: -4.23, z: 0}
   m_LocalScale: {x: 1.47, y: 1.47, z: 1.47}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -931,22 +931,22 @@ MonoBehaviour:
   CollisionTag: Player
   EventReference:
     Guid:
-      Data1: -1622771515
-      Data2: 1248952362
-      Data3: -1481719667
-      Data4: -1432778257
-    Path: event:/SOUND EVENTS/Mask Glow
+      Data1: -1178490328
+      Data2: 1130040430
+      Data3: -1532916319
+      Data4: 234164243
+    Path: event:/SOUND EVENTS/Mask Glow A
   Event: 
-  PlayEvent: 5
-  StopEvent: 6
+  PlayEvent: 0
+  StopEvent: 0
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 1
   AllowNonRigidbodyDoppler: 0
   Params: []
-  OverrideAttenuation: 1
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 3
+  OverrideAttenuation: 0
+  OverrideMinDistance: 5
+  OverrideMaxDistance: 20
 --- !u!58 &535533117
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -962,7 +962,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 2
 --- !u!1 &588469436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,7 +1344,7 @@ MonoBehaviour:
       Data2: 1190890189
       Data3: -2012530787
       Data4: -496301785
-    Path: event:/MASK TEST
+    Path: event:/SOUND EVENTS/Mask Glow B
   Event: 
   PlayEvent: 0
   StopEvent: 12
@@ -1408,7 +1408,7 @@ MonoBehaviour:
       Data2: 1190890189
       Data3: -2012530787
       Data4: -496301785
-    Path: event:/MASK TEST
+    Path: event:/SOUND EVENTS/Mask Glow B
   Event: 
   PlayEvent: 5
   StopEvent: 6
@@ -1418,8 +1418,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 1
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 3
+  OverrideMinDistance: 0.1
+  OverrideMaxDistance: 3.2
 --- !u!58 &797448739
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1435,7 +1435,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.57
+  m_Radius: 2.14
 --- !u!1 &818979062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,7 +1460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818979062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.65, y: -4.279, z: 0}
+  m_LocalPosition: {x: 8.98, y: -4.24, z: 0}
   m_LocalScale: {x: 1.47, y: 1.47, z: 1.47}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1665,7 +1665,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873269595}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.126, z: 0}
+  m_LocalPosition: {x: 0.006, y: -0.144, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1804,7 +1804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106063454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43, y: -4.26, z: 0}
+  m_LocalPosition: {x: 3.29, y: -4.21, z: 0}
   m_LocalScale: {x: 1.47, y: 1.47, z: 1.47}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1921,7 +1921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192754644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.13, y: -4.279, z: 0}
+  m_LocalPosition: {x: 16.6, y: -4.22, z: 0}
   m_LocalScale: {x: 1.47, y: 1.47, z: 1.47}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2162,7 +2162,7 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 1
   OverrideMinDistance: 0.1
-  OverrideMaxDistance: 1.15
+  OverrideMaxDistance: 2.8
 --- !u!58 &1226977528
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2178,7 +2178,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 2.21
 --- !u!114 &1226977529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2208,8 +2208,8 @@ MonoBehaviour:
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 100
+  OverrideMinDistance: 5
+  OverrideMaxDistance: 20
 --- !u!1001 &1316497745
 PrefabInstance:
   m_ObjectHideFlags: 0
