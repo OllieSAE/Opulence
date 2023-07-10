@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,24 @@ public class vfxTrigger : MonoBehaviour
     public ParticleSystem[] particles;
     public Transform flipTransform;
     private bool facingLeft = false;
+
+    [Header("Collision Module Settings")]
+    public LayerMask enemyLayer;
+    public LayerMask playerLayer;
+    public ParticleSystem.CollisionModule colMod;
+    
+    //private string particleName;
     
     // Start is called before the first frame update
     void Start()
     {
-        if (vfx == null) vfx[0] = GetComponentInChildren<VisualEffect>();
-        if (vfx[0].enabled) vfx[0].enabled = false;
+        for (int i = 0; i < particles.Length; i++)
+        {
+            colMod = particles[i].collision;
+            //unity is definitely doing a BIT
+            if (gameObject.layer == 8) colMod.collidesWith = playerLayer;
+            if (gameObject.layer == 6) colMod.collidesWith = enemyLayer;
+        }
     }
 
     // Update is called once per frame
@@ -22,30 +35,35 @@ public class vfxTrigger : MonoBehaviour
     {
         for (int i = 0; i < particles.Length; i++)
         {
-            particles[i].transform.localScale = flipTransform.localScale; 
+            if (particles[i].isPlaying) particles[i].transform.localScale = flipTransform.localScale; 
         }
-        
     }
 
-    public IEnumerator VFXTrigger()
+    public void VFXTrigger(string vfxName)
     {
-
         for (int i = 0; i < vfx.Length; i++)
         {
-            if (!vfx[i].enabled)
+            if (vfxName == vfx[i].name)
             {
-                vfx[i].enabled = true;
-                yield return new WaitForSeconds(0.3f);
-                vfx[i].enabled = false;
+                vfx[i].Play();
             }
         }
     }
 
-    public void ParticleTrigger()
+    public void OnParticleCollision(GameObject other)
     {
+        print("Hit enemy");
+    }
+
+    public void ParticleTrigger(string particleName)
+    {
+        
         for (int i = 0; i < particles.Length; i++)
         {
-            particles[i].Play();
+            if (particleName == particles[i].name)
+            {
+                particles[i].Play();
+            }
         }
     }
 }

@@ -153,7 +153,12 @@ public class Combat : MonoBehaviour
                 animator.SetTrigger("MeleeAttack");
                 yield return new WaitForSeconds(meleeHitDelay);
                 //Detect enemies in range of attack
+                
+                //change this to overlapBOXall
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, meleeAttackRange, enemyLayer);
+                
+                //can we set the "attack point" and "attack range" variables to default at the start
+                //then adjust them at the beginning of each attack animation, via event
 
                 //Damage them
                 foreach (Collider2D enemy in hitEnemies)
