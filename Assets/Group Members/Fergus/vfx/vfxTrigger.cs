@@ -50,6 +50,17 @@ public class vfxTrigger : MonoBehaviour
         }
     }
 
+    public void VFXStop(string vfxName)
+    {
+        for (int i = 0; i < vfx.Length; i++)
+        {
+            if (vfxName == vfx[i].name)
+            {
+                vfx[i].Stop();
+            }
+        }
+    }
+
     public void OnParticleCollision(GameObject other)
     {
         print("Hit enemy");
