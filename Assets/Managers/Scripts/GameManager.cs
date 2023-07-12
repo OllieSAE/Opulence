@@ -325,4 +325,15 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+    
+    //Testing only!!!
+    public void SlowTime()
+    {
+        Time.timeScale = 0.1f;
+    }
+
+    public void DefaultTime()
+    {
+        Time.timeScale = 1f;
+    }
 }

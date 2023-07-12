@@ -10,6 +10,17 @@ public class GameManagerEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
+        
+        if (GUILayout.Button("Slow Time"))
+        {
+            ((GameManager) target).SlowTime();
+        }
+        
+        if (GUILayout.Button("Default Time"))
+        {
+            ((GameManager) target).DefaultTime();
+        }
+        
         if (GUILayout.Button("Toggle Enemy Movement"))
         {
             ((GameManager) target).ToggleEnemyMovement();

@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     public HealthBar healthBar;
     public LayerMask playerLayer;
     private SpriteFlash flashEffect;
+    public bool immune;
 
     public delegate void DeathEvent(GameObject parent);
     public event DeathEvent deathEvent;
@@ -39,6 +40,7 @@ public class Health : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("Dead", false);
         if(healthBar!=null) healthBar.SetMaxHealth(maxHealth);
+        immune = false;
     }
 
     private void Start()
@@ -48,30 +50,35 @@ public class Health : MonoBehaviour
 
     public void ChangeHealth(int amount, GameObject whoDealtDamage)
     {
-        currentHealth += amount;
-        
-        if (healthBar != null) healthBar.SetHealth(currentHealth);
-        
-        if (amount < 0 && currentHealth > 0 && thisIsPlayer)
+        if (!immune)
         {
-            flashEffect.Flash();
-            if (whoDealtDamage.CompareTag("Hazard"))
+            currentHealth += amount;
+        
+            if (healthBar != null) healthBar.SetHealth(currentHealth);
+            immune = true;
+            StartCoroutine(ImmunityReset());
+            if (amount < 0 && currentHealth > 0 && thisIsPlayer)
             {
-                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Damage");
-            }
-            else if (whoDealtDamage.CompareTag("Enemy"))
-            {
-                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Placeholder");
-            }
+                flashEffect.Flash();
+                if (whoDealtDamage.CompareTag("Hazard"))
+                {
+                    RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Damage");
+                }
+                else if (whoDealtDamage.CompareTag("Enemy"))
+                {
+                    RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Placeholder");
+                }
             
+            }
+            else if (amount < 0 && currentHealth >= 0 && !thisIsPlayer)
+            {
+                //RuntimeManager.PlayOneShot("enemy takes damage sound")
+                flashEffect.Flash();
+                //StartCoroutine(EnemyDamagedCoroutine());
+            }
         }
-        else if (amount < 0 && currentHealth >= 0 && !thisIsPlayer)
-        {
-            //RuntimeManager.PlayOneShot("enemy takes damage sound")
-            flashEffect.Flash();
-            //StartCoroutine(EnemyDamagedCoroutine());
-        }
-        
+
+
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -85,6 +92,12 @@ public class Health : MonoBehaviour
             //combat tutorial only
             if(CombatTestManager.Instance != null) CombatTestManager.Instance.KilledEnemy(this.gameObject);
         }
+    }
+
+    private IEnumerator ImmunityReset()
+    {
+        yield return new WaitForSeconds(0.15f);
+        immune = false;
     }
 
     private IEnumerator EnemyDamagedShrinkCoroutine()
