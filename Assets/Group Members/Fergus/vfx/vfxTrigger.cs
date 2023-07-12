@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.VFX;
 
 public class vfxTrigger : MonoBehaviour
 {
     public VisualEffect[] vfx;
+    public string[] sfx;
     public ParticleSystem[] particles;
     public Transform flipTransform;
     private bool facingLeft = false;
@@ -74,6 +76,19 @@ public class vfxTrigger : MonoBehaviour
             if (particleName == particles[i].name)
             {
                 particles[i].Play();
+                print("played " + particleName);
+            }
+        }
+    }
+    
+    public void SFXTrigger(string sfxName)
+    {
+        for (int i = 0; i < sfx.Length; i++)
+        {
+            if (sfxName == sfx[i])
+            {
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/" + sfxName);
+                print("played " +sfxName);
             }
         }
     }
