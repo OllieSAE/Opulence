@@ -1944,6 +1944,16 @@ MonoBehaviour:
   falconA1F3: {fileID: 7201247062858784664}
   falconA1F4: {fileID: 2175882616056930765}
   falconA1Radius: 0.25
+  falconA2F1: {fileID: 0}
+  falconA2F2: {fileID: 0}
+  falconA2F3: {fileID: 0}
+  falconA2F4: {fileID: 0}
+  falconA2Radius: 0
+  falconA3F1: {fileID: 0}
+  falconA3F2: {fileID: 0}
+  falconA3F3: {fileID: 0}
+  falconA3F4: {fileID: 0}
+  falconA3Radius: 0
   spiderFrame1: {fileID: 0}
 --- !u!1 &686606752631119997
 GameObject:
@@ -2205,6 +2215,7 @@ MonoBehaviour:
   meleeAttackRange: 0.3
   meleeHitDelay: 0.25
   chargeTransitionDelay: 0
+  meleeComboTimerCutoff: 0.7
   rangedAttackPower: 30
   rangedMaxAmmo: 5
   rechargeAmmoTime: 3
@@ -2232,6 +2243,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  immune: 0
 --- !u!114 &1584120732
 MonoBehaviour:
   m_ObjectHideFlags: 0

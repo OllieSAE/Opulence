@@ -41,6 +41,8 @@ public class HitboxManager : MonoBehaviour
         }
     }
 
+    #region Player Attacks
+
     #region Falcon Attacks
 
     #region Falcon Attack 1 Frames
@@ -116,9 +118,23 @@ public class HitboxManager : MonoBehaviour
     #endregion
     
     #endregion
+
+    #endregion
+
     
 
+    #region Enemy Attacks
 
+    #region Basic Melee Attack
+
+    public void BasicMeleeAttack()
+    {
+        
+    }
+
+    #endregion
+
+    #endregion
 
     private void OnDrawGizmos()
     {

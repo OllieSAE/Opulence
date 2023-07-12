@@ -18,6 +18,9 @@ public class Combat : MonoBehaviour
     private LayerMask enemyLayer;
     private LayerMask playerLayer;
     private Health health;
+    private float meleeComboTimer;
+    private bool canFirstCombo;
+    private bool canSecondCombo;
     //private BasicEnemyPatrol basicEnemyPatrol;
 
     [Header("Melee Combat")]
@@ -26,6 +29,7 @@ public class Combat : MonoBehaviour
     public float meleeAttackRange;
     public float meleeHitDelay;
     public float chargeTransitionDelay;
+    public float meleeComboTimerCutoff;
 
     //this is set as BasicEnemyPatrol "Aggro Speed" on the Charger Prefab
     private float chargerAttackSpeed;
@@ -66,6 +70,8 @@ public class Combat : MonoBehaviour
         enemyLayer = LayerMask.GetMask("Enemies");
         playerLayer = LayerMask.GetMask("Player");
         health = GetComponent<Health>();
+        canFirstCombo = false;
+        canSecondCombo = false;
     }
 
     private void OnDisable()
@@ -82,6 +88,17 @@ public class Combat : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         currentlyAttacking = false;
         rechargingAmmo = false;
+    }
+
+    void Update()
+    {
+        meleeComboTimer += Time.deltaTime;
+        if (meleeComboTimer > meleeComboTimerCutoff)
+        {
+            meleeComboTimer = 0;
+            canFirstCombo = false;
+            canSecondCombo = false;
+        }
     }
 
     public void EnemyAttack(BasicEnemyPatrol.EnemyType value, float aggroSpeed)
@@ -144,28 +161,16 @@ public class Combat : MonoBehaviour
 
     private IEnumerator MeleeAttackCoroutine()
     {
-        if (!currentlyAttacking)
+        if (!currentlyAttacking && !canFirstCombo && !canSecondCombo)
         {
+            meleeComboTimer = 0;
             currentlyAttacking = true;
             StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
                 animator.SetTrigger("MeleeAttack");
                 yield return new WaitForSeconds(meleeHitDelay);
-                //Detect enemies in range of attack
-                
-                //change this to overlapBOXall
-                //Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, meleeAttackRange, enemyLayer);
-                
-                //can we set the "attack point" and "attack range" variables to default at the start
-                //then adjust them at the beginning of each attack animation, via event
-
-                //Damage them
-                
-                // foreach (Collider2D enemy in hitEnemies)
-                // {
-                //     enemy.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
-                // }
+                canFirstCombo = true;
             }
 
             if (gameObject.CompareTag("Enemy"))
@@ -183,12 +188,36 @@ public class Combat : MonoBehaviour
                 }
             }
         }
+        else if (!currentlyAttacking && canFirstCombo && !canSecondCombo)
+        {
+            meleeComboTimer = 0;
+            currentlyAttacking = true;
+            canFirstCombo = false;
+            StartCoroutine(MeleeAttackCooldownCoroutine());
+            if (gameObject.CompareTag("Player"))
+            {
+                animator.SetTrigger("MeleeAttack2");
+                yield return new WaitForSeconds(meleeHitDelay);
+                canSecondCombo = true;
+            }
+        }
+        else if (!currentlyAttacking && !canFirstCombo && canSecondCombo)
+        {
+            meleeComboTimer = 0;
+            currentlyAttacking = true;
+            canSecondCombo = false;
+            StartCoroutine(MeleeAttackCooldownCoroutine());
+            if (gameObject.CompareTag("Player"))
+            {
+                animator.SetTrigger("MeleeAttack3");
+                yield return new WaitForSeconds(meleeHitDelay);
+            }
+        }
     }
 
     private IEnumerator MeleeAttackCooldownCoroutine()
     {
         yield return new WaitForSeconds(attackCooldown);
-        
         currentlyAttacking = false;
     }
 
