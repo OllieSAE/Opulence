@@ -427,9 +427,11 @@ public class Movement : MonoBehaviour
     private IEnumerator DashingCoroutine()
     {
         dashing = true;
+        health.immune = true;
         rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(0.25f);
         dashing = false;
+        health.immune = false;
         animator.SetBool("Dashing", false);
         rigidbody.constraints = RigidbodyConstraints2D.None;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
