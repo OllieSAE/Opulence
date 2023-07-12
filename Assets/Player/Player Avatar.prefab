@@ -1774,6 +1774,7 @@ GameObject:
   - component: {fileID: 334087569}
   - component: {fileID: 1602821871}
   - component: {fileID: 2096564205}
+  - component: {fileID: 3813441183586035222}
   m_Layer: 6
   m_Name: View
   m_TagString: Untagged
@@ -1955,6 +1956,26 @@ MonoBehaviour:
   falconA3F4: {fileID: 0}
   falconA3Radius: 0
   spiderFrame1: {fileID: 0}
+--- !u!114 &3813441183586035222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039286895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ce6759dad464e46a43ee1fe0215049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTime: 0.25
+  spriteRefreshRateBright: 0.075
+  positionToSpawn: {fileID: 6330115352583211059}
+  positionOffset: {x: -0.2, y: 0, z: 0}
+  mat1: {fileID: 2100000, guid: fe4a5a008c98b454ca5458336f1d1e52, type: 2}
+  mat2: {fileID: 2100000, guid: 99062d4dfaef8044a884d3ec32923171, type: 2}
+  spriteDestroyDelay: 0.1
+  mainSprite: {fileID: 21300000, guid: dfd3269ad8dea4a4b909fbeeaacfcc5e, type: 3}
 --- !u!1 &686606752631119997
 GameObject:
   m_ObjectHideFlags: 0
