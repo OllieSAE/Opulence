@@ -484,6 +484,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: tutorialTestEnable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: toggleEnemyMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: combatTutorialTestEnable
       value: 1
       objectReference: {fileID: 0}
