@@ -5,7 +5,7 @@ using FMODUnity;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class vfxTrigger : MonoBehaviour
+public class FXTrigger : MonoBehaviour
 {
     public VisualEffect[] vfx;
     public string[] sfx;
