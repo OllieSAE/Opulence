@@ -62,6 +62,7 @@ public class FXTrigger : MonoBehaviour
             }
         }
     }
+    
 
     public void OnParticleCollision(GameObject other)
     {
