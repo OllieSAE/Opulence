@@ -166,7 +166,7 @@ public class Combat : MonoBehaviour
         {
             meleeComboTimer = 0;
             currentlyAttacking = true;
-            //StartCoroutine(MeleeAttackCooldownCoroutine());
+            StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
                 animator.SetTrigger("MeleeAttack");
@@ -191,12 +191,12 @@ public class Combat : MonoBehaviour
                 }
             }
         }
-        else if (currentlyAttacking && canFirstCombo && !canSecondCombo)
+        else if (!currentlyAttacking && canFirstCombo && !canSecondCombo)
         {
             meleeComboTimer = 0;
             currentlyAttacking = true;
             canFirstCombo = false;
-            //StartCoroutine(MeleeAttackCooldownCoroutine());
+            StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
                 canSecondCombo = true;
@@ -206,12 +206,12 @@ public class Combat : MonoBehaviour
                 //canSecondCombo = true;
             }
         }
-        else if (currentlyAttacking && !canFirstCombo && canSecondCombo)
+        else if (!currentlyAttacking && !canFirstCombo && canSecondCombo)
         {
             meleeComboTimer = 0;
             currentlyAttacking = true;
             canSecondCombo = false;
-            //StartCoroutine(MeleeAttackCooldownCoroutine());
+            StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
                 animator.SetTrigger("MeleeAttack3");
