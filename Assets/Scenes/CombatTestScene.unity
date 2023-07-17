@@ -7408,6 +7408,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4123682042663585797, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
   m_PrefabInstance: {fileID: 1122554754}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1122554766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122554755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx:
+  - Enemy Charge Emote
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1131910088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9034,6 +9057,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4123682042663585797, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
   m_PrefabInstance: {fileID: 369745423403658325}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &369745423403658337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369745423403658326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx:
+  - Enemy Charge Emote
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &3174919030219965931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9119,6 +9165,7 @@ MonoBehaviour:
   vfx: []
   sfx:
   - Enemy Ranged Attack
+  - Enemy Ranged Emote
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
