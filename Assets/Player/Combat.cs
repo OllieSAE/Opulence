@@ -98,6 +98,7 @@ public class Combat : MonoBehaviour
             meleeComboTimer = 0;
             canFirstCombo = false;
             canSecondCombo = false;
+            currentlyAttacking = false;
         }
     }
 
@@ -165,12 +166,14 @@ public class Combat : MonoBehaviour
         {
             meleeComboTimer = 0;
             currentlyAttacking = true;
-            StartCoroutine(MeleeAttackCooldownCoroutine());
+            //StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
                 animator.SetTrigger("MeleeAttack");
-                yield return new WaitForSeconds(meleeHitDelay);
                 canFirstCombo = true;
+                //yield return new WaitForSeconds(meleeHitDelay);
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+                //canFirstCombo = true;
             }
 
             if (gameObject.CompareTag("Enemy"))
@@ -188,29 +191,32 @@ public class Combat : MonoBehaviour
                 }
             }
         }
-        else if (!currentlyAttacking && canFirstCombo && !canSecondCombo)
+        else if (currentlyAttacking && canFirstCombo && !canSecondCombo)
         {
             meleeComboTimer = 0;
             currentlyAttacking = true;
             canFirstCombo = false;
-            StartCoroutine(MeleeAttackCooldownCoroutine());
+            //StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
-                animator.SetTrigger("MeleeAttack2");
-                yield return new WaitForSeconds(meleeHitDelay);
                 canSecondCombo = true;
+                animator.SetTrigger("MeleeAttack2");
+                //yield return new WaitForSeconds(meleeHitDelay);
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+                //canSecondCombo = true;
             }
         }
-        else if (!currentlyAttacking && !canFirstCombo && canSecondCombo)
+        else if (currentlyAttacking && !canFirstCombo && canSecondCombo)
         {
             meleeComboTimer = 0;
             currentlyAttacking = true;
             canSecondCombo = false;
-            StartCoroutine(MeleeAttackCooldownCoroutine());
+            //StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
                 animator.SetTrigger("MeleeAttack3");
-                yield return new WaitForSeconds(meleeHitDelay);
+                //yield return new WaitForSeconds(meleeHitDelay);
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             }
         }
     }
