@@ -1852,6 +1852,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: sfx.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: sfx.Array.data[1]
+      value: Character Land
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: sfx.Array.data[2]
+      value: Wall Slide
+      objectReference: {fileID: 0}
     - target: {fileID: 1048529260058701012, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_Name
       value: Player Avatar
