@@ -8564,6 +8564,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
   m_PrefabInstance: {fileID: 1869363812}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1869363814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869363813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx: []
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1963989934
 GameObject:
   m_ObjectHideFlags: 0
