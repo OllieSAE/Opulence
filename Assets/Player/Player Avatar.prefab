@@ -4064,7 +4064,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2301012657865679504, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301012657865679507, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
+      propertyPath: lengthInSec
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2301012657865679507, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
       propertyPath: CollisionModule.type
@@ -4081,6 +4085,18 @@ PrefabInstance:
     - target: {fileID: 2301012657865679507, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301012657865679597, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301012657865679597, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301012657865679597, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
