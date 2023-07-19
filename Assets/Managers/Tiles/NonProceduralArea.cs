@@ -7,7 +7,7 @@ using UnityEngine;
 public class NonProceduralArea : ScriptableObject
 {
     public GameObject prefab;
-    public Vector2 spawnPosition;
+    public Vector3 spawnPosition;
     [Header("Use EVEN numbers")]
     public int height;
     public int width;
