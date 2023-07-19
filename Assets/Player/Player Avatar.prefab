@@ -2249,8 +2249,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 614747f385ade654c99d718195dc05f7, type: 2}
   - {fileID: 11400000, guid: d06835bc64f1ea947941c74ef22e33c9, type: 2}
   internalComboTimeDelay: 0.2
-  externalComboTimeDelay: 0.2
-  whatDoICallThis: 0
+  externalComboTimeDelay: 0.3
+  whatDoICallThis: 0.05
   rangedAttackPower: 30
   rangedMaxAmmo: 5
   rechargeAmmoTime: 3
@@ -4253,6 +4253,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 6246053243521395651, guid: 13272c738f9e73c449ef23d0ddab966c, type: 3}
+    - target: {fileID: 6653974393262011347, guid: c6cc8ddea7a22b64fad3b445def5f293, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 6653974393262011347, guid: c6cc8ddea7a22b64fad3b445def5f293, type: 3}
       propertyPath: CustomDataModule.vector0_3.maxCurve.m_Curve.Array.data[0].value
       value: 1
