@@ -157,9 +157,9 @@ MonoBehaviour:
   grid: {fileID: 1065906565}
   levelHeight: 100
   levelWidth: 100
-  perlinThresholdMin: 0
-  perlinThresholdMax: 0.01
-  scale: 0.19
+  perlinThresholdMin: 0.02
+  perlinThresholdMax: 0.45
+  scale: 0.2
   nonProceduralAreas:
   - {fileID: 11400000, guid: d6fb8d6a7cc50a54fbd766478a8fdbdd, type: 2}
   - {fileID: 11400000, guid: 4e3835d7ea2894a49804d78c1780fabf, type: 2}

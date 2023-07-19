@@ -23,6 +23,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] public float perlinThresholdMax;
     [SerializeField] public float scale;
     private float previousPerlinValue;
+    private int enemySpawnCounter;
 
     [Header("Non Procedural Areas")] public List<NonProceduralArea> nonProceduralAreas = new List<NonProceduralArea>();
     [SerializeField] private Camera cam;
@@ -33,8 +34,8 @@ public class LevelGenerator : MonoBehaviour
     {
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
-        //ClearTiles();
-        //GenerateTiles();
+        ClearTiles();
+        GenerateTiles();
         
         if (Input.GetMouseButtonDown(0))
         {
@@ -62,18 +63,45 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = -levelHeight/2; y < levelHeight/2; y++)
             {
-                Vector3Int pos = new Vector3Int(x, y, 0);
+                //DELIBERATELY have the XY back to front so it draws horizontally first
+                Vector3Int pos = new Vector3Int(y, x, 0);
 
                 float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
-                if (perlinNoise > perlinThresholdMax)
+                float perlinDiff = perlinNoise - previousPerlinValue;
+                if (perlinDiff < 0.15f && perlinDiff > -0.15f)
                 {
-                    Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
+                    enemySpawnCounter++;
+                    perlinNoise = previousPerlinValue;
                     
-                    Gizmos.color = tempColor;
-                    Gizmos.DrawCube(pos,Vector3.one);
+                    if (perlinNoise > perlinThresholdMax)
+                    {
                     
-                }
+                        //currentTilemap.SetTile(pos,currentTile);
+                        Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
+                        //currentTilemap.SetColor(pos,tempColor);
+                    
+                        Gizmos.color = tempColor;
+                        Gizmos.DrawCube(pos,Vector3.one);
 
+                        if (perlinNoise < perlinThresholdMin + perlinThresholdMax)
+                        {
+                            if (Random.Range(0, 1f) > 0.8f)
+                            {
+                                Gizmos.color = Color.red;
+                                Gizmos.DrawCube(pos,Vector3.one);
+                            }
+                            if (enemySpawnCounter > 3)
+                            {
+                                enemySpawnCounter = 0;
+                                Gizmos.color = Color.blue;
+                                Gizmos.DrawCube(pos,Vector3.one);
+                            }
+                        }
+
+                        
+                    }
+                }
+                
                 previousPerlinValue = perlinNoise;
             }
         }
@@ -85,19 +113,26 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = -levelHeight/2; y < levelHeight/2; y++)
             {
-                Vector3Int pos = new Vector3Int(x, y, 0);
-
+                //DELIBERATELY have the XY back to front so it draws horizontally first
+                Vector3Int pos = new Vector3Int(y, x, 0);
 
                 float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
-                if (perlinNoise > perlinThresholdMax)
+                float perlinDiff = perlinNoise - previousPerlinValue;
+                if (perlinDiff < 0.15f && perlinDiff > -0.15f)
                 {
-                    //currentTilemap.SetTile(pos,currentTile);
-                    Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
-                    //currentTilemap.SetColor(pos,tempColor);
+                    perlinNoise = previousPerlinValue;
                     
-                    Gizmos.color = tempColor;
-                    Gizmos.DrawCube(pos,Vector3.one);
+                    if (perlinNoise > perlinThresholdMax)
+                    {
                     
+                        currentTilemap.SetTile(pos,currentTile);
+                        Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
+                        //currentTilemap.SetColor(pos,tempColor);
+                    
+                        //Gizmos.color = tempColor;
+                        //Gizmos.DrawCube(pos,Vector3.one);
+                    
+                    }
                 }
                 
                 previousPerlinValue = perlinNoise;
