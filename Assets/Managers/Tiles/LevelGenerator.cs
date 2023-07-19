@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Serialization;
@@ -10,6 +12,7 @@ public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private Tilemap currentTilemap;
     [SerializeField] private TileBase currentTile;
+    [SerializeField] private Grid grid;
 
     [Header("Use EVEN numbers!")]
     [SerializeField] public int levelHeight;
@@ -18,6 +21,8 @@ public class LevelGenerator : MonoBehaviour
     [Header("0,0 = full - 1,1 = empty")]
     [SerializeField] public float perlinThresholdMin;
     [SerializeField] public float perlinThresholdMax;
+    [SerializeField] public float scale;
+    private float previousPerlinValue;
 
     [Header("Non Procedural Areas")] public List<NonProceduralArea> nonProceduralAreas = new List<NonProceduralArea>();
     [SerializeField] private Camera cam;
@@ -28,6 +33,9 @@ public class LevelGenerator : MonoBehaviour
     {
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
+        //ClearTiles();
+        //GenerateTiles();
+        
         if (Input.GetMouseButtonDown(0))
         {
             print("generate tiles");
@@ -48,6 +56,29 @@ public class LevelGenerator : MonoBehaviour
         
     }
 
+    private void OnDrawGizmos()
+    {
+        for (int x = -levelWidth/2; x < levelWidth/2; x++)
+        {
+            for (int y = -levelHeight/2; y < levelHeight/2; y++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+
+                float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
+                if (perlinNoise > perlinThresholdMax)
+                {
+                    Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
+                    
+                    Gizmos.color = tempColor;
+                    Gizmos.DrawCube(pos,Vector3.one);
+                    
+                }
+
+                previousPerlinValue = perlinNoise;
+            }
+        }
+    }
+
     private void GenerateTiles()
     {
         for (int x = -levelWidth/2; x < levelWidth/2; x++)
@@ -56,11 +87,20 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(x, y, 0);
 
-                if (Mathf.PerlinNoise(Random.Range(0f, 100f), Time.time) >
-                    Random.Range(perlinThresholdMin, perlinThresholdMax))
+
+                float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
+                if (perlinNoise > perlinThresholdMax)
                 {
-                    currentTilemap.SetTile(pos,currentTile);
+                    //currentTilemap.SetTile(pos,currentTile);
+                    Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
+                    //currentTilemap.SetColor(pos,tempColor);
+                    
+                    Gizmos.color = tempColor;
+                    Gizmos.DrawCube(pos,Vector3.one);
+                    
                 }
+                
+                previousPerlinValue = perlinNoise;
             }
         }
         if (!borderGenerated)
@@ -87,6 +127,11 @@ public class LevelGenerator : MonoBehaviour
                     Vector3Int pos = new Vector3Int(x+tempSpawnPosX, y+tempSpawnPosY, 0);
                     currentTilemap.SetTile(pos,null);
                 }
+            }
+
+            if (nonProceduralArea.prefab != null)
+            {
+                Instantiate(nonProceduralArea.prefab,nonProceduralArea.spawnPosition,quaternion.identity,grid.transform);
             }
         }
 
@@ -120,6 +165,11 @@ public class LevelGenerator : MonoBehaviour
         borderGenerated = false;
         spawnedNonProceduralAreas = false;
         currentTilemap.ClearAllTiles();
+        foreach (Transform child in grid.transform)
+        {
+            child.GetComponent<Tilemap>().ClearAllTiles();
+            if (child != currentTilemap.transform) Destroy(child.transform.gameObject);
+        }
     }
 
     private void PlaceTile(Vector3Int pos)

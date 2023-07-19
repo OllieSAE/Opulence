@@ -154,10 +154,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTilemap: {fileID: 1830001864}
   currentTile: {fileID: 11400000, guid: 0334df8f6ac71e544bd555c217c07a6a, type: 2}
-  levelHeight: 10
-  levelWidth: 10
+  grid: {fileID: 1065906565}
+  levelHeight: 100
+  levelWidth: 100
   perlinThresholdMin: 0
-  perlinThresholdMax: 0
+  perlinThresholdMax: 0.01
+  scale: 0.19
   nonProceduralAreas:
   - {fileID: 11400000, guid: d6fb8d6a7cc50a54fbd766478a8fdbdd, type: 2}
   - {fileID: 11400000, guid: 4e3835d7ea2894a49804d78c1780fabf, type: 2}
@@ -295,7 +297,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830001861}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -323,7 +325,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 0a57891da5e7fa949b34f697d54f258e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -365,36 +367,48 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 0
+      e00: -2.640051e+32
       e01: 0
-      e02: -5.7500076
-      e03: -5.7500076
-      e10: 8.84e-43
+      e02: -2.4696095e+10
+      e03: -2.4696095e+10
+      e10: 4.5907e-41
       e11: 0
-      e12: 8.8e-43
-      e13: 8.8e-43
-      e20: 2.1768394e-14
+      e12: 5.91e-43
+      e13: 5.91e-43
+      e20: -5.558554e+10
       e21: 1e-45
-      e22: 6.010967e-29
-      e23: -8.61415e+9
+      e22: 5.8782126e-29
+      e23: -9.02221e+9
       e30: 4.5905e-41
       e31: 0
-      e32: 8.81e-43
-      e33: 8.84e-43
+      e32: 5.93e-43
+      e33: 5.96e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 5.1927e-41, g: 5.1927e-41, b: 5.1927e-41, a: 5.1927e-41}
+    m_Data: {r: 2.14906e-40, g: 2.14906e-40, b: 2.14906e-40, a: 2.14906e-40}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -2, y: 0, z: 0}
-  m_Size: {x: 2, y: 4, z: 1}
+  m_Origin: {x: -7, y: 0, z: 0}
+  m_Size: {x: 7, y: 9, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
