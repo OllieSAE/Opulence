@@ -171,12 +171,14 @@ public class Combat : MonoBehaviour
 
     private void MeleeAttackComboNew()
     {
-        if (Time.time - lastComboEnd > whatDoICallThis && comboCounter < meleeCombo.Count)// && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack"))
+        if (Time.time - lastComboEnd > whatDoICallThis && comboCounter < meleeCombo.Count)
         {
             CancelInvoke("EndMeleeCombo");
+            currentlyAttacking = true;
 
             if (Time.time - lastClickedTime >= internalComboTimeDelay)
             {
+                
                 animator.runtimeAnimatorController = meleeCombo[comboCounter].animatorOV;
                 animator.Play("MeleeAttack",0,0);
                 lastClickedTime = Time.time;
@@ -186,7 +188,7 @@ public class Combat : MonoBehaviour
             }
         }
         
-        else if ((Time.time - lastComboEnd > whatDoICallThis && comboCounter >= meleeCombo.Count)) // && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")))
+        else if ((Time.time - lastComboEnd > whatDoICallThis && comboCounter >= meleeCombo.Count))
         {
             if (Time.time - lastClickedTime >= internalComboTimeDelay)
             {
@@ -286,6 +288,7 @@ public class Combat : MonoBehaviour
     {
         comboCounter = 0;
         lastComboEnd = Time.time;
+        currentlyAttacking = false;
         print("resetting lastComboEnd");
     }
 
@@ -336,7 +339,7 @@ public class Combat : MonoBehaviour
     {
         if (!currentlyAttacking && rangedCurrentAmmo > 0)
         {
-            
+            lastComboEnd = Time.time;
             currentlyAttacking = true;
             rangedCurrentAmmo -= 1;
             StartCoroutine(RangedAttackCooldownCoroutine());
@@ -344,7 +347,7 @@ public class Combat : MonoBehaviour
             if(gameObject.CompareTag("Enemy")) animator.SetTrigger("Attack");
 
             yield return new WaitForSeconds(rangedHitDelay);
-            
+            lastComboEnd = Time.time;
             if (health.currentHealth > 0) FireProjectile();
         }
     }
