@@ -1952,16 +1952,16 @@ MonoBehaviour:
   falconA1F3: {fileID: 7201247062858784664}
   falconA1F4: {fileID: 2175882616056930765}
   falconA1Radius: 0.25
-  falconA2F1: {fileID: 0}
-  falconA2F2: {fileID: 0}
-  falconA2F3: {fileID: 0}
+  falconA2F1: {fileID: 323126098983104069}
+  falconA2F2: {fileID: 8689765855101657297}
+  falconA2F3: {fileID: 848075162915110879}
   falconA2F4: {fileID: 0}
-  falconA2Radius: 0
-  falconA3F1: {fileID: 0}
-  falconA3F2: {fileID: 0}
-  falconA3F3: {fileID: 0}
+  falconA2Radius: 0.25
+  falconA3F1: {fileID: 3522349468656059422}
+  falconA3F2: {fileID: 6432741975302777020}
+  falconA3F3: {fileID: 3686263408010960024}
   falconA3F4: {fileID: 0}
-  falconA3Radius: 0
+  falconA3Radius: 0.25
   spiderFrame1: {fileID: 0}
 --- !u!114 &3813441183586035222
 MonoBehaviour:
@@ -2111,7 +2111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 848075162915110879}
   m_Layer: 6
-  m_Name: Frame Z
+  m_Name: Frame 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2125,7 +2125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865139115847721403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.372, y: 0.389, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2647,7 +2647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8689765855101657297}
   m_Layer: 6
-  m_Name: Frame Y
+  m_Name: Frame 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2661,7 +2661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2536130016537986359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.419, y: -0.254, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2712,7 +2712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3522349468656059422}
   m_Layer: 6
-  m_Name: Frame X
+  m_Name: Frame 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2726,7 +2726,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2788180530304681451}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.173, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2910,7 +2910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 323126098983104069}
   m_Layer: 6
-  m_Name: Frame X
+  m_Name: Frame 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2924,7 +2924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3153215163631668389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.237, y: -0.461, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3496,7 +3496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6432741975302777020}
   m_Layer: 6
-  m_Name: Frame Y
+  m_Name: Frame 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3510,7 +3510,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6685439126359700184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.461, y: 0.097, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3747,7 +3747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3686263408010960024}
   m_Layer: 6
-  m_Name: Frame Z
+  m_Name: Frame 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3761,7 +3761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8543650908928259332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.542, y: -0.626, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

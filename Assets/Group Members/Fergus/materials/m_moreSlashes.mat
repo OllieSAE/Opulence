@@ -21,12 +21,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _EdgeMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: c8612cf7c7f0b3f4c9f0129fe3b63b77, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: 2c4985cbf024e504fbe99b14fc00f68f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 88019ab6a50cbac438efa9278210b767, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OuterTex:
@@ -47,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlbedoPower: 1
+    - _AlbedoPower: 0
     - _AlphaClip: 0
     - _AlphaPower: 0.16
     - _Alpha_Clipping: 0
@@ -55,21 +59,29 @@ Material:
     - _CastShadows: 1
     - _Cull: 0
     - _DstBlend: 10
-    - _EmissivePower: 2
-    - _NoiseAmount: 0.1
+    - _EdgeMask: 0.842
+    - _EdgeMaskBlend: 0.13
+    - _EdgeNoiseScale: 3
+    - _EdgeNoiseTiling: 25
+    - _EmissivePower: 1
+    - _InnerPower: 0.2
+    - _NoiseAmount: 0.082
+    - _NoisePower: 1
     - _NoiseScale: 25
     - _OuterHeight: 1
+    - _OuterPower: 1
     - _OuterWidth: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scrolling: -0
+    - _Scrolling: -0.32
     - _SrcBlend: 5
     - _Start_LerpScale: 0
     - _Surface: 1
     - _UV_AlphaClip_g: 0
     - _UV_Colour_Lerp_z: 0
     - _UV_Scroll_w: 0
+    - _UseEdgeMaskTex: 0
     - _UseNosieTexture: 1
     - _WorkflowMode: 1
     - _ZTest: 4
@@ -77,10 +89,15 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _AlbedoColour: {r: 0.006787301, g: 0.0033374857, b: 0.047169805, a: 1}
-    - _EmissiveColour: {r: 0.8867924, g: 0.17899224, b: 0.17150229, a: 1}
+    - _EdgeNoiseOffset: {r: 12, g: 0, b: 0, a: 0}
+    - _EmissiveColour: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
+    - _InnerColour: {r: 0.3207547, g: 0, b: 0, a: 1}
+    - _InnerTiling: {r: 1, g: 1, b: 0, a: 0}
     - _NoiseOffset: {r: 0.1, g: 0, b: 0, a: 0}
     - _NoiseTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _OuterColour: {r: 0.103773594, g: 0.060208265, b: 0.060208265, a: 1}
     - _OuterScale: {r: 1, g: 1, b: 0, a: 0}
+    - _OuterTiling: {r: 1, g: 1, b: 0, a: 0}
     - _Start_Lerp_Colour: {r: 12.99604, g: 12.99604, b: 12.99604, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &805471482091641379
