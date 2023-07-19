@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5996596872570871845
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: m_falconAttack3
+  m_Shader: {fileID: -6465566751694194690, guid: 2ab5b1ff2e13b5c4f9d77001a94c4a4a, type: 3}
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Cull: 0
+    - _DstBlend: 10
+    - _EdgeMask: 0.794
+    - _EdgeMaskBlend: 0.111
+    - _EdgeNoiseOffset: 1.2
+    - _EdgeNoiseScale: 3.08
+    - _EdgeNoiseTiling: 27.5
+    - _Height: 0.46
+    - _InnerColourLerp: 1
+    - _InnerHeight: 0.23
+    - _InnerWidth: 1.31
+    - _NoiseAmount: 0.2
+    - _NoiseOffset: 0.15
+    - _NoiseScale: 25
+    - _OuterColourLerp: 1
+    - _OuterHeight: 0.41
+    - _OuterWidth: 0.56
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Roundness: 0.1
+    - _Scroll: -0.09
+    - _SrcBlend: 5
+    - _StartColourLerp: 0
+    - _Surface: 1
+    - _UV_Color_Lerp_z: 0
+    - _UV_Scroll_w: 0
+    - _Width: 1.36
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 2
+    m_Colors:
+    - _EdgeNoiseOffset: {r: 12, g: 0, b: 0, a: 0}
+    - _InnerColour: {r: 0.5849056, g: 0.06900408, b: 0.06345675, a: 1}
+    - _NoiseOffset: {r: 0.1, g: 0, b: 0, a: 0}
+    - _NoiseTiling: {r: 0.69, g: 5.4, b: 0, a: 0}
+    - _OuterColour: {r: 0.0047952915, g: 0.0037599998, b: 0.01, a: 1}
+    - _StartColour: {r: 35.216236, g: 23.14526, b: 23.14526, a: 1}
+    - _StartColourInner: {r: 7.464264, g: 7.464264, b: 7.464264, a: 1}
+    - _StartColourOuter: {r: 9.119262, g: 0.38713828, b: 0.38713828, a: 1}
+  m_BuildTextureStacks: []
