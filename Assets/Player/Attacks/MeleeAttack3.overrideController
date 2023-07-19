@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MeleeAttack3
+  m_Controller: {fileID: 9100000, guid: af4af50b7fcfde643991cebc3a763d77, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 313b8f25f3da4d5429fc1f17c82d506e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 512c2c2d6ed286646b3a23d94c8cf0e0, type: 2}

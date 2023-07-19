@@ -2242,6 +2242,13 @@ MonoBehaviour:
   meleeHitDelay: 0.25
   chargeTransitionDelay: 0
   meleeComboTimerCutoff: 0.7
+  meleeCombo:
+  - {fileID: 11400000, guid: 857e29e58955d524aac4f8848072868e, type: 2}
+  - {fileID: 11400000, guid: 614747f385ade654c99d718195dc05f7, type: 2}
+  - {fileID: 11400000, guid: d06835bc64f1ea947941c74ef22e33c9, type: 2}
+  internalComboTimeDelay: 0.2
+  externalComboTimeDelay: 0.2
+  whatDoICallThis: 0
   rangedAttackPower: 30
   rangedMaxAmmo: 5
   rechargeAmmoTime: 3

@@ -11,7 +11,7 @@ public class Combat : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private Animator animator;
     private DamageAOETest damageAoeTest;
-    
+
     [Header("General Combat")]
     private bool currentlyAttacking;
     public float attackCooldown;
@@ -30,6 +30,13 @@ public class Combat : MonoBehaviour
     public float meleeHitDelay;
     public float chargeTransitionDelay;
     public float meleeComboTimerCutoff;
+    public List<AttackSO> meleeCombo;
+    private float lastComboEnd;
+    private float lastClickedTime;
+    private int comboCounter;
+    public float internalComboTimeDelay;
+    public float externalComboTimeDelay;
+    public float whatDoICallThis;
 
     //this is set as BasicEnemyPatrol "Aggro Speed" on the Charger Prefab
     private float chargerAttackSpeed;
@@ -100,6 +107,7 @@ public class Combat : MonoBehaviour
             canSecondCombo = false;
             currentlyAttacking = false;
         }
+        ExitMeleeAttack();
     }
 
     public void EnemyAttack(BasicEnemyPatrol.EnemyType value, float aggroSpeed)
@@ -156,8 +164,51 @@ public class Combat : MonoBehaviour
     {
         if (context.performed)
         {
-            StartCoroutine(MeleeAttackCoroutine());
+            //StartCoroutine(MeleeAttackCoroutine());
+            MeleeAttackComboNew();
         }
+    }
+
+    private void MeleeAttackComboNew()
+    {
+        if (Time.time - lastComboEnd > whatDoICallThis && comboCounter < meleeCombo.Count)// && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack"))
+        {
+            CancelInvoke("EndMeleeCombo");
+
+            if (Time.time - lastClickedTime >= internalComboTimeDelay)
+            {
+                animator.runtimeAnimatorController = meleeCombo[comboCounter].animatorOV;
+                animator.Play("MeleeAttack",0,0);
+                lastClickedTime = Time.time;
+                
+                if(comboCounter<meleeCombo.Count) comboCounter++;
+                else Invoke("EndMeleeCombo", 0);
+            }
+        }
+        
+        else if ((Time.time - lastComboEnd > whatDoICallThis && comboCounter >= meleeCombo.Count)) // && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")))
+        {
+            if (Time.time - lastClickedTime >= internalComboTimeDelay)
+            {
+                lastClickedTime = Time.time;
+                if(comboCounter<meleeCombo.Count-1) comboCounter++;
+                else Invoke("EndMeleeCombo", 0.4f);
+            }
+        }
+        
+        /*else if (Time.time - lastComboEnd > whatDoICallThis && comboCounter < meleeCombo.Count &&
+                 !animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack"))
+        {
+            if (Time.time - lastClickedTime >= internalComboTimeDelay)
+            {
+                animator.runtimeAnimatorController = meleeCombo[comboCounter].animatorOV;
+                animator.Play("MeleeAttack",0,0);
+                lastClickedTime = Time.time;
+                
+                if(comboCounter<meleeCombo.Count-1) comboCounter++;
+                else Invoke("EndMeleeCombo", 0);
+            }
+        }*/
     }
 
     private IEnumerator MeleeAttackCoroutine()
@@ -169,7 +220,7 @@ public class Combat : MonoBehaviour
             StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
-                animator.SetTrigger("MeleeAttack");
+                //animator.SetTrigger("MeleeAttack");
                 canFirstCombo = true;
                 //yield return new WaitForSeconds(meleeHitDelay);
                 yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
@@ -200,7 +251,7 @@ public class Combat : MonoBehaviour
             if (gameObject.CompareTag("Player"))
             {
                 canSecondCombo = true;
-                animator.SetTrigger("MeleeAttack2");
+                //animator.SetTrigger("MeleeAttack2");
                 //yield return new WaitForSeconds(meleeHitDelay);
                 yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
                 //canSecondCombo = true;
@@ -214,11 +265,28 @@ public class Combat : MonoBehaviour
             StartCoroutine(MeleeAttackCooldownCoroutine());
             if (gameObject.CompareTag("Player"))
             {
-                animator.SetTrigger("MeleeAttack3");
+                //animator.SetTrigger("MeleeAttack3");
                 //yield return new WaitForSeconds(meleeHitDelay);
                 yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             }
         }
+    }
+
+    void ExitMeleeAttack()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f &&
+            animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack"))
+        {
+            Invoke("EndMeleeCombo", externalComboTimeDelay);
+            print("invoke end combo");
+        }
+    }
+
+    void EndMeleeCombo()
+    {
+        comboCounter = 0;
+        lastComboEnd = Time.time;
+        print("resetting lastComboEnd");
     }
 
     private IEnumerator MeleeAttackCooldownCoroutine()
