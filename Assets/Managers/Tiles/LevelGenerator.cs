@@ -11,9 +11,14 @@ using UnityEngine.Tilemaps;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private Tilemap currentTilemap;
-    [SerializeField] private TileBase currentTile;
+    [SerializeField] private CustomTile currentTile;
+    [SerializeField] private List<CustomTile> customTiles;
     [SerializeField] private Grid grid;
+    public bool gizmosOn;
+    [Header("Tile Types")] private CustomTile enemyTile, spikeTile, ruleTile, collectibleTile;
 
+    private Vector3Int[,] tileArrayVector3Ints;
+    private List<CustomTile> spawnedTiles = new List<CustomTile>();
     [Header("Use EVEN numbers!")]
     [SerializeField] public int levelHeight;
     [SerializeField] public int levelWidth;
@@ -30,13 +35,19 @@ public class LevelGenerator : MonoBehaviour
 
     private bool borderGenerated = false;
     private bool spawnedNonProceduralAreas = false;
+
+    private void Awake()
+    {
+        tileArrayVector3Ints = new Vector3Int[levelHeight, levelWidth];
+    }
+
     private void Update()
     {
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
-        ClearTiles();
-        GenerateTiles();
-        
+        //ClearTiles();
+        //GenerateTiles();
+        scale = Random.Range(0.15f, 0.25f);
         if (Input.GetMouseButtonDown(0))
         {
             print("generate tiles");
@@ -54,55 +65,60 @@ public class LevelGenerator : MonoBehaviour
     private void Start()
     {
         if (cam == null) cam = FindObjectOfType<Camera>();
-        
+        spikeTile = customTiles.Find(t => t.tileType == CustomTile.TileType.spike);
+        enemyTile = customTiles.Find(t => t.tileType == CustomTile.TileType.enemy);
     }
 
     private void OnDrawGizmos()
     {
-        for (int x = -levelWidth/2; x < levelWidth/2; x++)
+        if (gizmosOn)
         {
-            for (int y = -levelHeight/2; y < levelHeight/2; y++)
+            for (int x = -levelWidth/2; x < levelWidth/2; x++)
             {
-                //DELIBERATELY have the XY back to front so it draws horizontally first
-                Vector3Int pos = new Vector3Int(y, x, 0);
-
-                float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
-                float perlinDiff = perlinNoise - previousPerlinValue;
-                if (perlinDiff < 0.15f && perlinDiff > -0.15f)
+                for (int y = -levelHeight/2; y < levelHeight/2; y++)
                 {
-                    enemySpawnCounter++;
-                    perlinNoise = previousPerlinValue;
+                    //DELIBERATELY have the XY back to front so it draws horizontally first
+                    Vector3Int pos = new Vector3Int(y, x, 0);
                     
-                    if (perlinNoise > perlinThresholdMax)
-                    {
-                    
-                        //currentTilemap.SetTile(pos,currentTile);
-                        Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
-                        //currentTilemap.SetColor(pos,tempColor);
-                    
-                        Gizmos.color = tempColor;
-                        Gizmos.DrawCube(pos,Vector3.one);
 
-                        if (perlinNoise < perlinThresholdMin + perlinThresholdMax)
+                    float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
+                    float perlinDiff = perlinNoise - previousPerlinValue;
+                    if (perlinDiff < 0.15f && perlinDiff > -0.15f)
+                    {
+                        enemySpawnCounter++;
+                        perlinNoise = previousPerlinValue;
+                    
+                        if (perlinNoise > perlinThresholdMax)
                         {
-                            if (Random.Range(0, 1f) > 0.8f)
+                    
+                            //currentTilemap.SetTile(pos,currentTile);
+                            Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
+                            //currentTilemap.SetColor(pos,tempColor);
+                    
+                            Gizmos.color = tempColor;
+                            Gizmos.DrawCube(pos,Vector3.one);
+
+                            if (perlinNoise < perlinThresholdMin + perlinThresholdMax)
                             {
-                                Gizmos.color = Color.red;
-                                Gizmos.DrawCube(pos,Vector3.one);
+                                if (Random.Range(0, 1f) > 0.8f)
+                                {
+                                    Gizmos.color = Color.red;
+                                    Gizmos.DrawCube(pos,Vector3.one);
+                                }
+                                if (enemySpawnCounter > 3)
+                                {
+                                    enemySpawnCounter = 0;
+                                    Gizmos.color = Color.blue;
+                                    Gizmos.DrawCube(pos,Vector3.one);
+                                }
                             }
-                            if (enemySpawnCounter > 3)
-                            {
-                                enemySpawnCounter = 0;
-                                Gizmos.color = Color.blue;
-                                Gizmos.DrawCube(pos,Vector3.one);
-                            }
-                        }
 
                         
+                        }
                     }
-                }
                 
-                previousPerlinValue = perlinNoise;
+                    previousPerlinValue = perlinNoise;
+                }
             }
         }
     }
@@ -115,23 +131,56 @@ public class LevelGenerator : MonoBehaviour
             {
                 //DELIBERATELY have the XY back to front so it draws horizontally first
                 Vector3Int pos = new Vector3Int(y, x, 0);
+                
+                //needs to account for negative
+                //tileArrayVector3Ints[y, x] = pos;
 
                 float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
                 float perlinDiff = perlinNoise - previousPerlinValue;
                 if (perlinDiff < 0.15f && perlinDiff > -0.15f)
                 {
+                    enemySpawnCounter++;
                     perlinNoise = previousPerlinValue;
                     
                     if (perlinNoise > perlinThresholdMax)
                     {
                     
-                        currentTilemap.SetTile(pos,currentTile);
-                        Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
-                        //currentTilemap.SetColor(pos,tempColor);
-                    
+                        //this gets overriden each iteration through the loop
+                        //need to store it as a position separately to the SO
+                        //dont think SO can store its own value because they're not separate objects
+                        currentTile.AssignPosition(x,y);
+                        
+                        currentTilemap.SetTile(pos,currentTile.tile);
+                        spawnedTiles.Add(currentTile);
+                        
+                        
+                        //Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
                         //Gizmos.color = tempColor;
                         //Gizmos.DrawCube(pos,Vector3.one);
-                    
+
+                        if (perlinNoise < perlinThresholdMin + perlinThresholdMax)
+                        {
+                            if (Random.Range(0, 1f) > 0.8f)
+                            {
+                                currentTilemap.SetTile(pos,spikeTile.tile);
+
+                                //Gizmos.color = Color.red;
+                                //Gizmos.DrawCube(pos,Vector3.one);
+                            }
+                            if (enemySpawnCounter > 3)
+                            {
+                                enemySpawnCounter = 0;
+                                
+                                currentTilemap.SetTile(pos,enemyTile.tile);
+                                
+                                //enemyTile.CheckNeighbours();
+                                
+                                //Gizmos.color = Color.blue;
+                                //Gizmos.DrawCube(pos,Vector3.one);
+                            }
+                        }
+
+                        
                     }
                 }
                 
@@ -146,6 +195,11 @@ public class LevelGenerator : MonoBehaviour
         if (!spawnedNonProceduralAreas)
         {
             SpawnNonProceduralAreas();
+        }
+
+        foreach (CustomTile spawnedTile in spawnedTiles)
+        {
+            spawnedTile.CheckNeighbours();
         }
     }
 
@@ -179,18 +233,18 @@ public class LevelGenerator : MonoBehaviour
         for (int y = -levelHeight / 2; y <= levelHeight / 2; y++)
         {
             Vector3Int posLeft = new Vector3Int((-levelWidth/2), y, 0);
-            currentTilemap.SetTile(posLeft,currentTile);
+            currentTilemap.SetTile(posLeft,currentTile.tile);
             Vector3Int posRight = new Vector3Int((levelWidth/2), y, 0);
-            currentTilemap.SetTile(posRight,currentTile);
+            currentTilemap.SetTile(posRight,currentTile.tile);
         }
         
         //for top and bottom borders
         for (int x = -levelWidth / 2; x <= levelWidth / 2; x++)
         {
             Vector3Int posBottom = new Vector3Int(x, (-levelHeight/2), 0);
-            currentTilemap.SetTile(posBottom,currentTile);
+            currentTilemap.SetTile(posBottom,currentTile.tile);
             Vector3Int posTop = new Vector3Int(x, (levelHeight/2), 0);
-            currentTilemap.SetTile(posTop,currentTile);
+            currentTilemap.SetTile(posTop,currentTile.tile);
         }
         borderGenerated = true;
     }
@@ -209,7 +263,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void PlaceTile(Vector3Int pos)
     {
-        currentTilemap.SetTile(pos, currentTile);
+        currentTilemap.SetTile(pos, currentTile.tile);
     }
 
     private void DeleteTile(Vector3Int pos)

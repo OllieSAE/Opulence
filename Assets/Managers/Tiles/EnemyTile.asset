@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db56be95ecc549b4cbed306db2f68fb8, type: 3}
-  m_Name: TileTest
+  m_Name: EnemyTile
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: cdd929cac82d37a4ea72142706f7d1b0, type: 2}
-  id: TileTest
-  tileType: 3
-  posX: 49
-  posY: 47
+  tile: {fileID: 11400000, guid: 12298e62ec9ef9f4082617235b90b5a2, type: 2}
+  id: EnemyTile
+  tileType: 0
+  posX: 0
+  posY: 0
