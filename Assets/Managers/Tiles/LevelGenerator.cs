@@ -48,6 +48,8 @@ public class LevelGenerator : MonoBehaviour
         //ClearTiles();
         //GenerateTiles();
         scale = Random.Range(0.15f, 0.25f);
+        //or change the 10000 
+        
         if (Input.GetMouseButtonDown(0))
         {
             print("generate tiles");
@@ -148,6 +150,7 @@ public class LevelGenerator : MonoBehaviour
                         //this gets overriden each iteration through the loop
                         //need to store it as a position separately to the SO
                         //dont think SO can store its own value because they're not separate objects
+                        //alternatively, look at how the waterNode grid worked in Yougenics!
                         currentTile.AssignPosition(x,y);
                         
                         currentTilemap.SetTile(pos,currentTile.tile);
