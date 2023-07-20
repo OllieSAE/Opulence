@@ -11,6 +11,7 @@ using UnityEngine.Tilemaps;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private Tilemap currentTilemap;
+    [SerializeField] private List<Tilemap> tilemapList = new List<Tilemap>();
     [SerializeField] private CustomTile currentTile;
     [SerializeField] private List<CustomTile> customTiles;
     [SerializeField] private Grid grid;
@@ -18,6 +19,10 @@ public class LevelGenerator : MonoBehaviour
     [Header("Tile Types")] private CustomTile enemyTile, spikeTile, ruleTile, collectibleTile;
 
     private Vector3Int[,] tileArrayVector3Ints;
+    private CustomTile[,] tile2DArray;
+    private Node[,] gridNodeReferences;
+    private List<Node> blockedNodes;
+    private List<Node> fullNeighbours = new List<Node>();
     private List<CustomTile> spawnedTiles = new List<CustomTile>();
     [Header("Use EVEN numbers!")]
     [SerializeField] public int levelHeight;
@@ -39,15 +44,20 @@ public class LevelGenerator : MonoBehaviour
     private void Awake()
     {
         tileArrayVector3Ints = new Vector3Int[levelHeight, levelWidth];
+        tile2DArray = new CustomTile[levelHeight, levelWidth];
+        gridNodeReferences = new Node[levelHeight+1, levelWidth+1];
+        blockedNodes = new List<Node>();
+        scale = Random.Range(0.15f, 0.25f);
     }
 
     private void Update()
     {
+        scale = Random.Range(0.15f, 0.25f);
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
         //ClearTiles();
         //GenerateTiles();
-        scale = Random.Range(0.15f, 0.25f);
+        
         //or change the 10000 
         
         if (Input.GetMouseButtonDown(0))
@@ -62,6 +72,11 @@ public class LevelGenerator : MonoBehaviour
             ClearTiles();
             //DeleteTile(pos);
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            FillIndividualEmpty();
+        }
     }
 
     private void Start()
@@ -69,10 +84,23 @@ public class LevelGenerator : MonoBehaviour
         if (cam == null) cam = FindObjectOfType<Camera>();
         spikeTile = customTiles.Find(t => t.tileType == CustomTile.TileType.spike);
         enemyTile = customTiles.Find(t => t.tileType == CustomTile.TileType.enemy);
+        tilemapList.Add(currentTilemap);
     }
 
     private void OnDrawGizmos()
     {
+        foreach (Node blockedNode in blockedNodes)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(blockedNode.gridPosition,Vector3.one);
+        }
+
+        foreach (Node fullNeighbour in fullNeighbours)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawCube(fullNeighbour.gridPosition,Vector3.one);
+        }
+        
         if (gizmosOn)
         {
             for (int x = -levelWidth/2; x < levelWidth/2; x++)
@@ -133,6 +161,13 @@ public class LevelGenerator : MonoBehaviour
             {
                 //DELIBERATELY have the XY back to front so it draws horizontally first
                 Vector3Int pos = new Vector3Int(y, x, 0);
+                
+                //list of grid positions that could exist, eg -width/2
+                //tilemap.GetTile(position) - true = blocked, false = not blocked
+                
+                
+                
+                
                 
                 //needs to account for negative
                 //tileArrayVector3Ints[y, x] = pos;
@@ -200,9 +235,106 @@ public class LevelGenerator : MonoBehaviour
             SpawnNonProceduralAreas();
         }
 
-        foreach (CustomTile spawnedTile in spawnedTiles)
+        //ScanLevel();
+    }
+
+    private void ScanLevel()
+    {
+        for (int x = (-levelWidth / 2); x < (levelWidth / 2) + 1; x++)
         {
-            spawnedTile.CheckNeighbours();
+            for (int y = (-levelHeight / 2); y < (levelHeight / 2) + 1; y++)
+            {
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2] = new Node();
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].xPosInArray = x;
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].yPosInArray = y;
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].gridPosition = new Vector3(x+0.5f, y+0.5f, 0);
+                
+                var vector2 = new Vector2(x, y);
+                Vector3Int location = new Vector3Int(x, y, 0); 
+                
+                //need to loop through all tilemaps to check any prefab areas
+                //for some reason this is not working
+                //it's not adding the prefab area to the blockedNodes list
+                foreach (Tilemap tilemap in tilemapList)
+                {
+                    if (tilemap.GetTile(location))
+                    {
+                        gridNodeReferences[x + levelWidth/2, y + levelHeight/2].isBlocked = true;
+                        blockedNodes.Add(gridNodeReferences[x + levelWidth/2,y + levelHeight/2]);
+                    }
+                }
+                if (currentTilemap.GetTile(location))
+                {
+                    
+                }
+            }
+        }
+
+        AssignNeighbours();
+        
+    }
+
+    private void AssignNeighbours()
+    {
+        int sizeX = (levelWidth / 2) + 1;
+        int sizeY = (levelHeight / 2) + 1;
+        int floorX = (-levelWidth / 2);
+        int floorY = (-levelHeight / 2);
+        int offsetX = levelWidth / 2;
+        int offsetY = levelHeight / 2;
+        for (int x = floorX; x < sizeX; x++)
+        {
+            for (int y = floorY; y < sizeY; y++)
+            {
+                if (x > floorX) gridNodeReferences[x + offsetX-1, y + offsetY].neighbours[2,1] = gridNodeReferences[x + offsetX, y + offsetY];
+                if (y > floorY) gridNodeReferences[x + offsetX, y + offsetY-1].neighbours[1,2] = gridNodeReferences[x + offsetX, y + offsetY];
+                if (x < sizeX-1) gridNodeReferences[x + offsetX+1, y + offsetY].neighbours[0,1] = gridNodeReferences[x + offsetX, y + offsetY];
+                if (y < sizeY-1) gridNodeReferences[x + offsetX, y + offsetY+1].neighbours[1,0] = gridNodeReferences[x + offsetX, y + offsetY];
+                if (x > floorX && y > floorY) gridNodeReferences[x + offsetX-1, y + offsetY-1].neighbours[2,2] = gridNodeReferences[x + offsetX, y + offsetY];
+                if (x > floorX && y < sizeY-1) gridNodeReferences[x + offsetX-1, y + offsetY+1].neighbours[2,0] = gridNodeReferences[x + offsetX, y + offsetY];
+                if (x < sizeX-1 && y > floorY) gridNodeReferences[x + offsetX+1, y + offsetY-1].neighbours[0,2] = gridNodeReferences[x + offsetX, y + offsetY];
+                if (x < sizeX-1 && y < sizeY-1) gridNodeReferences[x + offsetX+1, y + offsetY+1].neighbours[0,0] = gridNodeReferences[x + offsetX, y + offsetY];
+            }
+        }
+        
+        /*for (int x = (-levelWidth / 2); x < (levelWidth / 2) + 1; x++)
+        {
+            for (int y = (-levelHeight / 2); y < (levelHeight / 2) + 1; y++)
+            {
+                if (x > (-levelWidth / 2)) gridNodeReferences[x - 1, y].neighbours[2, 1] = gridNodeReferences[x, y];
+                if (y > (-levelHeight / 2)) gridNodeReferences[x, y - 1].neighbours[1, 2] = gridNodeReferences[x, y];
+                if (x < (levelWidth / 2)) gridNodeReferences[x + 1, y].neighbours[0, 1] = gridNodeReferences[x, y];
+                if (y < (levelHeight / 2)) gridNodeReferences[x, y + 1].neighbours[1, 0] = gridNodeReferences[x, y];
+                if (x > (-levelWidth / 2) && y > (-levelHeight / 2)) gridNodeReferences[x - 1, y - 1].neighbours[2, 2] = gridNodeReferences[x, y];
+                if (x > (-levelWidth / 2) && y < (levelHeight / 2))
+                    gridNodeReferences[x - 1, y + 1].neighbours[2, 0] = gridNodeReferences[x, y];
+                if (x < (levelWidth / 2) && y > (-levelHeight / 2))
+                    gridNodeReferences[x + 1, y - 1].neighbours[0, 2] = gridNodeReferences[x, y];
+                if (x < (levelWidth / 2) && y < (levelHeight / 2))
+                    gridNodeReferences[x + 1, y + 1].neighbours[0, 0] = gridNodeReferences[x, y];
+            }
+        }*/
+    }
+
+    private void FillIndividualEmpty()
+    {
+        foreach (Node node in gridNodeReferences)
+        {
+            int blockedNeighbours = 0;
+            if (!node.isBlocked)
+            {
+                foreach (Node neighbour in node.neighbours)
+                {
+                    if (neighbour!= null && neighbour.isBlocked)
+                    {
+                        blockedNeighbours++;
+                        if (blockedNeighbours >= 4)
+                        {
+                            fullNeighbours.Add(node);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -210,6 +342,7 @@ public class LevelGenerator : MonoBehaviour
     {
         foreach (NonProceduralArea nonProceduralArea in nonProceduralAreas)
         {
+            
             int tempSpawnPosX = (int)nonProceduralArea.spawnPosition.x;
             int tempSpawnPosY = (int)nonProceduralArea.spawnPosition.y;
             for (int x = -nonProceduralArea.width / 2; x < nonProceduralArea.width / 2; x++)
@@ -224,10 +357,12 @@ public class LevelGenerator : MonoBehaviour
             if (nonProceduralArea.prefab != null)
             {
                 Instantiate(nonProceduralArea.prefab,nonProceduralArea.spawnPosition,quaternion.identity,grid.transform);
+                tilemapList.Add(nonProceduralArea.prefab.GetComponent<Tilemap>());
             }
         }
 
         spawnedNonProceduralAreas = true;
+        ScanLevel();
     }
     
     private void GenerateBorder()
@@ -257,6 +392,8 @@ public class LevelGenerator : MonoBehaviour
         borderGenerated = false;
         spawnedNonProceduralAreas = false;
         currentTilemap.ClearAllTiles();
+        blockedNodes.Clear();
+        fullNeighbours.Clear();
         foreach (Transform child in grid.transform)
         {
             child.GetComponent<Tilemap>().ClearAllTiles();

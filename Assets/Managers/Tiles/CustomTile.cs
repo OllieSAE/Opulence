@@ -26,6 +26,7 @@ public class CustomTile : ScriptableObject
 
     public TileType tileType;
     public int posX, posY;
+    
     public void CheckNeighbours()
     {
         Debug.Log("posX = " + posX + ", posY = " + posY + ", tileType = " + tileType);
@@ -35,5 +36,6 @@ public class CustomTile : ScriptableObject
     {
         posX = x;
         posY = y;
+        
     }
 }

@@ -15,5 +15,18 @@ public interface IDamageable
     
 }
 
+public interface iHeapItem<T> : IComparable<T>
+{
+    int heapIndex
+    {
+        get;
+        set;
+    }
+}
 
+public interface iPathable
+{
+    void GeneratePath(Node node);
+    void ClearPath();
+}
 
