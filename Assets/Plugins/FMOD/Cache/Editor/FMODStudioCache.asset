@@ -54,6 +54,87 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8604414348185029335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Character Land
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Character Land
+  Guid:
+    Data1: -24961950
+    Data2: 1194366462
+    Data3: 202552502
+    Data4: 1917769048
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8522894675334553513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Character Projectile
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Character Projectile
+  Guid:
+    Data1: -503563593
+    Data2: 1196305155
+    Data3: -1672077153
+    Data4: -1182244049
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8428230315487420954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Falcon Melee 2
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Falcon Melee 2
+  Guid:
+    Data1: -1194555482
+    Data2: 1078031551
+    Data3: 662962832
+    Data4: 1986416876
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8331971158457588631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +159,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-7801997267594629473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Mask Glow A
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Mask Glow A
+  Guid:
+    Data1: -1178490328
+    Data2: 1130040430
+    Data3: -1532916319
+    Data4: 234164243
+  Banks:
+  - {fileID: 8380320410098705603}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 5
+  MaxDistance: 20
+  Length: 15000
 --- !u!114 &-6472139594049749927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +213,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6023777710682738448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Mask Glow
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Mask Glow
+  Guid:
+    Data1: -1622771515
+    Data2: 1248952362
+    Data3: -1481719667
+    Data4: -1432778257
+  Banks:
+  - {fileID: 8380320410098705603}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 5
+  MaxDistance: 20
+  Length: 3341
 --- !u!114 &-5775634451018956011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +267,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5371110394376872817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Enemy Ranged Emote
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Enemy Ranged Emote
+  Guid:
+    Data1: -115138781
+    Data2: 1146213813
+    Data3: 1793155462
+    Data4: 1787460019
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 884
 --- !u!114 &-5174326945422079278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,13 +314,13 @@ MonoBehaviour:
     Data4: -187920272
   Banks:
   - {fileID: 8652311888287359776}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 87648
+  Length: 275461
 --- !u!114 &-5132297831122044077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,10 +336,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638239712213008945
+  lastModified: 638252770221273914
   FileSizes:
   - Name: Desktop
-    Value: 102464
+    Value: 212192
   Exists: 1
 --- !u!114 &-4703593653948068669
 MonoBehaviour:
@@ -194,10 +356,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/COMBAT.bank
   Name: COMBAT
   StudioPath: bank:/COMBAT
-  lastModified: 638235391257042861
+  lastModified: 638254419526319539
   FileSizes:
   - Name: Desktop
-    Value: 24160
+    Value: 305216
   Exists: 1
 --- !u!114 &-3337688838205976797
 MonoBehaviour:
@@ -214,11 +376,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638235391257082752
+  lastModified: 638254419526324531
   FileSizes:
   - Name: Desktop
-    Value: 1526
+    Value: 2120
   Exists: 1
+--- !u!114 &-3031751295956749547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Enemy Charge Emote
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Enemy Charge Emote
+  Guid:
+    Data1: -255093822
+    Data2: 1312899540
+    Data3: 2037011359
+    Data4: 536139931
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1267
 --- !u!114 &-1828036729265133605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,11 +423,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638227912104931474
+  lastModified: 638228534575448938
   FileSizes:
   - Name: Desktop
     Value: 964
   Exists: 1
+--- !u!114 &-451783489565038035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Enemy Ranged Attack
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Enemy Ranged Attack
+  Guid:
+    Data1: 957648470
+    Data2: 1163769010
+    Data3: -1380120417
+    Data4: 930761051
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3100
 --- !u!114 &-293801989424842038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +475,33 @@ MonoBehaviour:
     Data4: 1116400619
   Banks:
   - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-218843160666562613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Falcon Melee
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Falcon Melee
+  Guid:
+    Data1: -359431996
+    Data2: 1332653183
+    Data3: 1239489442
+    Data4: 503902311
+  Banks:
+  - {fileID: -4703593653948068669}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -300,12 +543,24 @@ MonoBehaviour:
   - {fileID: -8609358556318376652}
   - {fileID: 4674270526348022349}
   - {fileID: -6472139594049749927}
+  - {fileID: -8604414348185029335}
+  - {fileID: 2009848212944404067}
+  - {fileID: -218843160666562613}
+  - {fileID: -7801997267594629473}
+  - {fileID: -6023777710682738448}
+  - {fileID: 3078312688614921709}
+  - {fileID: -8522894675334553513}
+  - {fileID: -5371110394376872817}
+  - {fileID: 5172027711694109520}
+  - {fileID: -451783489565038035}
+  - {fileID: -8428230315487420954}
+  - {fileID: -3031751295956749547}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1828036729265133605}
   StringsBanks:
   - {fileID: -3337688838205976797}
-  cacheTime: 638239712213008945
+  cacheTime: 638254419526324531
   cacheVersion: 131603
 --- !u!114 &712698009279880602
 MonoBehaviour:
@@ -322,11 +577,65 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/ATMOS.bank
   Name: ATMOS
   StudioPath: bank:/ATMOS
-  lastModified: 638235548941858325
+  lastModified: 638236468540906878
   FileSizes:
   - Name: Desktop
     Value: 2149376
   Exists: 1
+--- !u!114 &2009848212944404067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Wall Slide
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Wall Slide
+  Guid:
+    Data1: 1754344443
+    Data2: 1264728158
+    Data3: -323247464
+    Data4: -1985674813
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1900
+--- !u!114 &3078312688614921709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Mask Glow B
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Mask Glow B
+  Guid:
+    Data1: 59312443
+    Data2: 1190890189
+    Data3: -2012530787
+    Data4: -496301785
+  Banks:
+  - {fileID: 8380320410098705603}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 5
+  MaxDistance: 20
+  Length: 15000
 --- !u!114 &3649273788860696837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +717,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 998
+--- !u!114 &5172027711694109520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Enemy Impact
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Enemy Impact
+  Guid:
+    Data1: -114339012
+    Data2: 1211267488
+    Data3: 1083914146
+    Data4: 748622161
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6902208581302103451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +759,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 638227662229139894
+  lastModified: 638219096774220168
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -525,10 +861,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638235391257082752
+  lastModified: 638242481867207764
   FileSizes:
   - Name: Desktop
-    Value: 10720
+    Value: 1188768
   Exists: 1
 --- !u!114 &8652311888287359776
 MonoBehaviour:
@@ -545,8 +881,8 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/MUSIC.bank
   Name: MUSIC
   StudioPath: bank:/MUSIC
-  lastModified: 638235548941949367
+  lastModified: 638242481867037733
   FileSizes:
   - Name: Desktop
-    Value: 1107520
+    Value: 3712800
   Exists: 1

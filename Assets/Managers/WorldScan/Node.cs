@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Node : iHeapItem<Node>
 {
-    public bool isBlocked;
+    public bool isTile;
     public bool fullNeighbours;
     public Node parent;
     public Node[,] neighbours = new Node[3, 3];
@@ -16,7 +16,25 @@ public class Node : iHeapItem<Node>
             return new Vector3(gridPosition.x, gridPosition.y, 0);
         }
     }
+
+    public Vector3 gridPositionGizmosOnly
+    {
+        get
+        {
+            return new Vector3(gridPosition.x + 0.5f, gridPosition.y + 0.5f, 0);
+        }
+    }
+
+    public Vector3Int gridPosV3Int
+    {
+        get
+        {
+            return new Vector3Int((int) gridPosition.x, (int) gridPosition.y, 0);
+        }
+    }
+    
     public Vector3 gridPosition;
+    public Vector3 worldPosition;
     public int xPosInArray;
     public int yPosInArray;
     

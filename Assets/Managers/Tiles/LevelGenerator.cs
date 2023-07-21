@@ -53,14 +53,16 @@ public class LevelGenerator : MonoBehaviour
     private void Update()
     {
         scale = Random.Range(0.15f, 0.25f);
+        //or change the 10000 
+        
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
         //ClearTiles();
         //GenerateTiles();
         
-        //or change the 10000 
         
-        if (Input.GetMouseButtonDown(0))
+        
+        if (Input.GetMouseButtonDown(2))
         {
             print("generate tiles");
             GenerateTiles();
@@ -75,6 +77,7 @@ public class LevelGenerator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
+            //StartCoroutine(FillIndividualEmpty());
             FillIndividualEmpty();
         }
     }
@@ -92,13 +95,13 @@ public class LevelGenerator : MonoBehaviour
         foreach (Node blockedNode in blockedNodes)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(blockedNode.gridPosition,Vector3.one);
+            Gizmos.DrawCube(blockedNode.gridPositionGizmosOnly,Vector3.one);
         }
 
         foreach (Node fullNeighbour in fullNeighbours)
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawCube(fullNeighbour.gridPosition,Vector3.one);
+            Gizmos.DrawCube(fullNeighbour.gridPositionGizmosOnly,Vector3.one);
         }
         
         if (gizmosOn)
@@ -166,9 +169,6 @@ public class LevelGenerator : MonoBehaviour
                 //tilemap.GetTile(position) - true = blocked, false = not blocked
                 
                 
-                
-                
-                
                 //needs to account for negative
                 //tileArrayVector3Ints[y, x] = pos;
 
@@ -234,12 +234,15 @@ public class LevelGenerator : MonoBehaviour
         {
             SpawnNonProceduralAreas();
         }
-
-        //ScanLevel();
+        else GenerateGridNodes();
     }
 
-    private void ScanLevel()
+    private void GenerateGridNodes()
     {
+        //could change -levelWidth/2 to be:
+        //Vector2 worldBottomLeft = transform.position - Vector2.right * levelWidth - Vector2.up * levelHeight
+        //then set X/Y to worldBottomLeft.x/.y respectively
+        
         for (int x = (-levelWidth / 2); x < (levelWidth / 2) + 1; x++)
         {
             for (int y = (-levelHeight / 2); y < (levelHeight / 2) + 1; y++)
@@ -247,7 +250,7 @@ public class LevelGenerator : MonoBehaviour
                 gridNodeReferences[x + levelWidth/2, y + levelHeight/2] = new Node();
                 gridNodeReferences[x + levelWidth/2, y + levelHeight/2].xPosInArray = x;
                 gridNodeReferences[x + levelWidth/2, y + levelHeight/2].yPosInArray = y;
-                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].gridPosition = new Vector3(x+0.5f, y+0.5f, 0);
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].gridPosition = new Vector3(x, y, 0);
                 
                 var vector2 = new Vector2(x, y);
                 Vector3Int location = new Vector3Int(x, y, 0); 
@@ -259,19 +262,23 @@ public class LevelGenerator : MonoBehaviour
                 {
                     if (tilemap.GetTile(location))
                     {
-                        gridNodeReferences[x + levelWidth/2, y + levelHeight/2].isBlocked = true;
+                        gridNodeReferences[x + levelWidth/2, y + levelHeight/2].isTile = true;
                         blockedNodes.Add(gridNodeReferences[x + levelWidth/2,y + levelHeight/2]);
                     }
-                }
-                if (currentTilemap.GetTile(location))
-                {
-                    
                 }
             }
         }
 
         AssignNeighbours();
         
+    }
+
+    private void ScanTile(Node node)
+    {
+        foreach (Tilemap tilemap in tilemapList)
+        {
+            if (tilemap.GetTile(node.gridPosV3Int)) node.isTile = true;
+        }
     }
 
     private void AssignNeighbours()
@@ -296,39 +303,23 @@ public class LevelGenerator : MonoBehaviour
                 if (x < sizeX-1 && y < sizeY-1) gridNodeReferences[x + offsetX+1, y + offsetY+1].neighbours[0,0] = gridNodeReferences[x + offsetX, y + offsetY];
             }
         }
-        
-        /*for (int x = (-levelWidth / 2); x < (levelWidth / 2) + 1; x++)
-        {
-            for (int y = (-levelHeight / 2); y < (levelHeight / 2) + 1; y++)
-            {
-                if (x > (-levelWidth / 2)) gridNodeReferences[x - 1, y].neighbours[2, 1] = gridNodeReferences[x, y];
-                if (y > (-levelHeight / 2)) gridNodeReferences[x, y - 1].neighbours[1, 2] = gridNodeReferences[x, y];
-                if (x < (levelWidth / 2)) gridNodeReferences[x + 1, y].neighbours[0, 1] = gridNodeReferences[x, y];
-                if (y < (levelHeight / 2)) gridNodeReferences[x, y + 1].neighbours[1, 0] = gridNodeReferences[x, y];
-                if (x > (-levelWidth / 2) && y > (-levelHeight / 2)) gridNodeReferences[x - 1, y - 1].neighbours[2, 2] = gridNodeReferences[x, y];
-                if (x > (-levelWidth / 2) && y < (levelHeight / 2))
-                    gridNodeReferences[x - 1, y + 1].neighbours[2, 0] = gridNodeReferences[x, y];
-                if (x < (levelWidth / 2) && y > (-levelHeight / 2))
-                    gridNodeReferences[x + 1, y - 1].neighbours[0, 2] = gridNodeReferences[x, y];
-                if (x < (levelWidth / 2) && y < (levelHeight / 2))
-                    gridNodeReferences[x + 1, y + 1].neighbours[0, 0] = gridNodeReferences[x, y];
-            }
-        }*/
     }
 
     private void FillIndividualEmpty()
     {
+        fullNeighbours.Clear();
+
         foreach (Node node in gridNodeReferences)
         {
-            int blockedNeighbours = 0;
-            if (!node.isBlocked)
+            int neighboursWithTile = 0;
+            if (!node.isTile)
             {
                 foreach (Node neighbour in node.neighbours)
                 {
-                    if (neighbour!= null && neighbour.isBlocked)
+                    if (neighbour != null && neighbour.isTile)
                     {
-                        blockedNeighbours++;
-                        if (blockedNeighbours >= 4)
+                        neighboursWithTile++;
+                        if (neighboursWithTile >= 5)
                         {
                             fullNeighbours.Add(node);
                         }
@@ -336,11 +327,24 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
+
+        foreach (Node node in fullNeighbours)
+        {
+            currentTilemap.SetTile(node.gridPosV3Int,currentTile.tile);
+        }
+
+        foreach (Node node in gridNodeReferences)
+        {
+            ScanTile(node);
+        }
     }
 
     private void SpawnNonProceduralAreas()
     {
-        foreach (NonProceduralArea nonProceduralArea in nonProceduralAreas)
+        //TODO:
+        //needs a rework - there's some weird ghost shit going on with the center of the map
+        
+        /*foreach (NonProceduralArea nonProceduralArea in nonProceduralAreas)
         {
             
             int tempSpawnPosX = (int)nonProceduralArea.spawnPosition.x;
@@ -359,10 +363,10 @@ public class LevelGenerator : MonoBehaviour
                 Instantiate(nonProceduralArea.prefab,nonProceduralArea.spawnPosition,quaternion.identity,grid.transform);
                 tilemapList.Add(nonProceduralArea.prefab.GetComponent<Tilemap>());
             }
-        }
+        }*/
 
         spawnedNonProceduralAreas = true;
-        ScanLevel();
+        GenerateGridNodes();
     }
     
     private void GenerateBorder()
