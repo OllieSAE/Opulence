@@ -50,6 +50,14 @@ public class LevelGenerator : MonoBehaviour
         scale = Random.Range(0.15f, 0.25f);
     }
 
+    public int MaxSize
+    {
+        get
+        {
+            return levelHeight * levelWidth;
+        }
+    }
+
     private void Update()
     {
         scale = Random.Range(0.15f, 0.25f);
@@ -93,30 +101,27 @@ public class LevelGenerator : MonoBehaviour
     public List<Node> path;
     private void OnDrawGizmos()
     {
-        foreach (Node blockedNode in blockedNodes)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawCube(blockedNode.gridPositionGizmosOnly,Vector3.one);
-        }
+        // foreach (Node blockedNode in blockedNodes)
+        // {
+        //     Gizmos.color = Color.red;
+        //     Gizmos.DrawCube(blockedNode.gridPositionGizmosOnly,Vector3.one);
+        // }
+        //
+        // foreach (Node fullNeighbour in fullNeighbours)
+        // {
+        //     Gizmos.color = Color.blue;
+        //     Gizmos.DrawCube(fullNeighbour.gridPositionGizmosOnly,Vector3.one);
+        // }
 
-        foreach (Node fullNeighbour in fullNeighbours)
+        if (path != null)
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawCube(fullNeighbour.gridPositionGizmosOnly,Vector3.one);
-        }
-
-        foreach (Node node in gridNodeReferences)
-        {
-            if (path != null)
+            foreach (Node node in path)
             {
-                if (path.Contains(node))
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
-                }
-                
+                Gizmos.color = Color.green;
+                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
             }
         }
+        
 
 
         if (gizmosOn)
@@ -288,6 +293,18 @@ public class LevelGenerator : MonoBehaviour
         
     }
 
+    public void ClearAroundLowest(Node lowest)
+    {
+        foreach (Node neighbour in lowest.neighbours)
+        {
+            if (neighbour != null)
+            {
+                currentTilemap.SetTile(neighbour.gridPosV3Int,null);
+                ScanTile(neighbour);
+            }
+        }
+    }
+
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();
@@ -316,6 +333,11 @@ public class LevelGenerator : MonoBehaviour
         foreach (Tilemap tilemap in tilemapList)
         {
             if (tilemap.GetTile(node.gridPosV3Int)) node.isTile = true;
+            else 
+            {
+                node.isTile = false;
+            }
+            
         }
     }
 

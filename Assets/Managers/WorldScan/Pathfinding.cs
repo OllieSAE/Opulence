@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
+using System.Linq;
 
 public class Pathfinding : MonoBehaviour
 {
@@ -9,7 +11,9 @@ public class Pathfinding : MonoBehaviour
     public Transform start;
     public Transform end;
     public bool showPath = false;
-
+    private Heap<Node> openSet;
+    private HashSet<Node> closedSet = new HashSet<Node>();
+    private Node lowestHCost;
     private void Awake()
     {
         levelGenerator = GetComponent<LevelGenerator>();
@@ -17,30 +21,28 @@ public class Pathfinding : MonoBehaviour
 
     private void Update()
     {
-        if(showPath)FindPath(start.position, end.position);
+        if(Input.GetButtonDown("Jump"))FindPath(start.position, end.position);
     }
 
     void FindPath(Vector2 startPos, Vector2 targetPos)
     {
-        Node startNode = levelGenerator.NodeFromWorldPoint(startPos);
+         Node startNode = levelGenerator.NodeFromWorldPoint(startPos);
         Node targetNode = levelGenerator.NodeFromWorldPoint(targetPos);
 
-        List<Node> openSet = new List<Node>();
-        HashSet<Node> closedSet = new HashSet<Node>();
+        //TODO:
+        //May need to consider optimizing heap further
+        //RE: @mystman1210's comment on Lague's 3rd vid
+        closedSet.Clear();
+        if (openSet!=null) openSet.Clear();
+        if (levelGenerator.path != null) levelGenerator.path.Clear();
+        
+        openSet = new Heap<Node>(levelGenerator.MaxSize);
         openSet.Add(startNode);
+        startNode.hCost = GetDistance(startNode, targetNode);
 
         while (openSet.Count > 0)
         {
-            Node currentNode = openSet[0];
-            for (int i = 1; i < openSet.Count; i++)
-            {
-                if ((openSet[i].fCost < currentNode.fCost) || (openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost))
-                {
-                    currentNode = openSet[i];
-                }
-            }
-
-            openSet.Remove(currentNode);
+            Node currentNode = openSet.RemoveFirst();
             closedSet.Add(currentNode);
 
             if (currentNode == targetNode)
@@ -66,6 +68,37 @@ public class Pathfinding : MonoBehaviour
                     }
                 }
             }
+        }
+
+        int minH = closedSet.Min(node => node.hCost);
+        lowestHCost = closedSet.FirstOrDefault(node => node.hCost == minH);
+        levelGenerator.ClearAroundLowest(lowestHCost);
+    }
+    
+    private void OnDrawGizmos()
+    {
+        if (closedSet != null)
+        {
+            foreach (Node node in closedSet)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
+            }
+        }
+
+        if (levelGenerator.path != null)
+        {
+            foreach (Node node in levelGenerator.path)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
+            }
+        }
+
+        if (lowestHCost != null)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawCube(lowestHCost.gridPositionGizmosOnly,Vector3.one);
         }
     }
 
