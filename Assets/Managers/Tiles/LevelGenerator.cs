@@ -90,6 +90,7 @@ public class LevelGenerator : MonoBehaviour
         tilemapList.Add(currentTilemap);
     }
 
+    public List<Node> path;
     private void OnDrawGizmos()
     {
         foreach (Node blockedNode in blockedNodes)
@@ -103,7 +104,21 @@ public class LevelGenerator : MonoBehaviour
             Gizmos.color = Color.blue;
             Gizmos.DrawCube(fullNeighbour.gridPositionGizmosOnly,Vector3.one);
         }
-        
+
+        foreach (Node node in gridNodeReferences)
+        {
+            if (path != null)
+            {
+                if (path.Contains(node))
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
+                }
+                
+            }
+        }
+
+
         if (gizmosOn)
         {
             for (int x = -levelWidth/2; x < levelWidth/2; x++)
@@ -273,12 +288,48 @@ public class LevelGenerator : MonoBehaviour
         
     }
 
+    public List<Node> GetNeighbours(Node node)
+    {
+        List<Node> neighbours = new List<Node>();
+
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0) continue;
+
+                int checkX = node.xPosInArray + x;
+                int checkY = node.yPosInArray + y;
+
+                if (checkX >= -levelWidth/2 && checkX < levelWidth/2 + 1 && checkY >= -levelHeight/2 && checkY < levelHeight/2 + 1)
+                {
+                    neighbours.Add(gridNodeReferences[checkX,checkY]);
+                }
+            }
+        }
+
+        return neighbours;
+    }
+
     private void ScanTile(Node node)
     {
         foreach (Tilemap tilemap in tilemapList)
         {
             if (tilemap.GetTile(node.gridPosV3Int)) node.isTile = true;
         }
+    }
+
+    public Node NodeFromWorldPoint(Vector2 worldPosition)
+    {
+        float percentX = (worldPosition.x + levelWidth / 2) / levelWidth;
+        float percentY = (worldPosition.y + levelHeight / 2) / levelHeight;
+        percentX = Mathf.Clamp01(percentX);
+        percentY = Mathf.Clamp01(percentY);
+
+        int x = Mathf.RoundToInt((levelWidth - 1) * percentX);
+        int y = Mathf.RoundToInt((levelHeight - 1) * percentY);
+
+        return gridNodeReferences[x, y];
     }
 
     private void AssignNeighbours()
