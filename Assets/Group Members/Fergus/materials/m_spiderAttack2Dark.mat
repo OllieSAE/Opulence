@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_spiderAttacksBright
+  m_Name: m_spiderAttack2Dark
   m_Shader: {fileID: -6465566751694194690, guid: 8656f71424e8e2649b4f5a67def78ea6, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -34,15 +34,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _FresnelTex:
-        m_Texture: {fileID: 2800000, guid: c8e174f53bca63a46837371b2d261a55, type: 3}
+        m_Texture: {fileID: 2800000, guid: bc6f2b2d66575ef45a76782a2926b6b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8c0e5504cebb6064880dca2af08ce894, type: 3}
+        m_Texture: {fileID: 2800000, guid: 945e68c436a3eac40a82f990cc0a3a6b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: 91a824d6fc81b734998e4cd534ca09ca, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2437f6a6e60604944a537e369b5e071e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -59,19 +59,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FresnelPower: 5.47
-    - _MainContrast: 6.72
-    - _NoiseAmount: 0.509
-    - _NoiseContrast: 113.7
+    - _FresnelPower: 100
+    - _MainContrast: 2.15
+    - _NoiseAmount: 0.304
+    - _NoiseContrast: 1
     - _NoiseEdge1: 0.01
     - _NoiseEdge2: 0.1
     - _NoisePower: 0
     - _NoiseScale: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _UseFresnelColour: 0
+    - _UseFresnelColour: 1
     - _UseNoise: 1
     m_Colors:
-    - _MainColour: {r: 0, g: 2.8392158, b: 0.21960784, a: 1}
-    - _NoiseSpeed: {r: 1, g: 0, b: 0, a: 0}
+    - _MainColour: {r: 0.034042355, g: 0.14150941, b: 0.034042355, a: 1}
+    - _NoiseSpeed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
