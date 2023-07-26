@@ -927,6 +927,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4331296779273578422, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
   m_PrefabInstance: {fileID: 154379100}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &154379112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154379101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx:
+  - Enemy Impact
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &192439742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,7 +1877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: sfx.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: sfx.Array.data[1]
@@ -1863,6 +1886,10 @@ PrefabInstance:
     - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: sfx.Array.data[2]
       value: Falcon Melee 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: sfx.Array.data[3]
+      value: Falcon Melee 3
       objectReference: {fileID: 0}
     - target: {fileID: 1048529260058701012, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_Name
@@ -1984,6 +2011,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4331296779273578422, guid: 59945e7eee34cfe4cbed45474fd4ff2c, type: 3}
   m_PrefabInstance: {fileID: 387209650}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &387209662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387209651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx:
+  - Enemy Impact
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &395534876
 GameObject:
   m_ObjectHideFlags: 0
@@ -6358,6 +6408,7 @@ MonoBehaviour:
   sfx:
   - Enemy Ranged Attack
   - Enemy Ranged Emote
+  - Enemy Impact
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
@@ -6604,6 +6655,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4331296779273578422, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
   m_PrefabInstance: {fileID: 729102458}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &729102470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729102459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx:
+  - Enemy Impact
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &870403729
 GameObject:
   m_ObjectHideFlags: 0
@@ -7326,6 +7400,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4331296779273578422, guid: 59945e7eee34cfe4cbed45474fd4ff2c, type: 3}
   m_PrefabInstance: {fileID: 1102444183}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1102444195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102444184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx:
+  - Enemy Impact
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1114425807
 GameObject:
   m_ObjectHideFlags: 0
@@ -7447,6 +7544,7 @@ MonoBehaviour:
   vfx: []
   sfx:
   - Enemy Charge Emote
+  - Enemy Impact
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
@@ -7462,6 +7560,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.data[0]
+      value: Enemy Impact
+      objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: m_Name
       value: Training Dummy (3)
@@ -7596,6 +7702,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.data[0]
+      value: Enemy Impact
+      objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: m_Name
       value: Training Dummy (2)
@@ -8296,6 +8410,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4331296779273578422, guid: 59945e7eee34cfe4cbed45474fd4ff2c, type: 3}
   m_PrefabInstance: {fileID: 1744989865}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1744989877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744989866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx:
+  - Enemy Impact
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1762312099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8358,6 +8495,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4331296779273578422, guid: 59945e7eee34cfe4cbed45474fd4ff2c, type: 3}
   m_PrefabInstance: {fileID: 1762312099}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1762312111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762312100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4022286ebabb91545b0190ddfa24d891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfx: []
+  sfx:
+  - Enemy Impact
+  particles: []
+  flipTransform: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1808699715
 GameObject:
   m_ObjectHideFlags: 0
@@ -8533,6 +8693,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.data[0]
+      value: Enemy Impact
+      objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: m_Name
       value: Training Dummy
@@ -8986,6 +9154,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.data[0]
+      value: Enemy Impact
+      objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: m_Name
       value: Training Dummy (1)
@@ -9118,6 +9294,7 @@ MonoBehaviour:
   vfx: []
   sfx:
   - Enemy Charge Emote
+  - Enemy Impact
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
@@ -9212,6 +9389,7 @@ MonoBehaviour:
   sfx:
   - Enemy Ranged Attack
   - Enemy Ranged Emote
+  - Enemy Impact
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
