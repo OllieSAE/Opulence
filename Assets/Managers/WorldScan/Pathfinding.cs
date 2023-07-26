@@ -14,6 +14,7 @@ public class Pathfinding : MonoBehaviour
     private Heap<Node> openSet;
     private HashSet<Node> closedSet = new HashSet<Node>();
     private Node lowestHCost;
+    public short playerJumpValue;
     private void Awake()
     {
         levelGenerator = GetComponent<LevelGenerator>();
@@ -21,12 +22,12 @@ public class Pathfinding : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetButtonDown("Jump"))FindPath(start.position, end.position);
+        if(Input.GetButtonDown("Jump"))FindPath(start.position, end.position, playerJumpValue);
     }
 
-    void FindPath(Vector2 startPos, Vector2 targetPos)
+    void FindPath(Vector2 startPos, Vector2 targetPos, short maxPlayerJump)
     {
-         Node startNode = levelGenerator.NodeFromWorldPoint(startPos);
+        Node startNode = levelGenerator.NodeFromWorldPoint(startPos);
         Node targetNode = levelGenerator.NodeFromWorldPoint(targetPos);
 
         //TODO:
@@ -39,6 +40,7 @@ public class Pathfinding : MonoBehaviour
         openSet = new Heap<Node>(levelGenerator.MaxSize);
         openSet.Add(startNode);
         startNode.hCost = GetDistance(startNode, targetNode);
+        startNode.jumpValue = 0;
 
         while (openSet.Count > 0)
         {
@@ -47,16 +49,17 @@ public class Pathfinding : MonoBehaviour
 
             if (currentNode == targetNode)
             {
-                RetracePath(startNode,targetNode);
+                RetracePath(startNode, targetNode);
                 return;
             }
 
-            foreach (Node neighbour in currentNode.neighbours)
+            foreach (Node neighbour in levelGenerator.GetNeighbours(currentNode))
             {
                 if (neighbour != null)
                 {
                     if (neighbour.isTile || closedSet.Contains(neighbour)) continue;
 
+                    if (!neighbour.isReachable) continue;
                     int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
                     if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                     {
@@ -73,6 +76,21 @@ public class Pathfinding : MonoBehaviour
         int minH = closedSet.Min(node => node.hCost);
         lowestHCost = closedSet.FirstOrDefault(node => node.hCost == minH);
         levelGenerator.ClearAroundLowest(lowestHCost);
+        
+        
+        //this needs a failsafe if it CANNOT find a successful path
+        StartCoroutine(WaitForPathRetry(startPos, targetPos, maxPlayerJump));
+
+    }
+
+    private IEnumerator WaitForPathRetry(Vector2 startPos, Vector2 targetPos, short playerJump)
+    {
+        //int ++
+        //if int below X, find path
+        //if int above X, print failed path and call for new level to be generated
+        yield return new WaitForSeconds(0.1f);
+        print("searching");
+        FindPath(startPos,targetPos,playerJump);
     }
     
     private void OnDrawGizmos()

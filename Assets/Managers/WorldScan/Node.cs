@@ -5,7 +5,9 @@ using UnityEngine;
 public class Node : iHeapItem<Node>
 {
     public bool isTile;
+    public bool isReachable;
     public bool fullNeighbours;
+    public bool borderNode = false;
     public Node parent;
     public Node[,] neighbours = new Node[3, 3];
 
@@ -40,8 +42,9 @@ public class Node : iHeapItem<Node>
     
     private int _heapIndex;
 
-    public int gCost;
-    public int hCost;
+    public short jumpValue;
+    public int gCost; //distance from origin
+    public int hCost; //distance to target
 
     public int fCost
     {

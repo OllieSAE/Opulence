@@ -23,6 +23,7 @@ public class LevelGenerator : MonoBehaviour
     private Node[,] gridNodeReferences;
     private List<Node> blockedNodes;
     private List<Node> fullNeighbours = new List<Node>();
+    private List<Node> outliers = new List<Node>();
     private List<CustomTile> spawnedTiles = new List<CustomTile>();
     [Header("Use EVEN numbers!")]
     [SerializeField] public int levelHeight;
@@ -37,8 +38,21 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Non Procedural Areas")] public List<NonProceduralArea> nonProceduralAreas = new List<NonProceduralArea>();
     [SerializeField] private Camera cam;
+    
+    //testing neighbours
+    private Node topLeftNeighbour,
+        topRightNeighbour,
+        bottomLeftNeighbour,
+        bottomRightNeighbour,
+        topNeighbour,
+        bottomNeighbour,
+        leftNeighbour,
+        rightNeighbour;
+
+    private bool nodeSelected = false;
 
     private bool borderGenerated = false;
+    private bool borderNodesGenerated = false;
     private bool spawnedNonProceduralAreas = false;
 
     private void Awake()
@@ -67,8 +81,11 @@ public class LevelGenerator : MonoBehaviour
 
         //ClearTiles();
         //GenerateTiles();
-        
-        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            GetTileInfo(pos);
+        }
         
         if (Input.GetMouseButtonDown(2))
         {
@@ -85,9 +102,17 @@ public class LevelGenerator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            //StartCoroutine(FillIndividualEmpty());
-            FillIndividualEmpty();
+            //FillIndividualEmpty();
+            ClearSingleOutliers();
         }
+    }
+
+    public void GetTileInfo(Vector3Int location)
+    {
+        
+        Node node = gridNodeReferences[location.x+levelWidth/2, location.y+levelHeight/2];
+        
+
     }
 
     private void Start()
@@ -112,6 +137,60 @@ public class LevelGenerator : MonoBehaviour
         //     Gizmos.color = Color.blue;
         //     Gizmos.DrawCube(fullNeighbour.gridPositionGizmosOnly,Vector3.one);
         // }
+
+        // foreach (Node node in outliers)
+        // {
+        //     Gizmos.color = Color.blue;
+        //     Gizmos.DrawCube(node.gridPositionGizmosOnly, Vector3.one);
+        // }
+
+        // if (borderNodesGenerated)
+        // {
+        //     foreach (Node node in gridNodeReferences)
+        //     {
+        //         if (node.borderNode)
+        //         {
+        //             Gizmos.color = Color.yellow;
+        //             Gizmos.DrawCube(node.gridPositionGizmosOnly, Vector3.one);
+        //         }
+        //     }
+        // }
+        
+
+        if (nodeSelected)
+        {
+            //top left
+            Gizmos.color = Color.blue;
+            Gizmos.DrawCube(topLeftNeighbour.gridPositionGizmosOnly,Vector3.one);
+            
+            //top right
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(topRightNeighbour.gridPositionGizmosOnly,Vector3.one);
+            
+            //bottom left
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(bottomLeftNeighbour.gridPositionGizmosOnly,Vector3.one);
+            
+            //bottom right
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawCube(bottomRightNeighbour.gridPositionGizmosOnly,Vector3.one);
+            
+            //top
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawCube(topNeighbour.gridPositionGizmosOnly,Vector3.one);
+            
+            //bottom
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawCube(bottomNeighbour.gridPositionGizmosOnly,Vector3.one);
+            
+            //left
+            Gizmos.color = Color.white;
+            Gizmos.DrawCube(leftNeighbour.gridPositionGizmosOnly,Vector3.one);
+            
+            //right
+            Gizmos.color = Color.black;
+            Gizmos.DrawCube(rightNeighbour.gridPositionGizmosOnly,Vector3.one);
+        }
 
         if (path != null)
         {
@@ -183,7 +262,7 @@ public class LevelGenerator : MonoBehaviour
             for (int y = -levelHeight/2; y < levelHeight/2; y++)
             {
                 //DELIBERATELY have the XY back to front so it draws horizontally first
-                Vector3Int pos = new Vector3Int(y, x, 0);
+                Vector3Int pos = new Vector3Int(x, y, 0);
                 
                 //list of grid positions that could exist, eg -width/2
                 //tilemap.GetTile(position) - true = blocked, false = not blocked
@@ -268,8 +347,8 @@ public class LevelGenerator : MonoBehaviour
             for (int y = (-levelHeight / 2); y < (levelHeight / 2) + 1; y++)
             {
                 gridNodeReferences[x + levelWidth/2, y + levelHeight/2] = new Node();
-                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].xPosInArray = x;
-                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].yPosInArray = y;
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].xPosInArray = x + levelWidth/2;
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].yPosInArray = y + levelHeight/2;
                 gridNodeReferences[x + levelWidth/2, y + levelHeight/2].gridPosition = new Vector3(x, y, 0);
                 
                 var vector2 = new Vector2(x, y);
@@ -297,7 +376,7 @@ public class LevelGenerator : MonoBehaviour
     {
         foreach (Node neighbour in lowest.neighbours)
         {
-            if (neighbour != null)
+            if (neighbour != null && !neighbour.borderNode)
             {
                 currentTilemap.SetTile(neighbour.gridPosV3Int,null);
                 ScanTile(neighbour);
@@ -314,11 +393,15 @@ public class LevelGenerator : MonoBehaviour
             for (int y = -1; y <= 1; y++)
             {
                 if (x == 0 && y == 0) continue;
+                if (x == -1 && y == -1) continue;
+                if (x == -1 && y == 1) continue;
+                if (x == 1 && y == -1) continue;
+                if (x == 1 && y == 1) continue;
 
                 int checkX = node.xPosInArray + x;
                 int checkY = node.yPosInArray + y;
 
-                if (checkX >= -levelWidth/2 && checkX < levelWidth/2 + 1 && checkY >= -levelHeight/2 && checkY < levelHeight/2 + 1)
+                if (checkX >= 0 && checkX < levelWidth && checkY >= 0 && checkY < levelHeight)
                 {
                     neighbours.Add(gridNodeReferences[checkX,checkY]);
                 }
@@ -332,10 +415,169 @@ public class LevelGenerator : MonoBehaviour
     {
         foreach (Tilemap tilemap in tilemapList)
         {
-            if (tilemap.GetTile(node.gridPosV3Int)) node.isTile = true;
-            else 
+            if (tilemap.GetTile(node.gridPosV3Int))
+            {
+                node.isTile = true;
+                node.isReachable = false;
+            }
+            else
             {
                 node.isTile = false;
+                //[1,0] is directly beneath
+                if (node.neighbours[1, 0] != null)
+                {
+                    if(node.neighbours[1, 0].isTile) node.isReachable = true;
+                    else if (node.neighbours[1, 0].neighbours[1, 0] != null)
+                    {
+                        if(node.neighbours[1, 0].neighbours[1, 0].isTile) node.isReachable = true;
+                        else if (node.neighbours[1, 0].neighbours[1, 0].neighbours[1, 0] != null &&
+                                 node.neighbours[1, 0].neighbours[1, 0].neighbours[1, 0].isTile) node.isReachable = true;
+                    }
+                }
+
+                //need to tweak wall jump and then revisit how high you can actually jump
+                if (node.neighbours[0, 1] != null && node.neighbours[0, 1].isTile) node.isReachable = true;
+                if (node.neighbours[2, 1] != null && node.neighbours[2, 1].isTile) node.isReachable = true;
+
+                //one jump right
+                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
+                {
+                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
+                    {
+                        if ((node.neighbours[2, 1].neighbours[2, 0].isTile &&
+                            node.neighbours[2, 1].neighbours[2, 0] != null)&& (!node.neighbours[2,1].neighbours[2,1].isTile && node.neighbours[2,1].neighbours[2,1] != null))
+                        {
+                            node.neighbours[2, 2].isReachable = true;
+                            node.neighbours[2, 1].neighbours[2, 1].isReachable = true;
+                        }
+                    }
+                }
+                
+                //two jump right
+                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
+                {
+                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
+                    {
+                        if (node.neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 0] != null)
+                        {
+                            if (!node.neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].isTile && !node.neighbours[2, 1].neighbours[2, 0].isTile)
+                            {
+                                if ((node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0].isTile &&
+                                     node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null) &&
+                                    (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isTile &&
+                                     node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null))
+                                {
+                                    node.neighbours[2, 2].isReachable = true;
+                                    node.neighbours[2, 1].neighbours[2, 2].isReachable = true;
+                                    node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isReachable = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                //three jump right
+                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
+                {
+                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
+                    {
+                        if (node.neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 0] != null)
+                        {
+                            if (!node.neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].isTile && !node.neighbours[2, 1].neighbours[2, 0].isTile)
+                            {
+                                if (node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null)
+                                {
+                                    if (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile)
+                                    {
+                                        if ((node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 0].isTile &&
+                                             node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null) &&
+                                            (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isTile &&
+                                             node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null))
+                                        {
+                                            node.neighbours[2, 2].isReachable = true;
+                                            node.neighbours[2, 1].neighbours[2, 2].isReachable = true;
+                                            node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isReachable = true;
+                                            node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1]
+                                                .isReachable = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                //one jump left
+                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
+                {
+                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
+                    {
+                        if ((node.neighbours[0, 1].neighbours[0, 0].isTile &&
+                             node.neighbours[0, 1].neighbours[0, 0] != null)&& (!node.neighbours[0,1].neighbours[0,1].isTile && node.neighbours[0,1].neighbours[0,1] != null))
+                        {
+                            node.neighbours[0, 2].isReachable = true;
+                            node.neighbours[0, 1].neighbours[0, 1].isReachable = true;
+                        }
+                    }
+                }
+                
+                //two jump left
+                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
+                {
+                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
+                    {
+                        if (node.neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 0] != null)
+                        {
+                            if (!node.neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].isTile && !node.neighbours[0, 1].neighbours[0, 0].isTile)
+                            {
+                                if ((node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0].isTile &&
+                                     node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null) &&
+                                    (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isTile &&
+                                     node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null))
+                                {
+                                    node.neighbours[0, 2].isReachable = true;
+                                    node.neighbours[0, 1].neighbours[0, 2].isReachable = true;
+                                    node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isReachable = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                //three jump left
+                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
+                {
+                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
+                    {
+                        if (node.neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 0] != null)
+                        {
+                            if (!node.neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].isTile && !node.neighbours[0, 1].neighbours[0, 0].isTile)
+                            {
+                                if (node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null)
+                                {
+                                    if (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile)
+                                    {
+                                        if ((node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 0].isTile &&
+                                             node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null) &&
+                                            (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isTile &&
+                                             node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null))
+                                        {
+                                            node.neighbours[0, 2].isReachable = true;
+                                            node.neighbours[0, 1].neighbours[0, 2].isReachable = true;
+                                            node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isReachable = true;
+                                            node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1]
+                                                .isReachable = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                
+
+                else node.isReachable = false;
             }
             
         }
@@ -366,16 +608,40 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = floorY; y < sizeY; y++)
             {
+                //left edge does not get [2,1] neighbour set because that is directly left of center
                 if (x > floorX) gridNodeReferences[x + offsetX-1, y + offsetY].neighbours[2,1] = gridNodeReferences[x + offsetX, y + offsetY];
+
+                //bottom edge 
                 if (y > floorY) gridNodeReferences[x + offsetX, y + offsetY-1].neighbours[1,2] = gridNodeReferences[x + offsetX, y + offsetY];
+
+                //right edge
                 if (x < sizeX-1) gridNodeReferences[x + offsetX+1, y + offsetY].neighbours[0,1] = gridNodeReferences[x + offsetX, y + offsetY];
+                
+                //top edge
                 if (y < sizeY-1) gridNodeReferences[x + offsetX, y + offsetY+1].neighbours[1,0] = gridNodeReferences[x + offsetX, y + offsetY];
+                
+                //bottom left corner
                 if (x > floorX && y > floorY) gridNodeReferences[x + offsetX-1, y + offsetY-1].neighbours[2,2] = gridNodeReferences[x + offsetX, y + offsetY];
+                
+                //top left corner
                 if (x > floorX && y < sizeY-1) gridNodeReferences[x + offsetX-1, y + offsetY+1].neighbours[2,0] = gridNodeReferences[x + offsetX, y + offsetY];
+                
+                //bottom right corner
                 if (x < sizeX-1 && y > floorY) gridNodeReferences[x + offsetX+1, y + offsetY-1].neighbours[0,2] = gridNodeReferences[x + offsetX, y + offsetY];
+                
+                //top right corner
                 if (x < sizeX-1 && y < sizeY-1) gridNodeReferences[x + offsetX+1, y + offsetY+1].neighbours[0,0] = gridNodeReferences[x + offsetX, y + offsetY];
             }
         }
+
+        foreach (Node node in gridNodeReferences)
+        {
+            ScanTile(node);
+        }
+        
+        GenerateBorderNodes();
+        
+        FillIndividualEmpty();
     }
 
     private void FillIndividualEmpty()
@@ -401,11 +667,57 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
+        if (fullNeighbours.Count == 0)
+        {
+            //ClearSingleOutliers();
+            return;
+        }
+        
         foreach (Node node in fullNeighbours)
         {
             currentTilemap.SetTile(node.gridPosV3Int,currentTile.tile);
         }
 
+        foreach (Node node in gridNodeReferences)
+        {
+            ScanTile(node);
+        }
+        FillIndividualEmpty();
+    }
+
+    private void ClearSingleOutliers()
+    {
+        outliers.Clear();
+        
+        foreach (Node node in gridNodeReferences)
+        {
+            int neighboursWithTile = 0;
+            if (node.isTile)
+            {
+                foreach (Node neighbour in node.neighbours)
+                {
+                    if (neighbour != null && neighbour.isTile)
+                    {
+                        neighboursWithTile++;
+                    }
+                }
+                if (neighboursWithTile <= 3)
+                {
+                    if(!node.borderNode) outliers.Add(node);
+                }
+            }
+        }
+
+        if (outliers.Count == 0)
+        {
+            return;
+        }
+
+        foreach (Node node in outliers)
+        {
+            currentTilemap.SetTile(node.gridPosV3Int,null);
+        }
+        
         foreach (Node node in gridNodeReferences)
         {
             ScanTile(node);
@@ -462,6 +774,30 @@ public class LevelGenerator : MonoBehaviour
             currentTilemap.SetTile(posTop,currentTile.tile);
         }
         borderGenerated = true;
+    }
+
+    private void GenerateBorderNodes()
+    {
+        //left and right borders
+        for (int y = -levelHeight / 2; y <= levelHeight / 2; y++)
+        {
+            Vector3Int posLeft = new Vector3Int((-levelWidth/2), y, 0);
+            gridNodeReferences[posLeft.x+levelWidth/2, posLeft.y+levelHeight/2].borderNode = true;
+            
+            Vector3Int posRight = new Vector3Int((levelWidth/2), y, 0);
+            gridNodeReferences[posRight.x+levelWidth/2, posRight.y+levelHeight/2].borderNode = true;
+        }
+        
+        //for top and bottom borders
+        for (int x = -levelWidth / 2; x <= levelWidth / 2; x++)
+        {
+            Vector3Int posBottom = new Vector3Int(x, (-levelHeight/2), 0);
+            gridNodeReferences[posBottom.x+levelWidth/2, posBottom.y+levelHeight/2].borderNode = true;
+            
+            Vector3Int posTop = new Vector3Int(x, (levelHeight/2), 0);
+            gridNodeReferences[posTop.x+levelWidth/2, posTop.y+levelHeight/2].borderNode = true;
+        }
+        borderNodesGenerated = true;
     }
 
     private void ClearTiles()
