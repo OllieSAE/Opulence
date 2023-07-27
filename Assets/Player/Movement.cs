@@ -57,6 +57,7 @@ public class Movement : MonoBehaviour
     public Vector2 wallJumpForce;
     
     public FMOD.Studio.EventInstance playerWalk;
+    public FMOD.Studio.EventInstance wallSlideSFX;
 
     private void Awake()
     {
@@ -82,7 +83,9 @@ public class Movement : MonoBehaviour
         playerRespawnPos = transform.position;
 
         playerWalk = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Footsteps");
+        wallSlideSFX = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Wall Slide");
         RuntimeManager.AttachInstanceToGameObject(playerWalk, transform, rigidbody);
+        RuntimeManager.AttachInstanceToGameObject(wallSlideSFX, transform, rigidbody);
     }
 
     private void OnLevelLoad()
@@ -211,9 +214,17 @@ public class Movement : MonoBehaviour
             animator.SetBool("WallSlide", true);
             rigidbody.velocity = new Vector2(rigidbody.velocity.x,
                 Mathf.Clamp(rigidbody.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            if (!FmodExtensions.IsPlaying(wallSlideSFX))
+            {
+                wallSlideSFX.start();
+            }
         }
         //this might be inefficient
-        else animator.SetBool("WallSlide", false);
+        else
+        {
+            animator.SetBool("WallSlide", false);
+            wallSlideSFX.stop(STOP_MODE.IMMEDIATE);
+        }
         
 
         
