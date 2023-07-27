@@ -9,6 +9,7 @@ public class HitboxManager : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
     public Combat parentCombat;
+    private ComboAttackSFX comboAttackSfx;
     [Header("Falcon Attack 1 Frames")]
     public Transform falconA1F1;
     public Transform falconA1F2;
@@ -30,14 +31,23 @@ public class HitboxManager : MonoBehaviour
     [Header("Spider Attack Frames")]
     public Transform spiderFrame1;
 
+    private void Start()
+    {
+        comboAttackSfx = GetComponent<ComboAttackSFX>();
+    }
+
     //"Global" function for dealing damage via hitbox
-    public void GenerateHitboxForDamage(Vector3 position, float size, int damageAmount)
+    public void GenerateHitboxForDamage(Vector3 position, float size, int damageAmount)//, string sfxName)
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, size, enemyLayer);
-        
+        if (hitEnemies.Length > 0)
+        {
+            //comboAttackSfx.SuccessfulComboHit(sfxName);
+        }
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponentInParent<Health>().ChangeHealth(-damageAmount,this.gameObject);
+            
         }
     }
 
