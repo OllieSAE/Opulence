@@ -123,6 +123,7 @@ public class Movement : MonoBehaviour
         GameManager.Instance.pauseStartEvent -= GamePauseStart;
         GameManager.Instance.pauseEndEvent -= GamePauseEnd;
         playerWalk.release();
+        wallSlideSFX.release();
     }
 
     #region Gizmos
@@ -168,10 +169,6 @@ public class Movement : MonoBehaviour
         }
         else isSliding = false;
 
-        //TODO: fix the animations to work properly
-        // need back outs/exits that work appropriately
-        // play around with paper prototype maybe
-
         if (isTouchingGround)
         {
             animator.SetBool("Landed", true);
@@ -182,27 +179,25 @@ public class Movement : MonoBehaviour
         }
         
         animator.SetFloat("Y velocity", rigidbody.velocity.y);
-        // need to figure out why the playerwalk is playing a single footstep after some dashes
+        
         if ((rigidbody.velocity.x > 0.01f || rigidbody.velocity.x < -0.01f) && isTouchingGround && !dashing)
         {
             animator.SetBool("Running", true);
             if (!FmodExtensions.IsPlaying(playerWalk))
             {
-                playerWalk.start();
+                //playerWalk.start();
             }
         }
         else if (rigidbody.velocity.x == 0 && isTouchingGround)
         {
             animator.SetBool("Running", false);
-            playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
+            //playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
         }
         else
         {
             animator.SetBool("Running", false);
-            playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
+            //playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
         }
-        // Added to check vel when debugging animator
-        //Debug.Log(rigidbody.velocity.y);
     }
     
     
