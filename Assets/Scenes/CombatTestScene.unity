@@ -1859,6 +1859,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 189438590, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 189438592, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 914746547, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 914746549, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1181317841, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1875,21 +1891,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
-      propertyPath: sfx.Array.size
-      value: 4
+    - target: {fileID: 1617502543, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
-      propertyPath: sfx.Array.data[1]
-      value: Character Land
+    - target: {fileID: 1617502544, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
-      propertyPath: sfx.Array.data[2]
-      value: Falcon Melee 2
+    - target: {fileID: 1981248231, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1602821871, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
-      propertyPath: sfx.Array.data[3]
-      value: Falcon Melee 3
+    - target: {fileID: 1981248233, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1048529260058701012, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
       propertyPath: m_Name
