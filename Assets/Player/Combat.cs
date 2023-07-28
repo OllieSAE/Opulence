@@ -11,6 +11,7 @@ public class Combat : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private Animator animator;
     private DamageAOETest damageAoeTest;
+    private Movement movement;
 
     [Header("General Combat")]
     private bool currentlyAttacking;
@@ -57,6 +58,12 @@ public class Combat : MonoBehaviour
     [Header("Charger Enemy Combat")]
     public GameObject chargerCollider;
 
+    [Header("Mask Type")] 
+    public bool falconMask;
+    public bool spiderMask;
+
+    [Header("Falcon Combat")] public bool falconDashCD;
+
     private void Awake()
     {
         if (gameObject.CompareTag("Player"))
@@ -79,6 +86,7 @@ public class Combat : MonoBehaviour
         health = GetComponent<Health>();
         canFirstCombo = false;
         canSecondCombo = false;
+        falconDashCD = false;
     }
 
     private void OnDisable()
@@ -93,6 +101,7 @@ public class Combat : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        movement = GetComponent<Movement>();
         currentlyAttacking = false;
         rechargingAmmo = false;
     }
@@ -327,7 +336,19 @@ public class Combat : MonoBehaviour
     {
         if (context.performed)
         {
-            StartCoroutine(RangedAttackCoroutine());
+            if (falconMask)
+            {
+                StartCoroutine(FalconDashAttack());
+            }
+            else if (spiderMask)
+            {
+                
+            }
+            else
+            {
+                StartCoroutine(RangedAttackCoroutine());
+            }
+            
             if (!rechargingAmmo)
             {
                 StartCoroutine(RechargeAmmo());
@@ -349,6 +370,32 @@ public class Combat : MonoBehaviour
             yield return new WaitForSeconds(rangedHitDelay);
             lastComboEnd = Time.time;
             if (health.currentHealth > 0) FireProjectile();
+        }
+    }
+
+    private IEnumerator FalconDashAttack()
+    {
+        // Making sure we aren't attacking or dashing before we start another dash
+        if (!currentlyAttacking || !falconDashCD )
+        {
+            if (movement.isTouchingGround)
+            {
+                falconDashCD = true;
+                lastComboEnd = Time.time;
+                currentlyAttacking = true;
+                // activating the animation for the dash
+                if (gameObject.CompareTag("Player"))
+                {
+                    animator.SetBool("FalconDash", true);
+                    animator.Play("falconDashEnter_ANIM");
+                }
+                // waiting for the start up animation to finish before actually dashing
+                yield return new WaitForSeconds(0.2f);
+                // calling the movement dash to start the physics of the dash
+                movement.FalconDash();
+                yield return new WaitForSeconds(rangedHitDelay);
+                lastComboEnd = Time.time;
+            }
         }
     }
     

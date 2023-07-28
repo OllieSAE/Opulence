@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_Toon
+  m_Name: m_playerToon
   m_Shader: {fileID: -6465566751694194690, guid: 94497eea0bf15b64da110bc66378a98a, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -22,6 +22,10 @@ Material:
     m_TexEnvs:
     - _AlphaTex:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMask:
+        m_Texture: {fileID: 2800000, guid: db9d6efe805351445a43fdbee0a84dcb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -56,15 +60,20 @@ Material:
     m_Floats:
     - _Ambient_Strength: 0.8
     - _DistanceAtten: 1
+    - _Emission_Power: 0.54
     - _EnableExternalAlpha: 0
     - _Falloff_Amount: 0
     - _Fresnel_Size: 0.1
     - _Lighting_Cutoff: 0.3
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _Shadow_Attenuation: 1
     - _Smoothness: 1000
+    - _UseEmission: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Diffuse_Colour: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColour: {r: 231.90588, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _Fresnel_Colour: {r: 1, g: 1, b: 1, a: 1}
     - _LightCol: {r: 1, g: 1, b: 1, a: 0}

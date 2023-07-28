@@ -43,6 +43,9 @@ public class Movement : MonoBehaviour
     private bool wallJumpDelayCR;
     public bool inputAllowed;
     private bool isDead;
+    private bool falconDashCooldown;
+    private bool falconDashing;
+    
     
     [Header("Movement Values")]
     public float speed;
@@ -55,6 +58,7 @@ public class Movement : MonoBehaviour
     public float wallJumpDuration;
     public float controlLockDuration;
     public Vector2 wallJumpForce;
+    public float falconDashWaitTime = 0.25f;
     
     public FMOD.Studio.EventInstance playerWalk;
     public FMOD.Studio.EventInstance wallSlideSFX;
@@ -81,6 +85,8 @@ public class Movement : MonoBehaviour
         isDead = false;
         wallJumpDelayCR = false;
         playerRespawnPos = transform.position;
+        falconDashCooldown = false;
+        falconDashing = false;
 
         playerWalk = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Footsteps");
         wallSlideSFX = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Wall Slide");
@@ -180,7 +186,7 @@ public class Movement : MonoBehaviour
         
         animator.SetFloat("Y velocity", rigidbody.velocity.y);
         
-        if ((rigidbody.velocity.x > 0.01f || rigidbody.velocity.x < -0.01f) && isTouchingGround && !dashing)
+        if ((rigidbody.velocity.x > 0.01f || rigidbody.velocity.x < -0.01f) && isTouchingGround && !dashing && !falconDashing)
         {
             animator.SetBool("Running", true);
             if (!FmodExtensions.IsPlaying(playerWalk))
@@ -243,7 +249,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        else if (!dashing && !isSliding)
+        else if (!dashing && !isSliding && !falconDashing)
         {
             if (inputAllowed) rigidbody.velocity = new Vector2(inputVector.x * speed * Time.fixedDeltaTime, rigidbody.velocity.y);
         }
@@ -444,7 +450,60 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(dashCooldownDuration);
         dashCooldown = false;
     }
+    
+        public void FalconDash()
+    {
+        if (!isDead && inputAllowed && !isSliding && !falconDashCooldown)
+        {
+            if (!isTouchingGround && midairDash)
+            {
+                falconDashCooldown = true;
+                midairDash = false;
+                StartCoroutine(FalconDashCoroutine(falconDashWaitTime));
+                
+            }
+            else if (isTouchingGround)
+            {
+                falconDashCooldown = true;
+                StartCoroutine(FalconDashCoroutine(falconDashWaitTime));
+                
+            }
+        }
+    }
 
+    private IEnumerator FalconDashCoroutine(float waitTime)
+    {
+        falconDashing = true;
+        health.immune = true;
+        playerInput.DeactivateInput();
+        rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        yield return new WaitForSeconds(waitTime);
+        if (!facingLeft)
+        {
+            rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
+                    
+                    
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Dash");
+        }
+
+        if (facingLeft)
+        {
+            rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
+                    
+                    
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Dash");
+        }
+        yield return new WaitForSeconds(waitTime);
+        falconDashing = false;
+        health.immune = false;
+        if(gameObject.CompareTag("Player")) animator.SetBool("FalconDash", false);
+        rigidbody.constraints = RigidbodyConstraints2D.None;
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        yield return new WaitForSeconds(dashCooldownDuration);
+        falconDashCooldown = false;
+        playerInput.ActivateInput();
+    }
+    
     public void Crouch(InputAction.CallbackContext context)
     {
         if(context.performed) ;
