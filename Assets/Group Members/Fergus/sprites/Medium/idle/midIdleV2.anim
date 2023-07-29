@@ -188,6 +188,13 @@ AnimationClip:
   m_Events:
   - time: 0.041666668
     functionName: VFXStop
+    data: vfxGraph_smokeDash
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.041666668
+    functionName: VFXStop
     data: vfxGraph_smokeRun
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
