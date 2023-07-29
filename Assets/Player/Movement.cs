@@ -45,6 +45,7 @@ public class Movement : MonoBehaviour
     private bool isDead;
     private bool falconDashCooldown;
     private bool falconDashing;
+    private bool noFlipping;
     
     
     [Header("Movement Values")]
@@ -87,6 +88,7 @@ public class Movement : MonoBehaviour
         playerRespawnPos = transform.position;
         falconDashCooldown = false;
         falconDashing = false;
+        noFlipping = false;
 
         playerWalk = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Footsteps");
         wallSlideSFX = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Wall Slide");
@@ -258,11 +260,18 @@ public class Movement : MonoBehaviour
             //remove this when we have L/R sprites
         if (inputVector.x > 0 && facingLeft)
         {
-            Flip();
+            if (!noFlipping)
+            {
+                Flip();
+            }
+            
         }
         else if (inputVector.x < 0 && !facingLeft)
         {
-            Flip();
+            if (!noFlipping)
+            {
+                Flip();
+            }
         }
     }
 
@@ -459,12 +468,14 @@ public class Movement : MonoBehaviour
             {
                 falconDashCooldown = true;
                 midairDash = false;
+                noFlipping = false;
                 StartCoroutine(FalconDashCoroutine(falconDashWaitTime));
                 
             }
             else if (isTouchingGround)
             {
                 falconDashCooldown = true;
+                noFlipping = false;
                 StartCoroutine(FalconDashCoroutine(falconDashWaitTime));
                 
             }
@@ -476,8 +487,10 @@ public class Movement : MonoBehaviour
         falconDashing = true;
         health.immune = true;
         playerInput.DeactivateInput();
+        rigidbody.velocity = Vector2.zero;
         rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(waitTime);
+        noFlipping = true;
         if (!facingLeft)
         {
             rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
@@ -501,6 +514,7 @@ public class Movement : MonoBehaviour
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(dashCooldownDuration);
         falconDashCooldown = false;
+        noFlipping = false;
         playerInput.ActivateInput();
     }
     

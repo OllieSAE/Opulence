@@ -17,6 +17,16 @@ public class FXTrigger : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
     public ParticleSystem.CollisionModule colMod;
+
+    [Header("Emission Settings")] 
+    public Color emissionColour;
+    public float emissionIntenstiy;
+    public float waitTime;
+    private Material material;
+    private Color originalEmissionColour;
+    private float emissionIncrement;
+    private Color currentEmissionColour;
+    
     
     //private string particleName;
     
@@ -29,6 +39,11 @@ public class FXTrigger : MonoBehaviour
             //unity is definitely doing a BIT
             if (gameObject.layer == 8) colMod.collidesWith = playerLayer;
             if (gameObject.layer == 6) colMod.collidesWith = enemyLayer;
+        }
+
+        if (material == null)
+        {
+            material = GetComponent<SpriteRenderer>().material;
         }
     }
 
@@ -92,5 +107,38 @@ public class FXTrigger : MonoBehaviour
                 print("played " +sfxName);
             }
         }
+    }
+
+    public void EmissionLerp(float length)
+    {
+        originalEmissionColour = material.GetColor("_EmissionColour");
+        StartCoroutine(EmissionLerping(length));
+    }
+
+    public IEnumerator EmissionLerping(float length)
+    {
+        emissionIncrement = (length / 100) * 20;
+        Color intenseEmissiveColour = new Color((emissionColour.r * emissionIntenstiy),
+            (emissionColour.g * emissionIntenstiy), (emissionColour.b * emissionIntenstiy));
+        float i;
+        i = 0;
+        while (i < 1)
+        {
+            currentEmissionColour = Color.Lerp(originalEmissionColour, intenseEmissiveColour, i);
+            material.SetColor("_EmissionColour", currentEmissionColour);
+            yield return new WaitForSeconds(emissionIncrement);
+            i += 0.2f;
+        }
+        i = 1;
+        material.SetColor("_EmissionColour", intenseEmissiveColour);
+        yield return new WaitForSeconds(waitTime);
+        while (i > 1)
+        {
+            currentEmissionColour = Color.Lerp(originalEmissionColour, intenseEmissiveColour, i);
+            material.SetColor("_EmissionColour", currentEmissionColour);
+            yield return new WaitForSeconds(emissionIncrement);
+            i -= 0.2f;
+        }
+        material.SetColor("_EmissionColour", originalEmissionColour);
     }
 }

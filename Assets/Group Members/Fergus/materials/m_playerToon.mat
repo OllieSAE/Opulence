@@ -60,7 +60,7 @@ Material:
     m_Floats:
     - _Ambient_Strength: 0.8
     - _DistanceAtten: 1
-    - _Emission_Power: 0.54
+    - _Emission_Power: 1
     - _EnableExternalAlpha: 0
     - _Falloff_Amount: 0
     - _Fresnel_Size: 0.1
@@ -69,11 +69,11 @@ Material:
     - _QueueOffset: 0
     - _Shadow_Attenuation: 1
     - _Smoothness: 1000
-    - _UseEmission: 0
+    - _UseEmission: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Diffuse_Colour: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColour: {r: 231.90588, g: 0, b: 0, a: 1}
+    - _EmissionColour: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _Fresnel_Colour: {r: 1, g: 1, b: 1, a: 1}
     - _LightCol: {r: 1, g: 1, b: 1, a: 0}

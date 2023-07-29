@@ -62,7 +62,9 @@ public class Combat : MonoBehaviour
     public bool falconMask;
     public bool spiderMask;
 
-    [Header("Falcon Combat")] public bool falconDashCD;
+    [Header("Falcon Combat")] 
+    public bool falconDashCD;
+    public Collider2D falconDashCollider;
 
     private void Awake()
     {
