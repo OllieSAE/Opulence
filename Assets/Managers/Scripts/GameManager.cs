@@ -131,6 +131,14 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadLevelCoroutine());
     }
 
+    public void SelectActualLevel()
+    {
+        sceneToLoad = "LevelGenTest";
+        tutorialTestEnable = false;
+        combatTutorialTestEnable = false;
+        StartCoroutine(LoadLevelCoroutine());
+    }
+
     public void SelectCreditsUI()
     {
         mainMenuUI.SetActive(false);
@@ -158,15 +166,24 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         StartCoroutine(LoadSceneAsync());
     }
-    
+
     private IEnumerator LoadSceneAsync()
     {
-        
         loadingOperation = SceneManager.LoadSceneAsync(sceneToLoad,LoadSceneMode.Additive);
         while (!loadingOperation.isDone)
         {
             yield return null;
         }
+
+        if (sceneToLoad != "LevelGenTest")
+        {
+            OnLevelLoaded();
+            loadingScreen.SetActive(false);
+        }
+    }
+
+    public void LevelGenComplete()
+    {
         OnLevelLoaded();
         loadingScreen.SetActive(false);
     }

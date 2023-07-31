@@ -10,19 +10,44 @@ public class Pathfinding : MonoBehaviour
     private LevelGenerator levelGenerator;
     public Transform start;
     public Transform end;
+    public Transform start2;
+    public Transform end2;
     public bool showPath = false;
     private Heap<Node> openSet;
     private HashSet<Node> closedSet = new HashSet<Node>();
     private Node lowestHCost;
     public short playerJumpValue;
+    public int pathAttempts = 0;
+    
+    public delegate void RestartLevelGenEvent();
+    public event RestartLevelGenEvent restartLevelGenEvent;
+
+    public delegate void LevelGenSuccessEvent();
+    public event LevelGenSuccessEvent levelGenSuccessEvent;
+    
     private void Awake()
     {
         levelGenerator = GetComponent<LevelGenerator>();
     }
 
+    private void Start()
+    {
+        levelGenerator.clearTilesEvent += ClearGizmosLists;
+    }
+
+    private void OnDisable()
+    {
+        levelGenerator.clearTilesEvent -= ClearGizmosLists;
+    }
+
     private void Update()
     {
-        if(Input.GetButtonDown("Jump"))FindPath(start.position, end.position, playerJumpValue);
+        if(Input.GetButtonDown("Jump"))FindPath(start2.position, end2.position, playerJumpValue);
+    }
+
+    public void FindDefaultPath()
+    {
+        FindPath(start.position, end.position, playerJumpValue);
     }
 
     void FindPath(Vector2 startPos, Vector2 targetPos, short maxPlayerJump)
@@ -85,12 +110,17 @@ public class Pathfinding : MonoBehaviour
 
     private IEnumerator WaitForPathRetry(Vector2 startPos, Vector2 targetPos, short playerJump)
     {
-        //int ++
-        //if int below X, find path
-        //if int above X, print failed path and call for new level to be generated
-        yield return new WaitForSeconds(0.1f);
-        print("searching");
-        FindPath(startPos,targetPos,playerJump);
+        pathAttempts++;
+        yield return new WaitForSeconds(0.01f);
+        if (pathAttempts < 50)
+        {
+            FindPath(startPos, targetPos, playerJump);
+        }
+        else
+        {
+            pathAttempts = 0;
+            restartLevelGenEvent?.Invoke();
+        }
     }
     
     private void OnDrawGizmos()
@@ -120,6 +150,17 @@ public class Pathfinding : MonoBehaviour
         }
     }
 
+    private void ClearGizmosLists()
+    {
+        lowestHCost = null;
+        pathAttempts = 0;
+        if(levelGenerator.path!=null) levelGenerator.path.Clear();
+        closedSet.Clear();
+        openSet.Clear();
+        StopAllCoroutines();
+        StartCoroutine(PathFoundRestartTest());
+    }
+
     void RetracePath(Node startNode, Node endNode)
     {
         List<Node> path = new List<Node>();
@@ -134,6 +175,11 @@ public class Pathfinding : MonoBehaviour
         path.Reverse();
 
         levelGenerator.path = path;
+
+        print("path successful");
+        levelGenSuccessEvent?.Invoke();
+        
+        //StartCoroutine(PathFoundRestartTest());
     }
     
     int GetDistance(Node nodeA, Node nodeB)
@@ -145,5 +191,12 @@ public class Pathfinding : MonoBehaviour
 
         if (distanceX > distanceY) return 14 * distanceY + 10 * (distanceX - distanceY);
         return 14 * distanceX + 10 * (distanceY - distanceX);
+    }
+
+    private IEnumerator PathFoundRestartTest()
+    {
+        pathAttempts = 0;
+        yield return new WaitForSeconds(0.1f);
+        restartLevelGenEvent?.Invoke();
     }
 }

@@ -60,6 +60,7 @@ public class Health : MonoBehaviour
             if (amount < 0 && currentHealth > 0 && thisIsPlayer)
             {
                 flashEffect.Flash();
+                //maybe polly's SFX thing here
                 if (whoDealtDamage.CompareTag("Hazard"))
                 {
                     RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Damage");
@@ -74,6 +75,7 @@ public class Health : MonoBehaviour
             {
                 //RuntimeManager.PlayOneShot("enemy takes damage sound")
                 flashEffect.Flash();
+                //maybe polly's SFX thing here
                 //StartCoroutine(EnemyDamagedCoroutine());
             }
         }

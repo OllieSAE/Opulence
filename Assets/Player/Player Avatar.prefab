@@ -11792,6 +11792,7 @@ GameObject:
   - component: {fileID: 2039286897}
   - component: {fileID: 2039286896}
   - component: {fileID: 334087569}
+  - component: {fileID: 5771996311848104080}
   - component: {fileID: 1602821871}
   - component: {fileID: 2096564205}
   - component: {fileID: 3813441183586035222}
@@ -11920,6 +11921,18 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 6fd7e46e279ee9443b0322d4b6e55930, type: 2}
   vfxToTrigger: {fileID: 3707848182454776439}
   duration: 0.1
+--- !u!114 &5771996311848104080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039286895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590d61c3da6dfd24bb9f73faf37dfca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1602821871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12417,7 +12430,7 @@ MonoBehaviour:
   dashCooldownDuration: 0.5
   wallSlidingSpeed: 0.5
   wallJumpDuration: 0.1
-  controlLockDuration: 0.25
+  controlLockDuration: 0.01
   wallJumpForce: {x: 4, y: 5.5}
   falconDashWaitTime: 0.5
 --- !u!114 &1584120733

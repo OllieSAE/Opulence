@@ -362,7 +362,7 @@ public class Movement : MonoBehaviour
         wallJumpDelayCR = true;
         inputAllowed = false;
         yield return new WaitForSeconds(controlLockDuration);
-        Flip();
+        //Flip();
         inputAllowed = true;
         wallJumpDelayCR = false;
     }

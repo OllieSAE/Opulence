@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +17,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private CustomTile currentTile;
     [SerializeField] private List<CustomTile> customTiles;
     [SerializeField] private Grid grid;
+    public GameObject player;
+    private Pathfinding pathfinding;
     public bool gizmosOn;
     [Header("Tile Types")] private CustomTile enemyTile, spikeTile, ruleTile, collectibleTile;
 
@@ -54,14 +58,18 @@ public class LevelGenerator : MonoBehaviour
     private bool borderGenerated = false;
     private bool borderNodesGenerated = false;
     private bool spawnedNonProceduralAreas = false;
+    
+    public delegate void ClearTilesEvent();
+    public event ClearTilesEvent clearTilesEvent;
 
     private void Awake()
     {
         tileArrayVector3Ints = new Vector3Int[levelHeight, levelWidth];
         tile2DArray = new CustomTile[levelHeight, levelWidth];
-        gridNodeReferences = new Node[levelHeight+1, levelWidth+1];
+        
         blockedNodes = new List<Node>();
         scale = Random.Range(0.15f, 0.25f);
+        pathfinding = GetComponent<Pathfinding>();
     }
 
     public int MaxSize
@@ -73,8 +81,10 @@ public class LevelGenerator : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
+        
         scale = Random.Range(0.15f, 0.25f);
+        
         //or change the 10000 
         
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
@@ -84,26 +94,29 @@ public class LevelGenerator : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            GetTileInfo(pos);
+            //GetTileInfo(pos);
         }
         
         if (Input.GetMouseButtonDown(2))
         {
-            print("generate tiles");
-            GenerateTiles();
+            //GenerateTiles();
             //PlaceTile(pos);
         }
 
         if (Input.GetMouseButton(1))
         {
-            ClearTiles();
+            //ClearTiles();
             //DeleteTile(pos);
         }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
+            //ClearSingleOutliers();
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
             //FillIndividualEmpty();
-            ClearSingleOutliers();
         }
     }
 
@@ -121,6 +134,47 @@ public class LevelGenerator : MonoBehaviour
         spikeTile = customTiles.Find(t => t.tileType == CustomTile.TileType.spike);
         enemyTile = customTiles.Find(t => t.tileType == CustomTile.TileType.enemy);
         tilemapList.Add(currentTilemap);
+        pathfinding.restartLevelGenEvent += ClearTiles;
+        pathfinding.levelGenSuccessEvent += LevelGenCompleteToGameManager;
+        GenerateTiles();
+    }
+
+    private void OnDisable()
+    {
+        pathfinding.restartLevelGenEvent -= ClearTiles;
+        pathfinding.levelGenSuccessEvent -= LevelGenCompleteToGameManager;
+    }
+
+    private void LevelGenCompleteToGameManager()
+    {
+        BlockInPath();
+        //GameManager.Instance.LevelGenComplete();
+    }
+
+    private void BlockInPath()
+    {
+        if (path != null)
+        {
+            for (int i = 1; i < path.Count-1; i++)
+            {
+                //if next step of path is to my RIGHT, and previous is NOT BELOW current, put tile below current
+                if (path[i + 1] == path[i].neighbours[2, 1] && path[i-1] != path[i].neighbours[1,0])
+                {
+                    currentTilemap.SetTile(path[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                }
+
+                //if next step of path is ABOVE
+                if (path[i + 1] == path[i].neighbours[1, 2] && path[i-1] == path[i].neighbours[1,0])
+                {
+                    //if no tile to left, add tile to right
+                    if(path[i].neighbours[0,1].isTile == false) currentTilemap.SetTile(path[i].neighbours[2,1].gridPosV3Int,currentTile.tile);
+                    //if no tile to right, add tile to left
+                    else if (path[i].neighbours[2, 1].isTile == false)
+                        currentTilemap.SetTile(path[i].neighbours[0, 1].gridPosV3Int, currentTile.tile);
+                }
+            }
+        }
+        
     }
 
     public List<Node> path;
@@ -341,7 +395,7 @@ public class LevelGenerator : MonoBehaviour
         //could change -levelWidth/2 to be:
         //Vector2 worldBottomLeft = transform.position - Vector2.right * levelWidth - Vector2.up * levelHeight
         //then set X/Y to worldBottomLeft.x/.y respectively
-        
+        gridNodeReferences = new Node[levelHeight+1, levelWidth+1];
         for (int x = (-levelWidth / 2); x < (levelWidth / 2) + 1; x++)
         {
             for (int y = (-levelHeight / 2); y < (levelHeight / 2) + 1; y++)
@@ -409,6 +463,19 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return neighbours;
+    }
+
+    private void ScanAllTiles()
+    {
+        foreach (Node node in gridNodeReferences)
+        {
+            if (currentTilemap.GetTile(node.gridPosV3Int))
+            {
+                node.isTile = true;
+                node.isReachable = false;
+            }
+            else node.isTile = false;
+        }
     }
 
     private void ScanTile(Node node)
@@ -634,6 +701,8 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
+        ScanAllTiles();
+        
         foreach (Node node in gridNodeReferences)
         {
             ScanTile(node);
@@ -642,6 +711,7 @@ public class LevelGenerator : MonoBehaviour
         GenerateBorderNodes();
         
         FillIndividualEmpty();
+        
     }
 
     private void FillIndividualEmpty()
@@ -669,14 +739,17 @@ public class LevelGenerator : MonoBehaviour
 
         if (fullNeighbours.Count == 0)
         {
-            //ClearSingleOutliers();
+            ClearSingleOutliers();
             return;
         }
         
         foreach (Node node in fullNeighbours)
         {
             currentTilemap.SetTile(node.gridPosV3Int,currentTile.tile);
+            ScanTile(node);
         }
+        
+        ScanAllTiles();
 
         foreach (Node node in gridNodeReferences)
         {
@@ -710,18 +783,31 @@ public class LevelGenerator : MonoBehaviour
 
         if (outliers.Count == 0)
         {
+            StartCoroutine(MapFinished());
             return;
         }
 
         foreach (Node node in outliers)
         {
             currentTilemap.SetTile(node.gridPosV3Int,null);
+            ScanTile(node);
         }
+        
+        ScanAllTiles();
         
         foreach (Node node in gridNodeReferences)
         {
             ScanTile(node);
         }
+
+        ClearSingleOutliers();
+    }
+
+    private IEnumerator MapFinished()
+    {
+        print("map finished");
+        yield return new WaitForSeconds(5f);
+        pathfinding.FindDefaultPath();
     }
 
     private void SpawnNonProceduralAreas()
@@ -729,7 +815,7 @@ public class LevelGenerator : MonoBehaviour
         //TODO:
         //needs a rework - there's some weird ghost shit going on with the center of the map
         
-        /*foreach (NonProceduralArea nonProceduralArea in nonProceduralAreas)
+        foreach (NonProceduralArea nonProceduralArea in nonProceduralAreas)
         {
             
             int tempSpawnPosX = (int)nonProceduralArea.spawnPosition.x;
@@ -743,12 +829,12 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
 
-            if (nonProceduralArea.prefab != null)
-            {
-                Instantiate(nonProceduralArea.prefab,nonProceduralArea.spawnPosition,quaternion.identity,grid.transform);
-                tilemapList.Add(nonProceduralArea.prefab.GetComponent<Tilemap>());
-            }
-        }*/
+            // if (nonProceduralArea.prefab != null)
+            // {
+            //     Instantiate(nonProceduralArea.prefab,nonProceduralArea.spawnPosition,quaternion.identity,grid.transform);
+            //     tilemapList.Add(nonProceduralArea.prefab.GetComponent<Tilemap>());
+            // }
+        }
 
         spawnedNonProceduralAreas = true;
         GenerateGridNodes();
@@ -812,6 +898,9 @@ public class LevelGenerator : MonoBehaviour
             child.GetComponent<Tilemap>().ClearAllTiles();
             if (child != currentTilemap.transform) Destroy(child.transform.gameObject);
         }
+
+        GenerateTiles();
+        //clearTilesEvent?.Invoke();
     }
 
     private void PlaceTile(Vector3Int pos)
