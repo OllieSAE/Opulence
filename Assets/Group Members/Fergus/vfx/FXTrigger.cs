@@ -67,6 +67,11 @@ public class FXTrigger : MonoBehaviour
         }
     }
 
+    public void VFXTriggers(AnimationEvent vfx)
+    {
+        
+    }
+
     public void VFXStop(string vfxName)
     {
         for (int i = 0; i < vfx.Length; i++)
