@@ -42,12 +42,17 @@ public class Pathfinding : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetButtonDown("Jump"))FindPath(start2.position, end2.position, playerJumpValue);
+        //if(Input.GetButtonDown("Jump"))FindPath(start2.position, end2.position, playerJumpValue);
     }
 
     public void FindDefaultPath()
     {
         FindPath(start.position, end.position, playerJumpValue);
+    }
+
+    public void FindSecondaryPath()
+    {
+        FindPath(start2.position, end2.position, playerJumpValue);
     }
 
     void FindPath(Vector2 startPos, Vector2 targetPos, short maxPlayerJump)
@@ -136,9 +141,27 @@ public class Pathfinding : MonoBehaviour
 
         if (levelGenerator.path != null)
         {
-            foreach (Node node in levelGenerator.path)
+            // foreach (Node node in levelGenerator.path)
+            // {
+            //     Gizmos.color = Color.green;
+            //     Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
+            // }
+        }
+
+        if (levelGenerator.optimalPath != null)
+        {
+            foreach (Node node in levelGenerator.optimalPath)
             {
                 Gizmos.color = Color.green;
+                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
+            }
+        }
+
+        if (levelGenerator.secondaryPath != null)
+        {
+            foreach (Node node in levelGenerator.secondaryPath)
+            {
+                Gizmos.color = Color.blue;
                 Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
             }
         }
@@ -175,11 +198,30 @@ public class Pathfinding : MonoBehaviour
         path.Reverse();
 
         levelGenerator.path = path;
+        if (levelGenerator.optimalPath == null)
+        {
+            print("optimal path set");
+            levelGenerator.optimalPath = new List<Node>(path);
+            StartCoroutine(WaitForSecondPath());
+        }
+        else
+        {
+            print("secondary path set");
+            levelGenerator.secondaryPath = new List<Node>(path);
+            levelGenSuccessEvent?.Invoke();
+        }
+        
 
-        print("path successful");
-        levelGenSuccessEvent?.Invoke();
+        
+        
         
         //StartCoroutine(PathFoundRestartTest());
+    }
+
+    private IEnumerator WaitForSecondPath()
+    {
+        yield return new WaitForSeconds(1f);
+        FindSecondaryPath();
     }
     
     int GetDistance(Node nodeA, Node nodeB)

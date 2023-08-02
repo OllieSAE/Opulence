@@ -83,8 +83,9 @@ public class LevelGenerator : MonoBehaviour
     private void Update()
     { 
         
+        //if(optimalPath!= null) print(optimalPath.Count);
         scale = Random.Range(0.15f, 0.25f);
-        
+        ScanAllTiles();
         //or change the 10000 
         
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
@@ -153,24 +154,79 @@ public class LevelGenerator : MonoBehaviour
 
     private void BlockInPath()
     {
-        if (path != null)
+        //refactor this to take in OPTIMAL PATH and do another for SECONDARY PATH
+        if (optimalPath != null)
         {
-            for (int i = 1; i < path.Count-1; i++)
+            for (int i = 1; i < optimalPath.Count-1; i++)
             {
                 //if next step of path is to my RIGHT, and previous is NOT BELOW current, put tile below current
-                if (path[i + 1] == path[i].neighbours[2, 1] && path[i-1] != path[i].neighbours[1,0])
+                if (optimalPath[i + 1] == optimalPath[i].neighbours[2, 1] && optimalPath[i-1] != optimalPath[i].neighbours[1,0])
                 {
-                    currentTilemap.SetTile(path[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                    currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                }
+                
+                //if next step of path is to my LEFT, and previous is NOT BELOW current, put tile below current
+                if (optimalPath[i + 1] == optimalPath[i].neighbours[0, 1] && optimalPath[i-1] != optimalPath[i].neighbours[1,0])
+                {
+                    currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
                 }
 
-                //if next step of path is ABOVE
-                if (path[i + 1] == path[i].neighbours[1, 2] && path[i-1] == path[i].neighbours[1,0])
+                //if next step of path is ABOVE && previous step is BELOW
+                if (optimalPath[i + 1] == optimalPath[i].neighbours[1, 2] && optimalPath[i-1] == optimalPath[i].neighbours[1,0])
                 {
                     //if no tile to left, add tile to right
-                    if(path[i].neighbours[0,1].isTile == false) currentTilemap.SetTile(path[i].neighbours[2,1].gridPosV3Int,currentTile.tile);
+                    if(optimalPath[i].neighbours[0,1].isTile == false) currentTilemap.SetTile(optimalPath[i].neighbours[2,1].gridPosV3Int,currentTile.tile);
                     //if no tile to right, add tile to left
-                    else if (path[i].neighbours[2, 1].isTile == false)
-                        currentTilemap.SetTile(path[i].neighbours[0, 1].gridPosV3Int, currentTile.tile);
+                    else if (optimalPath[i].neighbours[2, 1].isTile == false)
+                        currentTilemap.SetTile(optimalPath[i].neighbours[0, 1].gridPosV3Int, currentTile.tile);
+                }
+                
+                //if next step is ABOVE and previous step is LEFT or RIGHT
+                if(optimalPath[i+1] == optimalPath[i].neighbours[1,2] && (optimalPath[i-1] == optimalPath[i].neighbours[0,1] || optimalPath[i-1] == optimalPath[i].neighbours[2,1]))
+                {
+                    //if no tile below, set tile below
+                    if(optimalPath[i].neighbours[1,0].isTile == false) currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                }
+                    
+            }
+        }
+
+        if (secondaryPath != null && optimalPath != null)
+        {
+            for (int i = 1; i < secondaryPath.Count-1; i++)
+            {
+                //if next step of path is to my RIGHT, and previous is NOT BELOW current, put tile below current
+                if (secondaryPath[i + 1] == secondaryPath[i].neighbours[2, 1] && secondaryPath[i-1] != secondaryPath[i].neighbours[1,0])
+                {
+                    if(!optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                }
+                
+                //if next step of path is to my LEFT, and previous is NOT BELOW current, put tile below current
+                if (secondaryPath[i + 1] == secondaryPath[i].neighbours[0, 1] && secondaryPath[i-1] != secondaryPath[i].neighbours[1,0])
+                {
+                    if(!optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                }
+
+                //if next step of path is ABOVE && previous step is BELOW
+                if (secondaryPath[i + 1] == secondaryPath[i].neighbours[1, 2] && secondaryPath[i-1] == secondaryPath[i].neighbours[1,0])
+                {
+                    //if no tile to right, add tile to left (as long as it's not in optimal path)
+                    if (secondaryPath[i].neighbours[2, 1].isTile == false)
+                    {
+                        if(!optimalPath.Contains(secondaryPath[i].neighbours[2,1])) currentTilemap.SetTile(secondaryPath[i].neighbours[2,1].gridPosV3Int,currentTile.tile);
+                    }
+                    //if no tile to left, add tile to right (as long as it's not in optimal path)
+                    else if (secondaryPath[i].neighbours[0, 1].isTile == false)
+                    {
+                        if(!optimalPath.Contains(secondaryPath[i].neighbours[0,1])) currentTilemap.SetTile(secondaryPath[i].neighbours[0, 1].gridPosV3Int, currentTile.tile);
+                    }
+                }
+                
+                //if next step is ABOVE and previous step is LEFT or RIGHT
+                if(secondaryPath[i+1] == secondaryPath[i].neighbours[1,2] && (secondaryPath[i-1] == secondaryPath[i].neighbours[0,1] || secondaryPath[i-1] == secondaryPath[i].neighbours[2,1]))
+                {
+                    //if no tile below, set tile below
+                    if(secondaryPath[i].neighbours[1,0].isTile == false && !optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
                 }
             }
         }
@@ -178,6 +234,8 @@ public class LevelGenerator : MonoBehaviour
     }
 
     public List<Node> path;
+    public List<Node> optimalPath;
+    public List<Node> secondaryPath;
     private void OnDrawGizmos()
     {
         // foreach (Node blockedNode in blockedNodes)
@@ -211,7 +269,7 @@ public class LevelGenerator : MonoBehaviour
         // }
         
 
-        if (nodeSelected)
+        /*if (nodeSelected)
         {
             //top left
             Gizmos.color = Color.blue;
@@ -245,8 +303,9 @@ public class LevelGenerator : MonoBehaviour
             Gizmos.color = Color.black;
             Gizmos.DrawCube(rightNeighbour.gridPositionGizmosOnly,Vector3.one);
         }
+        */
 
-        if (path != null)
+        /*if (path != null)
         {
             foreach (Node node in path)
             {
@@ -254,6 +313,24 @@ public class LevelGenerator : MonoBehaviour
                 Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
             }
         }
+
+        if (optimalPath != null)
+        {
+            foreach (Node node in optimalPath)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
+            }
+        }
+
+        if (secondaryPath != null)
+        {
+            foreach (Node node in secondaryPath)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
+            }
+        }*/
         
 
 
@@ -395,6 +472,7 @@ public class LevelGenerator : MonoBehaviour
         //could change -levelWidth/2 to be:
         //Vector2 worldBottomLeft = transform.position - Vector2.right * levelWidth - Vector2.up * levelHeight
         //then set X/Y to worldBottomLeft.x/.y respectively
+        gridNodeReferences = null;
         gridNodeReferences = new Node[levelHeight+1, levelWidth+1];
         for (int x = (-levelWidth / 2); x < (levelWidth / 2) + 1; x++)
         {
@@ -806,7 +884,7 @@ public class LevelGenerator : MonoBehaviour
     private IEnumerator MapFinished()
     {
         print("map finished");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         pathfinding.FindDefaultPath();
     }
 
@@ -893,6 +971,8 @@ public class LevelGenerator : MonoBehaviour
         currentTilemap.ClearAllTiles();
         blockedNodes.Clear();
         fullNeighbours.Clear();
+        optimalPath = null;
+        secondaryPath = null;
         foreach (Transform child in grid.transform)
         {
             child.GetComponent<Tilemap>().ClearAllTiles();
