@@ -7,6 +7,7 @@ public class Node : iHeapItem<Node>
     public bool isTile;
     public bool isReachable;
     public bool fullNeighbours;
+    public bool enemySpawner;
     public bool borderNode = false;
     public Node parent;
     public Node[,] neighbours = new Node[3, 3];

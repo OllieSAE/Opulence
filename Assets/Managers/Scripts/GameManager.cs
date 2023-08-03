@@ -196,22 +196,27 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         if( player != null ) player.SetActive(true);
         mainCamera.GetComponent<StudioListener>().attenuationObject = player;
+        if(LevelGenerator.Instance != null) LevelGenerator.Instance.SpawnEnemies();
         objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
         zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
         firstFloor = GameObject.FindGameObjectWithTag("First Floor");
         secondFloor = GameObject.FindGameObjectWithTag("Second Floor");
         if(objectPickUpTest != null) objectPickUpTest.ObjectPickUp += ObjectPickedUp;
-        if(player != null) playerRespawnPos = player.transform.position;
+        if (player != null)
+        {
+            player.GetComponent<Combat>().enabled = true;
+            playerRespawnPos = player.transform.position;
+        }
         if (combatTutorialTestEnable)
         {
             startCombatUI.SetActive(true);
-            player.GetComponent<Combat>().enabled = true;
             CombatTestManager.Instance.combatUI = combatUI;
             CombatTestManager.Instance.finalCombatUI = tutorialEndUI;
         }
-        else if (player != null) player.GetComponent<Combat>().enabled = false;
+        //else if (player != null) player.GetComponent<Combat>().enabled = false;
         onLevelLoadedEvent?.Invoke();
         enableEnemyPatrolEvent?.Invoke();
+        
     }
 
     private void Update()

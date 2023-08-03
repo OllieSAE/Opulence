@@ -19,6 +19,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private CustomTile currentTile;
     [SerializeField] private List<CustomTile> customTiles;
     [SerializeField] private Grid grid;
+    private EnemySpawner enemySpawner;
     public GameObject player;
     private Pathfinding pathfinding;
     private Node latestOptimalTraversed;
@@ -94,7 +95,7 @@ public class LevelGenerator : MonoBehaviour
         _instance = this;
         tileArrayVector3Ints = new Vector3Int[levelHeight, levelWidth];
         tile2DArray = new CustomTile[levelHeight, levelWidth];
-        
+        enemySpawner = FindObjectOfType<EnemySpawner>();
         blockedNodes = new List<Node>();
         scale = Random.Range(0.15f, 0.25f);
         pathfinding = GetComponent<Pathfinding>();
@@ -201,20 +202,19 @@ public class LevelGenerator : MonoBehaviour
         enemyTile = customTiles.Find(t => t.tileType == CustomTile.TileType.enemy);
         tilemapList.Add(currentTilemap);
         pathfinding.restartLevelGenEvent += ClearTiles;
-        pathfinding.levelGenSuccessEvent += LevelGenCompleteToGameManager;
+        pathfinding.levelGenSuccessEvent += PathfindingComplete;
         GenerateTiles();
     }
 
     private void OnDisable()
     {
         pathfinding.restartLevelGenEvent -= ClearTiles;
-        pathfinding.levelGenSuccessEvent -= LevelGenCompleteToGameManager;
+        pathfinding.levelGenSuccessEvent -= PathfindingComplete;
     }
 
-    private void LevelGenCompleteToGameManager()
+    private void PathfindingComplete()
     {
         BlockInPath();
-        //GameManager.Instance.LevelGenComplete();
     }
 
     private void BlockInPath()
@@ -312,8 +312,8 @@ public class LevelGenerator : MonoBehaviour
                 //if left & right neighbour aren't null
                 if (node.neighbours[0, 1] != null && node.neighbours[2, 1] != null)
                 {
-                    //if left & right neighbour are tiles
-                    if (node.neighbours[0, 1].isTile && node.neighbours[2, 1].isTile)
+                    //if left & right neighbour are tiles, and LEFT is not an enemy tile
+                    if (node.neighbours[0, 1].isTile && !node.neighbours[0,1].enemySpawner && node.neighbours[2, 1].isTile)
                     {
                         //if northwest, north and northeast neighbour aren't null
                         if (node.neighbours[0, 2] != null && node.neighbours[1, 2] != null  && node.neighbours[2, 2] != null )
@@ -324,6 +324,8 @@ public class LevelGenerator : MonoBehaviour
                             {
                                 //set to enemy tile
                                 currentTilemap.SetTile(node.gridPosV3Int,enemyTile.tile);
+                                node.enemySpawner = true;
+                                enemySpawner.enemyNodes.Add(node);
                             }
                         }
                     }
@@ -352,6 +354,12 @@ public class LevelGenerator : MonoBehaviour
                 go.GetComponent<RescueLocation>().gridPositionV3Int = node.gridPosV3Int;
             }
         }
+        GameManager.Instance.LevelGenComplete();
+    }
+
+    public void SpawnEnemies()
+    {
+        enemySpawner.SpawnEnemies();
     }
 
     public void UpdateLatestPointOfOptimalPath(Vector3Int pos)

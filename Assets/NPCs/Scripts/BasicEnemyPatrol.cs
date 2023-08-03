@@ -20,7 +20,7 @@ public class BasicEnemyPatrol : MonoBehaviour
     private Combat combat;
     private bool facingLeft;
     private bool flipCR;
-    private bool patrolling = false;
+    private bool patrolling = true;
     private bool isAttacking = false;
 
     [Header("Move/Combat Stuff")]
