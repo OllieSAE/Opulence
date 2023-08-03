@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Unity.Mathematics;
@@ -19,7 +21,10 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Grid grid;
     public GameObject player;
     private Pathfinding pathfinding;
+    private Node latestOptimalTraversed;
+    public GameObject playerRescuePrefab;
     public bool gizmosOn;
+    private bool floodingStarted = false;
     [Header("Tile Types")] private CustomTile enemyTile, spikeTile, ruleTile, collectibleTile;
 
     private Vector3Int[,] tileArrayVector3Ints;
@@ -58,18 +63,77 @@ public class LevelGenerator : MonoBehaviour
     private bool borderGenerated = false;
     private bool borderNodesGenerated = false;
     private bool spawnedNonProceduralAreas = false;
-    
+
+    public static LevelGenerator _instance;
+
+    public static LevelGenerator Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                print("Level Manager is null");
+            }
+
+            return _instance;
+        }
+    }
+
     public delegate void ClearTilesEvent();
     public event ClearTilesEvent clearTilesEvent;
 
+    //public Stopwatch stopwatch = new Stopwatch();
+    //private List<long> elapsedTimesList = new List<long>();
+    //public long elapsedTime;
+    //public double averageElapsedTime;
+    //public long longestElapsedTime;
+    //public int attemptedLevels = 0;
+    //public int successfulLevels = 0;
     private void Awake()
     {
+        _instance = this;
         tileArrayVector3Ints = new Vector3Int[levelHeight, levelWidth];
         tile2DArray = new CustomTile[levelHeight, levelWidth];
         
         blockedNodes = new List<Node>();
         scale = Random.Range(0.15f, 0.25f);
         pathfinding = GetComponent<Pathfinding>();
+    }
+
+    public List<Node> reachableTiles = new List<Node>();
+    public void FloodFill(int x, int y)
+    {
+        if (floodingStarted == false) StartCoroutine(FillNonReachable());
+        floodingStarted = true;
+        if (x > -levelWidth/2 && x < levelWidth/2 && y > -levelHeight/2 && y < levelHeight/2)
+        {
+            if (!gridNodeReferences[x + levelWidth / 2, y + levelHeight / 2].isTile)
+            {
+                if (!reachableTiles.Contains(gridNodeReferences[x + levelWidth / 2, y + levelHeight / 2]))
+                {
+                    reachableTiles.Add(gridNodeReferences[x + levelWidth / 2, y + levelHeight / 2]);
+                    FloodFill(x + 1, y);
+                    FloodFill(x - 1, y);
+                    FloodFill(x, y + 1);
+                    FloodFill(x, y - 1);
+                }
+            }
+        }
+    }
+
+    public IEnumerator FillNonReachable()
+    {
+        yield return new WaitForSeconds(1f);
+        foreach (Node node in gridNodeReferences)
+        {
+            if (!reachableTiles.Contains(node))
+            {
+                currentTilemap.SetTile(node.gridPosV3Int,currentTile.tile);
+            }
+        }
+        ScanAllTiles();
+        yield return new WaitForSeconds(0.1f);
+        SetEnemyTiles();
     }
 
     public int MaxSize
@@ -81,14 +145,15 @@ public class LevelGenerator : MonoBehaviour
     }
 
     private void Update()
-    { 
-        
+    {
+        //elapsedTime = stopwatch.ElapsedMilliseconds;
+        //averageElapsedTime = elapsedTimesList.Count > 0 ? elapsedTimesList.Average() : 0.0;
         //if(optimalPath!= null) print(optimalPath.Count);
         scale = Random.Range(0.15f, 0.25f);
         ScanAllTiles();
         //or change the 10000 
         
-        Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
+        /*Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
         //ClearTiles();
         //GenerateTiles();
@@ -118,7 +183,7 @@ public class LevelGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N))
         {
             //FillIndividualEmpty();
-        }
+        }*/
     }
 
     public void GetTileInfo(Vector3Int location)
@@ -230,7 +295,94 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
-        
+
+        ScanAllTiles();
+        //if(optimalPath!=null) StartCoroutine(FloodFill(optimalPath[1].gridPosV3Int.x, optimalPath[1].gridPosV3Int.y));
+        if(optimalPath!=null) FloodFill(optimalPath[1].gridPosV3Int.x, optimalPath[1].gridPosV3Int.y);
+    }
+
+    
+    public void SetEnemyTiles()
+    {
+        foreach (Node node in gridNodeReferences)
+        {
+            //if node is a tile
+            if (node.isTile)
+            {
+                //if left & right neighbour aren't null
+                if (node.neighbours[0, 1] != null && node.neighbours[2, 1] != null)
+                {
+                    //if left & right neighbour are tiles
+                    if (node.neighbours[0, 1].isTile && node.neighbours[2, 1].isTile)
+                    {
+                        //if northwest, north and northeast neighbour aren't null
+                        if (node.neighbours[0, 2] != null && node.neighbours[1, 2] != null  && node.neighbours[2, 2] != null )
+                        {
+                            //if northwest, north and northeast neighbour aren't tiles
+                            if (!node.neighbours[0, 2].isTile && !node.neighbours[1, 2].isTile &&
+                                !node.neighbours[2, 2].isTile)
+                            {
+                                //set to enemy tile
+                                currentTilemap.SetTile(node.gridPosV3Int,enemyTile.tile);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // long time = elapsedTime;
+        // elapsedTimesList.Add(time);
+        // if (longestElapsedTime < elapsedTime)
+        // {
+        //     longestElapsedTime = elapsedTime;
+        // }
+        //StartCoroutine(RestartForTesting());
+        SpawnNonProceduralAreas();
+        SetPlayerRescues();
+    }
+
+    public void SetPlayerRescues()
+    {
+        if (optimalPath != null)
+        {
+            foreach (Node node in optimalPath)
+            {
+                GameObject go = Instantiate(playerRescuePrefab,node.gridPositionGizmosOnly,quaternion.identity);
+                go.GetComponent<RescueLocation>().gridPositionV3Int = node.gridPosV3Int;
+            }
+        }
+    }
+
+    public void UpdateLatestPointOfOptimalPath(Vector3Int pos)
+    {
+        if (optimalPath != null)
+        {
+            foreach (Node node in optimalPath)
+            {
+                if (node.gridPosV3Int == pos)
+                {
+                    latestOptimalTraversed = node;
+                }
+            }
+        }
+    }
+
+    [Button("Rescue Player Test")]
+    public void RescuePlayer()
+    {
+        if (latestOptimalTraversed != null)
+        {
+            player.transform.position = latestOptimalTraversed.gridPositionGizmosOnly;
+        }
+    }
+
+    public IEnumerator RestartForTesting()
+    {
+        //stopwatch.Reset();
+        //successfulLevels++;
+        yield return new WaitForSeconds(1f);
+        ClearTiles();
     }
 
     public List<Node> path;
@@ -238,6 +390,20 @@ public class LevelGenerator : MonoBehaviour
     public List<Node> secondaryPath;
     private void OnDrawGizmos()
     {
+        // if (reachableTiles != null)
+        // {
+        //     foreach (Node node in reachableTiles)
+        //     {
+        //         Gizmos.color = Color.cyan;
+        //         Gizmos.DrawCube(node.gridPositionGizmosOnly, Vector3.one);
+        //     }
+        // }
+
+        if (latestOptimalTraversed != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawCube(latestOptimalTraversed.gridPositionGizmosOnly, Vector3.one);
+        }
         // foreach (Node blockedNode in blockedNodes)
         // {
         //     Gizmos.color = Color.red;
@@ -388,6 +554,8 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateTiles()
     {
+        //attemptedLevels++;
+        //if(!stopwatch.IsRunning) stopwatch.Start();
         for (int x = -levelWidth/2; x < levelWidth/2; x++)
         {
             for (int y = -levelHeight/2; y < levelHeight/2; y++)
@@ -422,31 +590,19 @@ public class LevelGenerator : MonoBehaviour
                         spawnedTiles.Add(currentTile);
                         
                         
-                        //Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
-                        //Gizmos.color = tempColor;
-                        //Gizmos.DrawCube(pos,Vector3.one);
-
-                        if (perlinNoise < perlinThresholdMin + perlinThresholdMax)
+                        /*if (perlinNoise < perlinThresholdMin + perlinThresholdMax)
                         {
                             if (Random.Range(0, 1f) > 0.8f)
                             {
                                 currentTilemap.SetTile(pos,spikeTile.tile);
-
-                                //Gizmos.color = Color.red;
-                                //Gizmos.DrawCube(pos,Vector3.one);
                             }
                             if (enemySpawnCounter > 3)
                             {
                                 enemySpawnCounter = 0;
                                 
                                 currentTilemap.SetTile(pos,enemyTile.tile);
-                                
-                                //enemyTile.CheckNeighbours();
-                                
-                                //Gizmos.color = Color.blue;
-                                //Gizmos.DrawCube(pos,Vector3.one);
                             }
-                        }
+                        }*/
 
                         
                     }
@@ -460,11 +616,11 @@ public class LevelGenerator : MonoBehaviour
             GenerateBorder();
         }
 
-        if (!spawnedNonProceduralAreas)
-        {
-            SpawnNonProceduralAreas();
-        }
-        else GenerateGridNodes();
+        // if (!spawnedNonProceduralAreas)
+        // {
+        //     SpawnNonProceduralAreas();
+        // }
+        GenerateGridNodes();
     }
 
     private void GenerateGridNodes()
@@ -883,8 +1039,8 @@ public class LevelGenerator : MonoBehaviour
 
     private IEnumerator MapFinished()
     {
-        print("map finished");
-        yield return new WaitForSeconds(1f);
+        
+        yield return new WaitForSeconds(0.1f);
         pathfinding.FindDefaultPath();
     }
 
@@ -915,7 +1071,8 @@ public class LevelGenerator : MonoBehaviour
         }
 
         spawnedNonProceduralAreas = true;
-        GenerateGridNodes();
+        ScanAllTiles();
+        //GenerateGridNodes();
     }
     
     private void GenerateBorder()
@@ -971,8 +1128,10 @@ public class LevelGenerator : MonoBehaviour
         currentTilemap.ClearAllTiles();
         blockedNodes.Clear();
         fullNeighbours.Clear();
+        reachableTiles.Clear();
         optimalPath = null;
         secondaryPath = null;
+        floodingStarted = false;
         foreach (Transform child in grid.transform)
         {
             child.GetComponent<Tilemap>().ClearAllTiles();

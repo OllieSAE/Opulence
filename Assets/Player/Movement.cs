@@ -76,6 +76,7 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Jump.canceled += ArrestJump;
         playerInputActions.Player.Dash.performed += Dash;
         playerInputActions.Player.Crouch.performed += Crouch;
+        playerInputActions.Player.RescuePlayer.performed += RescuePlayer;
 
         controlsSet = false;
         dashing = false;
@@ -124,6 +125,7 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Jump.canceled -= ArrestJump;
         playerInputActions.Player.Dash.performed -= Dash;
         playerInputActions.Player.Crouch.performed -= Crouch;
+        playerInputActions.Player.RescuePlayer.performed -= RescuePlayer;
         
         GameManager.Instance.playerRespawnEvent -= Respawn;
         GameManager.Instance.tutorialDialogueFinishedEvent -= TutorialDialogueFinished;
@@ -339,6 +341,15 @@ public class Movement : MonoBehaviour
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
                 Invoke("StopWallJump", wallJumpDuration);
             }
+        }
+    }
+
+    public void RescuePlayer(InputAction.CallbackContext context)
+    {
+        if (context.performed && LevelGenerator.Instance != null && !isDead)
+        {
+            animator.SetTrigger("Rescue");
+            print("rescue attempted");
         }
     }
 

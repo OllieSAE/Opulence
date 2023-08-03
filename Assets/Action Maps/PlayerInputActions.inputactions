@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RescuePlayer",
+                    "type": "Button",
+                    "id": "64c712ad-ebd2-4b23-aef8-ace909240a82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -267,6 +276,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "d66d5e91-f63e-4b6e-9b4b-f288911ac548",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RescuePlayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

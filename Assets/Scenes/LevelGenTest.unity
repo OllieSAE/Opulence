@@ -198,6 +198,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7c102c667e2e5948b343bbd1125d6cb, type: 2}
   grid: {fileID: 1065906565}
   player: {fileID: 680542013}
+  playerRescuePrefab: {fileID: 5576972779710407850, guid: d940029fa10b6834590405dd0ad59738, type: 3}
   gizmosOn: 0
   levelHeight: 100
   levelWidth: 100
@@ -446,6 +447,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1670231015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2039286895, guid: fd81f144cc4982e40861df0d929b0e77, type: 3}
+  m_PrefabInstance: {fileID: 1464399743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1670231024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670231015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753edd0b78c24cd42af0f5c277fdf5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1727969489
 GameObject:
   m_ObjectHideFlags: 0

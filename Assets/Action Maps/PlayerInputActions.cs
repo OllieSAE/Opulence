@@ -64,7 +64,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Melee Attack"",
+                    ""name"": ""MeleeAttack"",
                     ""type"": ""Button"",
                     ""id"": ""25827cf3-facb-4d79-b654-860dc4df7f26"",
                     ""expectedControlType"": ""Button"",
@@ -73,7 +73,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Ranged Attack"",
+                    ""name"": ""RangedAttack"",
                     ""type"": ""Button"",
                     ""id"": ""83d5da63-46e4-4e15-a211-dcdcb72fb679"",
                     ""expectedControlType"": ""Button"",
@@ -85,6 +85,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Attack 3"",
                     ""type"": ""Button"",
                     ""id"": ""3898e4d1-6b0b-4bc0-9996-b717fb10246d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RescuePlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""64c712ad-ebd2-4b23-aef8-ace909240a82"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -154,7 +163,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Melee Attack"",
+                    ""action"": ""MeleeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -165,7 +174,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Ranged Attack"",
+                    ""action"": ""RangedAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -289,6 +298,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d66d5e91-f63e-4b6e-9b4b-f288911ac548"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RescuePlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -301,9 +321,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_MeleeAttack = m_Player.FindAction("Melee Attack", throwIfNotFound: true);
-        m_Player_RangedAttack = m_Player.FindAction("Ranged Attack", throwIfNotFound: true);
+        m_Player_MeleeAttack = m_Player.FindAction("MeleeAttack", throwIfNotFound: true);
+        m_Player_RangedAttack = m_Player.FindAction("RangedAttack", throwIfNotFound: true);
         m_Player_Attack3 = m_Player.FindAction("Attack 3", throwIfNotFound: true);
+        m_Player_RescuePlayer = m_Player.FindAction("RescuePlayer", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +393,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MeleeAttack;
     private readonly InputAction m_Player_RangedAttack;
     private readonly InputAction m_Player_Attack3;
+    private readonly InputAction m_Player_RescuePlayer;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -383,6 +405,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @MeleeAttack => m_Wrapper.m_Player_MeleeAttack;
         public InputAction @RangedAttack => m_Wrapper.m_Player_RangedAttack;
         public InputAction @Attack3 => m_Wrapper.m_Player_Attack3;
+        public InputAction @RescuePlayer => m_Wrapper.m_Player_RescuePlayer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -413,6 +436,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack3.started += instance.OnAttack3;
             @Attack3.performed += instance.OnAttack3;
             @Attack3.canceled += instance.OnAttack3;
+            @RescuePlayer.started += instance.OnRescuePlayer;
+            @RescuePlayer.performed += instance.OnRescuePlayer;
+            @RescuePlayer.canceled += instance.OnRescuePlayer;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -438,6 +464,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack3.started -= instance.OnAttack3;
             @Attack3.performed -= instance.OnAttack3;
             @Attack3.canceled -= instance.OnAttack3;
+            @RescuePlayer.started -= instance.OnRescuePlayer;
+            @RescuePlayer.performed -= instance.OnRescuePlayer;
+            @RescuePlayer.canceled -= instance.OnRescuePlayer;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -464,5 +493,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMeleeAttack(InputAction.CallbackContext context);
         void OnRangedAttack(InputAction.CallbackContext context);
         void OnAttack3(InputAction.CallbackContext context);
+        void OnRescuePlayer(InputAction.CallbackContext context);
     }
 }

@@ -130,7 +130,7 @@ public class Pathfinding : MonoBehaviour
     
     private void OnDrawGizmos()
     {
-        if (closedSet != null)
+        /*if (closedSet != null)
         {
             foreach (Node node in closedSet)
             {
@@ -170,7 +170,7 @@ public class Pathfinding : MonoBehaviour
         {
             Gizmos.color = Color.magenta;
             Gizmos.DrawCube(lowestHCost.gridPositionGizmosOnly,Vector3.one);
-        }
+        }*/
     }
 
     private void ClearGizmosLists()
@@ -200,13 +200,11 @@ public class Pathfinding : MonoBehaviour
         levelGenerator.path = path;
         if (levelGenerator.optimalPath == null)
         {
-            print("optimal path set");
             levelGenerator.optimalPath = new List<Node>(path);
             StartCoroutine(WaitForSecondPath());
         }
         else
         {
-            print("secondary path set");
             levelGenerator.secondaryPath = new List<Node>(path);
             levelGenSuccessEvent?.Invoke();
         }
@@ -220,7 +218,7 @@ public class Pathfinding : MonoBehaviour
 
     private IEnumerator WaitForSecondPath()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         FindSecondaryPath();
     }
     
