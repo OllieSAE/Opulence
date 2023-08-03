@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RescueFailsafe : MonoBehaviour
 {
-    public void RescuePlayer()
+    public void FailsafeRescuePlayer()
     {
         LevelGenerator.Instance.RescuePlayer();
     }
