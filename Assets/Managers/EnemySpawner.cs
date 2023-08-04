@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject meleeEnemy, rangedEnemy, chargerEnemy;
+    public List<GameObject> enemyList = new List<GameObject>();
     public List<Node> enemyNodes = new List<Node>();
     
     public void SpawnEnemies()
@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
             List<Node> nodesToCheck = new List<Node>(enemyNodes);
             foreach (Node node in nodesToCheck)
             {
-                Instantiate(meleeEnemy, node.gridPositionGizmosOnly + Vector3.up, Quaternion.identity);
+                Instantiate(enemyList[Random.Range(0,enemyList.Count)], node.gridPositionGizmosOnly + Vector3.up, Quaternion.identity);
                 enemyNodes.Remove(node);
             }
         }

@@ -203,7 +203,7 @@ MonoBehaviour:
   wallAheadCheck: {fileID: 1173620278182232431}
   groundCheckRadius: 0.1
   wallCheckRadius: 0.1
-  defaultSpeed: 1
+  defaultSpeed: 1.25
   aggroSpeed: 1.5
   currentSpeed: 0
   patrolOnly: 0
@@ -214,6 +214,7 @@ MonoBehaviour:
   attackRange: 0.7
   isPlayerInSight: 0
   isPlayerInRange: 0
+  isTransitioning: 0
   enemyType: 0
 --- !u!50 &1834814332
 Rigidbody2D:
@@ -254,6 +255,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
+  immune: 0
 --- !u!114 &3916759110233673388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +273,12 @@ MonoBehaviour:
   meleeAttackPoint: {fileID: 992957323}
   meleeAttackRange: 0.24
   meleeHitDelay: 0.25
+  chargeTransitionDelay: 0
+  meleeComboTimerCutoff: 0
+  meleeCombo: []
+  internalComboTimeDelay: 0
+  externalComboTimeDelay: 0
+  whatDoICallThis: 0
   rangedAttackPower: 0
   rangedMaxAmmo: 0
   rechargeAmmoTime: 0
@@ -280,6 +288,10 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileSpeed: {x: 0, y: 0}
   chargerCollider: {fileID: 0}
+  falconMask: 0
+  spiderMask: 0
+  falconDashCD: 0
+  falconDashCollider: {fileID: 0}
 --- !u!114 &7668396663701203980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 6fd7e46e279ee9443b0322d4b6e55930, type: 2}
+  vfxToTrigger: {fileID: 0}
   duration: 0.1
 --- !u!1 &8328396619819119996
 GameObject:

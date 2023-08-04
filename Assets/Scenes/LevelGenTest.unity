@@ -460,9 +460,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333ae35da5f7fb747a6db55618fa6471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeEnemy: {fileID: 4331296779273578422, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
-  rangedEnemy: {fileID: 1158638353165944224, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
-  chargerEnemy: {fileID: 4123682042663585797, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
+  enemyList:
+  - {fileID: 4331296779273578422, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
+  - {fileID: 1158638353165944224, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
+  - {fileID: 4123682042663585797, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
 --- !u!1 &1661631581
 GameObject:
   m_ObjectHideFlags: 0
