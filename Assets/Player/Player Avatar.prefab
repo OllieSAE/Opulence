@@ -2195,6 +2195,7 @@ MonoBehaviour:
   - Falcon Melee 2
   - Falcon Melee 3
   - Footsteps
+  - Falcon Dash
   particles:
   - {fileID: 869124781}
   - {fileID: 5871862761527830896}
@@ -2700,6 +2701,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3898e4d1-6b0b-4bc0-9996-b717fb10246d
     m_ActionName: Keyboard/Attack 3
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64c712ad-ebd2-4b23-aef8-ace909240a82
+    m_ActionName: Player/RescuePlayer[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
