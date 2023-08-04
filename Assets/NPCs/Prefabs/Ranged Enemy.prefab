@@ -262,6 +262,7 @@ MonoBehaviour:
   falconMask: 0
   spiderMask: 0
   falconDashCD: 0
+  falconDashCollider: {fileID: 0}
 --- !u!114 &7897379715669634826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfx:
   - {fileID: 2078737524223279045}
-  sfx: []
+  sfx:
+  - Enemy Impact
+  - Enemy Ranged Emote
+  - Enemy Ranged Attack
   particles: []
   flipTransform: {fileID: 1158638353165944239}
   enemyLayer:
@@ -300,6 +304,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  emissionColour: {r: 0, g: 0, b: 0, a: 0}
+  emissionIntenstiy: 0
+  waitTime: 0
 --- !u!1 &6024986424192824089
 GameObject:
   m_ObjectHideFlags: 0

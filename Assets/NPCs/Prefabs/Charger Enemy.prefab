@@ -293,7 +293,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfx:
   - {fileID: 6002030879374674672}
-  sfx: []
+  sfx:
+  - Enemy Impact
+  - Enemy Charge Emote
   particles: []
   flipTransform: {fileID: 4123682042663585802}
   enemyLayer:
