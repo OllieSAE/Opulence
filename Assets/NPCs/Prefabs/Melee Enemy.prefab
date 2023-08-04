@@ -279,14 +279,14 @@ MonoBehaviour:
   internalComboTimeDelay: 0
   externalComboTimeDelay: 0
   whatDoICallThis: 0
-  rangedAttackPower: 0
-  rangedMaxAmmo: 0
+  rangedAttackPower: 2
+  rangedMaxAmmo: 5
   rechargeAmmoTime: 0
-  launchPoint: {fileID: 0}
-  flightTime: 0
-  rangedHitDelay: 0
-  projectilePrefab: {fileID: 0}
-  projectileSpeed: {x: 0, y: 0}
+  launchPoint: {fileID: 1173620278182232431}
+  flightTime: 2
+  rangedHitDelay: 1
+  projectilePrefab: {fileID: 8016620348432294599, guid: 21414d7022023c144bf9765f5d86ae28, type: 3}
+  projectileSpeed: {x: 7, y: 0}
   chargerCollider: {fileID: 0}
   falconMask: 0
   spiderMask: 0

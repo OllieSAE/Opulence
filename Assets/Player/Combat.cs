@@ -12,6 +12,7 @@ public class Combat : MonoBehaviour
     private Animator animator;
     private DamageAOETest damageAoeTest;
     private Movement movement;
+    private BasicEnemyPatrol basicEnemyPatrol;
 
     [Header("General Combat")]
     private bool currentlyAttacking;
@@ -78,7 +79,15 @@ public class Combat : MonoBehaviour
             ammoBar.SetMaxAmmo(rangedMaxAmmo);
             ammoBar.SetAmmo(rangedMaxAmmo);
         }
-        //else basicEnemyPatrol = GetComponent<BasicEnemyPatrol>();
+        else basicEnemyPatrol = GetComponent<BasicEnemyPatrol>();
+
+        if (basicEnemyPatrol != null)
+        {
+            if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Melee)
+            {
+                rangedMaxAmmo = 5;
+            }
+        }
 
         if (chargerCollider != null) chargerCollider.SetActive(false);
         damageAoeTest = GetComponent<DamageAOETest>();
@@ -125,7 +134,8 @@ public class Combat : MonoBehaviour
     {
         if (value == BasicEnemyPatrol.EnemyType.Melee)
         {
-            EnemyMeleeAttack();
+            EnemyRangedAttack();
+            //EnemyMeleeAttack();
         }
 
         if (value == BasicEnemyPatrol.EnemyType.Ranged)

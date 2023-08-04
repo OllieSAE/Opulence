@@ -34,7 +34,6 @@ public class LevelGenerator : MonoBehaviour
     private List<Node> blockedNodes;
     private List<Node> fullNeighbours = new List<Node>();
     private List<Node> outliers = new List<Node>();
-    private List<CustomTile> spawnedTiles = new List<CustomTile>();
     [Header("Use EVEN numbers!")]
     [SerializeField] public int levelHeight;
     [SerializeField] public int levelWidth;
@@ -46,6 +45,7 @@ public class LevelGenerator : MonoBehaviour
     private float previousPerlinValue;
     private int enemySpawnCounter;
 
+    public List<Node> reachableTiles = new List<Node>();
     [Header("Non Procedural Areas")] public List<NonProceduralArea> nonProceduralAreas = new List<NonProceduralArea>();
     [SerializeField] private Camera cam;
     
@@ -64,6 +64,7 @@ public class LevelGenerator : MonoBehaviour
     private bool borderGenerated = false;
     private bool borderNodesGenerated = false;
     private bool spawnedNonProceduralAreas = false;
+    private bool levelFinishedLoading = false;
 
     public static LevelGenerator _instance;
 
@@ -82,14 +83,7 @@ public class LevelGenerator : MonoBehaviour
 
     public delegate void ClearTilesEvent();
     public event ClearTilesEvent clearTilesEvent;
-
-    //public Stopwatch stopwatch = new Stopwatch();
-    //private List<long> elapsedTimesList = new List<long>();
-    //public long elapsedTime;
-    //public double averageElapsedTime;
-    //public long longestElapsedTime;
-    //public int attemptedLevels = 0;
-    //public int successfulLevels = 0;
+    
     private void Awake()
     {
         _instance = this;
@@ -101,7 +95,341 @@ public class LevelGenerator : MonoBehaviour
         pathfinding = GetComponent<Pathfinding>();
     }
 
-    public List<Node> reachableTiles = new List<Node>();
+    private void Start()
+    {
+        if (cam == null) cam = FindObjectOfType<Camera>();
+        spikeTile = customTiles.Find(t => t.tileType == CustomTile.TileType.spike);
+        enemyTile = customTiles.Find(t => t.tileType == CustomTile.TileType.enemy);
+        tilemapList.Add(currentTilemap);
+        pathfinding.restartLevelGenEvent += ClearTiles;
+        pathfinding.levelGenSuccessEvent += PathfindingComplete;
+        GenerateTiles();
+    }
+    
+    private void Update()
+    {
+        //move this once respawning causes level to change
+        scale = Random.Range(0.15f, 0.25f);
+        
+        //ScanAllTiles is called several times during the actual generation of level
+        //but also placed in update to further ensure that tiles are properly regularly scanned
+        //stops once the level is finished (when Enemies get spawned)
+        if (!levelFinishedLoading)
+        {
+            ScanAllTiles();
+        }
+    }
+    
+    private void GenerateTiles()
+    {
+        //deliberately expanding out from 0,0,0, so we're not "hard coding" things to 0. Makes for slightly messier level gen but easier modularity in future designs.
+        for (int x = -levelWidth/2; x < levelWidth/2; x++)
+        {
+            for (int y = -levelHeight/2; y < levelHeight/2; y++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+
+                float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
+                
+                //to encourage longer sets of straight lines, the noise is homogenised if it's close to the previous value
+                float perlinDiff = perlinNoise - previousPerlinValue;
+                if (perlinDiff < 0.15f && perlinDiff > -0.15f)
+                {
+                    perlinNoise = previousPerlinValue;
+                    
+                    if (perlinNoise > perlinThresholdMax)
+                    {
+                        currentTilemap.SetTile(pos,currentTile.tile);
+                    }
+                }
+                previousPerlinValue = perlinNoise;
+            }
+        }
+        if (!borderGenerated)
+        {
+            //forces a continuous border surrounding the level. Only allows for square levels at the moment.
+            GenerateBorder();
+        }
+        
+        GenerateGridNodes();
+    }
+    
+    private void ScanAllTiles()
+    {
+        foreach (Node node in gridNodeReferences)
+        {
+            if (currentTilemap.GetTile(node.gridPosV3Int))
+            {
+                node.isTile = true;
+                node.isReachable = false;
+            }
+            else node.isTile = false;
+        }
+    }
+    
+    private void ScanTile(Node node)
+    {
+        foreach (Tilemap tilemap in tilemapList)
+        {
+            if (tilemap.GetTile(node.gridPosV3Int))
+            {
+                node.isTile = true;
+                node.isReachable = false;
+            }
+            else 
+            //this part looks extremely chaotic, (and it is) but in short, it's setting a node to reachable, if certain parameters are met in regards to it's neighbours
+            //however, due to the neighbours only existing in a 3x3 grid around the node, it gets more and more convoluted as it checks it's neighbours' neighbours, etc
+            //this does work, and allows the pathfinder to treat the nodes in a similar to way to how a player would jump/climb through the level.
+            //unfortunately, this is NOT perfect. The failsafe exists further on, where extra tiles are thrown adjacent to the optimal path, which forces the level to be completable.
+            //Despite not being perfect, it has allowed for a better platform-y feel to the levels, so it's a net positive overall!
+            {
+                node.isTile = false;
+                //[1,0] is directly beneath
+                if (node.neighbours[1, 0] != null)
+                {
+                    if(node.neighbours[1, 0].isTile) node.isReachable = true;
+                    else if (node.neighbours[1, 0].neighbours[1, 0] != null)
+                    {
+                        if(node.neighbours[1, 0].neighbours[1, 0].isTile) node.isReachable = true;
+                        else if (node.neighbours[1, 0].neighbours[1, 0].neighbours[1, 0] != null &&
+                                 node.neighbours[1, 0].neighbours[1, 0].neighbours[1, 0].isTile) node.isReachable = true;
+                    }
+                }
+
+                //if left or right are tiles, then node is traversable (ie, wall jump)
+                if (node.neighbours[0, 1] != null && node.neighbours[0, 1].isTile) node.isReachable = true;
+                if (node.neighbours[2, 1] != null && node.neighbours[2, 1].isTile) node.isReachable = true;
+
+                //one jump right, via diagonally up to the right then diagonally down to the right
+                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
+                {
+                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
+                    {
+                        if ((node.neighbours[2, 1].neighbours[2, 0].isTile &&
+                            node.neighbours[2, 1].neighbours[2, 0] != null)&& (!node.neighbours[2,1].neighbours[2,1].isTile && node.neighbours[2,1].neighbours[2,1] != null))
+                        {
+                            node.neighbours[2, 2].isReachable = true;
+                            node.neighbours[2, 1].neighbours[2, 1].isReachable = true;
+                        }
+                    }
+                }
+                
+                //two jump right, via diagonally up to the right, then right then diagonally down
+                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
+                {
+                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
+                    {
+                        if (node.neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 0] != null)
+                        {
+                            if (!node.neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].isTile && !node.neighbours[2, 1].neighbours[2, 0].isTile)
+                            {
+                                if ((node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0].isTile &&
+                                     node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null) &&
+                                    (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isTile &&
+                                     node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null))
+                                {
+                                    node.neighbours[2, 2].isReachable = true;
+                                    node.neighbours[2, 1].neighbours[2, 2].isReachable = true;
+                                    node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isReachable = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                //three jump right, via diagonally up to the right, then right twice, then diagonally down
+                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
+                {
+                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
+                    {
+                        if (node.neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 0] != null)
+                        {
+                            if (!node.neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].isTile && !node.neighbours[2, 1].neighbours[2, 0].isTile)
+                            {
+                                if (node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null)
+                                {
+                                    if (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile)
+                                    {
+                                        if ((node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 0].isTile &&
+                                             node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null) &&
+                                            (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isTile &&
+                                             node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null))
+                                        {
+                                            node.neighbours[2, 2].isReachable = true;
+                                            node.neighbours[2, 1].neighbours[2, 2].isReachable = true;
+                                            node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isReachable = true;
+                                            node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1]
+                                                .isReachable = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                //one jump left, via diagonally up to the left, then diagonally down to the left
+                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
+                {
+                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
+                    {
+                        if ((node.neighbours[0, 1].neighbours[0, 0].isTile &&
+                             node.neighbours[0, 1].neighbours[0, 0] != null)&& (!node.neighbours[0,1].neighbours[0,1].isTile && node.neighbours[0,1].neighbours[0,1] != null))
+                        {
+                            node.neighbours[0, 2].isReachable = true;
+                            node.neighbours[0, 1].neighbours[0, 1].isReachable = true;
+                        }
+                    }
+                }
+                
+                //two jump left, via diagonally up to the left, then left once, then diagonally down to the left
+                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
+                {
+                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
+                    {
+                        if (node.neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 0] != null)
+                        {
+                            if (!node.neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].isTile && !node.neighbours[0, 1].neighbours[0, 0].isTile)
+                            {
+                                if ((node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0].isTile &&
+                                     node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null) &&
+                                    (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isTile &&
+                                     node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null))
+                                {
+                                    node.neighbours[0, 2].isReachable = true;
+                                    node.neighbours[0, 1].neighbours[0, 2].isReachable = true;
+                                    node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isReachable = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                //three jump left, via diagonally up to the left, then left twice, then diagonally down to the left
+                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
+                {
+                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
+                    {
+                        if (node.neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 0] != null)
+                        {
+                            if (!node.neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].isTile && !node.neighbours[0, 1].neighbours[0, 0].isTile)
+                            {
+                                if (node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null)
+                                {
+                                    if (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile)
+                                    {
+                                        if ((node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 0].isTile &&
+                                             node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null) &&
+                                            (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isTile &&
+                                             node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null))
+                                        {
+                                            node.neighbours[0, 2].isReachable = true;
+                                            node.neighbours[0, 1].neighbours[0, 2].isReachable = true;
+                                            node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isReachable = true;
+                                            node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1]
+                                                .isReachable = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else node.isReachable = false;
+            }
+        }
+    }
+    
+    private void GenerateBorder()
+    {
+        //left and right borders
+        for (int y = -levelHeight / 2; y <= levelHeight / 2; y++)
+        {
+            Vector3Int posLeft = new Vector3Int((-levelWidth/2), y, 0);
+            currentTilemap.SetTile(posLeft,currentTile.tile);
+            Vector3Int posRight = new Vector3Int((levelWidth/2), y, 0);
+            currentTilemap.SetTile(posRight,currentTile.tile);
+        }
+        
+        //for top and bottom borders
+        for (int x = -levelWidth / 2; x <= levelWidth / 2; x++)
+        {
+            Vector3Int posBottom = new Vector3Int(x, (-levelHeight/2), 0);
+            currentTilemap.SetTile(posBottom,currentTile.tile);
+            Vector3Int posTop = new Vector3Int(x, (levelHeight/2), 0);
+            currentTilemap.SetTile(posTop,currentTile.tile);
+        }
+        borderGenerated = true;
+    }
+    
+    private void GenerateGridNodes()
+    {
+        gridNodeReferences = null; //null at the start of generation each time to prevent corruption on repeated level gen
+        gridNodeReferences = new Node[levelHeight+1, levelWidth+1];
+        for (int x = (-levelWidth / 2); x < (levelWidth / 2) + 1; x++)
+        {
+            for (int y = (-levelHeight / 2); y < (levelHeight / 2) + 1; y++)
+            {
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2] = new Node();
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].xPosInArray = x + levelWidth/2;
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].yPosInArray = y + levelHeight/2;
+                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].gridPosition = new Vector3(x, y, 0);
+                
+                Vector3Int location = new Vector3Int(x, y, 0); 
+                
+                //need to loop through all tilemaps to check any prefab areas
+                //for some reason this is not working
+                //it's not adding the prefab area to the blockedNodes list
+                foreach (Tilemap tilemap in tilemapList)
+                {
+                    if (tilemap.GetTile(location))
+                    {
+                        gridNodeReferences[x + levelWidth/2, y + levelHeight/2].isTile = true;
+                        blockedNodes.Add(gridNodeReferences[x + levelWidth/2,y + levelHeight/2]);
+                    }
+                }
+            }
+        }
+        AssignNeighbours();
+    }
+    
+    private void AssignNeighbours()
+    {
+        int sizeX = (levelWidth / 2) + 1;
+        int sizeY = (levelHeight / 2) + 1;
+        int floorX = (-levelWidth / 2);
+        int floorY = (-levelHeight / 2);
+        int offsetX = levelWidth / 2;
+        int offsetY = levelHeight / 2;
+        for (int x = floorX; x < sizeX; x++)
+        {
+            for (int y = floorY; y < sizeY; y++)
+            {
+                //This is messy. It looks gross. But it works. /shrug
+                if (x > floorX) gridNodeReferences[x + offsetX-1, y + offsetY].neighbours[2,1] = gridNodeReferences[x + offsetX, y + offsetY]; //left edge
+                if (y > floorY) gridNodeReferences[x + offsetX, y + offsetY-1].neighbours[1,2] = gridNodeReferences[x + offsetX, y + offsetY]; //bottom edge 
+                if (x < sizeX-1) gridNodeReferences[x + offsetX+1, y + offsetY].neighbours[0,1] = gridNodeReferences[x + offsetX, y + offsetY]; //right edge
+                if (y < sizeY-1) gridNodeReferences[x + offsetX, y + offsetY+1].neighbours[1,0] = gridNodeReferences[x + offsetX, y + offsetY]; //top edge
+                if (x > floorX && y > floorY) gridNodeReferences[x + offsetX-1, y + offsetY-1].neighbours[2,2] = gridNodeReferences[x + offsetX, y + offsetY]; //bottom left corner
+                if (x > floorX && y < sizeY-1) gridNodeReferences[x + offsetX-1, y + offsetY+1].neighbours[2,0] = gridNodeReferences[x + offsetX, y + offsetY]; //top left corner
+                if (x < sizeX-1 && y > floorY) gridNodeReferences[x + offsetX+1, y + offsetY-1].neighbours[0,2] = gridNodeReferences[x + offsetX, y + offsetY]; //bottom right corner
+                if (x < sizeX-1 && y < sizeY-1) gridNodeReferences[x + offsetX+1, y + offsetY+1].neighbours[0,0] = gridNodeReferences[x + offsetX, y + offsetY]; //top right corner
+            }
+        }
+
+        ScanAllTiles();
+        
+        foreach (Node node in gridNodeReferences)
+        {
+            ScanTile(node);
+        }
+        
+        GenerateBorderNodes();
+        
+        FillIndividualEmpty();
+        
+    }
+    
     public void FloodFill(int x, int y)
     {
         if (floodingStarted == false) StartCoroutine(FillNonReachable());
@@ -145,66 +473,9 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        //elapsedTime = stopwatch.ElapsedMilliseconds;
-        //averageElapsedTime = elapsedTimesList.Count > 0 ? elapsedTimesList.Average() : 0.0;
-        //if(optimalPath!= null) print(optimalPath.Count);
-        scale = Random.Range(0.15f, 0.25f);
-        ScanAllTiles();
-        //or change the 10000 
-        
-        /*Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
+    
 
-        //ClearTiles();
-        //GenerateTiles();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            //GetTileInfo(pos);
-        }
-        
-        if (Input.GetMouseButtonDown(2))
-        {
-            //GenerateTiles();
-            //PlaceTile(pos);
-        }
-
-        if (Input.GetMouseButton(1))
-        {
-            //ClearTiles();
-            //DeleteTile(pos);
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            //ClearSingleOutliers();
-        }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            //FillIndividualEmpty();
-        }*/
-    }
-
-    public void GetTileInfo(Vector3Int location)
-    {
-        
-        Node node = gridNodeReferences[location.x+levelWidth/2, location.y+levelHeight/2];
-        
-
-    }
-
-    private void Start()
-    {
-        if (cam == null) cam = FindObjectOfType<Camera>();
-        spikeTile = customTiles.Find(t => t.tileType == CustomTile.TileType.spike);
-        enemyTile = customTiles.Find(t => t.tileType == CustomTile.TileType.enemy);
-        tilemapList.Add(currentTilemap);
-        pathfinding.restartLevelGenEvent += ClearTiles;
-        pathfinding.levelGenSuccessEvent += PathfindingComplete;
-        GenerateTiles();
-    }
+    
 
     private void OnDisable()
     {
@@ -306,8 +577,8 @@ public class LevelGenerator : MonoBehaviour
     {
         foreach (Node node in gridNodeReferences)
         {
-            //if node is a tile
-            if (node.isTile)
+            //if node is a tile && not on the bottom - so it doesn't spawn enemies on right next to the player at the beginning
+            if (node.isTile && node.gridPosition.y > -levelHeight/2)
             {
                 //if left & right neighbour aren't null
                 if (node.neighbours[0, 1] != null && node.neighbours[2, 1] != null)
@@ -332,14 +603,7 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
-
-        // long time = elapsedTime;
-        // elapsedTimesList.Add(time);
-        // if (longestElapsedTime < elapsedTime)
-        // {
-        //     longestElapsedTime = elapsedTime;
-        // }
-        //StartCoroutine(RestartForTesting());
+        
         SpawnNonProceduralAreas();
         SetPlayerRescues();
     }
@@ -357,9 +621,11 @@ public class LevelGenerator : MonoBehaviour
         GameManager.Instance.LevelGenComplete();
     }
 
+    //GameManager calls this when Level is loaded
     public void SpawnEnemies()
     {
         enemySpawner.SpawnEnemies();
+        levelFinishedLoading = true;
     }
 
     public void UpdateLatestPointOfOptimalPath(Vector3Int pos)
@@ -560,113 +826,9 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateTiles()
-    {
-        //attemptedLevels++;
-        //if(!stopwatch.IsRunning) stopwatch.Start();
-        for (int x = -levelWidth/2; x < levelWidth/2; x++)
-        {
-            for (int y = -levelHeight/2; y < levelHeight/2; y++)
-            {
-                //DELIBERATELY have the XY back to front so it draws horizontally first
-                Vector3Int pos = new Vector3Int(x, y, 0);
-                
-                //list of grid positions that could exist, eg -width/2
-                //tilemap.GetTile(position) - true = blocked, false = not blocked
-                
-                
-                //needs to account for negative
-                //tileArrayVector3Ints[y, x] = pos;
+    
 
-                float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
-                float perlinDiff = perlinNoise - previousPerlinValue;
-                if (perlinDiff < 0.15f && perlinDiff > -0.15f)
-                {
-                    enemySpawnCounter++;
-                    perlinNoise = previousPerlinValue;
-                    
-                    if (perlinNoise > perlinThresholdMax)
-                    {
-                    
-                        //this gets overriden each iteration through the loop
-                        //need to store it as a position separately to the SO
-                        //dont think SO can store its own value because they're not separate objects
-                        //alternatively, look at how the waterNode grid worked in Yougenics!
-                        currentTile.AssignPosition(x,y);
-                        
-                        currentTilemap.SetTile(pos,currentTile.tile);
-                        spawnedTiles.Add(currentTile);
-                        
-                        
-                        /*if (perlinNoise < perlinThresholdMin + perlinThresholdMax)
-                        {
-                            if (Random.Range(0, 1f) > 0.8f)
-                            {
-                                currentTilemap.SetTile(pos,spikeTile.tile);
-                            }
-                            if (enemySpawnCounter > 3)
-                            {
-                                enemySpawnCounter = 0;
-                                
-                                currentTilemap.SetTile(pos,enemyTile.tile);
-                            }
-                        }*/
-
-                        
-                    }
-                }
-                
-                previousPerlinValue = perlinNoise;
-            }
-        }
-        if (!borderGenerated)
-        {
-            GenerateBorder();
-        }
-
-        // if (!spawnedNonProceduralAreas)
-        // {
-        //     SpawnNonProceduralAreas();
-        // }
-        GenerateGridNodes();
-    }
-
-    private void GenerateGridNodes()
-    {
-        //could change -levelWidth/2 to be:
-        //Vector2 worldBottomLeft = transform.position - Vector2.right * levelWidth - Vector2.up * levelHeight
-        //then set X/Y to worldBottomLeft.x/.y respectively
-        gridNodeReferences = null;
-        gridNodeReferences = new Node[levelHeight+1, levelWidth+1];
-        for (int x = (-levelWidth / 2); x < (levelWidth / 2) + 1; x++)
-        {
-            for (int y = (-levelHeight / 2); y < (levelHeight / 2) + 1; y++)
-            {
-                gridNodeReferences[x + levelWidth/2, y + levelHeight/2] = new Node();
-                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].xPosInArray = x + levelWidth/2;
-                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].yPosInArray = y + levelHeight/2;
-                gridNodeReferences[x + levelWidth/2, y + levelHeight/2].gridPosition = new Vector3(x, y, 0);
-                
-                var vector2 = new Vector2(x, y);
-                Vector3Int location = new Vector3Int(x, y, 0); 
-                
-                //need to loop through all tilemaps to check any prefab areas
-                //for some reason this is not working
-                //it's not adding the prefab area to the blockedNodes list
-                foreach (Tilemap tilemap in tilemapList)
-                {
-                    if (tilemap.GetTile(location))
-                    {
-                        gridNodeReferences[x + levelWidth/2, y + levelHeight/2].isTile = true;
-                        blockedNodes.Add(gridNodeReferences[x + levelWidth/2,y + levelHeight/2]);
-                    }
-                }
-            }
-        }
-
-        AssignNeighbours();
-        
-    }
+    
 
     public void ClearAroundLowest(Node lowest)
     {
@@ -707,190 +869,9 @@ public class LevelGenerator : MonoBehaviour
         return neighbours;
     }
 
-    private void ScanAllTiles()
-    {
-        foreach (Node node in gridNodeReferences)
-        {
-            if (currentTilemap.GetTile(node.gridPosV3Int))
-            {
-                node.isTile = true;
-                node.isReachable = false;
-            }
-            else node.isTile = false;
-        }
-    }
 
-    private void ScanTile(Node node)
-    {
-        foreach (Tilemap tilemap in tilemapList)
-        {
-            if (tilemap.GetTile(node.gridPosV3Int))
-            {
-                node.isTile = true;
-                node.isReachable = false;
-            }
-            else
-            {
-                node.isTile = false;
-                //[1,0] is directly beneath
-                if (node.neighbours[1, 0] != null)
-                {
-                    if(node.neighbours[1, 0].isTile) node.isReachable = true;
-                    else if (node.neighbours[1, 0].neighbours[1, 0] != null)
-                    {
-                        if(node.neighbours[1, 0].neighbours[1, 0].isTile) node.isReachable = true;
-                        else if (node.neighbours[1, 0].neighbours[1, 0].neighbours[1, 0] != null &&
-                                 node.neighbours[1, 0].neighbours[1, 0].neighbours[1, 0].isTile) node.isReachable = true;
-                    }
-                }
 
-                //need to tweak wall jump and then revisit how high you can actually jump
-                if (node.neighbours[0, 1] != null && node.neighbours[0, 1].isTile) node.isReachable = true;
-                if (node.neighbours[2, 1] != null && node.neighbours[2, 1].isTile) node.isReachable = true;
-
-                //one jump right
-                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
-                {
-                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
-                    {
-                        if ((node.neighbours[2, 1].neighbours[2, 0].isTile &&
-                            node.neighbours[2, 1].neighbours[2, 0] != null)&& (!node.neighbours[2,1].neighbours[2,1].isTile && node.neighbours[2,1].neighbours[2,1] != null))
-                        {
-                            node.neighbours[2, 2].isReachable = true;
-                            node.neighbours[2, 1].neighbours[2, 1].isReachable = true;
-                        }
-                    }
-                }
-                
-                //two jump right
-                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
-                {
-                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
-                    {
-                        if (node.neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 0] != null)
-                        {
-                            if (!node.neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].isTile && !node.neighbours[2, 1].neighbours[2, 0].isTile)
-                            {
-                                if ((node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0].isTile &&
-                                     node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null) &&
-                                    (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isTile &&
-                                     node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null))
-                                {
-                                    node.neighbours[2, 2].isReachable = true;
-                                    node.neighbours[2, 1].neighbours[2, 2].isReachable = true;
-                                    node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isReachable = true;
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                //three jump right
-                if (node.neighbours[2, 2] != null && node.neighbours[2, 1] != null && node.neighbours[2, 0] != null)
-                {
-                    if (!node.neighbours[2, 2].isTile && !node.neighbours[2, 1].isTile && !node.neighbours[2, 0].isTile)
-                    {
-                        if (node.neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 0] != null)
-                        {
-                            if (!node.neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].isTile && !node.neighbours[2, 1].neighbours[2, 0].isTile)
-                            {
-                                if (node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2] != null && node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null && node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null)
-                                {
-                                    if (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile && !node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isTile)
-                                    {
-                                        if ((node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 0].isTile &&
-                                             node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 0] != null) &&
-                                            (!node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].isTile &&
-                                             node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1] != null))
-                                        {
-                                            node.neighbours[2, 2].isReachable = true;
-                                            node.neighbours[2, 1].neighbours[2, 2].isReachable = true;
-                                            node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 2].isReachable = true;
-                                            node.neighbours[2, 1].neighbours[2, 1].neighbours[2, 1].neighbours[2, 1]
-                                                .isReachable = true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                //one jump left
-                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
-                {
-                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
-                    {
-                        if ((node.neighbours[0, 1].neighbours[0, 0].isTile &&
-                             node.neighbours[0, 1].neighbours[0, 0] != null)&& (!node.neighbours[0,1].neighbours[0,1].isTile && node.neighbours[0,1].neighbours[0,1] != null))
-                        {
-                            node.neighbours[0, 2].isReachable = true;
-                            node.neighbours[0, 1].neighbours[0, 1].isReachable = true;
-                        }
-                    }
-                }
-                
-                //two jump left
-                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
-                {
-                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
-                    {
-                        if (node.neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 0] != null)
-                        {
-                            if (!node.neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].isTile && !node.neighbours[0, 1].neighbours[0, 0].isTile)
-                            {
-                                if ((node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0].isTile &&
-                                     node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null) &&
-                                    (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isTile &&
-                                     node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null))
-                                {
-                                    node.neighbours[0, 2].isReachable = true;
-                                    node.neighbours[0, 1].neighbours[0, 2].isReachable = true;
-                                    node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isReachable = true;
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                //three jump left
-                if (node.neighbours[0, 2] != null && node.neighbours[0, 1] != null && node.neighbours[0, 0] != null)
-                {
-                    if (!node.neighbours[0, 2].isTile && !node.neighbours[0, 1].isTile && !node.neighbours[0, 0].isTile)
-                    {
-                        if (node.neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 0] != null)
-                        {
-                            if (!node.neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].isTile && !node.neighbours[0, 1].neighbours[0, 0].isTile)
-                            {
-                                if (node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2] != null && node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null && node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null)
-                                {
-                                    if (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile && !node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isTile)
-                                    {
-                                        if ((node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 0].isTile &&
-                                             node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 0] != null) &&
-                                            (!node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].isTile &&
-                                             node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1] != null))
-                                        {
-                                            node.neighbours[0, 2].isReachable = true;
-                                            node.neighbours[0, 1].neighbours[0, 2].isReachable = true;
-                                            node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 2].isReachable = true;
-                                            node.neighbours[0, 1].neighbours[0, 1].neighbours[0, 1].neighbours[0, 1]
-                                                .isReachable = true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                
-
-                else node.isReachable = false;
-            }
-            
-        }
-    }
+    
 
     public Node NodeFromWorldPoint(Vector2 worldPosition)
     {
@@ -905,56 +886,7 @@ public class LevelGenerator : MonoBehaviour
         return gridNodeReferences[x, y];
     }
 
-    private void AssignNeighbours()
-    {
-        int sizeX = (levelWidth / 2) + 1;
-        int sizeY = (levelHeight / 2) + 1;
-        int floorX = (-levelWidth / 2);
-        int floorY = (-levelHeight / 2);
-        int offsetX = levelWidth / 2;
-        int offsetY = levelHeight / 2;
-        for (int x = floorX; x < sizeX; x++)
-        {
-            for (int y = floorY; y < sizeY; y++)
-            {
-                //left edge does not get [2,1] neighbour set because that is directly left of center
-                if (x > floorX) gridNodeReferences[x + offsetX-1, y + offsetY].neighbours[2,1] = gridNodeReferences[x + offsetX, y + offsetY];
-
-                //bottom edge 
-                if (y > floorY) gridNodeReferences[x + offsetX, y + offsetY-1].neighbours[1,2] = gridNodeReferences[x + offsetX, y + offsetY];
-
-                //right edge
-                if (x < sizeX-1) gridNodeReferences[x + offsetX+1, y + offsetY].neighbours[0,1] = gridNodeReferences[x + offsetX, y + offsetY];
-                
-                //top edge
-                if (y < sizeY-1) gridNodeReferences[x + offsetX, y + offsetY+1].neighbours[1,0] = gridNodeReferences[x + offsetX, y + offsetY];
-                
-                //bottom left corner
-                if (x > floorX && y > floorY) gridNodeReferences[x + offsetX-1, y + offsetY-1].neighbours[2,2] = gridNodeReferences[x + offsetX, y + offsetY];
-                
-                //top left corner
-                if (x > floorX && y < sizeY-1) gridNodeReferences[x + offsetX-1, y + offsetY+1].neighbours[2,0] = gridNodeReferences[x + offsetX, y + offsetY];
-                
-                //bottom right corner
-                if (x < sizeX-1 && y > floorY) gridNodeReferences[x + offsetX+1, y + offsetY-1].neighbours[0,2] = gridNodeReferences[x + offsetX, y + offsetY];
-                
-                //top right corner
-                if (x < sizeX-1 && y < sizeY-1) gridNodeReferences[x + offsetX+1, y + offsetY+1].neighbours[0,0] = gridNodeReferences[x + offsetX, y + offsetY];
-            }
-        }
-
-        ScanAllTiles();
-        
-        foreach (Node node in gridNodeReferences)
-        {
-            ScanTile(node);
-        }
-        
-        GenerateBorderNodes();
-        
-        FillIndividualEmpty();
-        
-    }
+    
 
     private void FillIndividualEmpty()
     {
@@ -1083,27 +1015,7 @@ public class LevelGenerator : MonoBehaviour
         //GenerateGridNodes();
     }
     
-    private void GenerateBorder()
-    {
-        //left and right borders
-        for (int y = -levelHeight / 2; y <= levelHeight / 2; y++)
-        {
-            Vector3Int posLeft = new Vector3Int((-levelWidth/2), y, 0);
-            currentTilemap.SetTile(posLeft,currentTile.tile);
-            Vector3Int posRight = new Vector3Int((levelWidth/2), y, 0);
-            currentTilemap.SetTile(posRight,currentTile.tile);
-        }
-        
-        //for top and bottom borders
-        for (int x = -levelWidth / 2; x <= levelWidth / 2; x++)
-        {
-            Vector3Int posBottom = new Vector3Int(x, (-levelHeight/2), 0);
-            currentTilemap.SetTile(posBottom,currentTile.tile);
-            Vector3Int posTop = new Vector3Int(x, (levelHeight/2), 0);
-            currentTilemap.SetTile(posTop,currentTile.tile);
-        }
-        borderGenerated = true;
-    }
+    
 
     private void GenerateBorderNodes()
     {
