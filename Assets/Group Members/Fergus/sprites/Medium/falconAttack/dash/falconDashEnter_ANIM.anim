@@ -145,6 +145,13 @@ AnimationClip:
     floatParameter: 0.05
     intParameter: 0
     messageOptions: 0
+  - time: 0.083333336
+    functionName: SFXTrigger
+    data: Falcon Dash
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.20833333
     functionName: VFXTrigger
     data: vfxGraph_falconDashCast
