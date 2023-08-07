@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6738477814847000875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.197, y: -0.864, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,34 +49,13 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array:
-      - m_Value: 0.5
-        m_Name: BaseSize
-        m_Overridden: 1
-      - m_Value: 0.4
-        m_Name: BaseLifetime
-        m_Overridden: 1
+      m_Array: []
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array:
-      - m_Value: {x: 0.49, y: 0.71, z: 0.5}
-        m_Name: Set Size
-        m_Overridden: 1
-      - m_Value: {x: 10, y: 0, z: 0}
-        m_Name: BaseVelocity
-        m_Overridden: 1
-      - m_Value: {x: 0, y: 0, z: 0}
-        m_Name: BasePosition
-        m_Overridden: 1
+      m_Array: []
     m_Vector4f:
-      m_Array:
-      - m_Value: {x: 0.7735849, y: 0.7735849, z: 0.7735849, w: 1}
-        m_Name: BaseColour
-        m_Overridden: 1
-      - m_Value: {x: 1, y: 1, z: 1, w: 1}
-        m_Name: FresnelColour
-        m_Overridden: 1
+      m_Array: []
     m_Uint:
       m_Array: []
     m_Int:
@@ -84,101 +63,9 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array:
-      - m_Value:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0.93029374
-            inSlope: 0.110900894
-            outSlope: 0.110900894
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.106814
-          - serializedVersion: 3
-            time: 1
-            value: 1.01515
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        m_Name: ScaleCurveX
-        m_Overridden: 1
-      - m_Value:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0.061065674
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.25
-            value: 0.13476847
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 0.061065674
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        m_Name: Size Over Life
-        m_Overridden: 1
+      m_Array: []
     m_Gradient:
-      m_Array:
-      - m_Value:
-          serializedVersion: 2
-          key0: {r: 5.278032, g: 5.278032, b: 5.278032, a: 0}
-          key1: {r: 1, g: 1, b: 1, a: 1}
-          key2: {r: 0.16582927, g: 0.08312017, b: 1.1339971, a: 1}
-          key3: {r: 0.040905975, g: 0.054517023, b: 0.19477698, a: 0}
-          key4: {r: 0, g: 0, b: 0, a: 0}
-          key5: {r: 0, g: 0, b: 0, a: 0}
-          key6: {r: 0, g: 0, b: 0, a: 0}
-          key7: {r: 0, g: 0, b: 0, a: 0}
-          ctime0: 0
-          ctime1: 65535
-          ctime2: 49922
-          ctime3: 65535
-          ctime4: 0
-          ctime5: 0
-          ctime6: 0
-          ctime7: 0
-          atime0: 0
-          atime1: 7517
-          atime2: 57054
-          atime3: 65535
-          atime4: 0
-          atime5: 0
-          atime6: 0
-          atime7: 0
-          m_Mode: 0
-          m_NumColorKeys: 2
-          m_NumAlphaKeys: 4
-        m_Name: DropletColour
-        m_Overridden: 1
+      m_Array: []
     m_NamedObject:
       m_Array: []
     m_Bool:
