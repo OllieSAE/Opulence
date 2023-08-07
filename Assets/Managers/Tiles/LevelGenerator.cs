@@ -342,22 +342,46 @@ public class LevelGenerator : MonoBehaviour
     
     private void GenerateBorder()
     {
-        //left and right borders
-        for (int y = -levelHeight / 2; y <= levelHeight / 2; y++)
+        //left and right borders + 1, 2 and 3 offset
+        for (int y = -levelHeight / 2 - 3; y <= levelHeight / 2 + 3; y++)
         {
             Vector3Int posLeft = new Vector3Int((-levelWidth/2), y, 0);
             currentTilemap.SetTile(posLeft,currentTile);
+            Vector3Int posLeft1 = new Vector3Int((-levelWidth / 2 - 1), y, 0);
+            currentTilemap.SetTile(posLeft1,currentTile);
+            Vector3Int posLeft2 = new Vector3Int((-levelWidth / 2 - 2), y, 0);
+            currentTilemap.SetTile(posLeft2,currentTile);
+            Vector3Int posLeft3 = new Vector3Int((-levelWidth / 2 - 3), y, 0);
+            currentTilemap.SetTile(posLeft3,currentTile);
             Vector3Int posRight = new Vector3Int((levelWidth/2), y, 0);
             currentTilemap.SetTile(posRight,currentTile);
+            Vector3Int posRight1 = new Vector3Int((levelWidth/2 + 1), y, 0);
+            currentTilemap.SetTile(posRight1,currentTile);
+            Vector3Int posRight2 = new Vector3Int((levelWidth/2 + 2), y, 0);
+            currentTilemap.SetTile(posRight2,currentTile);
+            Vector3Int posRight3 = new Vector3Int((levelWidth/2 + 3), y, 0);
+            currentTilemap.SetTile(posRight3,currentTile);
         }
         
-        //for top and bottom borders
-        for (int x = -levelWidth / 2; x <= levelWidth / 2; x++)
+        //for top and bottom borders + 1, 2 and 3 offset
+        for (int x = -levelWidth / 2 - 3; x <= levelWidth / 2 + 3; x++)
         {
             Vector3Int posBottom = new Vector3Int(x, (-levelHeight/2), 0);
             currentTilemap.SetTile(posBottom,currentTile);
+            Vector3Int posBottom1 = new Vector3Int(x, (-levelHeight/2 - 1), 0);
+            currentTilemap.SetTile(posBottom1,currentTile);
+            Vector3Int posBottom2 = new Vector3Int(x, (-levelHeight/2 - 2), 0);
+            currentTilemap.SetTile(posBottom2,currentTile);
+            Vector3Int posBottom3 = new Vector3Int(x, (-levelHeight/2 - 3), 0);
+            currentTilemap.SetTile(posBottom3,currentTile);
             Vector3Int posTop = new Vector3Int(x, (levelHeight/2), 0);
             currentTilemap.SetTile(posTop,currentTile);
+            Vector3Int posTop1 = new Vector3Int(x, (levelHeight/2 + 1), 0);
+            currentTilemap.SetTile(posTop1,currentTile);
+            Vector3Int posTop2 = new Vector3Int(x, (levelHeight/2 + 2), 0);
+            currentTilemap.SetTile(posTop2,currentTile);
+            Vector3Int posTop3 = new Vector3Int(x, (levelHeight/2 + 3), 0);
+            currentTilemap.SetTile(posTop3,currentTile);
         }
         borderGenerated = true;
     }
@@ -577,7 +601,7 @@ public class LevelGenerator : MonoBehaviour
     {
         foreach (Node node in gridNodeReferences)
         {
-            //if node is a tile && not on the bottom - so it doesn't spawn enemies on right next to the player at the beginning
+            //if node is a tile && not on the bottom - so it doesn't spawn enemies right next to the player at the beginning
             if (node.isTile && node.gridPosition.y > -levelHeight/2)
             {
                 //if left & right neighbour aren't null
@@ -605,6 +629,29 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
             }
+        }
+
+        SetSpikeTiles();
+    }
+
+    public void SetSpikeTiles()
+    {
+        foreach (Node node in gridNodeReferences)
+        {
+            //copy the format of SetEnemyTiles above
+            //for a node that has L and R neighbours, and nothing in the northern row
+            //set north neighbour to SPIKES on a random chance
+            
+            //for a node that has L and R neighbours, and nothing in the southern row
+            //set south neighbour to SPIKES on a random chance
+            
+            //for a node that has N and S neighbours, and nothing in the eastern row
+            //set east neighbour to SPIKE on a random chance
+            
+            //for a node that has N and S neighbours, and nothing in the western row
+            //set west neighbour to SPIKE on a random chance
+            
+            //probably can't have wall spikes cz you won't be able to jump!!!
         }
         
         SpawnNonProceduralAreas();
