@@ -2186,7 +2186,6 @@ MonoBehaviour:
   - {fileID: 1981248234}
   - {fileID: 914746550}
   - {fileID: 3707848182454776439}
-  - {fileID: 5510682399769448652}
   - {fileID: 7116876817029905549}
   - {fileID: 828241167}
   sfx:
@@ -2553,6 +2552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245e136e9bcd94e4baa9e17243495013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentlyAttacking: 0
   attackCooldown: 0.4
   meleeAttackPower: 10
   meleeAttackPoint: {fileID: 2051897553077874494}
@@ -4425,11 +4425,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95507e8345c10b74db716f26e4143910, type: 3}
---- !u!2083052967 &5510682399769448652 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 8974392611226960734, guid: 95507e8345c10b74db716f26e4143910, type: 3}
-  m_PrefabInstance: {fileID: 3527043060881134482}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7793417510828899571 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6689346371286232929, guid: 95507e8345c10b74db716f26e4143910, type: 3}

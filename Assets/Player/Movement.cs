@@ -173,7 +173,7 @@ public class Movement : MonoBehaviour
             midairDash = true;
         }
 
-        if (!isTouchingGround && isTouchingWall)
+        if (!isTouchingGround && isTouchingWall && rigidbody.velocity.y < 0)
         {
             isSliding = true;
         }

@@ -58,11 +58,14 @@ public class FXTrigger : MonoBehaviour
 
     public void VFXTrigger(string vfxName)
     {
-        for (int i = 0; i < vfx.Length; i++)
+        if (vfx != null)
         {
-            if (vfxName == vfx[i].name)
+            for (int i = 0; i < vfx.Length; i++)
             {
-                vfx[i].Play();
+                if (vfxName == vfx[i].name)
+                {
+                    vfx[i].Play();
+                }
             }
         }
     }

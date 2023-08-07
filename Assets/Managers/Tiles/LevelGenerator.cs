@@ -16,7 +16,7 @@ public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private Tilemap currentTilemap;
     [SerializeField] private List<Tilemap> tilemapList = new List<Tilemap>();
-    [SerializeField] private CustomTile currentTile;
+    [SerializeField] private RuleTile currentTile;
     [SerializeField] private List<CustomTile> customTiles;
     [SerializeField] private Grid grid;
     private EnemySpawner enemySpawner;
@@ -139,7 +139,7 @@ public class LevelGenerator : MonoBehaviour
                     
                     if (perlinNoise > perlinThresholdMax)
                     {
-                        currentTilemap.SetTile(pos,currentTile.tile);
+                        currentTilemap.SetTile(pos,currentTile);
                     }
                 }
                 previousPerlinValue = perlinNoise;
@@ -346,18 +346,18 @@ public class LevelGenerator : MonoBehaviour
         for (int y = -levelHeight / 2; y <= levelHeight / 2; y++)
         {
             Vector3Int posLeft = new Vector3Int((-levelWidth/2), y, 0);
-            currentTilemap.SetTile(posLeft,currentTile.tile);
+            currentTilemap.SetTile(posLeft,currentTile);
             Vector3Int posRight = new Vector3Int((levelWidth/2), y, 0);
-            currentTilemap.SetTile(posRight,currentTile.tile);
+            currentTilemap.SetTile(posRight,currentTile);
         }
         
         //for top and bottom borders
         for (int x = -levelWidth / 2; x <= levelWidth / 2; x++)
         {
             Vector3Int posBottom = new Vector3Int(x, (-levelHeight/2), 0);
-            currentTilemap.SetTile(posBottom,currentTile.tile);
+            currentTilemap.SetTile(posBottom,currentTile);
             Vector3Int posTop = new Vector3Int(x, (levelHeight/2), 0);
-            currentTilemap.SetTile(posTop,currentTile.tile);
+            currentTilemap.SetTile(posTop,currentTile);
         }
         borderGenerated = true;
     }
@@ -457,7 +457,7 @@ public class LevelGenerator : MonoBehaviour
         {
             if (!reachableTiles.Contains(node))
             {
-                currentTilemap.SetTile(node.gridPosV3Int,currentTile.tile);
+                currentTilemap.SetTile(node.gridPosV3Int,currentTile);
             }
         }
         ScanAllTiles();
@@ -498,30 +498,30 @@ public class LevelGenerator : MonoBehaviour
                 //if next step of path is to my RIGHT, and previous is NOT BELOW current, put tile below current
                 if (optimalPath[i + 1] == optimalPath[i].neighbours[2, 1] && optimalPath[i-1] != optimalPath[i].neighbours[1,0])
                 {
-                    currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                    currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile);
                 }
                 
                 //if next step of path is to my LEFT, and previous is NOT BELOW current, put tile below current
                 if (optimalPath[i + 1] == optimalPath[i].neighbours[0, 1] && optimalPath[i-1] != optimalPath[i].neighbours[1,0])
                 {
-                    currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                    currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile);
                 }
 
                 //if next step of path is ABOVE && previous step is BELOW
                 if (optimalPath[i + 1] == optimalPath[i].neighbours[1, 2] && optimalPath[i-1] == optimalPath[i].neighbours[1,0])
                 {
                     //if no tile to left, add tile to right
-                    if(optimalPath[i].neighbours[0,1].isTile == false) currentTilemap.SetTile(optimalPath[i].neighbours[2,1].gridPosV3Int,currentTile.tile);
+                    if(optimalPath[i].neighbours[0,1].isTile == false) currentTilemap.SetTile(optimalPath[i].neighbours[2,1].gridPosV3Int,currentTile);
                     //if no tile to right, add tile to left
                     else if (optimalPath[i].neighbours[2, 1].isTile == false)
-                        currentTilemap.SetTile(optimalPath[i].neighbours[0, 1].gridPosV3Int, currentTile.tile);
+                        currentTilemap.SetTile(optimalPath[i].neighbours[0, 1].gridPosV3Int, currentTile);
                 }
                 
                 //if next step is ABOVE and previous step is LEFT or RIGHT
                 if(optimalPath[i+1] == optimalPath[i].neighbours[1,2] && (optimalPath[i-1] == optimalPath[i].neighbours[0,1] || optimalPath[i-1] == optimalPath[i].neighbours[2,1]))
                 {
                     //if no tile below, set tile below
-                    if(optimalPath[i].neighbours[1,0].isTile == false) currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                    if(optimalPath[i].neighbours[1,0].isTile == false) currentTilemap.SetTile(optimalPath[i].neighbours[1,0].gridPosV3Int,currentTile);
                 }
                     
             }
@@ -534,13 +534,13 @@ public class LevelGenerator : MonoBehaviour
                 //if next step of path is to my RIGHT, and previous is NOT BELOW current, put tile below current
                 if (secondaryPath[i + 1] == secondaryPath[i].neighbours[2, 1] && secondaryPath[i-1] != secondaryPath[i].neighbours[1,0])
                 {
-                    if(!optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                    if(!optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile);
                 }
                 
                 //if next step of path is to my LEFT, and previous is NOT BELOW current, put tile below current
                 if (secondaryPath[i + 1] == secondaryPath[i].neighbours[0, 1] && secondaryPath[i-1] != secondaryPath[i].neighbours[1,0])
                 {
-                    if(!optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                    if(!optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile);
                 }
 
                 //if next step of path is ABOVE && previous step is BELOW
@@ -549,12 +549,12 @@ public class LevelGenerator : MonoBehaviour
                     //if no tile to right, add tile to left (as long as it's not in optimal path)
                     if (secondaryPath[i].neighbours[2, 1].isTile == false)
                     {
-                        if(!optimalPath.Contains(secondaryPath[i].neighbours[2,1])) currentTilemap.SetTile(secondaryPath[i].neighbours[2,1].gridPosV3Int,currentTile.tile);
+                        if(!optimalPath.Contains(secondaryPath[i].neighbours[2,1])) currentTilemap.SetTile(secondaryPath[i].neighbours[2,1].gridPosV3Int,currentTile);
                     }
                     //if no tile to left, add tile to right (as long as it's not in optimal path)
                     else if (secondaryPath[i].neighbours[0, 1].isTile == false)
                     {
-                        if(!optimalPath.Contains(secondaryPath[i].neighbours[0,1])) currentTilemap.SetTile(secondaryPath[i].neighbours[0, 1].gridPosV3Int, currentTile.tile);
+                        if(!optimalPath.Contains(secondaryPath[i].neighbours[0,1])) currentTilemap.SetTile(secondaryPath[i].neighbours[0, 1].gridPosV3Int, currentTile);
                     }
                 }
                 
@@ -562,7 +562,7 @@ public class LevelGenerator : MonoBehaviour
                 if(secondaryPath[i+1] == secondaryPath[i].neighbours[1,2] && (secondaryPath[i-1] == secondaryPath[i].neighbours[0,1] || secondaryPath[i-1] == secondaryPath[i].neighbours[2,1]))
                 {
                     //if no tile below, set tile below
-                    if(secondaryPath[i].neighbours[1,0].isTile == false && !optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile.tile);
+                    if(secondaryPath[i].neighbours[1,0].isTile == false && !optimalPath.Contains(secondaryPath[i].neighbours[1,0])) currentTilemap.SetTile(secondaryPath[i].neighbours[1,0].gridPosV3Int,currentTile);
                 }
             }
         }
@@ -594,7 +594,10 @@ public class LevelGenerator : MonoBehaviour
                                 !node.neighbours[2, 2].isTile)
                             {
                                 //set to enemy tile
-                                currentTilemap.SetTile(node.gridPosV3Int,enemyTile.tile);
+                                
+                                //TODO
+                                //this might need to be a separate rule tile?
+                                currentTilemap.SetTile(node.gridPosV3Int,currentTile);
                                 node.enemySpawner = true;
                                 enemySpawner.enemyNodes.Add(node);
                             }
@@ -919,7 +922,7 @@ public class LevelGenerator : MonoBehaviour
         
         foreach (Node node in fullNeighbours)
         {
-            currentTilemap.SetTile(node.gridPosV3Int,currentTile.tile);
+            currentTilemap.SetTile(node.gridPosV3Int,currentTile);
             ScanTile(node);
         }
         
@@ -1064,7 +1067,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void PlaceTile(Vector3Int pos)
     {
-        currentTilemap.SetTile(pos, currentTile.tile);
+        currentTilemap.SetTile(pos, currentTile);
     }
 
     private void DeleteTile(Vector3Int pos)

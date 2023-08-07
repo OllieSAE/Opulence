@@ -15,7 +15,7 @@ public class Combat : MonoBehaviour
     private BasicEnemyPatrol basicEnemyPatrol;
 
     [Header("General Combat")]
-    private bool currentlyAttacking;
+    public bool currentlyAttacking;
     public float attackCooldown;
     private LayerMask enemyLayer;
     private LayerMask playerLayer;
@@ -120,13 +120,19 @@ public class Combat : MonoBehaviour
     void Update()
     {
         meleeComboTimer += Time.deltaTime;
-        if (meleeComboTimer > meleeComboTimerCutoff)
+        
+        //find a way to make this work for spider boss?
+        if (gameObject.CompareTag("Player"))
         {
-            meleeComboTimer = 0;
-            canFirstCombo = false;
-            canSecondCombo = false;
-            currentlyAttacking = false;
+            if (meleeComboTimer > meleeComboTimerCutoff)
+            {
+                meleeComboTimer = 0;
+                canFirstCombo = false;
+                canSecondCombo = false;
+                currentlyAttacking = false;
+            }
         }
+        
         ExitMeleeAttack();
     }
 
@@ -134,8 +140,7 @@ public class Combat : MonoBehaviour
     {
         if (value == BasicEnemyPatrol.EnemyType.Melee)
         {
-            EnemyRangedAttack();
-            //EnemyMeleeAttack();
+            EnemyMeleeAttack();
         }
 
         if (value == BasicEnemyPatrol.EnemyType.Ranged)
@@ -301,7 +306,7 @@ public class Combat : MonoBehaviour
             animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack"))
         {
             Invoke("EndMeleeCombo", externalComboTimeDelay);
-            print("invoke end combo");
+            //print("invoke end combo");
         }
     }
 
@@ -310,7 +315,7 @@ public class Combat : MonoBehaviour
         comboCounter = 0;
         lastComboEnd = Time.time;
         currentlyAttacking = false;
-        print("resetting lastComboEnd");
+        //print("resetting lastComboEnd");
     }
 
     private IEnumerator MeleeAttackCooldownCoroutine()
@@ -381,7 +386,7 @@ public class Combat : MonoBehaviour
 
             yield return new WaitForSeconds(rangedHitDelay);
             lastComboEnd = Time.time;
-            if (health.currentHealth > 0) FireProjectile();
+            //if (health.currentHealth > 0) FireProjectile();
         }
     }
 
@@ -423,6 +428,7 @@ public class Combat : MonoBehaviour
     
     private IEnumerator RangedAttackCooldownCoroutine()
     {
+        //print("ranged attack cd cr started");
         yield return new WaitForSeconds(attackCooldown);
         
         currentlyAttacking = false;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Projectile : MonoBehaviour
 {
@@ -11,15 +12,17 @@ public class Projectile : MonoBehaviour
     private GameObject owner;
     private int damage;
     private float flightTime;
+    private VisualEffect vfx;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        vfx = GetComponent<VisualEffect>();
     }
 
     private void Start()
     {
-        rigidbody.velocity = new Vector2(moveSpeed.x * transform.localScale.x, moveSpeed.y);
+        if(rigidbody!=null)rigidbody.velocity = new Vector2(moveSpeed.x * transform.localScale.x, moveSpeed.y);
         StartCoroutine(DestroySelf());
     }
 

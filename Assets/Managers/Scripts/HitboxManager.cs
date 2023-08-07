@@ -36,6 +36,12 @@ public class HitboxManager : MonoBehaviour
         comboAttackSfx = GetComponent<ComboAttackSFX>();
     }
 
+    //call this through animation events to get player ranged working pixel perfect
+    private void FireParentProjectile()
+    {
+        if(parentCombat!=null) parentCombat.FireProjectile();
+    }
+
     //"Global" function for dealing damage via hitbox
     public void GenerateHitboxForDamage(Vector3 position, float size, int damageAmount)//, string sfxName)
     {
