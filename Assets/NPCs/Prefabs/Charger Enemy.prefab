@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245e136e9bcd94e4baa9e17243495013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentlyAttacking: 0
   attackCooldown: 2
   meleeAttackPower: 5
   meleeAttackPoint: {fileID: 1542501478319828700}

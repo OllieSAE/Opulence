@@ -6651,6 +6651,7 @@ MonoBehaviour:
   vfx: []
   sfx:
   - Enemy Impact
+  - Enemy Venom Spit
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
@@ -7508,18 +7509,6 @@ PrefabInstance:
     - target: {fileID: 4123682042663585802, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468337700005442789, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
-      propertyPath: sfx.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468337700005442789, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
-      propertyPath: sfx.Array.data[0]
-      value: Enemy Impact
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468337700005442789, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
-      propertyPath: sfx.Array.data[1]
-      value: Enemy Charge Emote
       objectReference: {fileID: 0}
     - target: {fileID: 7926972421639179050, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
       propertyPath: maxHealth
