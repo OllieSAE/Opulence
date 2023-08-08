@@ -864,6 +864,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1101789578115816725, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
+      propertyPath: sfx.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101789578115816725, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
+      propertyPath: sfx.Array.data[2]
+      value: Enemy Small Die
+      objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
       propertyPath: m_Name
       value: Melee Enemy (1)
@@ -2021,6 +2029,7 @@ MonoBehaviour:
   vfx: []
   sfx:
   - Enemy Impact
+  - Enemy Small Die
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
@@ -6581,6 +6590,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1101789578115816725, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
+      propertyPath: sfx.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101789578115816725, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
+      propertyPath: sfx.Array.data[2]
+      value: Enemy Small Die
+      objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
       propertyPath: m_Name
       value: Melee Enemy
@@ -7400,6 +7417,7 @@ MonoBehaviour:
   vfx: []
   sfx:
   - Enemy Impact
+  - Enemy Small Die
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
@@ -7510,6 +7528,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5468337700005442789, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
+      propertyPath: sfx.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468337700005442789, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
+      propertyPath: sfx.Array.data[2]
+      value: Enemy Charge Die
+      objectReference: {fileID: 0}
     - target: {fileID: 7926972421639179050, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
       propertyPath: maxHealth
       value: 60
@@ -7530,11 +7556,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: sfx.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: sfx.Array.data[0]
       value: Enemy Impact
+      objectReference: {fileID: 0}
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.data[1]
+      value: Enemy Small Die
       objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: m_Name
@@ -7676,11 +7706,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: sfx.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: sfx.Array.data[0]
       value: Enemy Impact
+      objectReference: {fileID: 0}
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.data[1]
+      value: Enemy Small Die
       objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: m_Name
@@ -8405,6 +8439,7 @@ MonoBehaviour:
   vfx: []
   sfx:
   - Enemy Impact
+  - Enemy Small Die
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
@@ -8497,6 +8532,7 @@ MonoBehaviour:
   vfx: []
   sfx:
   - Enemy Impact
+  - Enemy Small Die
   particles: []
   flipTransform: {fileID: 0}
   enemyLayer:
@@ -8685,11 +8721,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: sfx.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: sfx.Array.data[0]
       value: Enemy Impact
+      objectReference: {fileID: 0}
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.data[1]
+      value: Enemy Small Die
       objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: m_Name
@@ -9124,11 +9164,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: sfx.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: sfx.Array.data[0]
       value: Enemy Impact
+      objectReference: {fileID: 0}
+    - target: {fileID: 959413286, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
+      propertyPath: sfx.Array.data[1]
+      value: Enemy Small Die
       objectReference: {fileID: 0}
     - target: {fileID: 4331296779273578422, guid: 935fd460dd62be541a76112197a8ca3d, type: 3}
       propertyPath: m_Name
@@ -9243,6 +9287,14 @@ PrefabInstance:
     - target: {fileID: 4123682042663585802, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468337700005442789, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
+      propertyPath: sfx.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468337700005442789, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}
+      propertyPath: sfx.Array.data[2]
+      value: Enemy Charge Die
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9599c69ab4c500f4291c6917ac2ae2b9, type: 3}

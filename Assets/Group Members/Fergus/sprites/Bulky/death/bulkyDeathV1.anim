@@ -109,9 +109,16 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.041666668
+  - time: 0
     functionName: SFXTrigger
     data: Enemy Impact
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.041666668
+    functionName: SFXTrigger
+    data: Enemy Charge Die
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
