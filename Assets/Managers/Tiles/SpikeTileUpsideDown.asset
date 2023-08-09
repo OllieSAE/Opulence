@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75ee69baf21483444b61e27a4c9e424b, type: 3}
-  m_Name: PlayerEndGoalLevel1
+  m_Script: {fileID: 11500000, guid: db56be95ecc549b4cbed306db2f68fb8, type: 3}
+  m_Name: SpikeTileUpsideDown
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6209074449925138038, guid: daf5b80d9ee5ff54ca545feb7eeff72c, type: 3}
-  spawnPosition: {x: 52, y: 49, z: 0}
-  height: 2
-  width: 4
+  tile: {fileID: 11400000, guid: b0ec4ff71a39a4e478c31c54a6251b83, type: 2}
+  id: SpikeTileUpsideDown
+  tileType: 3
+  posX: 0
+  posY: 0

@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject firstFloor;
     public GameObject secondFloor;
     public GameObject mainCamera;
+    public GameObject vcam1;
     
     private static GameManager _instance;
 
@@ -90,6 +91,7 @@ public class GameManager : MonoBehaviour
         testObjectPickedUp = false;
         _instance = this;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        vcam1 = GameObject.FindGameObjectWithTag("vcam1");
         tutorialStartUI.SetActive(false);
         tutorialEndUI.SetActive(false);
         pauseUI.SetActive(false);
@@ -133,7 +135,8 @@ public class GameManager : MonoBehaviour
 
     public void SelectActualLevel()
     {
-        sceneToLoad = "LevelGenTest";
+        //need to change this to opening cutscene
+        sceneToLoad = "OpeningCutscene";
         tutorialTestEnable = false;
         combatTutorialTestEnable = false;
         StartCoroutine(LoadLevelCoroutine());
@@ -174,6 +177,8 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
+        if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -10);
 
         if (sceneToLoad != "LevelGenTest")
         {
@@ -193,9 +198,14 @@ public class GameManager : MonoBehaviour
     private void OnLevelLoaded()
     {
         currentScene = sceneToLoad;
+        if(currentScene!=null)SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentScene));
         player = GameObject.FindGameObjectWithTag("Player");
-        if( player != null ) player.SetActive(true);
-        mainCamera.GetComponent<StudioListener>().attenuationObject = player;
+        if (player != null)
+        {
+            player.SetActive(true);
+            mainCamera.GetComponent<StudioListener>().attenuationObject = player;
+        }
+        
         if(LevelGenerator.Instance != null) LevelGenerator.Instance.SpawnEnemies();
         objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
         zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
@@ -217,6 +227,38 @@ public class GameManager : MonoBehaviour
         onLevelLoadedEvent?.Invoke();
         enableEnemyPatrolEvent?.Invoke();
         
+    }
+
+    public void EndLevel()
+    {
+        if (currentScene == "LevelGenTest")
+        {
+            SceneManager.UnloadSceneAsync(currentScene);
+            sceneToLoad = "FirstBossLevel";
+            StartCoroutine(LoadLevelCoroutine());
+        }
+
+        if (currentScene == "FirstBossLevel")
+        {
+            SceneManager.UnloadSceneAsync(currentScene);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelSelectScene"));
+            mainMenuUI.SetActive(true);
+        }
+
+        if (currentScene is "OpeningCutscene" or "DeathCutscene")
+        {
+            SceneManager.UnloadSceneAsync(currentScene);
+            sceneToLoad = "LevelGenTest";
+            StartCoroutine(LoadLevelCoroutine());
+        }
+    }
+
+    public IEnumerator DeathCutscene()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.UnloadSceneAsync(currentScene);
+        sceneToLoad = "DeathCutscene";
+        StartCoroutine(LoadLevelCoroutine());
     }
 
     private void Update()
@@ -266,7 +308,8 @@ public class GameManager : MonoBehaviour
     {
         if (deadThing.layer == 6)
         {
-            RespawnPlayer();
+            StartCoroutine(DeathCutscene());
+            //RespawnPlayer();
             if(objectPickUpTest!=null)RespawnObject();
         }
         else if (deadThing.layer == 8)

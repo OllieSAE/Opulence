@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 1380553980}
   m_Layer: 0
   m_Name: CM vcam1
-  m_TagString: Untagged
+  m_TagString: vcam1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -423,7 +423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380553974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.82, y: -2.74, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -708,7 +708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: mainMenuEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: tutorialTestEnable
@@ -716,11 +716,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: toggleEnemyMovement
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: combatTutorialTestEnable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2417026086825389793, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_Name
@@ -955,11 +955,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534754, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534754, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534754, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_LocalPosition.z

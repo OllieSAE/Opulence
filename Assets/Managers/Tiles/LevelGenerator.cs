@@ -26,7 +26,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject playerRescuePrefab;
     public bool gizmosOn;
     private bool floodingStarted = false;
-    [Header("Tile Types")] private CustomTile enemyTile, spikeTile, ruleTile, collectibleTile;
+    [Header("Tile Types")] private CustomTile enemyTile, spikeTile, spikeTileUpsideDown, ruleTile, collectibleTile;
 
     private Vector3Int[,] tileArrayVector3Ints;
     private CustomTile[,] tile2DArray;
@@ -44,7 +44,10 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] public float scale;
     private float previousPerlinValue;
     private int enemySpawnCounter;
-
+    
+    public List<Node> path;
+    public List<Node> optimalPath;
+    public List<Node> secondaryPath;
     public List<Node> reachableTiles = new List<Node>();
     [Header("Non Procedural Areas")] public List<NonProceduralArea> nonProceduralAreas = new List<NonProceduralArea>();
     [SerializeField] private Camera cam;
@@ -66,6 +69,13 @@ public class LevelGenerator : MonoBehaviour
     private bool spawnedNonProceduralAreas = false;
     private bool levelFinishedLoading = false;
 
+    public int MaxSize
+    {
+        get
+        {
+            return levelHeight * levelWidth;
+        }
+    }
     public static LevelGenerator _instance;
 
     public static LevelGenerator Instance
@@ -94,11 +104,18 @@ public class LevelGenerator : MonoBehaviour
         scale = Random.Range(0.15f, 0.25f);
         pathfinding = GetComponent<Pathfinding>();
     }
+    
+    private void OnDisable()
+    {
+        pathfinding.restartLevelGenEvent -= ClearTiles;
+        pathfinding.levelGenSuccessEvent -= PathfindingComplete;
+    }
 
     private void Start()
     {
         if (cam == null) cam = FindObjectOfType<Camera>();
         spikeTile = customTiles.Find(t => t.tileType == CustomTile.TileType.spike);
+        spikeTileUpsideDown = customTiles.Find(t => t.tileType == CustomTile.TileType.spikeTileUpsideDown);
         enemyTile = customTiles.Find(t => t.tileType == CustomTile.TileType.enemy);
         tilemapList.Add(currentTilemap);
         pathfinding.restartLevelGenEvent += ClearTiles;
@@ -343,7 +360,7 @@ public class LevelGenerator : MonoBehaviour
     private void GenerateBorder()
     {
         //left and right borders + 1, 2 and 3 offset
-        for (int y = -levelHeight / 2 - 3; y <= levelHeight / 2 + 3; y++)
+        for (int y = -levelHeight / 2 - 8; y <= levelHeight / 2 + 8; y++)
         {
             Vector3Int posLeft = new Vector3Int((-levelWidth/2), y, 0);
             currentTilemap.SetTile(posLeft,currentTile);
@@ -353,6 +370,16 @@ public class LevelGenerator : MonoBehaviour
             currentTilemap.SetTile(posLeft2,currentTile);
             Vector3Int posLeft3 = new Vector3Int((-levelWidth / 2 - 3), y, 0);
             currentTilemap.SetTile(posLeft3,currentTile);
+            Vector3Int posLeft4 = new Vector3Int((-levelWidth / 2 - 4), y, 0);
+            currentTilemap.SetTile(posLeft4,currentTile);
+            Vector3Int posLeft5 = new Vector3Int((-levelWidth / 2 - 5), y, 0);
+            currentTilemap.SetTile(posLeft5,currentTile);
+            Vector3Int posLeft6 = new Vector3Int((-levelWidth / 2 - 6), y, 0);
+            currentTilemap.SetTile(posLeft6,currentTile);
+            Vector3Int posLeft7 = new Vector3Int((-levelWidth / 2 - 7), y, 0);
+            currentTilemap.SetTile(posLeft7,currentTile);
+            Vector3Int posLeft8 = new Vector3Int((-levelWidth / 2 - 8), y, 0);
+            currentTilemap.SetTile(posLeft8,currentTile);
             Vector3Int posRight = new Vector3Int((levelWidth/2), y, 0);
             currentTilemap.SetTile(posRight,currentTile);
             Vector3Int posRight1 = new Vector3Int((levelWidth/2 + 1), y, 0);
@@ -361,10 +388,20 @@ public class LevelGenerator : MonoBehaviour
             currentTilemap.SetTile(posRight2,currentTile);
             Vector3Int posRight3 = new Vector3Int((levelWidth/2 + 3), y, 0);
             currentTilemap.SetTile(posRight3,currentTile);
+            Vector3Int posRight4 = new Vector3Int((levelWidth/2 + 4), y, 0);
+            currentTilemap.SetTile(posRight4,currentTile);
+            Vector3Int posRight5 = new Vector3Int((levelWidth/2 + 5), y, 0);
+            currentTilemap.SetTile(posRight5,currentTile);
+            Vector3Int posRight6 = new Vector3Int((levelWidth/2 + 6), y, 0);
+            currentTilemap.SetTile(posRight6,currentTile);
+            Vector3Int posRight7 = new Vector3Int((levelWidth/2 + 7), y, 0);
+            currentTilemap.SetTile(posRight7,currentTile);
+            Vector3Int posRight8 = new Vector3Int((levelWidth/2 + 8), y, 0);
+            currentTilemap.SetTile(posRight8,currentTile);
         }
         
         //for top and bottom borders + 1, 2 and 3 offset
-        for (int x = -levelWidth / 2 - 3; x <= levelWidth / 2 + 3; x++)
+        for (int x = -levelWidth / 2 - 8; x <= levelWidth / 2 + 8; x++)
         {
             Vector3Int posBottom = new Vector3Int(x, (-levelHeight/2), 0);
             currentTilemap.SetTile(posBottom,currentTile);
@@ -374,6 +411,16 @@ public class LevelGenerator : MonoBehaviour
             currentTilemap.SetTile(posBottom2,currentTile);
             Vector3Int posBottom3 = new Vector3Int(x, (-levelHeight/2 - 3), 0);
             currentTilemap.SetTile(posBottom3,currentTile);
+            Vector3Int posBottom4 = new Vector3Int(x, (-levelHeight/2 - 4), 0);
+            currentTilemap.SetTile(posBottom4,currentTile);
+            Vector3Int posBottom5 = new Vector3Int(x, (-levelHeight/2 - 5), 0);
+            currentTilemap.SetTile(posBottom5,currentTile);
+            Vector3Int posBottom6 = new Vector3Int(x, (-levelHeight/2 - 6), 0);
+            currentTilemap.SetTile(posBottom6,currentTile);
+            Vector3Int posBottom7 = new Vector3Int(x, (-levelHeight/2 - 7), 0);
+            currentTilemap.SetTile(posBottom7,currentTile);
+            Vector3Int posBottom8 = new Vector3Int(x, (-levelHeight/2 - 8), 0);
+            currentTilemap.SetTile(posBottom8,currentTile);
             Vector3Int posTop = new Vector3Int(x, (levelHeight/2), 0);
             currentTilemap.SetTile(posTop,currentTile);
             Vector3Int posTop1 = new Vector3Int(x, (levelHeight/2 + 1), 0);
@@ -382,6 +429,16 @@ public class LevelGenerator : MonoBehaviour
             currentTilemap.SetTile(posTop2,currentTile);
             Vector3Int posTop3 = new Vector3Int(x, (levelHeight/2 + 3), 0);
             currentTilemap.SetTile(posTop3,currentTile);
+            Vector3Int posTop4 = new Vector3Int(x, (levelHeight/2 + 4), 0);
+            currentTilemap.SetTile(posTop4,currentTile);
+            Vector3Int posTop5 = new Vector3Int(x, (levelHeight/2 + 5), 0);
+            currentTilemap.SetTile(posTop5,currentTile);
+            Vector3Int posTop6 = new Vector3Int(x, (levelHeight/2 + 6), 0);
+            currentTilemap.SetTile(posTop6,currentTile);
+            Vector3Int posTop7 = new Vector3Int(x, (levelHeight/2 + 7), 0);
+            currentTilemap.SetTile(posTop7,currentTile);
+            Vector3Int posTop8 = new Vector3Int(x, (levelHeight/2 + 8), 0);
+            currentTilemap.SetTile(posTop8,currentTile);
         }
         borderGenerated = true;
     }
@@ -488,24 +545,8 @@ public class LevelGenerator : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         SetEnemyTiles();
     }
-
-    public int MaxSize
-    {
-        get
-        {
-            return levelHeight * levelWidth;
-        }
-    }
-
     
 
-    
-
-    private void OnDisable()
-    {
-        pathfinding.restartLevelGenEvent -= ClearTiles;
-        pathfinding.levelGenSuccessEvent -= PathfindingComplete;
-    }
 
     private void PathfindingComplete()
     {
@@ -592,7 +633,6 @@ public class LevelGenerator : MonoBehaviour
         }
 
         ScanAllTiles();
-        //if(optimalPath!=null) StartCoroutine(FloodFill(optimalPath[1].gridPosV3Int.x, optimalPath[1].gridPosV3Int.y));
         if(optimalPath!=null) FloodFill(optimalPath[1].gridPosV3Int.x, optimalPath[1].gridPosV3Int.y);
     }
 
@@ -638,6 +678,52 @@ public class LevelGenerator : MonoBehaviour
     {
         foreach (Node node in gridNodeReferences)
         {
+            //if node is a tile && not on the bottom - so it doesn't spawn enemies right next to the player at the beginning
+            if (node.isTile && node.gridPosition.y > -levelHeight / 2)
+            {
+                //if left & right neighbour aren't null
+                if (node.neighbours[0, 1] != null && node.neighbours[2, 1] != null)
+                {
+                    //if left & right neighbour are tiles
+                    if (node.neighbours[0, 1].isTile && node.neighbours[2, 1].isTile)
+                    {
+                        //if northwest, north and northeast neighbour aren't null
+                        if (node.neighbours[0, 2] != null && node.neighbours[1, 2] != null &&
+                            node.neighbours[2, 2] != null)
+                        {
+                            //if northwest, north and northeast neighbour aren't tiles
+                            if (!node.neighbours[0, 2].isTile && !node.neighbours[1, 2].isTile &&
+                                !node.neighbours[2, 2].isTile)
+                            {
+                                //set spike on chance
+                                if (Random.Range(0, 3) == 2)
+                                {
+                                    currentTilemap.SetTile(node.neighbours[1,2].gridPosV3Int,spikeTile.tile);
+                                }
+                                
+                            }
+                        }
+                        
+                        //if southwest, south and southeast neighbour aren't null
+                        if (node.neighbours[0, 0] != null && node.neighbours[1, 0] != null &&
+                            node.neighbours[2, 0] != null)
+                        {
+                            //if southwest, south and southeast neighbour aren't tiles
+                            if (!node.neighbours[0, 0].isTile && !node.neighbours[1, 0].isTile &&
+                                !node.neighbours[2, 0].isTile)
+                            {
+                                //set spike on chance
+                                if (Random.Range(0, 3) == 2)
+                                {
+                                    
+                                }
+                                currentTilemap.SetTile(node.neighbours[1,0].gridPosV3Int,spikeTileUpsideDown.tile);
+                            }
+                        }
+                    }
+                }
+            }
+
             //copy the format of SetEnemyTiles above
             //for a node that has L and R neighbours, and nothing in the northern row
             //set north neighbour to SPIKES on a random chance
@@ -709,174 +795,6 @@ public class LevelGenerator : MonoBehaviour
         ClearTiles();
     }
 
-    public List<Node> path;
-    public List<Node> optimalPath;
-    public List<Node> secondaryPath;
-    private void OnDrawGizmos()
-    {
-        // if (reachableTiles != null)
-        // {
-        //     foreach (Node node in reachableTiles)
-        //     {
-        //         Gizmos.color = Color.cyan;
-        //         Gizmos.DrawCube(node.gridPositionGizmosOnly, Vector3.one);
-        //     }
-        // }
-
-        if (latestOptimalTraversed != null)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawCube(latestOptimalTraversed.gridPositionGizmosOnly, Vector3.one);
-        }
-        // foreach (Node blockedNode in blockedNodes)
-        // {
-        //     Gizmos.color = Color.red;
-        //     Gizmos.DrawCube(blockedNode.gridPositionGizmosOnly,Vector3.one);
-        // }
-        //
-        // foreach (Node fullNeighbour in fullNeighbours)
-        // {
-        //     Gizmos.color = Color.blue;
-        //     Gizmos.DrawCube(fullNeighbour.gridPositionGizmosOnly,Vector3.one);
-        // }
-
-        // foreach (Node node in outliers)
-        // {
-        //     Gizmos.color = Color.blue;
-        //     Gizmos.DrawCube(node.gridPositionGizmosOnly, Vector3.one);
-        // }
-
-        // if (borderNodesGenerated)
-        // {
-        //     foreach (Node node in gridNodeReferences)
-        //     {
-        //         if (node.borderNode)
-        //         {
-        //             Gizmos.color = Color.yellow;
-        //             Gizmos.DrawCube(node.gridPositionGizmosOnly, Vector3.one);
-        //         }
-        //     }
-        // }
-        
-
-        /*if (nodeSelected)
-        {
-            //top left
-            Gizmos.color = Color.blue;
-            Gizmos.DrawCube(topLeftNeighbour.gridPositionGizmosOnly,Vector3.one);
-            
-            //top right
-            Gizmos.color = Color.red;
-            Gizmos.DrawCube(topRightNeighbour.gridPositionGizmosOnly,Vector3.one);
-            
-            //bottom left
-            Gizmos.color = Color.green;
-            Gizmos.DrawCube(bottomLeftNeighbour.gridPositionGizmosOnly,Vector3.one);
-            
-            //bottom right
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawCube(bottomRightNeighbour.gridPositionGizmosOnly,Vector3.one);
-            
-            //top
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawCube(topNeighbour.gridPositionGizmosOnly,Vector3.one);
-            
-            //bottom
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawCube(bottomNeighbour.gridPositionGizmosOnly,Vector3.one);
-            
-            //left
-            Gizmos.color = Color.white;
-            Gizmos.DrawCube(leftNeighbour.gridPositionGizmosOnly,Vector3.one);
-            
-            //right
-            Gizmos.color = Color.black;
-            Gizmos.DrawCube(rightNeighbour.gridPositionGizmosOnly,Vector3.one);
-        }
-        */
-
-        /*if (path != null)
-        {
-            foreach (Node node in path)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
-            }
-        }
-
-        if (optimalPath != null)
-        {
-            foreach (Node node in optimalPath)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
-            }
-        }
-
-        if (secondaryPath != null)
-        {
-            foreach (Node node in secondaryPath)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawCube(node.gridPositionGizmosOnly,Vector3.one);
-            }
-        }*/
-        
-
-
-        if (gizmosOn)
-        {
-            for (int x = -levelWidth/2; x < levelWidth/2; x++)
-            {
-                for (int y = -levelHeight/2; y < levelHeight/2; y++)
-                {
-                    //DELIBERATELY have the XY back to front so it draws horizontally first
-                    Vector3Int pos = new Vector3Int(y, x, 0);
-                    
-
-                    float perlinNoise = Mathf.PerlinNoise(10000+x*scale,10000+y*scale);
-                    float perlinDiff = perlinNoise - previousPerlinValue;
-                    if (perlinDiff < 0.15f && perlinDiff > -0.15f)
-                    {
-                        enemySpawnCounter++;
-                        perlinNoise = previousPerlinValue;
-                    
-                        if (perlinNoise > perlinThresholdMax)
-                        {
-                    
-                            //currentTilemap.SetTile(pos,currentTile);
-                            Color tempColor = new Color(perlinNoise, perlinNoise, perlinNoise, 1);
-                            //currentTilemap.SetColor(pos,tempColor);
-                    
-                            Gizmos.color = tempColor;
-                            Gizmos.DrawCube(pos,Vector3.one);
-
-                            if (perlinNoise < perlinThresholdMin + perlinThresholdMax)
-                            {
-                                if (Random.Range(0, 1f) > 0.8f)
-                                {
-                                    Gizmos.color = Color.red;
-                                    Gizmos.DrawCube(pos,Vector3.one);
-                                }
-                                if (enemySpawnCounter > 3)
-                                {
-                                    enemySpawnCounter = 0;
-                                    Gizmos.color = Color.blue;
-                                    Gizmos.DrawCube(pos,Vector3.one);
-                                }
-                            }
-
-                        
-                        }
-                    }
-                
-                    previousPerlinValue = perlinNoise;
-                }
-            }
-        }
-    }
-
-    
 
     
 

@@ -21,6 +21,7 @@ public class CustomTile : ScriptableObject
         enemy,
         collectable,
         spike,
+        spikeTileUpsideDown,
         rule
     }
 
