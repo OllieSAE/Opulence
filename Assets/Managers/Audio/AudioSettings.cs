@@ -14,6 +14,7 @@ public class AudioSettings : MonoBehaviour
     {
         vcaController = FMODUnity.RuntimeManager.GetVCA("vca:/" + vcaName);
         slider = GetComponent<Slider>();
+        SetVolume(slider.value);
     }
 
     public void SetVolume(float volume)

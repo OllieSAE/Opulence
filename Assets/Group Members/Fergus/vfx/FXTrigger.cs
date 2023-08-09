@@ -100,7 +100,7 @@ public class FXTrigger : MonoBehaviour
             if (particleName == particles[i].name)
             {
                 particles[i].Play();
-                print("played " + particleName);
+                //print("played " + particleName);
             }
         }
     }
@@ -112,7 +112,7 @@ public class FXTrigger : MonoBehaviour
             if (sfxName == sfx[i])
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/" + sfxName);
-                print("played " +sfxName);
+                //print("played " +sfxName);
             }
         }
     }

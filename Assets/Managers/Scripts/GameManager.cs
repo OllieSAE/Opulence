@@ -87,6 +87,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //figure out saving stuff
+        //make sure to save audio and other settings too
+        
         DontDestroyOnLoad(this.gameObject);
         testObjectPickedUp = false;
         _instance = this;

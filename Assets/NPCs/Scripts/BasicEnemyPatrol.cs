@@ -13,6 +13,7 @@ public class BasicEnemyPatrol : MonoBehaviour
     public float wallCheckRadius;
     private LayerMask groundLayer;
     private LayerMask playerLayer;
+    private LayerMask playerAndGroundLayer;
     private bool isGroundAhead;
     private bool isWallAhead;
     private Rigidbody2D rigidbody;
@@ -21,7 +22,6 @@ public class BasicEnemyPatrol : MonoBehaviour
     private bool facingLeft;
     private bool flipCR;
     private bool patrolling = true;
-    private bool isAttacking = false;
 
     [Header("Move/Combat Stuff")]
     public float defaultSpeed;
@@ -33,10 +33,18 @@ public class BasicEnemyPatrol : MonoBehaviour
     public float rearSightDistance;
     public float rearViewFlipDelay;
     public float attackRange;
+    public float meleeAttackRange;
     public bool isPlayerInSight;
     public bool isPlayerInRange;
+    public bool isPlayerInMeleeRange;
     public bool isTransitioning;
-    
+    private bool isAttacking = false;
+    private bool attackCD = false;
+    public float attackCooldown;
+
+    [Header("Boss Stuff")]
+    public GameObject player;
+
     public enum EnemyType
     {
         Melee,
@@ -56,7 +64,9 @@ public class BasicEnemyPatrol : MonoBehaviour
         GameManager.Instance.disableEnemyPatrolEvent += DisablePatrolling;
         groundLayer = LayerMask.GetMask("Ground");
         playerLayer = LayerMask.GetMask("Player");
+        playerAndGroundLayer = LayerMask.GetMask("Ground", "Player");
         isPlayerInRange = false;
+        isPlayerInMeleeRange = false;
         flipCR = false;
         currentSpeed = defaultSpeed;
         isTransitioning = false;
@@ -95,7 +105,7 @@ public class BasicEnemyPatrol : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!patrolOnly)
+        if (!patrolOnly && enemyType != EnemyType.Boss)
         {
             RaycastHit2D frontHit = Physics2D.Raycast(
                 origin: transform.position,
@@ -142,6 +152,36 @@ public class BasicEnemyPatrol : MonoBehaviour
             Debug.DrawRay(wallAheadCheck.position,forward * sightDistance);
             //Debug.DrawRay(wallAheadCheck.position,-forward * rearSightDistance);
         }
+
+        if (enemyType == EnemyType.Boss)
+        {
+            Vector3 dir = (player.transform.position - transform.position).normalized;
+            RaycastHit2D frontHit = Physics2D.Raycast(
+                origin: transform.position,
+                direction: new Vector2(dir.x, dir.y),
+                distance: sightDistance,
+                layerMask: playerAndGroundLayer);
+            
+            if (frontHit.collider != null && frontHit.collider.CompareTag("Player"))
+            {
+                isPlayerInSight = true;
+                float distance = Vector2.Distance(transform.position, frontHit.collider.gameObject.transform.position);
+                
+                if(distance < meleeAttackRange && distance > -meleeAttackRange && !flipCR)
+                {
+                    isPlayerInMeleeRange = true;
+                }
+                else isPlayerInMeleeRange = false;
+                
+                if ((distance < attackRange && distance > -attackRange) && !flipCR)
+                {
+                    isPlayerInRange = true;
+                }
+                else isPlayerInRange = false;
+            }
+            
+            //Debug.DrawLine(transform.position,transform.position+dir*sightDistance,Color.red);
+        }
     }
 
     private IEnumerator FlipCoroutine()
@@ -165,14 +205,23 @@ public class BasicEnemyPatrol : MonoBehaviour
         }
         if (isPlayerInRange && !isAttacking && !patrolOnly)
         {
-            StartCoroutine(EnemyAttackCoroutine());
-            currentSpeed = aggroSpeed;
+            if (enemyType != EnemyType.Boss)
+            {
+                StartCoroutine(EnemyAttackCoroutine());
+                currentSpeed = aggroSpeed;
+            }
+            else
+            {
+                StartCoroutine(BossAttackCoroutine());
+                //need to make the boss move after casting
+            }
+            
         }
         else if (isTransitioning)
         {
             //if (!isPlayerInRange) isAttacking = false;
         }
-        else if (isAttacking && isGroundAhead && !isWallAhead && enemyType == EnemyType.Charger)// && !isTransitioning)
+        else if (isAttacking && isGroundAhead && !isWallAhead && enemyType == EnemyType.Charger)
         {
             transform.Translate(targetDirection * currentSpeed * Time.deltaTime);
         }
@@ -181,16 +230,45 @@ public class BasicEnemyPatrol : MonoBehaviour
             transform.Translate(targetDirection * currentSpeed * Time.deltaTime);
             animator.SetBool("Running", true);
         }
+        else if (isGroundAhead && !isWallAhead && attackCD && !isPlayerInMeleeRange)
+        {
+            transform.Translate(targetDirection * aggroSpeed * Time.deltaTime);
+            animator.SetBool("Running", true);
+        }
         else if ((!isGroundAhead || isWallAhead) && !isPlayerInRange)
         {
             Flip();
         }
     }
 
+    private IEnumerator BossAttackCoroutine()
+    {
+        animator.SetBool("Running", false);
+        isAttacking = true;
+        if (isPlayerInMeleeRange)
+        {
+            combat.EnemyAttack(enemyType, aggroSpeed, isPlayerInMeleeRange);
+            yield return new WaitForSeconds(attackDelay);
+            attackCD = true;
+            yield return new WaitForSeconds(attackCooldown);
+            attackCD = false;
+        }
+        else
+        {
+            combat.EnemyAttack(enemyType, aggroSpeed, isPlayerInMeleeRange);
+            yield return new WaitForSeconds(attackDelay);
+            attackCD = true;
+            yield return new WaitForSeconds(attackCooldown);
+            attackCD = false;
+        }
+        isAttacking = false;
+        currentSpeed = defaultSpeed;
+    }
+
     private IEnumerator EnemyAttackCoroutine()
     {
         animator.SetBool("Running", false);
-        combat.EnemyAttack(enemyType, aggroSpeed);
+        combat.EnemyAttack(enemyType, aggroSpeed, isPlayerInMeleeRange);
         if (enemyType == EnemyType.Charger)
         {
             isTransitioning = true;

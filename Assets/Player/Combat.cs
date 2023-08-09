@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Random = System.Random;
 
 public class Combat : MonoBehaviour
 {
@@ -87,6 +88,11 @@ public class Combat : MonoBehaviour
             {
                 rangedMaxAmmo = 5;
             }
+
+            if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss)
+            {
+                basicEnemyPatrol.player = GameObject.FindGameObjectWithTag("Player");
+            }
         }
 
         if (chargerCollider != null) chargerCollider.SetActive(false);
@@ -136,7 +142,7 @@ public class Combat : MonoBehaviour
         ExitMeleeAttack();
     }
 
-    public void EnemyAttack(BasicEnemyPatrol.EnemyType value, float aggroSpeed)
+    public void EnemyAttack(BasicEnemyPatrol.EnemyType value, float aggroSpeed, bool playerInMeleeRange)
     {
         if (value == BasicEnemyPatrol.EnemyType.Melee)
         {
@@ -156,7 +162,7 @@ public class Combat : MonoBehaviour
 
         if (value == BasicEnemyPatrol.EnemyType.Boss)
         {
-            EnemyBossAttack();
+            EnemyBossAttack(playerInMeleeRange);
         }
     }
 
@@ -179,9 +185,32 @@ public class Combat : MonoBehaviour
         StartCoroutine(ChargerAttackCoroutine());
     }
 
-    private void EnemyBossAttack()
+    private void EnemyBossAttack(bool playerInMeleeRange)
     {
-        print("boss attack");
+        if (playerInMeleeRange)
+        {
+            print("boss melee attack");
+        }
+        else
+        {
+            int random = UnityEngine.Random.Range(0, 100);
+            if (random < 80)
+            {
+                if (random < 40)
+                {
+                    print("web blast");
+                }
+                else
+                {
+                    print("venom spit");
+                }
+            }
+            else
+            {
+                print("special attack");
+            }
+        }
+        
     }
 
     #region Melee
