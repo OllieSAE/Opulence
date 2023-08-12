@@ -184,9 +184,13 @@ MonoBehaviour:
   rearSightDistance: 0
   rearViewFlipDelay: 0.5
   attackRange: 3
+  meleeAttackRange: 0
   isPlayerInSight: 0
   isPlayerInRange: 0
+  isPlayerInMeleeRange: 0
   isTransitioning: 0
+  attackCooldown: 0
+  player: {fileID: 0}
   enemyType: 2
 --- !u!50 &369745422201578703
 Rigidbody2D:
@@ -297,6 +301,7 @@ MonoBehaviour:
   sfx:
   - Enemy Impact
   - Enemy Charge Emote
+  - Enemy Charge Die
   particles: []
   flipTransform: {fileID: 4123682042663585802}
   enemyLayer:
