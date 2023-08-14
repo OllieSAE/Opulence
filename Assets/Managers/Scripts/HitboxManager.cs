@@ -39,7 +39,7 @@ public class HitboxManager : MonoBehaviour
     //call this through animation events to get player ranged working pixel perfect
     private void FireParentProjectile()
     {
-        if(parentCombat!=null) parentCombat.FireProjectile();
+        if(parentCombat!=null) parentCombat.FireProjectile("none");
     }
 
     //"Global" function for dealing damage via hitbox

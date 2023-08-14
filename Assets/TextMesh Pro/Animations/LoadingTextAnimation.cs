@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LoadingTextAnimation : MonoBehaviour
 {
-    public GameObject[] loadingTexts;
+    public List<GameObject> loadingTexts;
 
     public float duration;
 
@@ -16,7 +16,7 @@ public class LoadingTextAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < loadingTexts.Length; i++)
+        for (int i = 0; i < loadingTexts.Count; i++)
         {
             loadingTexts[i].SetActive(false);
         }
@@ -37,7 +37,7 @@ public class LoadingTextAnimation : MonoBehaviour
     {
 
         currentlyRunning = true;
-        for (int i = 0; i < loadingTexts.Length; i++)
+        for (int i = 0; i < loadingTexts.Count; i++)
         {
             loadingTexts[i].SetActive(true);
             yield return new WaitForSeconds(duration);

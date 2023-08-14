@@ -53,12 +53,20 @@ public class Combat : MonoBehaviour
     public Transform launchPoint;
     public float flightTime;
     public float rangedHitDelay;
-    public GameObject projectilePrefab;
+    public GameObject defaultProjectilePrefab;
+    public GameObject webBlastProjectile;
+    public GameObject venomSpitProjectile;
     public Vector2 projectileSpeed;
     private bool rechargingAmmo;
 
     [Header("Charger Enemy Combat")]
     public GameObject chargerCollider;
+
+    [Header("Boss Combat")]
+    public float specialAttackHitDelay;
+    public GameObject spiderBossTileCollider;
+    public float climbUpSpeed;
+    public float crashDownSpeed;
 
     [Header("Mask Type")] 
     public bool falconMask;
@@ -189,28 +197,119 @@ public class Combat : MonoBehaviour
     {
         if (playerInMeleeRange)
         {
-            print("boss melee attack");
+            StartCoroutine(BossAttackCoroutine("Melee"));
         }
         else
         {
             int random = UnityEngine.Random.Range(0, 100);
-            if (random < 80)
+            if (random < 100)
             {
                 if (random < 40)
                 {
-                    print("web blast");
+                    StartCoroutine(BossAttackCoroutine("Web Blast"));
                 }
                 else
                 {
-                    print("venom spit");
+                    StartCoroutine(BossAttackCoroutine("Venom Spit"));
                 }
             }
             else
             {
-                print("special attack");
+                StartCoroutine(BossAttackCoroutine("Spider Special Attack"));
             }
         }
+    }
+
+    public void SpiderAttackOverride()
+    {
+        StartCoroutine(BossAttackCoroutine("Spider Special Attack"));
+    }
+
+    private IEnumerator BossAttackCoroutine(string attackType)
+    {
+        if (!currentlyAttacking && attackType == "Melee")
+        {
+            currentlyAttacking = true;
+            StartCoroutine(MeleeAttackCooldownCoroutine());
+            animator.SetTrigger("Melee");
+            yield return new WaitForSeconds(meleeHitDelay);
+        }
+
+        if (!currentlyAttacking && attackType == "Web Blast")
+        {
+            currentlyAttacking = true;
+            StartCoroutine(MeleeAttackCooldownCoroutine());
+            animator.SetTrigger("Web");
+            yield return new WaitForSeconds(rangedHitDelay);
+        }
+
+        if (!currentlyAttacking && attackType == "Venom Spit")
+        {
+            currentlyAttacking = true;
+            StartCoroutine(MeleeAttackCooldownCoroutine());
+            animator.SetTrigger("Venom");
+            yield return new WaitForSeconds(rangedHitDelay);
+        }
+
+        if (!currentlyAttacking && attackType == "Spider Special Attack")
+        {
+            currentlyAttacking = true;
+            basicEnemyPatrol.playerHiding = 0;
+            StartCoroutine(MeleeAttackCooldownCoroutine());
+            animator.SetTrigger("Special");
+            
+            //go up, replace with function that's called via animation event
+            StartCoroutine(ClimbUp());
+            //transform.position = new Vector3(transform.position.x, transform.position.y + 20, 0);
+            
+            
+            yield return new WaitForSeconds(specialAttackHitDelay/2);
+            
+            //move to above player
+            transform.position = new Vector3(basicEnemyPatrol.player.transform.position.x,transform.position.y,0);
+            basicEnemyPatrol.playerHiding = 0;
+            yield return new WaitForSeconds(specialAttackHitDelay / 2);
+
+            StartCoroutine(CrashDown());
+            basicEnemyPatrol.playerHiding = 0;
+        }
+    }
+
+    private IEnumerator ClimbUp()
+    {
+        spiderBossTileCollider.SetActive(false);
+        Vector3 goal = new Vector3(transform.position.x, transform.position.y + 20, 0);
+        float rateOfMovement = climbUpSpeed;
+        while (true)
+        {
+            Vector3 start = transform.position;
+            if (start == goal) break;
+            transform.position = Vector3.MoveTowards(start, goal, Time.deltaTime * rateOfMovement);
+            yield return new WaitForEndOfFrame();
+        }
+        spiderBossTileCollider.SetActive(true);
+    }
+
+    private IEnumerator CrashDown()
+    {
         
+        Vector3 goal = new Vector3(transform.position.x, -0.07f, 0);
+        float rateOfMovement = crashDownSpeed;
+        while (true)
+        {
+            Vector3 start = transform.position;
+            if (start == goal) break;
+            transform.position = Vector3.MoveTowards(start, goal, Time.deltaTime * rateOfMovement);
+            yield return new WaitForEndOfFrame();
+        }
+        StartCoroutine(MoveAfterCrash());
+    }
+
+    private IEnumerator MoveAfterCrash()
+    {
+        yield return new WaitForSeconds(1f);
+        currentlyAttacking = false;
+        basicEnemyPatrol.BossEndAttackAnimation();
     }
 
     #region Melee
@@ -445,10 +544,15 @@ public class Combat : MonoBehaviour
         }
     }
     
-    public void FireProjectile()
+    public void FireProjectile(string projectileType)
     {
         if (gameObject.CompareTag("Player")) ammoBar.SetAmmo(rangedCurrentAmmo);
-        GameObject go = Instantiate(projectilePrefab, launchPoint.position, projectilePrefab.transform.rotation);
+        if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss)
+        {
+            if (projectileType == "Web") defaultProjectilePrefab = webBlastProjectile;
+            if (projectileType == "Venom") defaultProjectilePrefab = venomSpitProjectile;
+        }
+        GameObject go = Instantiate(defaultProjectilePrefab, launchPoint.position, defaultProjectilePrefab.transform.rotation);
         go.GetComponent<Projectile>()
             .SetProjectileValues(flightTime, this.gameObject, projectileSpeed, rangedAttackPower);
         Vector3 origin = go.transform.localScale;
