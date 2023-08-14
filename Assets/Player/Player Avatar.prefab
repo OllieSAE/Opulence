@@ -2474,6 +2474,7 @@ GameObject:
   - component: {fileID: 1584120732}
   - component: {fileID: 1584120733}
   - component: {fileID: 2575634471455701375}
+  - component: {fileID: 1986453059}
   m_Layer: 6
   m_Name: Player Avatar
   m_TagString: Player
@@ -2738,6 +2739,37 @@ CircleCollider2D:
   m_Offset: {x: -0.006594181, y: -0.37140936}
   serializedVersion: 2
   m_Radius: 0.09409082
+--- !u!114 &1986453059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048529260058701012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1636397413
+      Data2: 1330099696
+      Data3: 2120124078
+      Data4: -1370525694
+    Path: event:/SOUND EVENTS/Character Spawn
+  Event: 
+  PlayEvent: 11
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 1
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1229117945578845079
 GameObject:
   m_ObjectHideFlags: 0
