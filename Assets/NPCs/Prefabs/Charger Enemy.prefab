@@ -191,6 +191,7 @@ MonoBehaviour:
   isTransitioning: 0
   attackCooldown: 0
   player: {fileID: 0}
+  playerHiding: 0
   enemyType: 2
 --- !u!50 &369745422201578703
 Rigidbody2D:
@@ -262,9 +263,12 @@ MonoBehaviour:
   launchPoint: {fileID: 0}
   flightTime: 0
   rangedHitDelay: 0
-  projectilePrefab: {fileID: 0}
+  defaultProjectilePrefab: {fileID: 0}
+  webBlastProjectile: {fileID: 0}
+  venomSpitProjectile: {fileID: 0}
   projectileSpeed: {x: 0, y: 0}
   chargerCollider: {fileID: 7021041561296149607}
+  specialAttackHitDelay: 0
   falconMask: 0
   spiderMask: 0
   falconDashCD: 0

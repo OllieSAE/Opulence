@@ -22,6 +22,7 @@ public class BasicEnemyPatrol : MonoBehaviour
     private bool facingLeft;
     private bool flipCR;
     private bool patrolling = true;
+    private bool bossRayStarted = false;
 
     [Header("Move/Combat Stuff")]
     public float defaultSpeed;
@@ -44,6 +45,7 @@ public class BasicEnemyPatrol : MonoBehaviour
 
     [Header("Boss Stuff")]
     public GameObject player;
+    public int playerHiding = 0;
 
     public enum EnemyType
     {
@@ -155,6 +157,15 @@ public class BasicEnemyPatrol : MonoBehaviour
 
         if (enemyType == EnemyType.Boss)
         {
+            StartCoroutine(BossRayCoroutine());
+        }
+    }
+
+    private IEnumerator BossRayCoroutine()
+    {
+        if (!bossRayStarted)
+        {
+            bossRayStarted = true;
             Vector3 dir = (player.transform.position - transform.position).normalized;
             RaycastHit2D frontHit = Physics2D.Raycast(
                 origin: transform.position,
@@ -165,6 +176,7 @@ public class BasicEnemyPatrol : MonoBehaviour
             if (frontHit.collider != null && frontHit.collider.CompareTag("Player"))
             {
                 isPlayerInSight = true;
+                playerHiding = 0;
                 float distance = Vector2.Distance(transform.position, frontHit.collider.gameObject.transform.position);
                 
                 if(distance < meleeAttackRange && distance > -meleeAttackRange && !flipCR)
@@ -179,8 +191,24 @@ public class BasicEnemyPatrol : MonoBehaviour
                 }
                 else isPlayerInRange = false;
             }
-            
+            else if (frontHit.collider != null && frontHit.collider.CompareTag("Ground"))
+            {
+                isPlayerInSight = false;
+                isPlayerInRange = false;
+                isPlayerInMeleeRange = false;
+                playerHiding++;
+                //print("player hiding" + playerHiding);
+                if (playerHiding > 5)
+                {
+                    print("YOU CANNOT HIDE FROM ME");
+                    combat.SpiderAttackOverride();
+                    playerHiding = 0;
+                    isAttacking = true;
+                }
+            }
             //Debug.DrawLine(transform.position,transform.position+dir*sightDistance,Color.red);
+            yield return new WaitForSeconds(1f);
+            bossRayStarted = false;
         }
     }
 
@@ -212,11 +240,12 @@ public class BasicEnemyPatrol : MonoBehaviour
             }
             else
             {
+                BossCheckDirection();
                 StartCoroutine(BossAttackCoroutine());
                 //need to make the boss move after casting
             }
-            
         }
+        
         else if (isTransitioning)
         {
             //if (!isPlayerInRange) isAttacking = false;
@@ -227,13 +256,23 @@ public class BasicEnemyPatrol : MonoBehaviour
         }
         else if (isGroundAhead && !isWallAhead && !isPlayerInRange && !isAttacking)
         {
+            BossCheckDirection();
             transform.Translate(targetDirection * currentSpeed * Time.deltaTime);
-            animator.SetBool("Running", true);
+            if (enemyType == EnemyType.Boss)
+            {
+                animator.SetBool("Walking", true);
+            }
+            else animator.SetBool("Running", true);
         }
         else if (isGroundAhead && !isWallAhead && attackCD && !isPlayerInMeleeRange)
         {
+            BossCheckDirection();
             transform.Translate(targetDirection * aggroSpeed * Time.deltaTime);
-            animator.SetBool("Running", true);
+            animator.SetBool("Walking", true);
+        }
+        else if (isAttacking && enemyType == EnemyType.Boss)
+        {
+            animator.SetBool("Walking", false);
         }
         else if ((!isGroundAhead || isWallAhead) && !isPlayerInRange)
         {
@@ -241,27 +280,42 @@ public class BasicEnemyPatrol : MonoBehaviour
         }
     }
 
+    private void BossCheckDirection()
+    {
+        if (isPlayerInSight)
+        {
+            Vector3 dir = (player.transform.position - transform.position).normalized;
+            if(dir.x * transform.localScale.x < 0 && dir.y < 0.9) Flip();
+        }
+    }
+
+    public void BossEndAttackAnimation()
+    {
+        attackCD = true;
+        StartCoroutine(BossEndAttackAnimationCoroutine());
+    }
+
+    private IEnumerator BossEndAttackAnimationCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
+        attackCD = false;
+    }
+
     private IEnumerator BossAttackCoroutine()
     {
-        animator.SetBool("Running", false);
+        animator.SetBool("Walking", false);
         isAttacking = true;
         if (isPlayerInMeleeRange)
         {
             combat.EnemyAttack(enemyType, aggroSpeed, isPlayerInMeleeRange);
             yield return new WaitForSeconds(attackDelay);
-            attackCD = true;
-            yield return new WaitForSeconds(attackCooldown);
-            attackCD = false;
         }
         else
         {
             combat.EnemyAttack(enemyType, aggroSpeed, isPlayerInMeleeRange);
             yield return new WaitForSeconds(attackDelay);
-            attackCD = true;
-            yield return new WaitForSeconds(attackCooldown);
-            attackCD = false;
         }
-        isAttacking = false;
         currentSpeed = defaultSpeed;
     }
 
