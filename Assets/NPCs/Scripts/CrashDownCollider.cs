@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargerCollider : MonoBehaviour
+public class CrashDownCollider : MonoBehaviour
 {
-    private int meleeAttackPower;
+    private int crashDownPower;
     private Combat combat;
 
     private void Start()
@@ -17,8 +16,8 @@ public class ChargerCollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            meleeAttackPower = combat.meleeAttackPower;
-            other.GetComponentInParent<Health>().ChangeHealth(meleeAttackPower,this.gameObject);
+            crashDownPower = combat.crashDownPower;
+            other.GetComponentInParent<Health>().ChangeHealth(-crashDownPower,this.gameObject);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BasicEnemyPatrol : MonoBehaviour
 {
@@ -48,6 +49,8 @@ public class BasicEnemyPatrol : MonoBehaviour
     public int playerHiding = 0;
     public bool bossCharging = false;
     public float bossChargeSpeed;
+    public Vector3 targetDirRaw;
+    public Vector3 targetDir;
 
     public enum EnemyType
     {
@@ -165,13 +168,16 @@ public class BasicEnemyPatrol : MonoBehaviour
 
     private IEnumerator BossRayCoroutine()
     {
+        
         if (!bossRayStarted)
         {
             bossRayStarted = true;
-            Vector3 dir = (player.transform.position - transform.position).normalized;
+            targetDirRaw = (player.transform.position - transform.position);
+            targetDir = targetDirRaw.normalized;
+            targetDir.y = Mathf.Clamp(targetDir.y, -0.55f, 0.00f);
             RaycastHit2D frontHit = Physics2D.Raycast(
                 origin: transform.position,
-                direction: new Vector2(dir.x, dir.y),
+                direction: new Vector2(targetDir.x, targetDir.y),
                 distance: sightDistance,
                 layerMask: playerAndGroundLayer);
             
@@ -193,13 +199,12 @@ public class BasicEnemyPatrol : MonoBehaviour
                 }
                 else isPlayerInRange = false;
             }
-            else if (frontHit.collider != null && frontHit.collider.CompareTag("Ground"))
+            else if (frontHit.collider == null)
             {
                 isPlayerInSight = false;
                 isPlayerInRange = false;
                 isPlayerInMeleeRange = false;
                 playerHiding++;
-                //print("player hiding" + playerHiding);
                 if (playerHiding > 5)
                 {
                     print("YOU CANNOT HIDE FROM ME");
@@ -208,7 +213,7 @@ public class BasicEnemyPatrol : MonoBehaviour
                     isAttacking = true;
                 }
             }
-            //Debug.DrawLine(transform.position,transform.position+dir*sightDistance,Color.red);
+            Debug.DrawLine(transform.position,transform.position+targetDir*sightDistance,Color.red);
             yield return new WaitForSeconds(1f);
             bossRayStarted = false;
         }

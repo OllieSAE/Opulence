@@ -65,8 +65,10 @@ public class Combat : MonoBehaviour
     [Header("Boss Combat")]
     public float specialAttackHitDelay;
     public GameObject spiderBossTileCollider;
+    public GameObject crashDownCollider;
     public float climbUpSpeed;
     public float crashDownSpeed;
+    public int crashDownPower;
 
     [Header("Mask Type")] 
     public bool falconMask;
@@ -285,6 +287,14 @@ public class Combat : MonoBehaviour
         }
     }
 
+    public void SetBossProjectileAngle()
+    {
+        if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss)
+        {
+            projectileSpeed.y = basicEnemyPatrol.targetDirRaw.y;
+        }
+    }
+
     private IEnumerator ClimbUp()
     {
         spiderBossTileCollider.SetActive(false);
@@ -302,7 +312,9 @@ public class Combat : MonoBehaviour
 
     private IEnumerator CrashDown()
     {
-        
+        crashDownCollider.SetActive(true);
+        int tempDamage = damageAoeTest.damageRate;
+        damageAoeTest.damageRate = 0;
         Vector3 goal = new Vector3(transform.position.x, -0.07f, 0);
         float rateOfMovement = crashDownSpeed;
         while (true)
@@ -313,6 +325,8 @@ public class Combat : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         StartCoroutine(MoveAfterCrash());
+        crashDownCollider.SetActive(false);
+        damageAoeTest.damageRate = tempDamage;
     }
 
     private IEnumerator MoveAfterCrash()
