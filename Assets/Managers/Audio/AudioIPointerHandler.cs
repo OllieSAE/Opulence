@@ -1,17 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class AudioIPointerHandler : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
+    public string hoverSoundToPlay;
+    public string clickSoundToPlay;
+    
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
-        print("mouse has entered");
+        if (hoverSoundToPlay != null)
+        {
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/" + hoverSoundToPlay);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        print("mouse has clicked");
+        if (clickSoundToPlay != null)
+        {
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/" + clickSoundToPlay);
+        }
     }
 }
