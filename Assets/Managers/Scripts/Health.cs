@@ -52,10 +52,11 @@ public class Health : MonoBehaviour
     {
         if (!immune)
         {
+            if(amount < 0) immune = true;
             currentHealth += amount;
         
             if (healthBar != null) healthBar.SetHealth(currentHealth);
-            immune = true;
+            
             StartCoroutine(ImmunityReset());
             if (amount < 0 && currentHealth > 0 && thisIsPlayer)
             {

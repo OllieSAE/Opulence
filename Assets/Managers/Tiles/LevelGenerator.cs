@@ -754,6 +754,9 @@ public class LevelGenerator : MonoBehaviour
                 go.GetComponent<RescueLocation>().gridPositionV3Int = node.gridPosV3Int;
             }
         }
+
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         GameManager.Instance.LevelGenComplete();
     }
 
@@ -1025,7 +1028,6 @@ public class LevelGenerator : MonoBehaviour
             child.GetComponent<Tilemap>().ClearAllTiles();
             if (child != currentTilemap.transform) Destroy(child.transform.gameObject);
         }
-
         GenerateTiles();
         //clearTilesEvent?.Invoke();
     }

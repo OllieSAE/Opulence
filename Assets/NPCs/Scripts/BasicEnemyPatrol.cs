@@ -46,6 +46,8 @@ public class BasicEnemyPatrol : MonoBehaviour
     [Header("Boss Stuff")]
     public GameObject player;
     public int playerHiding = 0;
+    public bool bossCharging = false;
+    public float bossChargeSpeed;
 
     public enum EnemyType
     {
@@ -254,9 +256,13 @@ public class BasicEnemyPatrol : MonoBehaviour
         {
             transform.Translate(targetDirection * currentSpeed * Time.deltaTime);
         }
+        else if (bossCharging && isGroundAhead && !isWallAhead && enemyType == EnemyType.Boss)
+        {
+            transform.Translate(targetDirection * bossChargeSpeed * Time.deltaTime);
+        }
         else if (isGroundAhead && !isWallAhead && !isPlayerInRange && !isAttacking)
         {
-            BossCheckDirection();
+            if(enemyType==EnemyType.Boss) BossCheckDirection();
             transform.Translate(targetDirection * currentSpeed * Time.deltaTime);
             if (enemyType == EnemyType.Boss)
             {
@@ -266,7 +272,7 @@ public class BasicEnemyPatrol : MonoBehaviour
         }
         else if (isGroundAhead && !isWallAhead && attackCD && !isPlayerInMeleeRange)
         {
-            BossCheckDirection();
+            if(enemyType==EnemyType.Boss) BossCheckDirection();
             transform.Translate(targetDirection * aggroSpeed * Time.deltaTime);
             animator.SetBool("Walking", true);
         }

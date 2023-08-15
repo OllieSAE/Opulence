@@ -59019,7 +59019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1204839768, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1264342192, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_fontColor.a
@@ -59103,6 +59103,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 861644328799837907, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: mainMenuEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: toggleEnemyMovement
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2417026086825389793, guid: 81df457d65ef04042942728167ca4758, type: 3}

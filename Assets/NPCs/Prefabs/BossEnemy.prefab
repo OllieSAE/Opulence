@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 376282883375763913}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &376282881704245186
 VisualEffect:
@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 376282883375763916}
   - component: {fileID: 376282883375763919}
   - component: {fileID: 376282883375763918}
+  - component: {fileID: 7853506241795880766}
   m_Layer: 8
   m_Name: BossEnemy
   m_TagString: Enemy
@@ -267,6 +268,7 @@ Transform:
   m_Children:
   - {fileID: 376282883182580678}
   - {fileID: 376282883461614293}
+  - {fileID: 4809789910740232740}
   - {fileID: 697696997849945930}
   - {fileID: 5183134750765974972}
   - {fileID: 376282881704245184}
@@ -427,6 +429,8 @@ MonoBehaviour:
   attackCooldown: 1.5
   player: {fileID: 0}
   playerHiding: 0
+  bossCharging: 0
+  bossChargeSpeed: 6
   enemyType: 3
 --- !u!114 &376282883375763911
 MonoBehaviour:
@@ -464,7 +468,7 @@ MonoBehaviour:
   meleeAttackPower: 5
   meleeAttackPoint: {fileID: 376282883461614293}
   meleeAttackRange: 0
-  meleeHitDelay: 2
+  meleeHitDelay: 1.25
   chargeTransitionDelay: 1
   meleeComboTimerCutoff: 0.7
   meleeCombo:
@@ -483,7 +487,7 @@ MonoBehaviour:
   webBlastProjectile: {fileID: 7808962626766069802, guid: eb38e488c2b84774e9f82bb2ea8ff07d, type: 3}
   venomSpitProjectile: {fileID: 6372635195886023942, guid: 95507e8345c10b74db716f26e4143910, type: 3}
   projectileSpeed: {x: 7, y: 0}
-  chargerCollider: {fileID: 0}
+  chargerCollider: {fileID: 7675706847509581007}
   specialAttackHitDelay: 5
   spiderBossTileCollider: {fileID: 9137885093425031230}
   climbUpSpeed: 50
@@ -535,6 +539,20 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 6fd7e46e279ee9443b0322d4b6e55930, type: 2}
   vfxToTrigger: {fileID: 3912571511903046469}
   duration: 0.1
+--- !u!114 &7853506241795880766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376282883375763910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85264d7d0cea3df4d812b65eb261d470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRate: 5
+  timer: 0
 --- !u!1 &376282883461614292
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +584,77 @@ Transform:
   m_Father: {fileID: 376282883375763913}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7675706847509581007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4809789910740232740}
+  - component: {fileID: 1298391627}
+  - component: {fileID: 4540032893688073275}
+  m_Layer: 0
+  m_Name: ChargerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4809789910740232740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675706847509581007}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 376282883375763913}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1298391627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675706847509581007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdfbc4bceb42604aaaf986de3129325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &4540032893688073275
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675706847509581007}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.22982454, y: -0.2676442}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.65671635, y: 1.3083727}
+  m_EdgeRadius: 0
 --- !u!1 &9137885093425031230
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +685,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 376282883375763913}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2026845531179332816
 CircleCollider2D:
@@ -635,7 +724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4816286241991073915, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4816286241991073915, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
       propertyPath: m_LocalPosition.x
@@ -739,7 +828,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 907023359325518941, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 907023359325518941, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1421,13 +1421,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1455478821}
   - component: {fileID: 1455478822}
+  - component: {fileID: 1991819848}
   m_Layer: 6
   m_Name: falconDashCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1455478821
 Transform:
   m_ObjectHideFlags: 0
@@ -1450,13 +1451,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455478820}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.14791825, y: -0.21941203}
+  m_Offset: {x: 0.034329265, y: -0.21941203}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1467,8 +1468,20 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48721665, y: 0.50200856}
+  m_Size: {x: 0.26003867, y: 0.50200856}
   m_EdgeRadius: 0
+--- !u!114 &1991819848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455478820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a44e214fc821e4dacb655162a6f2d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1486400787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,7 +2539,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!61 &1584120731
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2585,14 +2598,20 @@ MonoBehaviour:
   rechargeAmmoTime: 3
   launchPoint: {fileID: 2731262880608830011}
   flightTime: 0.6
-  rangedHitDelay: 0
-  projectilePrefab: {fileID: 4786924577641686911, guid: ef8ab564bf53e9543abe35df872d7452, type: 3}
+  rangedHitDelay: 1
+  defaultProjectilePrefab: {fileID: 0}
+  webBlastProjectile: {fileID: 0}
+  venomSpitProjectile: {fileID: 0}
   projectileSpeed: {x: 6, y: 0}
   chargerCollider: {fileID: 0}
+  specialAttackHitDelay: 0
+  spiderBossTileCollider: {fileID: 0}
+  climbUpSpeed: 0
+  crashDownSpeed: 0
   falconMask: 1
   spiderMask: 0
   falconDashCD: 0
-  falconDashCollider: {fileID: 0}
+  falconDashCollider: {fileID: 1455478820}
 --- !u!114 &2666934854866716956
 MonoBehaviour:
   m_ObjectHideFlags: 0

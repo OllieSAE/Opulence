@@ -192,6 +192,7 @@ MonoBehaviour:
   attackCooldown: 0
   player: {fileID: 0}
   playerHiding: 0
+  bossCharging: 0
   enemyType: 2
 --- !u!50 &369745422201578703
 Rigidbody2D:
@@ -269,6 +270,9 @@ MonoBehaviour:
   projectileSpeed: {x: 0, y: 0}
   chargerCollider: {fileID: 7021041561296149607}
   specialAttackHitDelay: 0
+  spiderBossTileCollider: {fileID: 0}
+  climbUpSpeed: 0
+  crashDownSpeed: 0
   falconMask: 0
   spiderMask: 0
   falconDashCD: 0

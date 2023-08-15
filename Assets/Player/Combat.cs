@@ -74,7 +74,7 @@ public class Combat : MonoBehaviour
 
     [Header("Falcon Combat")] 
     public bool falconDashCD;
-    public Collider2D falconDashCollider;
+    public GameObject falconDashCollider;
 
     private void Awake()
     {
@@ -202,15 +202,19 @@ public class Combat : MonoBehaviour
         else
         {
             int random = UnityEngine.Random.Range(0, 100);
-            if (random < 100)
+            if (random < 90)
             {
-                if (random < 40)
+                if (random < 30)
                 {
                     StartCoroutine(BossAttackCoroutine("Web Blast"));
                 }
-                else
+                else if (random < 60)
                 {
                     StartCoroutine(BossAttackCoroutine("Venom Spit"));
+                }
+                else
+                {
+                    StartCoroutine(BossAttackCoroutine("Charge"));
                 }
             }
             else
@@ -251,6 +255,13 @@ public class Combat : MonoBehaviour
             yield return new WaitForSeconds(rangedHitDelay);
         }
 
+        if (!currentlyAttacking && attackType == "Charge")
+        {
+            StartCoroutine(ChargerAttackCoroutine());
+            animator.SetTrigger("Charge");
+            yield return new WaitForSeconds(meleeHitDelay);
+        }
+
         if (!currentlyAttacking && attackType == "Spider Special Attack")
         {
             currentlyAttacking = true;
@@ -260,15 +271,14 @@ public class Combat : MonoBehaviour
             
             //go up, replace with function that's called via animation event
             StartCoroutine(ClimbUp());
-            //transform.position = new Vector3(transform.position.x, transform.position.y + 20, 0);
-            
-            
+
+            //wait for a bit before aligning with player
             yield return new WaitForSeconds(specialAttackHitDelay/2);
             
             //move to above player
             transform.position = new Vector3(basicEnemyPatrol.player.transform.position.x,transform.position.y,0);
             basicEnemyPatrol.playerHiding = 0;
-            yield return new WaitForSeconds(specialAttackHitDelay / 2);
+            yield return new WaitForSeconds(0.01f);
 
             StartCoroutine(CrashDown());
             basicEnemyPatrol.playerHiding = 0;
@@ -456,19 +466,26 @@ public class Combat : MonoBehaviour
     {
         if (!currentlyAttacking)
         {
-            
             currentlyAttacking = true;
             StartCoroutine(MeleeAttackCooldownCoroutine());
-            //if (gameObject.CompareTag("Player")) ;
-            if(gameObject.CompareTag("Enemy")) animator.SetBool("Charge", true);
-            if (chargerCollider != null) chargerCollider.SetActive(true);
             int tempDamage = damageAoeTest.damageRate;
             damageAoeTest.damageRate = 0;
+            if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss) basicEnemyPatrol.bossCharging = true;
+            if(gameObject.CompareTag("Enemy") && basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Charger) animator.SetBool("Charge", true);
+            yield return new WaitForSeconds(0.2f);
+            if (chargerCollider != null) chargerCollider.SetActive(true);
             yield return new WaitForSeconds(meleeHitDelay);
             if (chargerCollider != null) chargerCollider.SetActive(false);
             damageAoeTest.damageRate = tempDamage;
             yield return new WaitForSeconds(chargeTransitionDelay);
-            if(gameObject.CompareTag("Enemy")) animator.SetBool("Charge", false);
+            if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss)
+            {
+                animator.SetTrigger("FinishCharge");
+                print("finish charge");
+                basicEnemyPatrol.bossCharging = false;
+                basicEnemyPatrol.BossEndAttackAnimation();
+            }
+            if(gameObject.CompareTag("Enemy") && basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Charger) animator.SetBool("Charge", false);
             
         }
     }
@@ -525,6 +542,7 @@ public class Combat : MonoBehaviour
         {
             if (movement.isTouchingGround)
             {
+                
                 falconDashCD = true;
                 lastComboEnd = Time.time;
                 currentlyAttacking = true;
@@ -534,11 +552,20 @@ public class Combat : MonoBehaviour
                     animator.SetBool("FalconDash", true);
                     animator.Play("falconDashEnter_ANIM");
                 }
+
+                
                 // waiting for the start up animation to finish before actually dashing
                 yield return new WaitForSeconds(0.2f);
                 // calling the movement dash to start the physics of the dash
+                health.immune = true;
                 movement.FalconDash();
+                
+                //falconDashCollider.SetActive(true);
+                
                 yield return new WaitForSeconds(rangedHitDelay);
+                
+                //falconDashCollider.SetActive(false);
+                health.immune = false;
                 lastComboEnd = Time.time;
             }
         }

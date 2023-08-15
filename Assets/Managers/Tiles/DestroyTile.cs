@@ -8,6 +8,7 @@ public class DestroyTile : MonoBehaviour
 {
     private Tilemap tilemap;
     private Vector3Int myPos;
+    private bool exploded = false;
 
     private void Start()
     {
@@ -20,6 +21,12 @@ public class DestroyTile : MonoBehaviour
         if (other.gameObject.CompareTag("TileBreaker"))
         {
             tilemap.SetTile(myPos, null);
+            if (!exploded)
+            {
+                exploded = true;
+                //play exploded sound
+                //play exploded vfx
+            }
         }
     }
 }

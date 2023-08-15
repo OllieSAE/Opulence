@@ -6,11 +6,13 @@ using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class Movement : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
+    private Combat combat;
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
     private Vector2 inputVector;
@@ -69,6 +71,7 @@ public class Movement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         health = GetComponent<Health>();
+        combat = GetComponent<Combat>();
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -116,6 +119,12 @@ public class Movement : MonoBehaviour
         GameManager.Instance.endTutorialEvent += TutorialFinished;
         GameManager.Instance.pauseStartEvent += GamePauseStart;
         GameManager.Instance.pauseEndEvent += GamePauseEnd;
+        if(SceneManager.GetActiveScene().name == "FirstBossLevel")
+        {
+            
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     private void OnDisable()
@@ -378,22 +387,6 @@ public class Movement : MonoBehaviour
         wallJumpDelayCR = false;
     }
 
-    public void StartMove(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            //StartCoroutine();
-        }
-    }
-
-    public void StopMove(InputAction.CallbackContext context)
-    {
-        if (context.canceled)
-        {
-            //StopCoroutine();
-        }
-    }
-
     public void ArrestJump(InputAction.CallbackContext context)
     {
         if(rigidbody.velocity.y > 0) rigidbody.velocity = new Vector2(rigidbody.velocity.x,0);
@@ -471,7 +464,7 @@ public class Movement : MonoBehaviour
         dashCooldown = false;
     }
     
-        public void FalconDash()
+    public void FalconDash()
     {
         if (!isDead && inputAllowed && !isSliding && !falconDashCooldown)
         {
@@ -492,6 +485,7 @@ public class Movement : MonoBehaviour
             }
         }
     }
+    
 
     private IEnumerator FalconDashCoroutine(float waitTime)
     {
@@ -501,6 +495,7 @@ public class Movement : MonoBehaviour
         rigidbody.velocity = Vector2.zero;
         rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(waitTime);
+        combat.falconDashCollider.SetActive(true);
         noFlipping = true;
         if (!facingLeft)
         {
@@ -523,10 +518,13 @@ public class Movement : MonoBehaviour
         if(gameObject.CompareTag("Player")) animator.SetBool("FalconDash", false);
         rigidbody.constraints = RigidbodyConstraints2D.None;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        combat.falconDashCollider.SetActive(false);
         yield return new WaitForSeconds(dashCooldownDuration);
         falconDashCooldown = false;
         noFlipping = false;
+        
         playerInput.ActivateInput();
+        health.immune = false;
     }
     
     public void Crouch(InputAction.CallbackContext context)

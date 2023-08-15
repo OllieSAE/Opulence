@@ -219,6 +219,8 @@ public class GameManager : MonoBehaviour
         {
             player.GetComponent<Combat>().enabled = true;
             playerRespawnPos = player.transform.position;
+            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         if (combatTutorialTestEnable)
         {

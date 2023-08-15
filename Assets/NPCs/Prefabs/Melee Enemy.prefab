@@ -221,6 +221,8 @@ MonoBehaviour:
   isTransitioning: 0
   attackCooldown: 0
   player: {fileID: 0}
+  playerHiding: 0
+  bossCharging: 0
   enemyType: 1
 --- !u!50 &1834814332
 Rigidbody2D:
@@ -292,9 +294,15 @@ MonoBehaviour:
   launchPoint: {fileID: 1173620278182232431}
   flightTime: 0.5
   rangedHitDelay: 1
-  projectilePrefab: {fileID: 6372635195886023942, guid: 95507e8345c10b74db716f26e4143910, type: 3}
+  defaultProjectilePrefab: {fileID: 6372635195886023942, guid: 95507e8345c10b74db716f26e4143910, type: 3}
+  webBlastProjectile: {fileID: 0}
+  venomSpitProjectile: {fileID: 0}
   projectileSpeed: {x: 7, y: 0}
   chargerCollider: {fileID: 0}
+  specialAttackHitDelay: 0
+  spiderBossTileCollider: {fileID: 0}
+  climbUpSpeed: 0
+  crashDownSpeed: 0
   falconMask: 0
   spiderMask: 0
   falconDashCD: 0

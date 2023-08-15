@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargerCollider : MonoBehaviour
+public class FalconDashCollider : MonoBehaviour
 {
     private int meleeAttackPower;
     private Combat combat;
@@ -15,10 +15,10 @@ public class ChargerCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             meleeAttackPower = combat.meleeAttackPower;
-            other.GetComponentInParent<Health>().ChangeHealth(-5,this.gameObject);
+            other.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
         }
     }
 }
