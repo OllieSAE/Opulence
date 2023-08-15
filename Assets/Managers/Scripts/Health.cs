@@ -55,6 +55,7 @@ public class Health : MonoBehaviour
             if(amount < 0) immune = true;
             currentHealth += amount;
         
+            print(gameObject + " took " + amount + " damage from " + whoDealtDamage);
             if (healthBar != null) healthBar.SetHealth(currentHealth);
             
             StartCoroutine(ImmunityReset());

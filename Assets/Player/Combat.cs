@@ -66,6 +66,8 @@ public class Combat : MonoBehaviour
     public float specialAttackHitDelay;
     public GameObject spiderBossTileCollider;
     public GameObject crashDownCollider;
+    public GameObject spiderBossMelee1;
+    public GameObject spiderBossMelee2;
     public float climbUpSpeed;
     public float crashDownSpeed;
     public int crashDownPower;
@@ -287,6 +289,39 @@ public class Combat : MonoBehaviour
         }
     }
 
+    public void ToggleSpiderMeleeHitbox1(string state)
+    {
+        int tempDamage = damageAoeTest.damageRate;
+        if (state == "true")
+        {
+            damageAoeTest.damageRate = 0;
+            spiderBossMelee1.SetActive(true);
+        }
+
+        if (state == "false")
+        {
+            
+            damageAoeTest.damageRate = tempDamage;
+            spiderBossMelee1.SetActive(false);
+        }
+    }
+
+    public void ToggleSpiderMeleeHitbox2(string state)
+    {
+        int tempDamage = damageAoeTest.damageRate;
+        if (state == "true")
+        {
+            damageAoeTest.damageRate = 0;
+            spiderBossMelee2.SetActive(true);
+        }
+
+        if (state == "false")
+        {
+            damageAoeTest.damageRate = tempDamage;
+            spiderBossMelee2.SetActive(false);
+        }
+    }
+    
     public void SetBossProjectileAngle()
     {
         if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss)

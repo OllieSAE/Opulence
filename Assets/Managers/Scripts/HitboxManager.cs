@@ -29,7 +29,7 @@ public class HitboxManager : MonoBehaviour
     public Transform falconA3F4;
     public float falconA3Radius;
     [Header("Spider Attack Frames")]
-    public Transform spiderFrame1;
+    public Transform spiderA1F1;
 
     private void Start()
     {
