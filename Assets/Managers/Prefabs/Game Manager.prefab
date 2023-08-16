@@ -3686,7 +3686,6 @@ GameObject:
   - component: {fileID: 630692784}
   - component: {fileID: 630692783}
   - component: {fileID: 630692782}
-  - component: {fileID: 1482018042}
   m_Layer: 5
   m_Name: Settings Menu Button
   m_TagString: Untagged
@@ -3710,10 +3709,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 46.85, y: -25.81125}
+  m_SizeDelta: {x: 93.7, y: 17.2075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &630692784
 CanvasRenderer:
@@ -3809,20 +3808,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1482018042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630692780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
 --- !u!1 &633383098
 GameObject:
   m_ObjectHideFlags: 0
@@ -4005,7 +3990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &717350749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4110,8 +4095,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 704643071
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.16078432}
+    rgba: 654311423
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5063,7 +5048,6 @@ GameObject:
   - component: {fileID: 920456900}
   - component: {fileID: 920456899}
   - component: {fileID: 920456898}
-  - component: {fileID: 88942692}
   m_Layer: 5
   m_Name: Play Menu Button
   m_TagString: Untagged
@@ -5087,10 +5071,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -17.2075}
+  m_SizeDelta: {x: 93.7, y: 17.2075}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &920456900
 CanvasRenderer:
@@ -5186,20 +5170,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &88942692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920456896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
 --- !u!1 &929441432
 GameObject:
   m_ObjectHideFlags: 0
@@ -7225,7 +7195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1204839769
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7754,8 +7724,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 704643071
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.16078432}
+    rgba: 654311423
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10806,7 +10776,6 @@ GameObject:
   - component: {fileID: 1592870409}
   - component: {fileID: 1592870408}
   - component: {fileID: 1592870407}
-  - component: {fileID: 1430448296}
   m_Layer: 5
   m_Name: Exit Menu Button
   m_TagString: Untagged
@@ -10830,10 +10799,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 46.85, y: -60.22625}
+  m_SizeDelta: {x: 93.7, y: 17.2075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1592870409
 CanvasRenderer:
@@ -10929,20 +10898,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1430448296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592870405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
 --- !u!1 &1616829040
 GameObject:
   m_ObjectHideFlags: 0
@@ -11608,8 +11563,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 704643071
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.16078432}
+    rgba: 654311423
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.14901961}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16958,7 +16913,6 @@ GameObject:
   - component: {fileID: 2388290452524937575}
   - component: {fileID: 2735786430961107937}
   - component: {fileID: 1741707009003814048}
-  - component: {fileID: 2141830315}
   m_Layer: 5
   m_Name: Credits Menu Button
   m_TagString: Untagged
@@ -16982,10 +16936,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 46.85, y: -43.018753}
+  m_SizeDelta: {x: 93.7, y: 17.2075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2388290452524937575
 CanvasRenderer:
@@ -17081,20 +17035,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2141830315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942765371788691062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
 --- !u!1 &3041789559072965629
 GameObject:
   m_ObjectHideFlags: 0
