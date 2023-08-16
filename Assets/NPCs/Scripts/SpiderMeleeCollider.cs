@@ -6,31 +6,37 @@ using UnityEngine;
 public class SpiderMeleeCollider : MonoBehaviour
 {
     private int meleeAttackPower;
-    private Combat combat;
-    public BoxCollider2D collider;
+    public Combat combat;
+    public Vector2 overlapBoxSize;
+    public Vector2 overlapBoxPos;
+    public Vector2 newPos;
+    private bool damageDealt = false;
     
     public int damageModifier = 1;
 
-    private void Start()
-    {
-        combat = GetComponentInParent<Combat>();
-    }
-
     private void OnEnable()
     {
-        collider.enabled = true;
+        meleeAttackPower = combat.meleeAttackPower;
+        damageDealt = false;
     }
 
-    //this DOES NOT WORK if the player is stationary
-    //because unity is doing a bit... again
-    //maybe attempt a physics2D circle check, like the original charger?
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            meleeAttackPower = combat.meleeAttackPower;
-            other.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower * damageModifier,this.gameObject);
-            gameObject.SetActive(false);
-        }
+        newPos = overlapBoxPos;
+        newPos.x += transform.position.x;
+        newPos.y += transform.position.y;
+        Collider2D[] hitPlayers = Physics2D.OverlapBoxAll(newPos, overlapBoxSize, 0.5f);
+        foreach (Collider2D hitPlayer in hitPlayers)
+            if (hitPlayer.CompareTag("Player") && !damageDealt)
+            {
+                damageDealt = true;
+                hitPlayer.GetComponent<Health>().ChangeHealth(-meleeAttackPower*damageModifier,this.gameObject);
+            }
     }
+
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawCube(newPos,overlapBoxSize);
+    // }
 }
