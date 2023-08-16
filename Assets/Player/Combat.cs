@@ -71,6 +71,7 @@ public class Combat : MonoBehaviour
     public float climbUpSpeed;
     public float crashDownSpeed;
     public int crashDownPower;
+    private int tempDamage;
 
     [Header("Mask Type")] 
     public bool falconMask;
@@ -104,11 +105,13 @@ public class Combat : MonoBehaviour
             if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss)
             {
                 basicEnemyPatrol.player = GameObject.FindGameObjectWithTag("Player");
+                
             }
         }
 
         if (chargerCollider != null) chargerCollider.SetActive(false);
         damageAoeTest = GetComponent<DamageAOETest>();
+        if(damageAoeTest!= null) tempDamage = damageAoeTest.damageRate;
         rangedCurrentAmmo = rangedMaxAmmo;
         enemyLayer = LayerMask.GetMask("Enemies");
         playerLayer = LayerMask.GetMask("Player");
@@ -289,9 +292,9 @@ public class Combat : MonoBehaviour
         }
     }
 
+    
     public void ToggleSpiderMeleeHitbox1(string state)
     {
-        int tempDamage = damageAoeTest.damageRate;
         if (state == "true")
         {
             damageAoeTest.damageRate = 0;
@@ -300,7 +303,6 @@ public class Combat : MonoBehaviour
 
         if (state == "false")
         {
-            
             damageAoeTest.damageRate = tempDamage;
             spiderBossMelee1.SetActive(false);
         }
@@ -308,7 +310,6 @@ public class Combat : MonoBehaviour
 
     public void ToggleSpiderMeleeHitbox2(string state)
     {
-        int tempDamage = damageAoeTest.damageRate;
         if (state == "true")
         {
             damageAoeTest.damageRate = 0;
@@ -348,7 +349,7 @@ public class Combat : MonoBehaviour
     private IEnumerator CrashDown()
     {
         crashDownCollider.SetActive(true);
-        int tempDamage = damageAoeTest.damageRate;
+        //int tempDamage = damageAoeTest.damageRate;
         damageAoeTest.damageRate = 0;
         Vector3 goal = new Vector3(transform.position.x, -0.07f, 0);
         float rateOfMovement = crashDownSpeed;
@@ -517,7 +518,7 @@ public class Combat : MonoBehaviour
         {
             currentlyAttacking = true;
             StartCoroutine(MeleeAttackCooldownCoroutine());
-            int tempDamage = damageAoeTest.damageRate;
+            //int tempDamage = damageAoeTest.damageRate;
             damageAoeTest.damageRate = 0;
             if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss) basicEnemyPatrol.bossCharging = true;
             if(gameObject.CompareTag("Enemy") && basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Charger) animator.SetBool("Charge", true);

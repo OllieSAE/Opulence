@@ -84,7 +84,7 @@ public class LevelGenerator : MonoBehaviour
         {
             if (_instance == null)
             {
-                print("Level Manager is null");
+                print("Level Generator is null");
             }
 
             return _instance;
