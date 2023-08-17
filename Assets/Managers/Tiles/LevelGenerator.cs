@@ -19,6 +19,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private RuleTile currentTile;
     [SerializeField] private List<CustomTile> customTiles;
     [SerializeField] private Grid grid;
+    public MapGenerator mapGenerator;
     private EnemySpawner enemySpawner;
     public GameObject player;
     private Pathfinding pathfinding;
@@ -30,7 +31,7 @@ public class LevelGenerator : MonoBehaviour
 
     private Vector3Int[,] tileArrayVector3Ints;
     private CustomTile[,] tile2DArray;
-    private Node[,] gridNodeReferences;
+    public Node[,] gridNodeReferences;
     private List<Node> blockedNodes;
     private List<Node> fullNeighbours = new List<Node>();
     private List<Node> outliers = new List<Node>();
@@ -103,6 +104,7 @@ public class LevelGenerator : MonoBehaviour
         blockedNodes = new List<Node>();
         scale = Random.Range(0.15f, 0.25f);
         pathfinding = GetComponent<Pathfinding>();
+        mapGenerator = GetComponent<MapGenerator>();
     }
     
     private void OnDisable()
@@ -676,7 +678,9 @@ public class LevelGenerator : MonoBehaviour
 
     public void SetSpikeTiles()
     {
-        foreach (Node node in gridNodeReferences)
+        //disabled spikes for now
+        
+        /*foreach (Node node in gridNodeReferences)
         {
             //if node is a tile && not on the bottom - so it doesn't spawn enemies right next to the player at the beginning
             if (node.isTile && node.gridPosition.y > -levelHeight / 2)
@@ -738,7 +742,7 @@ public class LevelGenerator : MonoBehaviour
             //set west neighbour to SPIKE on a random chance
             
             //probably can't have wall spikes cz you won't be able to jump!!!
-        }
+        }*/
         
         SpawnNonProceduralAreas();
         SetPlayerRescues();
@@ -758,6 +762,7 @@ public class LevelGenerator : MonoBehaviour
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         GameManager.Instance.LevelGenComplete();
+        mapGenerator.LevelGenComplete();
     }
 
     //GameManager calls this when Level is loaded
