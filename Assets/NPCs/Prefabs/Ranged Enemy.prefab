@@ -191,6 +191,9 @@ MonoBehaviour:
   player: {fileID: 0}
   playerHiding: 0
   bossCharging: 0
+  bossChargeSpeed: 0
+  targetDirRaw: {x: 0, y: 0, z: 0}
+  targetDir: {x: 0, y: 0, z: 0}
   enemyType: 1
 --- !u!50 &3174919029024467306
 Rigidbody2D:
@@ -269,8 +272,12 @@ MonoBehaviour:
   chargerCollider: {fileID: 0}
   specialAttackHitDelay: 0
   spiderBossTileCollider: {fileID: 0}
+  crashDownCollider: {fileID: 0}
+  spiderBossMelee1: {fileID: 0}
+  spiderBossMelee2: {fileID: 0}
   climbUpSpeed: 0
   crashDownSpeed: 0
+  crashDownPower: 0
   falconMask: 0
   spiderMask: 0
   falconDashCD: 0
@@ -307,6 +314,7 @@ MonoBehaviour:
   - Enemy Impact
   - Enemy Ranged Emote
   - Enemy Ranged Attack
+  - Enemy Ranged Die
   particles: []
   flipTransform: {fileID: 1158638353165944239}
   enemyLayer:

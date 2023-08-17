@@ -6332,22 +6332,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1765219776, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
-      propertyPath: sfx.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765219776, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
-      propertyPath: sfx.Array.data[0]
-      value: Enemy Impact
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765219776, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
-      propertyPath: sfx.Array.data[1]
-      value: Enemy Ranged Emote
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765219776, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
-      propertyPath: sfx.Array.data[2]
-      value: Enemy Ranged Attack
-      objectReference: {fileID: 0}
     - target: {fileID: 1158638353165944224, guid: 958b692c3fdd7f0409665a874e3cea6c, type: 3}
       propertyPath: m_Name
       value: Ranged Enemy (1)
