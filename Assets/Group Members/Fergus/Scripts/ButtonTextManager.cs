@@ -12,34 +12,43 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
     public bool backButton;
 
     private TextMeshProUGUI text;
-    // Start is called before the first frame update
+    private Image buttonImage;
+    
     void Start()
     {
+        // Check if the textMesh is already saved
         if (text == null)
         {
+            // If there is no text currently, set the text
             text = GetComponent<TextMeshProUGUI>();
         }
-
+        // Checking if we are a back button
         if (backButton)
         {
+            // Setting the text's colour to the buttons normal colour
             text.color = button.colors.normalColor;
+            // Getting the sprite currently on the button
+            buttonImage = button.GetComponent<Image>();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        // Checking we aren't a backbutton
         if (!backButton)
         {
+            // Checking we have a button available
             if (button)
             {
+                // Checking if we are interactable or not
                 if (button.interactable)
                 {
+                    // Setting text colour to buttons normal colour
                     text.color = button.colors.normalColor;
                 }
                 else
                 {
+                    // Setting text colour to buttons disabled colour
                     text.color = button.colors.disabledColor;
 
                 }
@@ -48,6 +57,7 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
 
     }
 
+    // Event function for when the mouse enters the script objects space
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (backButton)
@@ -56,14 +66,17 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
         }
     }
 
+    // Event function for when the mouse clicks down on the script objects space
     public void OnPointerDown(PointerEventData eventData)
     {
         if (backButton)
         {
             text.color = button.colors.pressedColor;
+            buttonImage.color = button.colors.pressedColor;
         }
     }
 
+    // Event function for when the mouse exits the script objects space
     public void OnPointerExit(PointerEventData eventData)
     {
         if (backButton)
@@ -75,11 +88,13 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
         }
     }
 
+    // Event function for when the mouse releases a click on the script objects space
     public void OnPointerUp(PointerEventData eventData)
     {
         if (backButton)
         {
             text.color = button.colors.selectedColor;
+            buttonImage.color = button.colors.selectedColor;
         }
     }
 }
