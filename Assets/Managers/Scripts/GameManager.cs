@@ -5,6 +5,7 @@ using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
@@ -17,8 +18,8 @@ public class GameManager : MonoBehaviour
     private AsyncOperation loadingOperation;
     public GameObject mainCamera;
     public GameObject vcam1;
-    private string sceneToLoad;
-    private string currentScene;
+    public string sceneToLoad;
+    public string currentScene;
 
     [Header("Backgrounds")]
     public GameObject mainMenuBG;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     public GameObject settingsMenuUI;
     public GameObject loadGameMenuUI;
     public GameObject pauseUI;
+    public Button stuckButton;
     
     
     //public GameObject controlsUI;
@@ -113,12 +115,21 @@ public class GameManager : MonoBehaviour
         vcam1 = GameObject.FindGameObjectWithTag("vcam1");
         //tutorialStartUI.SetActive(false);
         //tutorialEndUI.SetActive(false);
-        pauseUI.SetActive(false);
+        //pauseUI.SetActive(false);
         //startCombatUI.SetActive(false);
-        creditsUI.SetActive(false);
-        if (!mainMenuEnabled) mainMenuUI.SetActive(false);
-        else mainMenuUI.SetActive(true);
-        loadingScreen.SetActive(false);
+        //creditsUI.SetActive(false);
+        if (!mainMenuEnabled)
+        {
+            mainMenuBG.SetActive(false);
+            mainMenuUI.SetActive(false);
+        }
+        else
+        {
+            mainMenuBG.SetActive(true);
+            mainMenuUI.SetActive(true);
+        }
+        //loadingScreen.SetActive(false);
+        sceneToLoad = "LevelSelectScene";
     }
 
     private void Start()
@@ -302,7 +313,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadLevelCoroutine()
     {
+        mainMenuBG.SetActive(false);
         mainMenuUI.SetActive(false);
+        
+        loadingScreenBG.SetActive(true);
         loadingScreen.SetActive(true);
         yield return new WaitForSeconds(1f);
         StartCoroutine(LoadSceneAsync());
@@ -321,6 +335,7 @@ public class GameManager : MonoBehaviour
         if (sceneToLoad != "LevelGenTest")
         {
             OnLevelLoaded();
+            loadingScreenBG.SetActive(false);
             loadingScreen.SetActive(false);
         }
     }
@@ -328,6 +343,7 @@ public class GameManager : MonoBehaviour
     public void LevelGenComplete()
     {
         OnLevelLoaded();
+        loadingScreenBG.SetActive(false);
         loadingScreen.SetActive(false);
     }
 
@@ -336,7 +352,10 @@ public class GameManager : MonoBehaviour
     private void OnLevelLoaded()
     {
         currentScene = sceneToLoad;
-        if(currentScene!=null)SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentScene));
+        if (!string.IsNullOrEmpty(currentScene))
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentScene));
+        }
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -356,6 +375,7 @@ public class GameManager : MonoBehaviour
             playerRespawnPos = player.transform.position;
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            
         }
         // if (combatTutorialTestEnable)
         // {
@@ -366,7 +386,11 @@ public class GameManager : MonoBehaviour
         //else if (player != null) player.GetComponent<Combat>().enabled = false;
         onLevelLoadedEvent?.Invoke();
         enableEnemyPatrolEvent?.Invoke();
-        
+        if (currentScene == "FirstBossLevel")
+        {
+            stuckButton.interactable = false;
+        }
+        else stuckButton.interactable = true;
     }
 
     public void EndLevel()
@@ -403,12 +427,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //like a wild chicken, this is FOUL
-            if (mainMenuUI.activeSelf || creditsUI.activeSelf) return;
-                PauseUI();
-        }
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        // {
+        //     //like a wild chicken, this is FOUL
+        //     if (mainMenuUI.activeSelf || creditsUI.activeSelf) return;
+        //         PauseUI();
+        // }
     }
 
     public void SubscribeToDeathEvents(Health health)

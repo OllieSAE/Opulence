@@ -90,8 +90,11 @@ public class Combat : MonoBehaviour
             playerInputActions.Player.MeleeAttack.performed += MeleeAttack;
             playerInputActions.Player.RangedAttack.performed += RangedAttack;
             ammoBar = GetComponentInChildren<AmmoBar>();
-            ammoBar.SetMaxAmmo(rangedMaxAmmo);
-            ammoBar.SetAmmo(rangedMaxAmmo);
+            if (ammoBar != null)
+            {
+                ammoBar.SetMaxAmmo(rangedMaxAmmo);
+                ammoBar.SetAmmo(rangedMaxAmmo);
+            }
         }
         else basicEnemyPatrol = GetComponent<BasicEnemyPatrol>();
 
@@ -623,7 +626,7 @@ public class Combat : MonoBehaviour
     
     public void FireProjectile(string projectileType)
     {
-        if (gameObject.CompareTag("Player")) ammoBar.SetAmmo(rangedCurrentAmmo);
+        if (gameObject.CompareTag("Player") && ammoBar!=null) ammoBar.SetAmmo(rangedCurrentAmmo);
         if (basicEnemyPatrol.enemyType == BasicEnemyPatrol.EnemyType.Boss)
         {
             if (projectileType == "Web") defaultProjectilePrefab = webBlastProjectile;
@@ -655,12 +658,12 @@ public class Combat : MonoBehaviour
         {
             rangedCurrentAmmo++;
             StartCoroutine(RechargeAmmo());
-            if (gameObject.CompareTag("Player")) ammoBar.SetAmmo(rangedCurrentAmmo);
+            if (gameObject.CompareTag("Player") && ammoBar!=null) ammoBar.SetAmmo(rangedCurrentAmmo);
         }
         else if (rangedCurrentAmmo == rangedMaxAmmo)
         {
             rechargingAmmo = false;
-            if (gameObject.CompareTag("Player")) ammoBar.SetAmmo(rangedCurrentAmmo);
+            if (gameObject.CompareTag("Player") && ammoBar!=null) ammoBar.SetAmmo(rangedCurrentAmmo);
         }
     }
 
