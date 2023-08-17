@@ -26,9 +26,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170866396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -37.32315}
+  m_LocalScale: {x: 0.6020833, y: 0.6020833, z: 0.6020833}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1274984827}
@@ -38,9 +38,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 241.81944, y: 134.49828}
+  m_SizeDelta: {x: 800, y: 450.10382}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &170866400
 Canvas:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ Canvas:
   m_GameObject: {fileID: 170866396}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &170866398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &734048860
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1048,7 +1048,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.75, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2257,7 +2257,7 @@ MonoBehaviour:
   falconA3F3: {fileID: 3686263408010960024}
   falconA3F4: {fileID: 0}
   falconA3Radius: 0.25
-  spiderFrame1: {fileID: 0}
+  spiderA1F1: {fileID: 0}
 --- !u!114 &3813441183586035222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2606,8 +2606,12 @@ MonoBehaviour:
   chargerCollider: {fileID: 0}
   specialAttackHitDelay: 0
   spiderBossTileCollider: {fileID: 0}
+  crashDownCollider: {fileID: 0}
+  spiderBossMelee1: {fileID: 0}
+  spiderBossMelee2: {fileID: 0}
   climbUpSpeed: 0
   crashDownSpeed: 0
+  crashDownPower: 0
   falconMask: 1
   spiderMask: 0
   falconDashCD: 0
@@ -2737,6 +2741,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 64c712ad-ebd2-4b23-aef8-ace909240a82
     m_ActionName: Player/RescuePlayer[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4b699fc-1163-4119-b527-39e54f88054c
+    m_ActionName: Player/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3942,7 +3950,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

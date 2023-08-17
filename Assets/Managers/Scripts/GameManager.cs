@@ -5,6 +5,7 @@ using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
@@ -12,34 +13,52 @@ public class GameManager : MonoBehaviour
 {
     
     public GameObject player;
+    public Canvas playerCanvas;
     public Vector3 playerRespawnPos;
     public bool isPaused;
-    public GameObject pauseUI;
     private AsyncOperation loadingOperation;
-    public GameObject loadingScreen;
-    
-    [Header("Tutorial Stuff")]
-    public bool tutorialTestEnable;
-    public bool combatTutorialTestEnable;
-    public bool toggleEnemyMovement;
-    public bool mainMenuEnabled;
-    public ObjectPickUpTest objectPickUpTest;
-    public GameObject mainMenuUI;
-    private string sceneToLoad;
-    private string currentScene;
-    public GameObject tutorialStartUI;
-    public GameObject tutorialEndUI;
-    public GameObject startCombatUI;
-    public GameObject combatUI;
-    public GameObject finalCombatUI;
-    public GameObject creditsUI;
-    public GameObject controlsUI;
-    public ZhiaHeadCheck zhiaSkeleton;
-    public bool testObjectPickedUp;
-    public GameObject firstFloor;
-    public GameObject secondFloor;
     public GameObject mainCamera;
     public GameObject vcam1;
+    public string sceneToLoad;
+    public string currentScene;
+
+    [Header("Backgrounds")]
+    public GameObject mainMenuBG;
+    public GameObject creditsBG;
+    public GameObject playOptionsBG;
+    public GameObject loadingScreenBG;
+    public GameObject settingsBG;
+    public GameObject loadGameMenuBG;
+    
+    [Header("UI Elements")]
+    public GameObject mainMenuUI;
+    public GameObject creditsUI;
+    public GameObject loadingScreen;
+    public GameObject playMenuUI;
+    public GameObject settingsMenuUI;
+    public GameObject loadGameMenuUI;
+    public GameObject pauseUI;
+    public Button stuckButton;
+    
+    
+    //public GameObject controlsUI;
+    
+    [Header("Tutorial Stuff")]
+    public bool toggleEnemyMovement;
+    public bool mainMenuEnabled;
+    //public bool tutorialTestEnable;
+    //public bool combatTutorialTestEnable;
+    //public ObjectPickUpTest objectPickUpTest;
+    //public GameObject tutorialStartUI;
+    //public GameObject tutorialEndUI;
+    //public GameObject startCombatUI;
+    //public GameObject combatUI;
+    //public GameObject finalCombatUI;
+    //public ZhiaHeadCheck zhiaSkeleton;
+    //public bool testObjectPickedUp;
+    //public GameObject firstFloor;
+    //public GameObject secondFloor;
+    
     
     private static GameManager _instance;
 
@@ -91,18 +110,27 @@ public class GameManager : MonoBehaviour
         //make sure to save audio and other settings too
         
         DontDestroyOnLoad(this.gameObject);
-        testObjectPickedUp = false;
+        //testObjectPickedUp = false;
         _instance = this;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         vcam1 = GameObject.FindGameObjectWithTag("vcam1");
-        tutorialStartUI.SetActive(false);
-        tutorialEndUI.SetActive(false);
-        pauseUI.SetActive(false);
-        startCombatUI.SetActive(false);
-        creditsUI.SetActive(false);
-        if (!mainMenuEnabled) mainMenuUI.SetActive(false);
-        else mainMenuUI.SetActive(true);
-        loadingScreen.SetActive(false);
+        //tutorialStartUI.SetActive(false);
+        //tutorialEndUI.SetActive(false);
+        //pauseUI.SetActive(false);
+        //startCombatUI.SetActive(false);
+        //creditsUI.SetActive(false);
+        if (!mainMenuEnabled)
+        {
+            mainMenuBG.SetActive(false);
+            mainMenuUI.SetActive(false);
+        }
+        else
+        {
+            mainMenuBG.SetActive(true);
+            mainMenuUI.SetActive(true);
+        }
+        //loadingScreen.SetActive(false);
+        sceneToLoad = "LevelSelectScene";
     }
 
     private void Start()
@@ -114,34 +142,34 @@ public class GameManager : MonoBehaviour
 
     public void SelectMovementLevel()
     {
-        sceneToLoad = "MovementTestScene";
-        tutorialTestEnable = true;
-        combatTutorialTestEnable = false;
-        StartCoroutine(LoadLevelCoroutine());
+        // sceneToLoad = "MovementTestScene";
+        // tutorialTestEnable = true;
+        // combatTutorialTestEnable = false;
+        // StartCoroutine(LoadLevelCoroutine());
     }
 
     public void SelectCombatLevel()
     {
-        sceneToLoad = "CombatTestScene";
-        tutorialTestEnable = false;
-        combatTutorialTestEnable = true;
-        StartCoroutine(LoadLevelCoroutine());
+        // sceneToLoad = "CombatTestScene";
+        // tutorialTestEnable = false;
+        // combatTutorialTestEnable = true;
+        // StartCoroutine(LoadLevelCoroutine());
     }
 
     public void SelectAudioLevel()
     {
-        sceneToLoad = "AudioPedestalScene 1";
-        tutorialTestEnable = false;
-        combatTutorialTestEnable = false;
-        StartCoroutine(LoadLevelCoroutine());
+        // sceneToLoad = "AudioPedestalScene 1";
+        // tutorialTestEnable = false;
+        // combatTutorialTestEnable = false;
+        // StartCoroutine(LoadLevelCoroutine());
     }
 
     public void SelectActualLevel()
     {
         //need to change this to opening cutscene
         sceneToLoad = "OpeningCutscene";
-        tutorialTestEnable = false;
-        combatTutorialTestEnable = false;
+        // tutorialTestEnable = false;
+        // combatTutorialTestEnable = false;
         StartCoroutine(LoadLevelCoroutine());
     }
 
@@ -153,21 +181,143 @@ public class GameManager : MonoBehaviour
 
     public void SelectControlsUI()
     {
-        mainMenuUI.SetActive(false);
-        controlsUI.SetActive(true);
+        // mainMenuUI.SetActive(false);
+        // controlsUI.SetActive(true);
     }
 
     public void ExitCreditsOrControls()
     {
+        // creditsUI.SetActive(false);
+        // controlsUI.SetActive(false);
+        // mainMenuUI.SetActive(true);
+    }
+
+    public void MainMenuPlayButton()
+    {
+        mainMenuBG.SetActive(false);
+        mainMenuUI.SetActive(false);
+        
+        playOptionsBG.SetActive(true);
+        playMenuUI.SetActive(true);
+    }
+
+    public void SettingsButton()
+    {
+        mainMenuBG.SetActive(false);
+        mainMenuUI.SetActive(false);
+        pauseUI.SetActive(false);
+        
+        settingsBG.SetActive(true);
+        settingsMenuUI.SetActive(true);
+    }
+
+    public void CreditsButton()
+    {
+        mainMenuBG.SetActive(false);
+        mainMenuUI.SetActive(false);
+
+        creditsBG.SetActive(true);
+        creditsUI.SetActive(true);
+    }
+
+    public void NewGameButton()
+    {
+        playOptionsBG.SetActive(false);
+        playMenuUI.SetActive(false);
+        
+        SelectActualLevel();
+    }
+
+    public void LoadGameButton()
+    {
+        playOptionsBG.SetActive(false);
+        playMenuUI.SetActive(false);
+
+        loadGameMenuBG.SetActive(true);
+        loadGameMenuUI.SetActive(true);
+    }
+
+    public void LoadSaveSlot1()
+    {
+        //TODO:
+        //something like fileToLoad = slot 1 path
+        //LoadSavedGameButton(fileToLoad)
+    }
+    
+    public void LoadSaveSlot2()
+    {
+        //TODO:
+        //something like fileToLoad = slot 2 path
+        //LoadSavedGameButton(fileToLoad)
+    }
+    
+    public void LoadSaveSlot3()
+    {
+        //TODO:
+        //something like fileToLoad = slot 3 path
+        //LoadSavedGameButton(fileToLoad)
+    }
+    
+    public void LoadSavedGameButton()
+    {
+        //TODO:
+    }
+
+    public void BackToMainMenu()
+    {
+        playOptionsBG.SetActive(false);
+        playMenuUI.SetActive(false);
+        settingsBG.SetActive(false);
+        settingsMenuUI.SetActive(false);
+        creditsBG.SetActive(false);
         creditsUI.SetActive(false);
-        controlsUI.SetActive(false);
+        
+        mainMenuBG.SetActive(true);
         mainMenuUI.SetActive(true);
+    }
+
+    public void BackToPlayOptionsMenu()
+    {
+        loadGameMenuBG.SetActive(false);
+        loadGameMenuUI.SetActive(false);
+        
+        playOptionsBG.SetActive(true);
+        playMenuUI.SetActive(true);
+    }
+
+    public void BackToPauseUI()
+    {
+        settingsBG.SetActive(false);
+        settingsMenuUI.SetActive(false);
+
+        pauseUI.SetActive(true);
+    }
+
+    public void BackFromSettings()
+    {
+        if (currentScene != "LevelSelectScene")
+        {
+            BackToPauseUI();
+        }
+        else BackToMainMenu();
+    }
+
+    public void RescuePlayer()
+    {
+        if (player != null && currentScene == "LevelGenTest")
+        {
+            PauseUI();
+            player.GetComponent<RescueFailsafe>().FailsafeRescuePlayer();
+        }
     }
     
 
     private IEnumerator LoadLevelCoroutine()
     {
+        mainMenuBG.SetActive(false);
         mainMenuUI.SetActive(false);
+        
+        loadingScreenBG.SetActive(true);
         loadingScreen.SetActive(true);
         yield return new WaitForSeconds(1f);
         StartCoroutine(LoadSceneAsync());
@@ -181,11 +331,13 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
+        
         if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -10);
 
         if (sceneToLoad != "LevelGenTest")
         {
             OnLevelLoaded();
+            loadingScreenBG.SetActive(false);
             loadingScreen.SetActive(false);
         }
     }
@@ -193,6 +345,7 @@ public class GameManager : MonoBehaviour
     public void LevelGenComplete()
     {
         OnLevelLoaded();
+        loadingScreenBG.SetActive(false);
         loadingScreen.SetActive(false);
     }
 
@@ -201,37 +354,54 @@ public class GameManager : MonoBehaviour
     private void OnLevelLoaded()
     {
         currentScene = sceneToLoad;
-        if(currentScene!=null)SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentScene));
+        if (!string.IsNullOrEmpty(currentScene))
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentScene));
+        }
+        if(LevelGenerator.Instance != null) LevelGenerator.Instance.SpawnEnemies();
         player = GameObject.FindGameObjectWithTag("Player");
+        
+        //HACK CITY
+        //to make the player health bar NOT visible during level gen
+        if (player!=null) playerCanvas = player.GetComponentInChildren<Canvas>();
+        if (playerCanvas != null) playerCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        
+        
         if (player != null)
         {
             player.SetActive(true);
             mainCamera.GetComponent<StudioListener>().attenuationObject = player;
         }
         
-        if(LevelGenerator.Instance != null) LevelGenerator.Instance.SpawnEnemies();
-        objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
-        zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
-        firstFloor = GameObject.FindGameObjectWithTag("First Floor");
-        secondFloor = GameObject.FindGameObjectWithTag("Second Floor");
-        if(objectPickUpTest != null) objectPickUpTest.ObjectPickUp += ObjectPickedUp;
         if (player != null)
         {
             player.GetComponent<Combat>().enabled = true;
             playerRespawnPos = player.transform.position;
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            
         }
-        if (combatTutorialTestEnable)
-        {
-            startCombatUI.SetActive(true);
-            CombatTestManager.Instance.combatUI = combatUI;
-            CombatTestManager.Instance.finalCombatUI = tutorialEndUI;
-        }
+        // objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
+        // zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
+        // firstFloor = GameObject.FindGameObjectWithTag("First Floor");
+        // secondFloor = GameObject.FindGameObjectWithTag("Second Floor");
+        // if(objectPickUpTest != null) objectPickUpTest.ObjectPickUp += ObjectPickedUp;
+        
+        // if (combatTutorialTestEnable)
+        // {
+        //     startCombatUI.SetActive(true);
+        //     CombatTestManager.Instance.combatUI = combatUI;
+        //     CombatTestManager.Instance.finalCombatUI = tutorialEndUI;
+        // }
         //else if (player != null) player.GetComponent<Combat>().enabled = false;
+        
         onLevelLoadedEvent?.Invoke();
         enableEnemyPatrolEvent?.Invoke();
-        
+        if (currentScene == "FirstBossLevel")
+        {
+            stuckButton.interactable = false;
+        }
+        else stuckButton.interactable = true;
     }
 
     public void EndLevel()
@@ -268,14 +438,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //like a wild chicken, this is FOUL
-            if (mainMenuUI.activeSelf || tutorialStartUI.activeSelf || tutorialEndUI.activeSelf ||
-                startCombatUI.activeSelf || combatUI.activeSelf || finalCombatUI.activeSelf || creditsUI.activeSelf ||
-                controlsUI.activeSelf) return;
-                PauseUI();
-        }
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        // {
+        //     //like a wild chicken, this is FOUL
+        //     if (mainMenuUI.activeSelf || creditsUI.activeSelf) return;
+        //         PauseUI();
+        // }
     }
 
     public void SubscribeToDeathEvents(Health health)
@@ -296,17 +464,17 @@ public class GameManager : MonoBehaviour
             disableEnemyPatrolEvent?.Invoke();
         }
 
-        if (combatTutorialTestEnable)
-        {
-            startCombatUI.SetActive(false);
-            enableEnemyPatrolEvent?.Invoke();
-        }
+        // if (combatTutorialTestEnable)
+        // {
+        //     startCombatUI.SetActive(false);
+        //     enableEnemyPatrolEvent?.Invoke();
+        // }
     }
 
     private void ObjectPickedUp()
     {
-        testObjectPickedUp = true;
-        if(zhiaSkeleton!=null) zhiaSkeleton.playerHasObject = true;
+        // testObjectPickedUp = true;
+        // if(zhiaSkeleton!=null) zhiaSkeleton.playerHasObject = true;
     }
 
     private void SomethingDied(GameObject deadThing)
@@ -315,7 +483,7 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(DeathCutscene());
             //RespawnPlayer();
-            if(objectPickUpTest!=null)RespawnObject();
+            // if(objectPickUpTest!=null)RespawnObject();
         }
         else if (deadThing.layer == 8)
         {
@@ -326,12 +494,12 @@ public class GameManager : MonoBehaviour
 
     public void DestroyFirstFloor()
     {
-        if (firstFloor != null) Destroy(firstFloor);
+        // if (firstFloor != null) Destroy(firstFloor);
     }
 
     public void DestroySecondFloor()
     {
-        if (secondFloor != null) Destroy(secondFloor);
+        // if (secondFloor != null) Destroy(secondFloor);
     }
 
     private void RespawnPlayer()
@@ -341,25 +509,25 @@ public class GameManager : MonoBehaviour
 
     private void RespawnObject()
     {
-        objectPickUpTest.gameObject.SetActive(true);
-        zhiaSkeleton.playerHasObject = false;
+        // objectPickUpTest.gameObject.SetActive(true);
+        // zhiaSkeleton.playerHasObject = false;
     }
 
     public void DialogueManagerEvent()
     {
-        tutorialStartUI.SetActive(true);
+        //tutorialStartUI.SetActive(true);
     }
 
     public void BeginTutorial()
     {
-        tutorialStartUI.SetActive(false);
-        tutorialDialogueFinishedEvent?.Invoke();
+        //tutorialStartUI.SetActive(false);
+        //tutorialDialogueFinishedEvent?.Invoke();
     }
 
     public void EndTutorial()
     {
-        tutorialEndUI.SetActive(true);
-        endTutorialEvent?.Invoke();
+        //tutorialEndUI.SetActive(true);
+        //endTutorialEvent?.Invoke();
     }
 
     public void PauseUI()
@@ -385,7 +553,7 @@ public class GameManager : MonoBehaviour
             if(isPaused) PauseUI();
             player.SetActive(false);
             player.GetComponent<Movement>().playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
-            tutorialEndUI.SetActive(false);
+            //tutorialEndUI.SetActive(false);
             SceneManager.UnloadSceneAsync(currentScene);
             mainMenuUI.SetActive(true);
         }

@@ -34,13 +34,13 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance.tutorialTestEnable)
-        {
-            StartCoroutine(StartDialogue());
-            dialogueStarted = false;
-            finalDialogueUnlocked = false;
-        }
-        else this.gameObject.SetActive(false);
+        // if (GameManager.Instance.tutorialTestEnable)
+        // {
+        //     StartCoroutine(StartDialogue());
+        //     dialogueStarted = false;
+        //     finalDialogueUnlocked = false;
+        // }
+        // else this.gameObject.SetActive(false);
     }
 
     private void Update()

@@ -12,6 +12,7 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 public class Movement : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
+    private Canvas myCanvas;
     private Combat combat;
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
@@ -80,6 +81,7 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Dash.performed += Dash;
         playerInputActions.Player.Crouch.performed += Crouch;
         playerInputActions.Player.RescuePlayer.performed += RescuePlayer;
+        playerInputActions.Player.Pause.performed += PauseGame;
 
         controlsSet = false;
         dashing = false;
@@ -100,6 +102,11 @@ public class Movement : MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(wallSlideSFX, transform, rigidbody);
     }
 
+    private void PauseGame(InputAction.CallbackContext context)
+    {
+        if(context.performed) GameManager.Instance.PauseUI();
+    }
+
     private void OnLevelLoad()
     {
         
@@ -108,11 +115,15 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.onLevelLoadedEvent += OnLevelLoad;
-        if (GameManager.Instance.tutorialTestEnable)
-        {
-            inputAllowed = false;
-        }
-        else inputAllowed = true;
+        // if (GameManager.Instance.tutorialTestEnable)
+        // {
+        //     inputAllowed = false;
+        // }
+        //else inputAllowed = true;
+        
+        //is this necessary?
+        inputAllowed = true;
+        
         
         GameManager.Instance.playerRespawnEvent += Respawn;
         GameManager.Instance.tutorialDialogueFinishedEvent += TutorialDialogueFinished;

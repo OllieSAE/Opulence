@@ -26,7 +26,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 53591
+  Length: 174749
+--- !u!114 &-8706604227617565413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Enemy Small Die
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Enemy Small Die
+  Guid:
+    Data1: 179391874
+    Data2: 1218476340
+    Data3: 1576864405
+    Data4: 1649671549
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3966
 --- !u!114 &-8609358556318376652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +186,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-8020467620599436832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/UI Hover
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/UI Hover
+  Guid:
+    Data1: 1394865779
+    Data2: 1240889530
+    Data3: -1160856164
+    Data4: -865137443
+  Banks:
+  - {fileID: -2462053465261629295}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2676
 --- !u!114 &-7801997267594629473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +240,7 @@ MonoBehaviour:
   MinDistance: 5
   MaxDistance: 20
   Length: 15000
---- !u!114 &-6472139594049749927
+--- !u!114 &-6579050629358950135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,14 +250,68 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SOUND EVENTS/Sword Swing Enemy
+  m_Name: event:/SOUND EVENTS/UI Click
   m_EditorClassIdentifier: 
-  Path: event:/SOUND EVENTS/Sword Swing Enemy
+  Path: event:/SOUND EVENTS/UI Click
   Guid:
-    Data1: -2052258653
-    Data2: 1193232671
-    Data3: 607080333
-    Data4: -699978018
+    Data1: -1920174674
+    Data2: 1305027232
+    Data3: -2136897894
+    Data4: -2163887
+  Banks:
+  - {fileID: -2462053465261629295}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2969
+--- !u!114 &-6545988072972062194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Falcon Melee 3
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Falcon Melee 3
+  Guid:
+    Data1: 1477915772
+    Data2: 1247056463
+    Data3: -164405569
+    Data4: 634087031
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6398510884736874414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Enemy Venom Spit
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Enemy Venom Spit
+  Guid:
+    Data1: -1235080930
+    Data2: 1192100887
+    Data3: -1582654542
+    Data4: 1173075944
   Banks:
   - {fileID: -4703593653948068669}
   IsStream: 0
@@ -212,7 +320,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 3633
 --- !u!114 &-6023777710682738448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,33 +402,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 884
---- !u!114 &-5174326945422079278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SOUND EVENTS/Music
-  m_EditorClassIdentifier: 
-  Path: event:/SOUND EVENTS/Music
-  Guid:
-    Data1: 2040681264
-    Data2: 1167146700
-    Data3: -1801479285
-    Data4: -187920272
-  Banks:
-  - {fileID: 8652311888287359776}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 275461
 --- !u!114 &-5132297831122044077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,10 +417,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638252770221273914
+  lastModified: 638276300127162432
   FileSizes:
   - Name: Desktop
-    Value: 212192
+    Value: 338304
   Exists: 1
 --- !u!114 &-4703593653948068669
 MonoBehaviour:
@@ -356,10 +437,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/COMBAT.bank
   Name: COMBAT
   StudioPath: bank:/COMBAT
-  lastModified: 638254419526319539
+  lastModified: 638271913526728593
   FileSizes:
   - Name: Desktop
-    Value: 305216
+    Value: 436992
   Exists: 1
 --- !u!114 &-3337688838205976797
 MonoBehaviour:
@@ -376,10 +457,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638254419526324531
+  lastModified: 638277172963571482
   FileSizes:
   - Name: Desktop
-    Value: 2120
+    Value: 2934
   Exists: 1
 --- !u!114 &-3031751295956749547
 MonoBehaviour:
@@ -407,7 +488,27 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1267
+  Length: 1500
+--- !u!114 &-2462053465261629295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/UI.bank
+  Name: UI
+  StudioPath: bank:/UI
+  lastModified: 638277172963581470
+  FileSizes:
+  - Name: Desktop
+    Value: 52512
+  Exists: 1
 --- !u!114 &-1828036729265133605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,11 +524,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638228534575448938
+  lastModified: 638276300127815742
   FileSizes:
   - Name: Desktop
-    Value: 964
+    Value: 2786
   Exists: 1
+--- !u!114 &-811185893889831797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Music Level
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Music Level
+  Guid:
+    Data1: 2040681264
+    Data2: 1167146700
+    Data3: -1801479285
+    Data4: -187920272
+  Banks:
+  - {fileID: 8652311888287359776}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 455418
 --- !u!114 &-451783489565038035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,10 +658,10 @@ MonoBehaviour:
   - {fileID: 8380320410098705603}
   - {fileID: 8652311888287359776}
   - {fileID: -4703593653948068669}
+  - {fileID: -2462053465261629295}
   EditorEvents:
   - {fileID: -293801989424842038}
   - {fileID: 7397799452261780516}
-  - {fileID: -5174326945422079278}
   - {fileID: -9077551120531397955}
   - {fileID: 3649273788860696837}
   - {fileID: 7458236732572193858}
@@ -541,8 +669,6 @@ MonoBehaviour:
   - {fileID: 7406381183786980771}
   - {fileID: -5775634451018956011}
   - {fileID: -8609358556318376652}
-  - {fileID: 4674270526348022349}
-  - {fileID: -6472139594049749927}
   - {fileID: -8604414348185029335}
   - {fileID: 2009848212944404067}
   - {fileID: -218843160666562613}
@@ -555,13 +681,51 @@ MonoBehaviour:
   - {fileID: -451783489565038035}
   - {fileID: -8428230315487420954}
   - {fileID: -3031751295956749547}
+  - {fileID: 406308036771916835}
+  - {fileID: -6545988072972062194}
+  - {fileID: -6398510884736874414}
+  - {fileID: -8706604227617565413}
+  - {fileID: 8504313919504247161}
+  - {fileID: 3892222106000435225}
+  - {fileID: -811185893889831797}
+  - {fileID: 7795218530155751962}
+  - {fileID: 4481546270034828056}
+  - {fileID: -8020467620599436832}
+  - {fileID: -6579050629358950135}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1828036729265133605}
   StringsBanks:
   - {fileID: -3337688838205976797}
-  cacheTime: 638254419526324531
+  cacheTime: 638277172963581470
   cacheVersion: 131603
+--- !u!114 &406308036771916835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Falcon Dash
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Falcon Dash
+  Guid:
+    Data1: -1902424549
+    Data2: 1295234242
+    Data3: 747926667
+    Data4: 2051169690
+  Banks:
+  - {fileID: -5132297831122044077}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2500
 --- !u!114 &712698009279880602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,10 +741,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/ATMOS.bank
   Name: ATMOS
   StudioPath: bank:/ATMOS
-  lastModified: 638236468540906878
+  lastModified: 638276300127122540
   FileSizes:
   - Name: Desktop
-    Value: 2149376
+    Value: 5105248
   Exists: 1
 --- !u!114 &2009848212944404067
 MonoBehaviour:
@@ -608,7 +772,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1900
+  Length: 2050
 --- !u!114 &3078312688614921709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +826,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2983
+--- !u!114 &3892222106000435225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Music Boss
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Music Boss
+  Guid:
+    Data1: -956724466
+    Data2: 1118946244
+    Data3: -1295116374
+    Data4: -730241655
+  Banks:
+  - {fileID: 8652311888287359776}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 188160
 --- !u!114 &4149181485515530461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,7 +881,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2407
---- !u!114 &4674270526348022349
+--- !u!114 &4481546270034828056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -700,23 +891,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SOUND EVENTS/Enemy Bug Die
+  m_Name: event:/SOUND EVENTS/Character Spawn
   m_EditorClassIdentifier: 
-  Path: event:/SOUND EVENTS/Enemy Bug Die
+  Path: event:/SOUND EVENTS/Character Spawn
   Guid:
-    Data1: 1452481081
-    Data2: 1113948429
-    Data3: -406112115
-    Data4: 666011239
+    Data1: 1636397413
+    Data2: 1330099696
+    Data3: 2120124078
+    Data4: -1370525694
   Banks:
-  - {fileID: -4703593653948068669}
+  - {fileID: -5132297831122044077}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 998
+  Length: 6440
 --- !u!114 &5172027711694109520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,7 +950,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 638219096774220168
+  lastModified: 638227655887691982
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -786,7 +977,7 @@ MonoBehaviour:
   - {fileID: -5132297831122044077}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: -8331971158457588631}
   MinDistance: 3350
@@ -846,6 +1037,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 949
+--- !u!114 &7795218530155751962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Music Menu
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Music Menu
+  Guid:
+    Data1: 305334422
+    Data2: 1159448293
+    Data3: 78761362
+    Data4: 1832513475
+  Banks:
+  - {fileID: 8652311888287359776}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 177789
 --- !u!114 &8380320410098705603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,11 +1079,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638242481867207764
+  lastModified: 638277116930471770
   FileSizes:
   - Name: Desktop
-    Value: 1188768
+    Value: 1232224
   Exists: 1
+--- !u!114 &8504313919504247161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Enemy Charge Die
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Enemy Charge Die
+  Guid:
+    Data1: 2028600052
+    Data2: 1256741958
+    Data3: -770894415
+    Data4: -1275439361
+  Banks:
+  - {fileID: -4703593653948068669}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5050
 --- !u!114 &8652311888287359776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -881,8 +1126,8 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/MUSIC.bank
   Name: MUSIC
   StudioPath: bank:/MUSIC
-  lastModified: 638242481867037733
+  lastModified: 638276300127780778
   FileSizes:
   - Name: Desktop
-    Value: 3712800
+    Value: 10825792
   Exists: 1
