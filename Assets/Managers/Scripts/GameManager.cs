@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 {
     
     public GameObject player;
+    public Canvas playerCanvas;
     public Vector3 playerRespawnPos;
     public bool isPaused;
     private AsyncOperation loadingOperation;
@@ -330,6 +331,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
+        
         if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -10);
 
         if (sceneToLoad != "LevelGenTest")
@@ -356,19 +358,21 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentScene));
         }
+        if(LevelGenerator.Instance != null) LevelGenerator.Instance.SpawnEnemies();
         player = GameObject.FindGameObjectWithTag("Player");
+        
+        //HACK CITY
+        //to make the player health bar NOT visible during level gen
+        if (player!=null) playerCanvas = player.GetComponentInChildren<Canvas>();
+        if (playerCanvas != null) playerCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        
+        
         if (player != null)
         {
             player.SetActive(true);
             mainCamera.GetComponent<StudioListener>().attenuationObject = player;
         }
         
-        if(LevelGenerator.Instance != null) LevelGenerator.Instance.SpawnEnemies();
-        // objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
-        // zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
-        // firstFloor = GameObject.FindGameObjectWithTag("First Floor");
-        // secondFloor = GameObject.FindGameObjectWithTag("Second Floor");
-        // if(objectPickUpTest != null) objectPickUpTest.ObjectPickUp += ObjectPickedUp;
         if (player != null)
         {
             player.GetComponent<Combat>().enabled = true;
@@ -377,6 +381,12 @@ public class GameManager : MonoBehaviour
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             
         }
+        // objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
+        // zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
+        // firstFloor = GameObject.FindGameObjectWithTag("First Floor");
+        // secondFloor = GameObject.FindGameObjectWithTag("Second Floor");
+        // if(objectPickUpTest != null) objectPickUpTest.ObjectPickUp += ObjectPickedUp;
+        
         // if (combatTutorialTestEnable)
         // {
         //     startCombatUI.SetActive(true);
@@ -384,6 +394,7 @@ public class GameManager : MonoBehaviour
         //     CombatTestManager.Instance.finalCombatUI = tutorialEndUI;
         // }
         //else if (player != null) player.GetComponent<Combat>().enabled = false;
+        
         onLevelLoadedEvent?.Invoke();
         enableEnemyPatrolEvent?.Invoke();
         if (currentScene == "FirstBossLevel")

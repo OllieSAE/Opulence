@@ -12,6 +12,7 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 public class Movement : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
+    private Canvas myCanvas;
     private Combat combat;
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
