@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     private CinemachineBrain mainCameraBrain;
     public string sceneToLoad;
     public string currentScene;
+    public GameObject playerMapClone;
 
     [Header("Backgrounds")]
     public GameObject mainMenuBG;
@@ -344,6 +345,7 @@ public class GameManager : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
         
         if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -10);
+        //if (mapCameraVC != null) mapCameraVC.transform.position = new Vector3(0, 0, -20);
 
         if (sceneToLoad != "LevelGenTest")
         {
@@ -388,9 +390,10 @@ public class GameManager : MonoBehaviour
         {
             player.GetComponent<Combat>().enabled = true;
             playerRespawnPos = player.transform.position;
-            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-            
+            StartCoroutine(UnlockPlayer());
+            //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
         }
         // objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
         // zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();
@@ -413,6 +416,13 @@ public class GameManager : MonoBehaviour
             stuckButton.interactable = false;
         }
         else stuckButton.interactable = true;
+    }
+
+    private IEnumerator UnlockPlayer()
+    {
+        yield return new WaitForSeconds(0.1f);
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void EndLevel()

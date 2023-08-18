@@ -13,6 +13,7 @@ public class CinemachineConfiner : MonoBehaviour
     public float offsetX;
     public float offsetY;
 
+    //NOTE THIS DOES NOT WORK AT ALL!!!!!!
     private void Start()
     {
         GameManager.Instance.onLevelLoadedEvent += OnLevelLoaded;

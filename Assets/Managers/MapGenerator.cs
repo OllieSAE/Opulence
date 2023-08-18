@@ -24,6 +24,7 @@ public class MapGenerator : MonoBehaviour
     private Node[,] mapNodes;
     public float timer;
     public float mapUpdateTimer = 1f;
+    private bool cloneFound = false;
 
     private void Start()
     {
@@ -31,12 +32,27 @@ public class MapGenerator : MonoBehaviour
         offset = mapGrid.transform.position;
         levelHeight = LevelGenerator.Instance.levelHeight;
         levelWidth = LevelGenerator.Instance.levelWidth;
-        if (player != null) playerMapClone = Instantiate(playerMapClonePrefab,player.transform.position,quaternion.identity);
+        GameManager.Instance.onLevelLoadedEvent += OnLevelLoad;
+    }
+    
+    private void OnDisable()
+    {
+        GameManager.Instance.onLevelLoadedEvent -= OnLevelLoad;
+    }
+
+    private void OnLevelLoad()
+    {
+        if (player != null)
+        {
+            playerMapClone = Instantiate(playerMapClonePrefab,player.transform.position,quaternion.identity);
+            GameManager.Instance.playerMapClone = playerMapClone;
+            cloneFound = true;
+        }
     }
 
     private void Update()
     {
-        playerMapClone.transform.position = player.transform.position + offset;
+        if(cloneFound) playerMapClone.transform.position = player.transform.position + offset;
         timer += Time.deltaTime;
     }
 
