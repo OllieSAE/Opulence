@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,14 +12,19 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class GameManager : MonoBehaviour
 {
-    
     public GameObject player;
     public Canvas playerCanvas;
     public Vector3 playerRespawnPos;
     public bool isPaused;
+    public bool mapIsOpen;
     private AsyncOperation loadingOperation;
     public GameObject mainCamera;
     public GameObject vcam1;
+    public GameObject mapCamera;
+    public CinemachineBlendDefinition goToMapCameraBlend;
+    private CinemachineVirtualCamera vcam1VC;
+    private CinemachineVirtualCamera mapCameraVC;
+    private CinemachineBrain mainCameraBrain;
     public string sceneToLoad;
     public string currentScene;
 
@@ -113,7 +119,12 @@ public class GameManager : MonoBehaviour
         //testObjectPickedUp = false;
         _instance = this;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        if (mainCamera != null) mainCameraBrain = mainCamera.GetComponent<CinemachineBrain>();
         vcam1 = GameObject.FindGameObjectWithTag("vcam1");
+        if (vcam1 != null) vcam1VC = vcam1.GetComponent<CinemachineVirtualCamera>();
+        mapCamera = GameObject.FindGameObjectWithTag("Map Camera");
+        if (mapCamera != null) mapCameraVC = mapCamera.GetComponent<CinemachineVirtualCamera>();
+        mainCameraBrain.m_DefaultBlend = goToMapCameraBlend;
         //tutorialStartUI.SetActive(false);
         //tutorialEndUI.SetActive(false);
         //pauseUI.SetActive(false);
@@ -438,12 +449,35 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Escape))
-        // {
-        //     //like a wild chicken, this is FOUL
-        //     if (mainMenuUI.activeSelf || creditsUI.activeSelf) return;
-        //         PauseUI();
-        // }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ToggleMap();
+        }
+    }
+
+    private void ToggleMap()
+    {
+        if (mapCameraVC != null && vcam1VC != null && currentScene == "LevelGenTest")
+        {
+            if (!isPaused)
+            {
+                if (!mapIsOpen)
+                {
+                    //open the map and trigger pause event to LOCK movement/timeScale
+                    mapCameraVC.gameObject.SetActive(true);
+                    vcam1VC.gameObject.SetActive(false);
+                    pauseStartEvent?.Invoke();
+                }
+                else
+                {
+                    //close the map and trigger pause event to UNLOCK movement/timeScale
+                    vcam1VC.gameObject.SetActive(true);
+                    mapCameraVC.gameObject.SetActive(false);
+                    pauseEndEvent?.Invoke();
+                }
+                mapIsOpen = !mapIsOpen;
+            }
+        }
     }
 
     public void SubscribeToDeathEvents(Health health)
@@ -532,18 +566,20 @@ public class GameManager : MonoBehaviour
 
     public void PauseUI()
     {
-        if (isPaused)
+        if (!mapIsOpen)
         {
-            pauseUI.SetActive(false);
-            pauseEndEvent?.Invoke();
+            if (isPaused)
+            {
+                pauseUI.SetActive(false);
+                pauseEndEvent?.Invoke();
+            }
+            else if (!isPaused)
+            {
+                pauseUI.SetActive(true);
+                pauseStartEvent?.Invoke();
+            }
+            isPaused = !isPaused;
         }
-        else if (!isPaused)
-        {
-            pauseUI.SetActive(true);
-            pauseStartEvent?.Invoke();
-        }
-
-        isPaused = !isPaused;
     }
 
     public void ExitLevel()
