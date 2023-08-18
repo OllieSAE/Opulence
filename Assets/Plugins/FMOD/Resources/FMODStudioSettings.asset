@@ -373,15 +373,15 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Master
+  - Desktop/Master
   Banks:
-  - ATMOS
-  - Character
-  - COMBAT
-  - DX
-  - MUSIC
-  - SFX
-  - UI
+  - Desktop/ATMOS
+  - Desktop/Character
+  - Desktop/COMBAT
+  - Desktop/DX
+  - Desktop/MUSIC
+  - Desktop/SFX
+  - Desktop/UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
