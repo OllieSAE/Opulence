@@ -510,6 +510,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3185623301221270997, guid: 02d88aececd7c9644a3fdc3ee4895bf2, type: 3}
   m_PrefabInstance: {fileID: 201122583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &166821605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 92140168, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &166821610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166821605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1001 &180505095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14698,7 +14717,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1205665327761728772, guid: 81df457d65ef04042942728167ca4758, type: 3}
   m_PrefabInstance: {fileID: 1902371211}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &444355428
+--- !u!114 &444355433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14711,7 +14730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
+  clickSoundToPlay: UI Click 2
 --- !u!43 &454099832
 Mesh:
   m_ObjectHideFlags: 0
@@ -15008,6 +15027,25 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: -0.5716343, y: -2.5668073, z: 0}
     m_Extent: {x: 13.735172, y: 3.56699, z: 0}
+--- !u!1 &508696050 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1854087923, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &508696055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508696050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1 &544976879
 GameObject:
   m_ObjectHideFlags: 0
@@ -27338,7 +27376,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2893646305027435089, guid: 81df457d65ef04042942728167ca4758, type: 3}
   m_PrefabInstance: {fileID: 1902371211}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &941993300
+--- !u!114 &941993305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27351,7 +27389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
+  clickSoundToPlay: UI Click 2
 --- !u!1001 &955808663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27418,6 +27456,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4331296779273578425, guid: 079e5ab1686589742b9b5f44f0773c62, type: 3}
   m_PrefabInstance: {fileID: 955808663}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &955827608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1983087756, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &955827613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955827608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1 &960251769
 GameObject:
   m_ObjectHideFlags: 0
@@ -57150,7 +57207,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8815443288846281521, guid: 81df457d65ef04042942728167ca4758, type: 3}
   m_PrefabInstance: {fileID: 1902371211}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1488970623
+--- !u!114 &1488970628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57163,7 +57220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
+  clickSoundToPlay: UI Click 2
 --- !u!1 &1489351990
 GameObject:
   m_ObjectHideFlags: 0
@@ -57419,7 +57476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
+  clickSoundToPlay: UI Click 2
 --- !u!1 &1549433250
 GameObject:
   m_ObjectHideFlags: 0
@@ -58450,6 +58507,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 88942692, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: clickSoundToPlay
+      value: UI Click 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1430448296, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: clickSoundToPlay
+      value: UI Click 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1482018042, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: clickSoundToPlay
+      value: UI Click 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141830315, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: clickSoundToPlay
+      value: UI Click 2
+      objectReference: {fileID: 0}
     - target: {fileID: 861644328799837907, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -59135,7 +59208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
+  clickSoundToPlay: UI Click 2
 --- !u!1 &2004910390
 GameObject:
   m_ObjectHideFlags: 0
@@ -59693,25 +59766,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3185623301221270997, guid: 02d88aececd7c9644a3fdc3ee4895bf2, type: 3}
   m_PrefabInstance: {fileID: 2039812896}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2068781361 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2060360479, guid: 81df457d65ef04042942728167ca4758, type: 3}
-  m_PrefabInstance: {fileID: 1902371211}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2068781364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068781361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
 --- !u!1 &2076570917 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 221499361, guid: 81df457d65ef04042942728167ca4758, type: 3}
@@ -59730,7 +59784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverSoundToPlay: UI Hover
-  clickSoundToPlay: UI Click
+  clickSoundToPlay: UI Click 2
 --- !u!1 &2087377334
 GameObject:
   m_ObjectHideFlags: 0
