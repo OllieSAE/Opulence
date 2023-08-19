@@ -8818,6 +8818,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1c152828d15e4e449fc81182d8b1fe8, type: 3}
+--- !u!1 &307224139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 34668943, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &307224141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307224139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!1001 &310662112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14674,6 +14693,25 @@ Transform:
   m_Father: {fileID: 669054254}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &444355426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1205665327761728772, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &444355428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444355426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!43 &454099832
 Mesh:
   m_ObjectHideFlags: 0
@@ -27295,6 +27333,25 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &941993298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2893646305027435089, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &941993300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941993298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!1001 &955808663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39241,6 +39298,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1117670669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1652527599, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1117670671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117670669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!1 &1124887727
 GameObject:
   m_ObjectHideFlags: 0
@@ -39410,6 +39486,44 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!1 &1166300460 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1206964344681137292, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1166300464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166300460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
+--- !u!1 &1174489660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 762353862, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1174489662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174489660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!1 &1221248790
 GameObject:
   m_ObjectHideFlags: 0
@@ -57031,6 +57145,25 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1488970621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8815443288846281521, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1488970623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488970621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!1 &1489351990
 GameObject:
   m_ObjectHideFlags: 0
@@ -57268,6 +57401,25 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &1541681459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 297420749, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1541681463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541681459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!1 &1549433250
 GameObject:
   m_ObjectHideFlags: 0
@@ -57919,6 +58071,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1779125540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7643324759822873150, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1779125542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779125540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: 
+  clickSoundToPlay: 
 --- !u!1 &1796446669
 GameObject:
   m_ObjectHideFlags: 0
@@ -58946,6 +59117,25 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2003452278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1297918430, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2003452282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003452278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!1 &2004910390
 GameObject:
   m_ObjectHideFlags: 0
@@ -59503,6 +59693,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3185623301221270997, guid: 02d88aececd7c9644a3fdc3ee4895bf2, type: 3}
   m_PrefabInstance: {fileID: 2039812896}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2068781361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2060360479, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2068781364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068781361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
+--- !u!1 &2076570917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 221499361, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2076570921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076570917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click
 --- !u!1 &2087377334
 GameObject:
   m_ObjectHideFlags: 0
