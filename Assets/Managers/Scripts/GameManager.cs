@@ -455,7 +455,11 @@ public class GameManager : MonoBehaviour
             StartCoroutine(UnlockPlayer());
             //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
 
+        if (currentScene == "LevelGenTest")
+        {
+            vcam1.GetComponent<CinemachineVirtualCamera>().m_Follow = player.transform;
         }
         // objectPickUpTest = FindObjectOfType<ObjectPickUpTest>();
         // zhiaSkeleton = FindObjectOfType<ZhiaHeadCheck>();

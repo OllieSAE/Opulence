@@ -721,7 +721,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skip
+  m_text: 'Respawn!
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1085,27 +1087,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2842832305865025520, guid: b6014c141a3aa7b47ad72ddc1333dd49, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.315
       objectReference: {fileID: 0}
     - target: {fileID: 2842832305865025520, guid: b6014c141a3aa7b47ad72ddc1333dd49, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2842832305865025520, guid: b6014c141a3aa7b47ad72ddc1333dd49, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.315
       objectReference: {fileID: 0}
     - target: {fileID: 6481154246857248318, guid: b6014c141a3aa7b47ad72ddc1333dd49, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.315
       objectReference: {fileID: 0}
     - target: {fileID: 6481154246857248318, guid: b6014c141a3aa7b47ad72ddc1333dd49, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8400073720552864608, guid: b6014c141a3aa7b47ad72ddc1333dd49, type: 3}
       propertyPath: m_Name
       value: AudioSliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400073720552864608, guid: b6014c141a3aa7b47ad72ddc1333dd49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6014c141a3aa7b47ad72ddc1333dd49, type: 3}
