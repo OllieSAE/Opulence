@@ -759,8 +759,8 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         GameManager.Instance.LevelGenComplete();
         mapGenerator.LevelGenComplete();
     }

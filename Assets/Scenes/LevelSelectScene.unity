@@ -27478,7 +27478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9fc1f3e616de4b8996beda05aaea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panSpeed: 0.25
+  defaultSpeed: 0.5
+  fastSpeed: 1
   zoomSpeed: 0.1
   followTransform: {fileID: 0}
   zoomInMax: 5
@@ -58267,6 +58268,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1076480526, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1983087756, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_IsActive
       value: 0

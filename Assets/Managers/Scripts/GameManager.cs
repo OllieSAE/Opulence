@@ -515,7 +515,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator UnlockPlayer()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1.5f);
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
