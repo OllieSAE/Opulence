@@ -79,7 +79,6 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Jump.performed += Jump;
         playerInputActions.Player.Jump.canceled += ArrestJump;
         playerInputActions.Player.Dash.performed += Dash;
-        playerInputActions.Player.RescuePlayer.performed += RescuePlayer;
         playerInputActions.Player.Pause.performed += PauseGame;
         playerInputActions.Player.Map.performed += ToggleMap;
 
@@ -137,7 +136,6 @@ public class Movement : MonoBehaviour
         GameManager.Instance.pauseEndEvent += GamePauseEnd;
         if(SceneManager.GetActiveScene().name == "FirstBossLevel")
         {
-            
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
@@ -149,7 +147,6 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Jump.performed -= Jump;
         playerInputActions.Player.Jump.canceled -= ArrestJump;
         playerInputActions.Player.Dash.performed -= Dash;
-        playerInputActions.Player.RescuePlayer.performed -= RescuePlayer;
         playerInputActions.Player.Map.performed -= ToggleMap;
         
         GameManager.Instance.playerRespawnEvent -= Respawn;
@@ -366,15 +363,6 @@ public class Movement : MonoBehaviour
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
                 Invoke("StopWallJump", wallJumpDuration);
             }
-        }
-    }
-
-    public void RescuePlayer(InputAction.CallbackContext context)
-    {
-        if (context.performed && LevelGenerator.Instance != null && !isDead)
-        {
-            animator.SetTrigger("Rescue");
-            print("rescue attempted");
         }
     }
 

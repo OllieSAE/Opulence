@@ -144,8 +144,8 @@ VisualEffect:
   m_GameObject: {fileID: 189438590}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 9657367368eb42a4c949e21e9c61c234, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -510,8 +510,8 @@ VisualEffect:
   m_GameObject: {fileID: 828241164}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 9657367368eb42a4c949e21e9c61c234, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -783,8 +783,8 @@ VisualEffect:
   m_GameObject: {fileID: 914746547}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 9657367368eb42a4c949e21e9c61c234, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -1343,8 +1343,8 @@ VisualEffect:
   m_GameObject: {fileID: 1401723156}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 2f3418659276ee34084651927b8b0b82, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -1676,8 +1676,8 @@ VisualEffect:
   m_GameObject: {fileID: 1617502543}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 9657367368eb42a4c949e21e9c61c234, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -1873,8 +1873,8 @@ VisualEffect:
   m_GameObject: {fileID: 1981248231}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 9657367368eb42a4c949e21e9c61c234, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -2629,7 +2629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 30
+  maxHealth: 100
   healthBar: {fileID: 0}
   playerLayer:
     serializedVersion: 2
@@ -2737,10 +2737,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3898e4d1-6b0b-4bc0-9996-b717fb10246d
     m_ActionName: Keyboard/Attack 3
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 64c712ad-ebd2-4b23-aef8-ace909240a82
-    m_ActionName: Player/RescuePlayer[/Keyboard/p]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: b4b699fc-1163-4119-b527-39e54f88054c
@@ -3542,8 +3538,8 @@ VisualEffect:
   m_GameObject: {fileID: 3946954942645232994}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 7a059a5cb55a3a746b56a386fb091156, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -4388,6 +4384,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -4503,6 +4507,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6947091268192933929, guid: 84a1a955207f8454da1371661ee52726, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947091268192933929, guid: 84a1a955207f8454da1371661ee52726, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 1.25
       objectReference: {fileID: 0}
@@ -4593,6 +4601,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2039286898}
     m_Modifications:
+    - target: {fileID: 2454578248562357100, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4816286241991073914, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
       propertyPath: m_Name
       value: vfx_spideAttacks
@@ -4639,6 +4651,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4816286241991073915, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816286242443474063, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816286242583082653, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668798691502732286, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4720,6 +4744,10 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2301012657865679507, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301012657865679507, guid: b4edcdb09d24ec34a9106df45052b129, type: 3}
       propertyPath: CollisionModule.type
       value: 1
       objectReference: {fileID: 0}
@@ -4793,6 +4821,10 @@ PrefabInstance:
     - target: {fileID: 5871862762032001403, guid: 5d68ab63accffb144a618910509e6c89, type: 3}
       propertyPath: lengthInSec
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871862762032001403, guid: 5d68ab63accffb144a618910509e6c89, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5871862762032001403, guid: 5d68ab63accffb144a618910509e6c89, type: 3}
       propertyPath: TriggerModule.enter
@@ -4945,6 +4977,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 38c3ab98dbc52cf4baecba5a6196f3cd, type: 2}
+    - target: {fileID: 6653974393262011347, guid: c6cc8ddea7a22b64fad3b445def5f293, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6653974393262011347, guid: c6cc8ddea7a22b64fad3b445def5f293, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.35

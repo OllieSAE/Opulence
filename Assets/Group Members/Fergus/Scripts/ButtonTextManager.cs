@@ -50,7 +50,6 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
                 {
                     // Setting text colour to buttons disabled colour
                     text.color = button.colors.disabledColor;
-
                 }
             }
         }
@@ -94,7 +93,7 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
         if (backButton)
         {
             text.color = button.colors.selectedColor;
-            buttonImage.color = button.colors.selectedColor;
+            buttonImage.color = Color.white;
         }
     }
 }

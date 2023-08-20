@@ -60,15 +60,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RescuePlayer",
-                    "type": "Button",
-                    "id": "64c712ad-ebd2-4b23-aef8-ace909240a82",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "b4b699fc-1163-4119-b527-39e54f88054c",
@@ -516,50 +507,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "d66d5e91-f63e-4b6e-9b4b-f288911ac548",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RescuePlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b05e3b27-7176-4383-9a03-611e250767f9",
-                    "path": "<XInputController>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RescuePlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0b59d8a4-c172-496d-a06d-f3471d0f78d1",
-                    "path": "<DualShockGamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RescuePlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0bd20173-8c49-4579-9e2e-33bad3be1409",
-                    "path": "<SwitchProControllerHID>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RescuePlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

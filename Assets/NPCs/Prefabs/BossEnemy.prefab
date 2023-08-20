@@ -42,8 +42,8 @@ VisualEffect:
   m_GameObject: {fileID: 376282881704245213}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 9657367368eb42a4c949e21e9c61c234, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -925,6 +925,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 376282883375763913}
     m_Modifications:
     - target: {fileID: 2454578248562357100, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2454578248562357100, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 3
       objectReference: {fileID: 0}
@@ -993,12 +997,24 @@ PrefabInstance:
       value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4816286242443474063, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816286242443474063, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4816286242583082650, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816286242583082653, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668798691502732286, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6563579833032739649, guid: 578c601f87804654d8aeb71953bf7611, type: 3}
       propertyPath: m_Layer
@@ -1083,6 +1099,14 @@ PrefabInstance:
     - target: {fileID: 907023359325518941, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
       propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value

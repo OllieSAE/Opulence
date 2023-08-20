@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
     public bool mapIsOpen;
     private AsyncOperation loadingOperation;
     public GameObject mainCamera;
+    public Volume globalVolume;
+    public Volume globalVolumeWithDoF;
     public GameObject vcam1;
     public GameObject mapCamera;
     public CinemachineBlendDefinition goToMapCameraBlend;
@@ -28,6 +32,7 @@ public class GameManager : MonoBehaviour
     public string sceneToLoad;
     public string currentScene;
     public GameObject playerMapClone;
+    private int playerHealthEndOfLevel;
 
     [Header("Backgrounds")]
     public GameObject mainMenuBG;
@@ -360,7 +365,7 @@ public class GameManager : MonoBehaviour
         if (player != null && currentScene == "LevelGenTest")
         {
             PauseUI();
-            player.GetComponent<RescueFailsafe>().FailsafeRescuePlayer();
+            player.GetComponentInChildren<RescueFailsafe>().FailsafeRescuePlayer();
         }
     }
     
@@ -370,8 +375,10 @@ public class GameManager : MonoBehaviour
         mainMenuBG.SetActive(false);
         mainMenuUI.SetActive(false);
         
+        if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -20);
         loadingScreenBG.SetActive(true);
         loadingScreen.SetActive(true);
+        
         yield return new WaitForSeconds(1f);
         StartCoroutine(LoadSceneAsync());
     }
@@ -385,22 +392,35 @@ public class GameManager : MonoBehaviour
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
         
-        if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -10);
+        if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -20);
         //if (mapCameraVC != null) mapCameraVC.transform.position = new Vector3(0, 0, -20);
 
-        if (sceneToLoad != "LevelGenTest")
+        if (sceneToLoad != "LevelGenTest" && sceneToLoad != "FirstBossLevel")
         {
             OnLevelLoaded();
             loadingScreenBG.SetActive(false);
             loadingScreen.SetActive(false);
         }
+        else if (sceneToLoad == "FirstBossLevel")
+        {
+            OnLevelLoaded();
+            StartCoroutine(LoadingScreenDeactivate());
+        }
+    }
+
+    //TODO:
+    //HACK: Hides the view of the VFX playing on awake in boss and first level scenes
+    public IEnumerator LoadingScreenDeactivate()
+    {
+        yield return new WaitForSeconds(0f);
+        loadingScreenBG.SetActive(false);
+        loadingScreen.SetActive(false);
     }
 
     public void LevelGenComplete()
     {
         OnLevelLoaded();
-        loadingScreenBG.SetActive(false);
-        loadingScreen.SetActive(false);
+        StartCoroutine(LoadingScreenDeactivate());
     }
 
     #endregion
@@ -425,6 +445,7 @@ public class GameManager : MonoBehaviour
         {
             player.SetActive(true);
             mainCamera.GetComponent<StudioListener>().attenuationObject = player;
+            
         }
         
         if (player != null)
@@ -463,6 +484,7 @@ public class GameManager : MonoBehaviour
             case "FirstBossLevel":
                 StopCurrentMusic();
                 bossMusic.start();
+                player.GetComponent<Health>().currentHealth = playerHealthEndOfLevel;
                 break;
             case "LevelGenTest":
                 StopCurrentMusic();
@@ -502,6 +524,8 @@ public class GameManager : MonoBehaviour
     {
         if (currentScene == "LevelGenTest")
         {
+            playerHealthEndOfLevel = player.GetComponent<Health>().currentHealth;
+            if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -20);
             SceneManager.UnloadSceneAsync(currentScene);
             sceneToLoad = "FirstBossLevel";
             StartCoroutine(LoadLevelCoroutine());
@@ -654,11 +678,15 @@ public class GameManager : MonoBehaviour
             if (isPaused)
             {
                 pauseUI.SetActive(false);
+                globalVolumeWithDoF.gameObject.SetActive(false);
+                globalVolume.gameObject.SetActive(true);
                 pauseEndEvent?.Invoke();
             }
             else if (!isPaused)
             {
                 pauseUI.SetActive(true);
+                globalVolume.gameObject.SetActive(false);
+                globalVolumeWithDoF.gameObject.SetActive(true);
                 pauseStartEvent?.Invoke();
             }
             isPaused = !isPaused;
@@ -678,7 +706,7 @@ public class GameManager : MonoBehaviour
             currentScene = "LevelSelectScene";
             mainMenuUI.SetActive(true);
             mainMenuBG.SetActive(true);
-            vcam1.transform.position = new Vector3(0, 0, transform.position.z);
+            vcam1.transform.position = new Vector3(0, 0, -20);
         }
     }
 

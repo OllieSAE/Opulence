@@ -193,6 +193,9 @@ MonoBehaviour:
   player: {fileID: 0}
   playerHiding: 0
   bossCharging: 0
+  bossChargeSpeed: 0
+  targetDirRaw: {x: 0, y: 0, z: 0}
+  targetDir: {x: 0, y: 0, z: 0}
   enemyType: 2
 --- !u!50 &369745422201578703
 Rigidbody2D:
@@ -271,8 +274,12 @@ MonoBehaviour:
   chargerCollider: {fileID: 7021041561296149607}
   specialAttackHitDelay: 0
   spiderBossTileCollider: {fileID: 0}
+  crashDownCollider: {fileID: 0}
+  spiderBossMelee1: {fileID: 0}
+  spiderBossMelee2: {fileID: 0}
   climbUpSpeed: 0
   crashDownSpeed: 0
+  crashDownPower: 0
   falconMask: 0
   spiderMask: 0
   falconDashCD: 0
@@ -424,8 +431,8 @@ VisualEffect:
   m_GameObject: {fileID: 7117918306067272411}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 9657367368eb42a4c949e21e9c61c234, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -691,6 +698,14 @@ PrefabInstance:
     - target: {fileID: 907023359325518941, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3707848182641500242, guid: c5d8fd8333b5d9844aea4e21fb82fece, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.size

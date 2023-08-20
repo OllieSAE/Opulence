@@ -46,6 +46,24 @@ public class Health : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.SubscribeToDeathEvents(this);
+        GameManager.Instance.onLevelLoadedEvent += OnLevelLoad;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.onLevelLoadedEvent -= OnLevelLoad;
+    }
+
+    private void OnLevelLoad()
+    {
+        StartCoroutine(UpdateHealthBarOnLoad());
+    }
+
+    private IEnumerator UpdateHealthBarOnLoad()
+    {
+        //delay to get HP showing across levels
+        yield return new WaitForSeconds(0.05f);
+        if (healthBar != null) healthBar.SetHealth(currentHealth);
     }
 
     public void ChangeHealth(int amount, GameObject whoDealtDamage)

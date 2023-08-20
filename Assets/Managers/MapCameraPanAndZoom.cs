@@ -6,7 +6,9 @@ using Cinemachine;
 
 public class MapCameraPanAndZoom : MonoBehaviour
 {
-    [SerializeField] private float panSpeed = 0.25f;
+    [SerializeField] private float defaultSpeed = 0.5f;
+    [SerializeField] private float fastSpeed = 1f;
+    private float panSpeed;
     [SerializeField] private float zoomSpeed = 1f;
     private CinemachineInputProvider inputProvider;
     private CinemachineVirtualCamera mapCamera;
@@ -68,10 +70,61 @@ public class MapCameraPanAndZoom : MonoBehaviour
     public Vector2 PanDirection(float x, float y)
     {
         Vector2 dir = Vector2.zero;
-        if (y >= Screen.height * 0.8f) dir.y += 1;
-        else if (y <= Screen.height * 0.2f) dir.y -= 1;
-        if (x >= Screen.width * 0.8f) dir.x += 1;
-        else if (x <= Screen.width * 0.2f) dir.x -= 1;
+        if (y >= Screen.height * 0.8f)
+        {
+            if (y >= Screen.height * 0.95f)
+            {
+                panSpeed = fastSpeed;
+                dir.y += 1;
+            }
+            else
+            {
+                panSpeed = defaultSpeed;
+                dir.y += 1;
+            }
+            
+        }
+        else if (y <= Screen.height * 0.2f)
+        {
+            if (y <= Screen.height * 0.05f)
+            {
+                panSpeed = fastSpeed;
+                dir.y -= 1;
+            }
+            else
+            {
+                panSpeed = defaultSpeed;
+                dir.y -= 1;
+            }
+        }
+
+        if (x >= Screen.width * 0.8f)
+        {
+            if (x >= Screen.width * 0.95f)
+            {
+                panSpeed = fastSpeed;
+                dir.x += 1;
+            }
+            else
+            {
+                panSpeed = defaultSpeed;
+                dir.x += 1;
+            }
+            
+        }
+        else if (x <= Screen.width * 0.2f)
+        {
+            if (x <= Screen.width * 0.05f)
+            {
+                panSpeed = fastSpeed;
+                dir.x -= 1;
+            }
+            else
+            {
+                panSpeed = defaultSpeed;
+                dir.x -= 1;
+            }
+        }
         return dir;
     }
 

@@ -82,15 +82,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RescuePlayer"",
-                    ""type"": ""Button"",
-                    ""id"": ""64c712ad-ebd2-4b23-aef8-ace909240a82"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""b4b699fc-1163-4119-b527-39e54f88054c"",
@@ -541,50 +532,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d66d5e91-f63e-4b6e-9b4b-f288911ac548"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RescuePlayer"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b05e3b27-7176-4383-9a03-611e250767f9"",
-                    ""path"": ""<XInputController>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RescuePlayer"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0b59d8a4-c172-496d-a06d-f3471d0f78d1"",
-                    ""path"": ""<DualShockGamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RescuePlayer"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0bd20173-8c49-4579-9e2e-33bad3be1409"",
-                    ""path"": ""<SwitchProControllerHID>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RescuePlayer"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3af99eb6-c65c-4ac3-bf1c-f2aded17e49a"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -684,7 +631,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_MeleeAttack = m_Player.FindAction("MeleeAttack", throwIfNotFound: true);
         m_Player_RangedAttack = m_Player.FindAction("RangedAttack", throwIfNotFound: true);
         m_Player_Attack3 = m_Player.FindAction("Attack 3", throwIfNotFound: true);
-        m_Player_RescuePlayer = m_Player.FindAction("RescuePlayer", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Map = m_Player.FindAction("Map", throwIfNotFound: true);
     }
@@ -754,7 +700,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MeleeAttack;
     private readonly InputAction m_Player_RangedAttack;
     private readonly InputAction m_Player_Attack3;
-    private readonly InputAction m_Player_RescuePlayer;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Map;
     public struct PlayerActions
@@ -767,7 +712,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @MeleeAttack => m_Wrapper.m_Player_MeleeAttack;
         public InputAction @RangedAttack => m_Wrapper.m_Player_RangedAttack;
         public InputAction @Attack3 => m_Wrapper.m_Player_Attack3;
-        public InputAction @RescuePlayer => m_Wrapper.m_Player_RescuePlayer;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Map => m_Wrapper.m_Player_Map;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -797,9 +741,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack3.started += instance.OnAttack3;
             @Attack3.performed += instance.OnAttack3;
             @Attack3.canceled += instance.OnAttack3;
-            @RescuePlayer.started += instance.OnRescuePlayer;
-            @RescuePlayer.performed += instance.OnRescuePlayer;
-            @RescuePlayer.canceled += instance.OnRescuePlayer;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
@@ -828,9 +769,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack3.started -= instance.OnAttack3;
             @Attack3.performed -= instance.OnAttack3;
             @Attack3.canceled -= instance.OnAttack3;
-            @RescuePlayer.started -= instance.OnRescuePlayer;
-            @RescuePlayer.performed -= instance.OnRescuePlayer;
-            @RescuePlayer.canceled -= instance.OnRescuePlayer;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
@@ -862,7 +800,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMeleeAttack(InputAction.CallbackContext context);
         void OnRangedAttack(InputAction.CallbackContext context);
         void OnAttack3(InputAction.CallbackContext context);
-        void OnRescuePlayer(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
     }
