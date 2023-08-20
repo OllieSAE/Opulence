@@ -118,10 +118,10 @@ public class BasicEnemyPatrol : MonoBehaviour
                 origin: transform.position,
                 direction: new Vector2(transform.localScale.x, 0),
                 distance: sightDistance,
-                layerMask: playerLayer);
+                layerMask: playerAndGroundLayer);
         
         
-            if (frontHit.collider != null)
+            if (frontHit.collider != null && frontHit.collider.CompareTag("Player"))
             {
                 isPlayerInSight = true;
             

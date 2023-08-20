@@ -42,6 +42,10 @@ public class Projectile : MonoBehaviour
             enemyHealth.ChangeHealth(-damage,owner);
             Destroy(this.gameObject);
         }
+        else if (other.CompareTag("Ground"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private IEnumerator DestroySelf()

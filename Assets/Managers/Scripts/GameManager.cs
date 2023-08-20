@@ -117,6 +117,14 @@ public class GameManager : MonoBehaviour
     public event MapClosedEvent mapClosedEvent;
     #endregion
 
+    #region FMOD Event Instances
+    public FMOD.Studio.EventInstance mainMenuMusic;
+    public FMOD.Studio.EventInstance ambienceMusic;
+    public FMOD.Studio.EventInstance levelMusic;
+    public FMOD.Studio.EventInstance bossMusic;
+    #endregion
+    
+    
     private void Awake()
     {
         //figure out saving stuff
@@ -149,11 +157,38 @@ public class GameManager : MonoBehaviour
         }
         //loadingScreen.SetActive(false);
         sceneToLoad = "LevelSelectScene";
+
+
+        mainMenuMusic = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Music Menu");
+        ambienceMusic = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Ambience");
+        levelMusic = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Music Level");
+        bossMusic = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Music Boss");
+        RuntimeManager.AttachInstanceToGameObject(mainMenuMusic, transform, true);
+        RuntimeManager.AttachInstanceToGameObject(ambienceMusic, transform,true);
+        RuntimeManager.AttachInstanceToGameObject(levelMusic, transform, true);
+        RuntimeManager.AttachInstanceToGameObject(bossMusic, transform,true);
+
+        if (!FmodExtensions.IsPlaying(mainMenuMusic))
+        {
+            mainMenuMusic.start();
+        }
+        if (!FmodExtensions.IsPlaying(ambienceMusic))
+        {
+            ambienceMusic.start();
+        }
     }
 
     private void Start()
     {
         OnLevelLoaded();
+    }
+
+    private void OnDisable()
+    {
+        mainMenuMusic.release();
+        ambienceMusic.release();
+        levelMusic.release();
+        bossMusic.release();
     }
 
     #region Level Select/Load
@@ -422,6 +457,38 @@ public class GameManager : MonoBehaviour
             stuckButton.interactable = false;
         }
         else stuckButton.interactable = true;
+
+        switch (currentScene)
+        {
+            case "FirstBossLevel":
+                StopCurrentMusic();
+                bossMusic.start();
+                break;
+            case "LevelGenTest":
+                StopCurrentMusic();
+                levelMusic.start();
+                break;
+            case "LevelSelectScene":
+                StopCurrentMusic();
+                mainMenuMusic.start();
+                break;
+        }
+    }
+
+    private void StopCurrentMusic()
+    {
+        if (FmodExtensions.IsPlaying(mainMenuMusic))
+        {
+            mainMenuMusic.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+        if (FmodExtensions.IsPlaying(levelMusic))
+        {
+            levelMusic.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+        if (FmodExtensions.IsPlaying(bossMusic))
+        {
+            bossMusic.stop(STOP_MODE.ALLOWFADEOUT);
+        }
     }
 
     private IEnumerator UnlockPlayer()
@@ -444,7 +511,9 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync(currentScene);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelSelectScene"));
+            currentScene = "LevelSelectScene";
             mainMenuUI.SetActive(true);
+            mainMenuBG.SetActive(true);
         }
 
         if (currentScene is "OpeningCutscene" or "DeathCutscene")
@@ -601,11 +670,15 @@ public class GameManager : MonoBehaviour
         if (currentScene != "LevelSelectScene")
         {
             if(isPaused) PauseUI();
-            player.SetActive(false);
+            //player.SetActive(false);
             player.GetComponent<Movement>().playerWalk.stop(STOP_MODE.ALLOWFADEOUT);
             //tutorialEndUI.SetActive(false);
             SceneManager.UnloadSceneAsync(currentScene);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelSelectScene"));
+            currentScene = "LevelSelectScene";
             mainMenuUI.SetActive(true);
+            mainMenuBG.SetActive(true);
+            vcam1.transform.position = new Vector3(0, 0, transform.position.z);
         }
     }
 
