@@ -109,6 +109,12 @@ public class GameManager : MonoBehaviour
     public delegate void DisableEnemyPatrolEvent();
 
     public event DisableEnemyPatrolEvent disableEnemyPatrolEvent;
+
+    public delegate void MapOpenedEvent();
+    public event MapOpenedEvent mapOpenedEvent;
+
+    public delegate void MapClosedEvent();
+    public event MapClosedEvent mapClosedEvent;
     #endregion
 
     private void Awake()
@@ -457,15 +463,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadLevelCoroutine());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            ToggleMap();
-        }
-    }
 
-    private void ToggleMap()
+
+    public void ToggleMap()
     {
         if (mapCameraVC != null && vcam1VC != null && currentScene == "LevelGenTest")
         {
@@ -475,8 +475,11 @@ public class GameManager : MonoBehaviour
                 {
                     //open the map and trigger pause event to LOCK movement/timeScale
                     mapCameraVC.gameObject.SetActive(true);
+                    mapCameraVC.gameObject.transform.position =
+                        playerMapClone.transform.position + new Vector3(0, 0, -20);
                     vcam1VC.gameObject.SetActive(false);
                     pauseStartEvent?.Invoke();
+                    mapOpenedEvent?.Invoke();
                 }
                 else
                 {
@@ -484,6 +487,7 @@ public class GameManager : MonoBehaviour
                     vcam1VC.gameObject.SetActive(true);
                     mapCameraVC.gameObject.SetActive(false);
                     pauseEndEvent?.Invoke();
+                    mapClosedEvent?.Invoke();
                 }
                 mapIsOpen = !mapIsOpen;
             }

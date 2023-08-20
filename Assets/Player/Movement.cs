@@ -79,9 +79,9 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Jump.performed += Jump;
         playerInputActions.Player.Jump.canceled += ArrestJump;
         playerInputActions.Player.Dash.performed += Dash;
-        playerInputActions.Player.Crouch.performed += Crouch;
         playerInputActions.Player.RescuePlayer.performed += RescuePlayer;
         playerInputActions.Player.Pause.performed += PauseGame;
+        playerInputActions.Player.Map.performed += ToggleMap;
 
         controlsSet = false;
         dashing = false;
@@ -105,6 +105,11 @@ public class Movement : MonoBehaviour
     private void PauseGame(InputAction.CallbackContext context)
     {
         if(context.performed) GameManager.Instance.PauseUI();
+    }
+
+    private void ToggleMap(InputAction.CallbackContext context)
+    {
+        if (context.performed) GameManager.Instance.ToggleMap();
     }
 
     private void OnLevelLoad()
@@ -144,8 +149,8 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Jump.performed -= Jump;
         playerInputActions.Player.Jump.canceled -= ArrestJump;
         playerInputActions.Player.Dash.performed -= Dash;
-        playerInputActions.Player.Crouch.performed -= Crouch;
         playerInputActions.Player.RescuePlayer.performed -= RescuePlayer;
+        playerInputActions.Player.Map.performed -= ToggleMap;
         
         GameManager.Instance.playerRespawnEvent -= Respawn;
         GameManager.Instance.tutorialDialogueFinishedEvent -= TutorialDialogueFinished;
@@ -536,11 +541,6 @@ public class Movement : MonoBehaviour
         
         playerInput.ActivateInput();
         health.immune = false;
-    }
-    
-    public void Crouch(InputAction.CallbackContext context)
-    {
-        if(context.performed) ;
     }
 
     //Temporary fix for placeholder sprites

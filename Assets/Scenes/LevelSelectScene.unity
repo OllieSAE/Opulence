@@ -27486,6 +27486,8 @@ GameObject:
   - component: {fileID: 960251771}
   - component: {fileID: 960251770}
   - component: {fileID: 960251773}
+  - component: {fileID: 960251775}
+  - component: {fileID: 960251774}
   m_Layer: 0
   m_Name: Map Camera
   m_TagString: Map Camera
@@ -27562,6 +27564,39 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 1902371212}
   m_Damping: 0.6
   m_MaxWindowSize: -1
+--- !u!114 &960251774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960251769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIndex: -1
+  AutoEnableInputs: 1
+  XYAxis: {fileID: -1122640939284467061, guid: 52db24ce79241bf4bb061ff5d8866295, type: 3}
+  ZAxis: {fileID: 7209733258910802137, guid: 52db24ce79241bf4bb061ff5d8866295, type: 3}
+--- !u!114 &960251775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960251769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b9fc1f3e616de4b8996beda05aaea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panSpeed: 0.25
+  zoomSpeed: 0.1
+  followTransform: {fileID: 0}
+  zoomInMax: 5
+  zoomOutMax: 20
 --- !u!1 &989278880
 GameObject:
   m_ObjectHideFlags: 0
