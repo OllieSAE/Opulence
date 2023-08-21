@@ -531,14 +531,12 @@ public class GameManager : MonoBehaviour
         track.setVolume(0);
         float currentVol = 0.0f;
         track.getVolume(out currentVol);
-
-        print(currentVol);
+        
         while (currentVol < 1)
         {
             track.setVolume(currentVol);
             currentVol += 0.1f;
             yield return new WaitForSeconds(0.2f);
-            print(currentVol);
         }
 
         currentVol = 0;

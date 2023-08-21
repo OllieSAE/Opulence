@@ -11,6 +11,7 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
     public Button button;
     public bool backButton;
 
+    private AudioIPointerHandler parentAudioHandler;
     private TextMeshProUGUI text;
     private Image buttonImage;
     
@@ -30,6 +31,8 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
             // Getting the sprite currently on the button
             buttonImage = button.GetComponent<Image>();
         }
+
+        parentAudioHandler = button.gameObject.GetComponent<AudioIPointerHandler>();
     }
 
     void Update()
@@ -72,6 +75,7 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
         {
             text.color = button.colors.pressedColor;
             buttonImage.color = button.colors.pressedColor;
+            parentAudioHandler.OnPointerDown(eventData);
         }
     }
 

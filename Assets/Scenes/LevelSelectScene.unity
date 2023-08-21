@@ -50904,6 +50904,25 @@ Transform:
   m_Father: {fileID: 1377841079}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1304463659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3795705241059937763, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1304463664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304463659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1 &1305339314
 GameObject:
   m_ObjectHideFlags: 0
@@ -56905,6 +56924,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1467142051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7551593229937944733, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1467142056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467142051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1 &1488456363
 GameObject:
   m_ObjectHideFlags: 0
@@ -59612,6 +59650,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3185623301221270997, guid: 02d88aececd7c9644a3fdc3ee4895bf2, type: 3}
   m_PrefabInstance: {fileID: 2039812896}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2053359980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2060360479, guid: 81df457d65ef04042942728167ca4758, type: 3}
+  m_PrefabInstance: {fileID: 1902371211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2053359985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053359980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1 &2087377334
 GameObject:
   m_ObjectHideFlags: 0
