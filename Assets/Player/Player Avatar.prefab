@@ -2488,6 +2488,8 @@ GameObject:
   - component: {fileID: 1584120733}
   - component: {fileID: 2575634471455701375}
   - component: {fileID: 1986453059}
+  - component: {fileID: 5699736835534899814}
+  - component: {fileID: 1679568389995197566}
   m_Layer: 6
   m_Name: Player Avatar
   m_TagString: Player
@@ -2793,6 +2795,58 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &5699736835534899814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048529260058701012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 432073182
+      Data2: 1306003340
+      Data3: 856290736
+      Data4: 1044385218
+    Path: event:/SOUND EVENTS/Low Health
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1679568389995197566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048529260058701012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Emitters:
+  - Target: {fileID: 5699736835534899814}
+    Params:
+    - Name: Health
+      Value: 100
+  - Target: {fileID: 1986453059}
+    Params: []
+  TriggerEvent: 0
 --- !u!1 &1229117945578845079
 GameObject:
   m_ObjectHideFlags: 0

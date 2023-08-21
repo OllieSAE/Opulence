@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     private SpriteFlash flashEffect;
     public bool immune;
 
+    private FMOD.Studio.EventInstance heartbeatSound;
     public delegate void DeathEvent(GameObject parent);
     public event DeathEvent deathEvent;
     
@@ -33,6 +34,8 @@ public class Health : MonoBehaviour
         if (thisIsPlayer)
         {
             flashEffect = GetComponentInChildren<SpriteFlash>();
+            heartbeatSound = RuntimeManager.CreateInstance("event:/SOUND EVENTS/Low Health");
+            heartbeatSound.start();
         }
         else flashEffect = GetComponent<SpriteFlash>();
     
@@ -45,7 +48,7 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        
+        if(thisIsPlayer) heartbeatSound.setParameterByName("Health", (currentHealth/maxHealth * 100));
     }
 
     private void Start()
