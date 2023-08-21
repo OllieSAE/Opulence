@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using FMODUnity;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -487,15 +488,18 @@ public class GameManager : MonoBehaviour
         {
             case "FirstBossLevel":
                 StopCurrentMusic();
+                StartCoroutine(FadeInTrack(bossMusic));
                 bossMusic.start();
                 player.GetComponent<Health>().currentHealth = playerHealthEndOfLevel;
                 break;
             case "LevelGenTest":
                 StopCurrentMusic();
+                StartCoroutine(FadeInTrack(levelMusic));
                 levelMusic.start();
                 break;
             case "LevelSelectScene":
                 StopCurrentMusic();
+                StartCoroutine(FadeInTrack(mainMenuMusic));
                 mainMenuMusic.start();
                 break;
         }
@@ -505,16 +509,54 @@ public class GameManager : MonoBehaviour
     {
         if (FmodExtensions.IsPlaying(mainMenuMusic))
         {
-            mainMenuMusic.stop(STOP_MODE.ALLOWFADEOUT);
+            StartCoroutine(FadeOutTrack(mainMenuMusic));
+            //mainMenuMusic.stop(STOP_MODE.ALLOWFADEOUT);
         }
         if (FmodExtensions.IsPlaying(levelMusic))
         {
-            levelMusic.stop(STOP_MODE.ALLOWFADEOUT);
+            StartCoroutine(FadeOutTrack(levelMusic));
+            //levelMusic.stop(STOP_MODE.ALLOWFADEOUT);
         }
         if (FmodExtensions.IsPlaying(bossMusic))
         {
-            bossMusic.stop(STOP_MODE.ALLOWFADEOUT);
+            StartCoroutine(FadeOutTrack(bossMusic));
+            //bossMusic.stop(STOP_MODE.ALLOWFADEOUT);
         }
+    }
+
+    private IEnumerator FadeInTrack(FMOD.Studio.EventInstance track)
+    {
+        // float targetVol = 0.0f;
+        // track.getVolume(out targetVol);
+        track.setVolume(0);
+        float currentVol = 0.0f;
+        track.getVolume(out currentVol);
+
+        print(currentVol);
+        while (currentVol < 1)
+        {
+            track.setVolume(currentVol);
+            currentVol += 0.1f;
+            yield return new WaitForSeconds(0.2f);
+            print(currentVol);
+        }
+
+        currentVol = 0;
+    }
+
+    private IEnumerator FadeOutTrack(FMOD.Studio.EventInstance track)
+    {
+        float currentVol = 0.0f;
+        track.getVolume(out currentVol);
+
+        while (currentVol > 0)
+        {
+            track.setVolume(currentVol);
+            currentVol -= 0.1f;
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        currentVol = 0;
     }
 
     private IEnumerator UnlockPlayer()
