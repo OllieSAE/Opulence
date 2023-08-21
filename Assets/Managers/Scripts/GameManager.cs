@@ -337,6 +337,8 @@ public class GameManager : MonoBehaviour
         creditsUI.SetActive(false);
         statsUI.SetActive(false);
         statsBG.SetActive(false);
+        if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -20);
+        if(mainCamera!=null)mainCamera.transform.position = new Vector3(0, 0, -20);
         mainMenuBG.SetActive(true);
         mainMenuUI.SetActive(true);
     }
@@ -594,6 +596,7 @@ public class GameManager : MonoBehaviour
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelSelectScene"));
             currentScene = "LevelSelectScene";
             if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -20);
+            if(mainCamera!=null)mainCamera.transform.position = new Vector3(0, 0, -20);
             statsBG.SetActive(true);
             statsUI.SetActive(true);
             statTracker.DisplayStats();
