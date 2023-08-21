@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public GameObject loadingScreenBG;
     public GameObject settingsBG;
     public GameObject loadGameMenuBG;
+    public GameObject statsBG;
     
     [Header("UI Elements")]
     public GameObject mainMenuUI;
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
     public GameObject settingsMenuUI;
     public GameObject loadGameMenuUI;
     public GameObject pauseUI;
+    public GameObject statsUI;
     public Button stuckButton;
     
     
@@ -141,6 +143,7 @@ public class GameManager : MonoBehaviour
         //testObjectPickedUp = false;
         _instance = this;
         statTracker = GetComponent<StatTracker>();
+        statTracker.ResetAllValues();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         if (mainCamera != null) mainCameraBrain = mainCamera.GetComponent<CinemachineBrain>();
         vcam1 = GameObject.FindGameObjectWithTag("vcam1");
@@ -332,7 +335,8 @@ public class GameManager : MonoBehaviour
         settingsMenuUI.SetActive(false);
         creditsBG.SetActive(false);
         creditsUI.SetActive(false);
-        
+        statsUI.SetActive(false);
+        statsBG.SetActive(false);
         mainMenuBG.SetActive(true);
         mainMenuUI.SetActive(true);
     }
@@ -590,8 +594,9 @@ public class GameManager : MonoBehaviour
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelSelectScene"));
             currentScene = "LevelSelectScene";
             if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -20);
-            mainMenuUI.SetActive(true);
-            mainMenuBG.SetActive(true);
+            statsBG.SetActive(true);
+            statsUI.SetActive(true);
+            statTracker.DisplayStats();
         }
 
         if (currentScene is "OpeningCutscene" or "DeathCutscene")
@@ -760,8 +765,9 @@ public class GameManager : MonoBehaviour
             SceneManager.UnloadSceneAsync(currentScene);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelSelectScene"));
             currentScene = "LevelSelectScene";
-            mainMenuUI.SetActive(true);
-            mainMenuBG.SetActive(true);
+            statsBG.SetActive(true);
+            statsUI.SetActive(true);
+            statTracker.DisplayStats();
             vcam1.transform.position = new Vector3(0, 0, -20);
         }
     }

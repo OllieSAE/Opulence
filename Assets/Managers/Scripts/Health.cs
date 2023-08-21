@@ -43,6 +43,11 @@ public class Health : MonoBehaviour
         immune = false;
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void Start()
     {
         GameManager.Instance.SubscribeToDeathEvents(this);

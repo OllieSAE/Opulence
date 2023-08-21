@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StatTracker : MonoBehaviour
@@ -12,11 +13,14 @@ public class StatTracker : MonoBehaviour
     public int enemiesKilled;
     public int deaths;
     public float timeElapsed;
-
-    public void Start()
-    {
-        ResetAllValues();
-    }
+    public TextMeshProUGUI damageDealtText;
+    public TextMeshProUGUI damageTakenText;
+    public TextMeshProUGUI jumpsText;
+    public TextMeshProUGUI dashesText;
+    public TextMeshProUGUI enemiesKilledText;
+    public TextMeshProUGUI deathsText;
+    public TextMeshProUGUI timeElapsedText;
+    
 
     public void ResetAllValues()
     {
@@ -54,5 +58,16 @@ public class StatTracker : MonoBehaviour
             timeElapsed = endTime - timeElapsed;
             print("end time = " + timeElapsed);
         }
+    }
+
+    public void DisplayStats()
+    {
+        damageDealtText.text = damageDealt.ToString();
+        damageTakenText.text = damageTaken.ToString();
+        jumpsText.text = jumps.ToString();
+        dashesText.text = dashes.ToString();
+        enemiesKilledText.text = enemiesKilled.ToString();
+        deathsText.text = deaths.ToString();
+        timeElapsedText.text = timeElapsed.ToString();
     }
 }
