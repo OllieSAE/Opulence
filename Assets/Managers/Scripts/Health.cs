@@ -17,6 +17,7 @@ public class Health : MonoBehaviour
     public LayerMask playerLayer;
     private SpriteFlash flashEffect;
     public bool immune;
+    public bool iAmTheBoss;
 
     private FMOD.Studio.EventInstance heartbeatSound;
     public delegate void DeathEvent(GameObject parent);
@@ -119,6 +120,7 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = -1;
+            if(iAmTheBoss) GameManager.Instance.BossKilled();
             StartCoroutine(Death(this.gameObject));
             
             //combat tutorial only

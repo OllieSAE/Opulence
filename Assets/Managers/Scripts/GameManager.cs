@@ -124,6 +124,9 @@ public class GameManager : MonoBehaviour
 
     public delegate void MapClosedEvent();
     public event MapClosedEvent mapClosedEvent;
+
+    public delegate void BossKilledEvent();
+    public event BossKilledEvent bossKilledEvent;
     #endregion
 
     #region FMOD Event Instances
@@ -576,6 +579,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    public void BossKilled()
+    {
+        bossKilledEvent?.Invoke();
     }
 
     public void EndLevel()

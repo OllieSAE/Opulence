@@ -6,18 +6,51 @@ using UnityEngine;
 public class EndLevel : MonoBehaviour
 {
     public bool levelEnded = false;
+    private bool bossDead = false;
+    public bool bossDoor;
+
+    private void Start()
+    {
+        GameManager.Instance.bossKilledEvent += BossKilled;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.bossKilledEvent -= BossKilled;
+    }
+
+    private void BossKilled()
+    {
+        bossDead = true;
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            if (levelEnded == false)
+            if (bossDoor && bossDead)
             {
-                levelEnded = true;
-                print("test");
+                if (levelEnded == false)
+                {
+                    levelEnded = true;
+                    print("test");
                 
-                //maybe replace with coroutine so we can animate the exit
-                GameManager.Instance.EndLevel();
+                    //maybe replace with coroutine so we can animate the exit
+                    GameManager.Instance.EndLevel();
+                }
             }
+            else if (!bossDoor)
+            {
+                if (levelEnded == false)
+                {
+                    levelEnded = true;
+                    print("test");
+                
+                    //maybe replace with coroutine so we can animate the exit
+                    GameManager.Instance.EndLevel();
+                }
+            }
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -269,6 +270,7 @@ public class Combat : MonoBehaviour
         {
             StartCoroutine(ChargerAttackCoroutine());
             animator.SetTrigger("Charge");
+            RuntimeManager.PlayOneShot("event:/SOUND EFFECTS/Boss Charge Attack");
             yield return new WaitForSeconds(meleeHitDelay);
         }
 

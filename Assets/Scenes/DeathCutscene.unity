@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 281468860}
   - component: {fileID: 281468859}
   - component: {fileID: 281468858}
+  - component: {fileID: 281468861}
   m_Layer: 5
   m_Name: Death Text
   m_TagString: Untagged
@@ -384,6 +385,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281468856}
   m_CullTransparentMesh: 1
+--- !u!114 &281468861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281468856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3efeb7423ad59e64295b9be3effcb907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  continueButton: {fileID: 1090760909}
 --- !u!1 &540487753
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1090760907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -643,6 +657,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 281468861}
+        m_TargetAssemblyTypeName: DeathCutsceneManager, Assembly-CSharp
+        m_MethodName: DisableContinueButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1090760908}
         m_TargetAssemblyTypeName: OpeningCutsceneSkip, Assembly-CSharp
         m_MethodName: SkipCutscene
