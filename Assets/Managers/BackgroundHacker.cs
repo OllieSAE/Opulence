@@ -15,4 +15,12 @@ public class BackgroundHacker : MonoBehaviour
             mainCamera.transform.position.y,
             zPos);
     }
+
+    private void Update()
+    {
+        transform.position = new Vector3(
+            mainCamera.transform.position.x,
+            mainCamera.transform.position.y,
+            zPos);
+    }
 }
