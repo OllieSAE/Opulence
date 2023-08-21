@@ -2811,10 +2811,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 46.85, y: -22.81125}
+  m_SizeDelta: {x: 85.7, y: 19.2075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &630692784
 CanvasRenderer:
@@ -4056,10 +4056,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 4, y: -9.2075}
+  m_SizeDelta: {x: 85.7, y: 19.2075}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &920456900
 CanvasRenderer:
@@ -8444,10 +8444,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 46.85, y: -69.22625}
+  m_SizeDelta: {x: 85.7, y: 19.2075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1592870409
 CanvasRenderer:
@@ -10190,7 +10190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1983087757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10896,6 +10896,7 @@ GameObject:
   - component: {fileID: 2060360483}
   - component: {fileID: 2060360482}
   - component: {fileID: 2060360481}
+  - component: {fileID: 2053359985}
   m_Layer: 5
   m_Name: Stuck Button
   m_TagString: Untagged
@@ -11018,6 +11019,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2053359985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060360479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1 &2060440601
 GameObject:
   m_ObjectHideFlags: 0
@@ -12649,6 +12664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 861644328799837907}
   - component: {fileID: 1785361502933586404}
+  - component: {fileID: 4501009770635961471}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -12724,6 +12740,25 @@ MonoBehaviour:
   stuckButton: {fileID: 2060360481}
   toggleEnemyMovement: 0
   mainMenuEnabled: 1
+--- !u!114 &4501009770635961471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417026086825389793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7500979963ca3449808f2bc4770b5b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealt: 0
+  damageTaken: 0
+  jumps: 0
+  dashes: 0
+  enemiesKilled: 0
+  deaths: 0
+  timeElapsed: 0
 --- !u!1 &2893646305027435089
 GameObject:
   m_ObjectHideFlags: 0
@@ -12909,10 +12944,10 @@ RectTransform:
   m_Father: {fileID: 1328100717}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 46.85, y: -46.018753}
+  m_SizeDelta: {x: 85.7, y: 19.2075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2388290452524937575
 CanvasRenderer:
@@ -13427,6 +13462,7 @@ GameObject:
   - component: {fileID: 1950894921478415948}
   - component: {fileID: 9062554284948866039}
   - component: {fileID: 6685777633395248454}
+  - component: {fileID: 1304463664}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -13549,6 +13585,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1304463664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795705241059937763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1 &3886668355135115157
 GameObject:
   m_ObjectHideFlags: 0
@@ -15275,6 +15325,7 @@ GameObject:
   - component: {fileID: 5431427492543029686}
   - component: {fileID: 2645034436806961399}
   - component: {fileID: 2400567134889123418}
+  - component: {fileID: 1467142056}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -15397,6 +15448,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1467142056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7551593229937944733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundToPlay: UI Hover
+  clickSoundToPlay: UI Click 2
 --- !u!1 &7643324759822873150
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -24,7 +25,7 @@ public class DestroyTile : MonoBehaviour
             if (!exploded)
             {
                 exploded = true;
-                //play exploded sound
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Boss Rock Smash");
                 //play exploded vfx
             }
         }

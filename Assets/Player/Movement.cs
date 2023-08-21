@@ -346,6 +346,7 @@ public class Movement : MonoBehaviour
         {
             if (!isTouchingGround && !isTouchingWall && doubleJump && !dashing)
             {
+                GameManager.Instance.statTracker.jumps++;
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
@@ -353,6 +354,7 @@ public class Movement : MonoBehaviour
             }
             else if (isTouchingGround)
             {
+                GameManager.Instance.statTracker.jumps++;
                 rigidbody.AddForce(Vector3.up * jumpValue, ForceMode2D.Impulse);
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
                 doubleJump = true;
@@ -360,6 +362,7 @@ public class Movement : MonoBehaviour
             else if (isSliding)
             {
                 wallJumping = true;
+                GameManager.Instance.statTracker.jumps++;
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Jump");
                 Invoke("StopWallJump", wallJumpDuration);
             }
@@ -409,6 +412,7 @@ public class Movement : MonoBehaviour
                 animator.SetBool("Dashing", true);
                 if (!facingLeft)
                 {
+                    GameManager.Instance.statTracker.dashes++;
                     rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
                     
                     
@@ -417,6 +421,7 @@ public class Movement : MonoBehaviour
 
                 if (facingLeft)
                 {
+                    GameManager.Instance.statTracker.dashes++;
                     rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
                     
                     
@@ -430,6 +435,7 @@ public class Movement : MonoBehaviour
                 animator.SetBool("Dashing", true);
                 if (!facingLeft)
                 {
+                    GameManager.Instance.statTracker.dashes++;
                     rigidbody.AddForce(Vector3.right * dashValue, ForceMode2D.Impulse);
 
                     if (rigidbody.velocity.x is < 0.01f and > -0.01f)
@@ -441,6 +447,7 @@ public class Movement : MonoBehaviour
 
                 if (facingLeft)
                 {
+                    GameManager.Instance.statTracker.dashes++;
                     rigidbody.AddForce(Vector3.left * dashValue, ForceMode2D.Impulse);
                     
                     if (rigidbody.velocity.x is < 0.01f and > -0.01f)

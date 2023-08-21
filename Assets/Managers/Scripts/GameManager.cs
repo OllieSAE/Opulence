@@ -15,6 +15,7 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class GameManager : MonoBehaviour
 {
+    public StatTracker statTracker;
     public GameObject player;
     public Canvas playerCanvas;
     public Vector3 playerRespawnPos;
@@ -139,6 +140,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         //testObjectPickedUp = false;
         _instance = this;
+        statTracker = GetComponent<StatTracker>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         if (mainCamera != null) mainCameraBrain = mainCamera.GetComponent<CinemachineBrain>();
         vcam1 = GameObject.FindGameObjectWithTag("vcam1");
@@ -421,6 +423,7 @@ public class GameManager : MonoBehaviour
     public void LevelGenComplete()
     {
         OnLevelLoaded();
+        statTracker.UpdateTimeElapsed(Time.time,0);
         StartCoroutine(LoadingScreenDeactivate());
     }
 
@@ -502,6 +505,11 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(FadeInTrack(mainMenuMusic));
                 mainMenuMusic.start();
                 break;
+            case "DeathCutscene":
+                StopCurrentMusic();
+                StartCoroutine(FadeInTrack(levelMusic));
+                levelMusic.start();
+                break;
         }
     }
 
@@ -577,9 +585,11 @@ public class GameManager : MonoBehaviour
 
         if (currentScene == "FirstBossLevel")
         {
+            statTracker.UpdateTimeElapsed(0,Time.time);
             SceneManager.UnloadSceneAsync(currentScene);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelSelectScene"));
             currentScene = "LevelSelectScene";
+            if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -20);
             mainMenuUI.SetActive(true);
             mainMenuBG.SetActive(true);
         }
@@ -667,11 +677,13 @@ public class GameManager : MonoBehaviour
         if (deadThing.layer == 6)
         {
             StartCoroutine(DeathCutscene());
+            statTracker.ResetOnDeathValues();
             //RespawnPlayer();
             // if(objectPickUpTest!=null)RespawnObject();
         }
         else if (deadThing.layer == 8)
         {
+            statTracker.enemiesKilled++;
             deadThing.GetComponent<DamageAOETest>().enabled = false;
             deadThing.GetComponent<BasicEnemyPatrol>().enabled = false;
         }
