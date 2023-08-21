@@ -48,7 +48,7 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        if(thisIsPlayer) heartbeatSound.setParameterByName("Health", (currentHealth/maxHealth * 100));
+        if(thisIsPlayer) heartbeatSound.setParameterByName("Health", currentHealth);
     }
 
     private void Start()
