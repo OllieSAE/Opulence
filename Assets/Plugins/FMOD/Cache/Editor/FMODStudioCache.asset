@@ -264,33 +264,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-6579050629358950135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SOUND EVENTS/UI Click
-  m_EditorClassIdentifier: 
-  Path: event:/SOUND EVENTS/UI Click
-  Guid:
-    Data1: -1920174674
-    Data2: 1305027232
-    Data3: -2136897894
-    Data4: -2163887
-  Banks:
-  - {fileID: -4576621597892024814}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2969
 --- !u!114 &-6545988072972062194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,10 +306,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/SFX.bank
   Name: Desktop/SFX
   StudioPath: bank:/SFX
-  lastModified: 638279580827889917
+  lastModified: 638282260142999849
   FileSizes:
   - Name: Desktop
-    Value: 1232224
+    Value: 1538496
   Exists: 1
 --- !u!114 &-6398510884736874414
 MonoBehaviour:
@@ -392,6 +365,88 @@ MonoBehaviour:
   MinDistance: 5
   MaxDistance: 20
   Length: 3341
+--- !u!114 &-5888146598354029134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Low Health
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Low Health
+  Guid:
+    Data1: 432073182
+    Data2: 1306003340
+    Data3: 856290736
+    Data4: 1044385218
+  Banks:
+  - {fileID: -6484548602196942016}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3782035632138371876}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 62954
+--- !u!114 &-5829725030734862813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Web Blast
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Web Blast
+  Guid:
+    Data1: -143380596
+    Data2: 1185024745
+    Data3: 795827616
+    Data4: 362708118
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4937
+--- !u!114 &-5803173701802767071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/UI Click 2
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/UI Click 2
+  Guid:
+    Data1: 2028602844
+    Data2: 1169184540
+    Data3: -1693843034
+    Data4: -679549535
+  Banks:
+  - {fileID: -4576621597892024814}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5775634451018956011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,11 +516,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638279580827801013
+  lastModified: 638282260140791328
   FileSizes:
   - Name: Desktop
-    Value: 3004
+    Value: 3640
   Exists: 1
+--- !u!114 &-4635870018434644930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Charge Attack
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Charge Attack
+  Guid:
+    Data1: 881951805
+    Data2: 1326211957
+    Data3: -428886383
+    Data4: -2147321430
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4576621597892024814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,10 +563,34 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/UI.bank
   Name: Desktop/UI
   StudioPath: bank:/UI
-  lastModified: 638279580827929819
+  lastModified: 638282260143441526
   FileSizes:
   - Name: Desktop
-    Value: 52512
+    Value: 264480
+  Exists: 1
+--- !u!114 &-3782035632138371876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Low Health/Health
+  m_EditorClassIdentifier: 
+  Name: Health
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 100
+  ID:
+    data1: 3402761264
+    data2: 1364579537
+  Type: 0
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &-3730144565508193611
 MonoBehaviour:
@@ -501,11 +607,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/Character.bank
   Name: Desktop/Character
   StudioPath: bank:/Character
-  lastModified: 638279580827082070
+  lastModified: 638282260139728314
   FileSizes:
   - Name: Desktop
-    Value: 338304
+    Value: 359296
   Exists: 1
+--- !u!114 &-3092171006492212588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Melee
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Melee
+  Guid:
+    Data1: -268424987
+    Data2: 1178722538
+    Data3: -956009594
+    Data4: -1847307256
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3301
 --- !u!114 &-3031751295956749547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +666,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1500
+--- !u!114 &-2625433126107433679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Venom Spit
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Venom Spit
+  Guid:
+    Data1: 1880164256
+    Data2: 1167009996
+    Data3: -1813351280
+    Data4: 1692262275
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3997
+--- !u!114 &-2612072305320509320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Battle DX
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Battle DX
+  Guid:
+    Data1: 312941884
+    Data2: 1086572480
+    Data3: -1356162171
+    Data4: -617850339
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 120500
 --- !u!114 &-1574722979122902322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,11 +735,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/MUSIC.bank
   Name: Desktop/MUSIC
   StudioPath: bank:/MUSIC
-  lastModified: 638279580827750303
+  lastModified: 638282260142302104
   FileSizes:
   - Name: Desktop
-    Value: 11066848
+    Value: 11066720
   Exists: 1
+--- !u!114 &-1091959804441886434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Final DX
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Final DX
+  Guid:
+    Data1: -1604869933
+    Data2: 1269972040
+    Data3: -349710682
+    Data4: -640945526
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6594
 --- !u!114 &-811185893889831797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,6 +822,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3100
+--- !u!114 &-431373252157430249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Jump
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Jump
+  Guid:
+    Data1: -242837186
+    Data2: 1200567606
+    Data3: 195119031
+    Data4: -1967136845
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-293801989424842038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +875,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 136000
 --- !u!114 &-218843160666562613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,6 +925,7 @@ MonoBehaviour:
   - {fileID: -1574722979122902322}
   - {fileID: -6484548602196942016}
   - {fileID: -4576621597892024814}
+  - {fileID: 5701650040283660709}
   EditorEvents:
   - {fileID: -293801989424842038}
   - {fileID: 7397799452261780516}
@@ -716,15 +958,83 @@ MonoBehaviour:
   - {fileID: 7795218530155751962}
   - {fileID: 4481546270034828056}
   - {fileID: -8020467620599436832}
-  - {fileID: -6579050629358950135}
   - {fileID: 4079744058888284286}
+  - {fileID: -2612072305320509320}
+  - {fileID: -4635870018434644930}
+  - {fileID: -431373252157430249}
+  - {fileID: -5829725030734862813}
+  - {fileID: 8326234119365648457}
+  - {fileID: -2625433126107433679}
+  - {fileID: 5550958542964510696}
+  - {fileID: 1262622371139637817}
+  - {fileID: 7945670947877408390}
+  - {fileID: -1091959804441886434}
+  - {fileID: 188769400369311440}
+  - {fileID: -5803173701802767071}
+  - {fileID: -3092171006492212588}
+  - {fileID: 172686369508242162}
+  - {fileID: -5888146598354029134}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2915868286208036031}
   StringsBanks:
   - {fileID: -4773173170254566585}
-  cacheTime: 638279580827929819
+  cacheTime: 638282260143441526
   cacheVersion: 131603
+--- !u!114 &172686369508242162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Door
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Door
+  Guid:
+    Data1: -2083454454
+    Data2: 1339036473
+    Data3: 228182175
+    Data4: -552433578
+  Banks:
+  - {fileID: -6484548602196942016}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4340
+--- !u!114 &188769400369311440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Opulence Title
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Opulence Title
+  Guid:
+    Data1: -160896563
+    Data2: 1290998063
+    Data3: -1819935567
+    Data4: -2132804707
+  Banks:
+  - {fileID: -4576621597892024814}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2087
 --- !u!114 &406308036771916835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,11 +1077,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/ATMOS.bank
   Name: Desktop/ATMOS
   StudioPath: bank:/ATMOS
-  lastModified: 638279580826952156
+  lastModified: 638282260137308268
   FileSizes:
   - Name: Desktop
-    Value: 5105248
+    Value: 5468736
   Exists: 1
+--- !u!114 &1262622371139637817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Rock Smash
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Rock Smash
+  Guid:
+    Data1: 1710770529
+    Data2: 1264196950
+    Data3: -1213439579
+    Data4: 681018206
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5010
 --- !u!114 &1694991616297143086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,7 +1124,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/DX.bank
   Name: Desktop/DX
   StudioPath: bank:/DX
-  lastModified: 638279580827111995
+  lastModified: 638282260140755414
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -834,10 +1171,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 638279580827790219
+  lastModified: 638282260140775310
   FileSizes:
   - Name: Desktop
-    Value: 2786
+    Value: 2898
   Exists: 1
 --- !u!114 &3078312688614921709
 MonoBehaviour:
@@ -1016,7 +1353,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/COMBAT.bank
   Name: Desktop/COMBAT
   StudioPath: bank:/COMBAT
-  lastModified: 638279580827002351
+  lastModified: 638282260140733551
   FileSizes:
   - Name: Desktop
     Value: 453728
@@ -1048,6 +1385,53 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5550958542964510696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss YOU
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss YOU
+  Guid:
+    Data1: 2130308332
+    Data2: 1335755503
+    Data3: 863208890
+    Data4: -1806234492
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1834
+--- !u!114 &5701650040283660709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/BOSS.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/FMODbanks/Desktop/Desktop/BOSS.bank
+  Name: Desktop/BOSS
+  StudioPath: bank:/BOSS
+  lastModified: 638282260138603878
+  FileSizes:
+  - Name: Desktop
+    Value: 684960
+  Exists: 1
 --- !u!114 &7397799452261780516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1102,7 +1486,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 350
 --- !u!114 &7458236732572193858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,6 +1541,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 177789
+--- !u!114 &7945670947877408390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Die Emote
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Die Emote
+  Guid:
+    Data1: 1681823897
+    Data2: 1203007807
+    Data3: 883930009
+    Data4: -192737282
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8326234119365648457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SOUND EVENTS/Boss Land
+  m_EditorClassIdentifier: 
+  Path: event:/SOUND EVENTS/Boss Land
+  Guid:
+    Data1: 331149461
+    Data2: 1274846683
+    Data3: 1893862532
+    Data4: 152201764
+  Banks:
+  - {fileID: 5701650040283660709}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8504313919504247161
 MonoBehaviour:
   m_ObjectHideFlags: 0
