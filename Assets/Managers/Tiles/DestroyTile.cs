@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.VFX;
 
 public class DestroyTile : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class DestroyTile : MonoBehaviour
     private Vector3Int myPos;
     private bool exploded = false;
     public TileBase tileWhereAreYou;
+    public ParticleSystem destroyedTileParticleSystem;
+    public VisualEffect destroyedTileSmokeGraph;
 
     private void Start()
     {
@@ -26,6 +29,8 @@ public class DestroyTile : MonoBehaviour
             {
                 exploded = true;
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Boss Rock Smash");
+                destroyedTileParticleSystem.Play();
+                destroyedTileSmokeGraph.Play();
                 //play exploded vfx
             }
         }
