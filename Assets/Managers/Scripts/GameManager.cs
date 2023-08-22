@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial Stuff")]
     public bool toggleEnemyMovement;
     public bool mainMenuEnabled;
+    public bool pollyMac;
     //public bool tutorialTestEnable;
     //public bool combatTutorialTestEnable;
     //public ObjectPickUpTest objectPickUpTest;
@@ -230,24 +231,26 @@ public class GameManager : MonoBehaviour
 
     public void ControllerCursor()
     {
-        cursorInputVector = cursorActions.Mouse.CursorControl.ReadValue<Vector2>();
-        Vector2 currentPosition = Mouse.current.position.ReadValue();
-        if (currentPosition.y < Screen.height && currentPosition.y > 0 &&
-            currentPosition.x < Screen.width && currentPosition.x > 0)
+        if (!pollyMac)
         {
-            Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
-            Mouse.current.WarpCursorPosition(newPosition);
+            cursorInputVector = cursorActions.Mouse.CursorControl.ReadValue<Vector2>();
+            Vector2 currentPosition = Mouse.current.position.ReadValue();
+            if (currentPosition.y < Screen.height && currentPosition.y > 0 &&
+                currentPosition.x < Screen.width && currentPosition.x > 0)
+            {
+                Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
+                Mouse.current.WarpCursorPosition(newPosition);
+            }
+            else if (cursorInputVector != Vector2.zero)
+            {
+                if (currentPosition.y > Screen.height) currentPosition.y = Screen.height - 10;
+                if (currentPosition.x > Screen.width) currentPosition.x = Screen.width - 10;
+                if (currentPosition.y < 0) currentPosition.y = 10;
+                if (currentPosition.x < 0) currentPosition.x = 10;
+                Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
+                Mouse.current.WarpCursorPosition(newPosition);
+            }
         }
-        else if (cursorInputVector != Vector2.zero)
-        {
-            if (currentPosition.y > Screen.height) currentPosition.y = Screen.height - 10;
-            if (currentPosition.x > Screen.width) currentPosition.x = Screen.width - 10;
-            if (currentPosition.y < 0) currentPosition.y = 10;
-            if (currentPosition.x < 0) currentPosition.x = 10;
-            Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
-            Mouse.current.WarpCursorPosition(newPosition);
-        }
-        
     }
 
     private void OnDisable()
