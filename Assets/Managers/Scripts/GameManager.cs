@@ -240,10 +240,12 @@ public class GameManager : MonoBehaviour
         }
         else if (cursorInputVector != Vector2.zero)
         {
-            if (currentPosition.y > Screen.height) currentPosition.y = Screen.height - 1;
-            if (currentPosition.x > Screen.width) currentPosition.x = Screen.width - 1;
-            if (currentPosition.y < 0) currentPosition.y = 1;
-            if (currentPosition.x < 0) currentPosition.x = 1;
+            if (currentPosition.y > Screen.height) currentPosition.y = Screen.height - 10;
+            if (currentPosition.x > Screen.width) currentPosition.x = Screen.width - 10;
+            if (currentPosition.y < 0) currentPosition.y = 10;
+            if (currentPosition.x < 0) currentPosition.x = 10;
+            Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
+            Mouse.current.WarpCursorPosition(newPosition);
         }
         
     }
