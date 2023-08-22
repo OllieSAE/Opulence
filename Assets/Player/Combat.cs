@@ -10,7 +10,7 @@ using Random = System.Random;
 
 public class Combat : MonoBehaviour
 {
-    private PlayerInputActions playerInputActions;
+    public PlayerInputActions playerInputActions;
     private Animator animator;
     private DamageAOETest damageAoeTest;
     private Movement movement;

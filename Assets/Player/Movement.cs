@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     private Canvas myCanvas;
     private Combat combat;
     private PlayerInput playerInput;
-    private PlayerInputActions playerInputActions;
+    public PlayerInputActions playerInputActions;
     private Vector2 inputVector;
     private Health health;
     [Header("Animation")]

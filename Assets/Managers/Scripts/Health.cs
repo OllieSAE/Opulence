@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class Health : MonoBehaviour
 {
@@ -61,6 +62,7 @@ public class Health : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.onLevelLoadedEvent -= OnLevelLoad;
+        heartbeatSound.stop(STOP_MODE.IMMEDIATE);
         heartbeatSound.release();
     }
 
@@ -160,7 +162,12 @@ public class Health : MonoBehaviour
                 GetComponent<Combat>().enabled = false;
                 GetComponent<BoxCollider2D>().enabled = false;
             }
-            if(thisIsPlayer) RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Death");
+
+            if (thisIsPlayer)
+            {
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Death");
+                GameManager.Instance.LockPlayer();
+            }
             yield return new WaitForSeconds(5f);
             deathCR = false;
         }

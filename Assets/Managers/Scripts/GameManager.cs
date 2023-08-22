@@ -591,6 +591,12 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
+    public void LockPlayer()
+    {
+        player.GetComponent<Movement>().playerInputActions.Disable();
+        player.GetComponent<Combat>().playerInputActions.Disable();
+    }
+
     public void BossKilled()
     {
         bossKilledEvent?.Invoke();
