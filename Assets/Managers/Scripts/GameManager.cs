@@ -232,11 +232,18 @@ public class GameManager : MonoBehaviour
     {
         cursorInputVector = cursorActions.Mouse.CursorControl.ReadValue<Vector2>();
         Vector2 currentPosition = Mouse.current.position.ReadValue();
-        if (currentPosition.y < Screen.height && currentPosition.x < Screen.width)
+        if (currentPosition.y < Screen.height && currentPosition.y > 0 &&
+            currentPosition.x < Screen.width && currentPosition.x > 0)
         {
-            
             Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
             Mouse.current.WarpCursorPosition(newPosition);
+        }
+        else if (cursorInputVector != Vector2.zero)
+        {
+            if (currentPosition.y > Screen.height) currentPosition.y = Screen.height - 1;
+            if (currentPosition.x > Screen.width) currentPosition.x = Screen.width - 1;
+            if (currentPosition.y < 0) currentPosition.y = 1;
+            if (currentPosition.x < 0) currentPosition.x = 1;
         }
         
     }
