@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class ExitDoorOpener : MonoBehaviour
@@ -10,6 +11,7 @@ public class ExitDoorOpener : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool bossDead = false;
     public bool bossDoor;
+    public bool startDoor;
 
     private void Start()
     {
@@ -39,6 +41,15 @@ public class ExitDoorOpener : MonoBehaviour
             {
                 spriteRenderer = exitDoor.GetComponent<SpriteRenderer>();
                 spriteRenderer.sprite = spriteToChange;
+            }
+
+            if (startDoor)
+            {
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Close");
+            }
+            else if (!startDoor)
+            {
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Open");
             }
         }
     }
