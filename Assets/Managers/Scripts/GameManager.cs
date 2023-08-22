@@ -232,8 +232,13 @@ public class GameManager : MonoBehaviour
     {
         cursorInputVector = cursorActions.Mouse.CursorControl.ReadValue<Vector2>();
         Vector2 currentPosition = Mouse.current.position.ReadValue();
-        Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
-        Mouse.current.WarpCursorPosition(newPosition);
+        if (currentPosition.y < Screen.height && currentPosition.x < Screen.width)
+        {
+            
+            Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
+            Mouse.current.WarpCursorPosition(newPosition);
+        }
+        
     }
 
     private void OnDisable()
