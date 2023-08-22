@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.VFX;
 using Random = System.Random;
 
 public class Combat : MonoBehaviour
@@ -73,6 +74,9 @@ public class Combat : MonoBehaviour
     public float crashDownSpeed;
     public int crashDownPower;
     private int tempDamage;
+    private VisualEffect crashImpact1;
+    private VisualEffect crashImpact2;
+    public FXTrigger fxTrigger;
 
     [Header("Mask Type")] 
     public bool falconMask;
@@ -123,6 +127,8 @@ public class Combat : MonoBehaviour
         canFirstCombo = false;
         canSecondCombo = false;
         falconDashCD = false;
+        
+        
     }
 
     private void OnDisable()
@@ -140,6 +146,10 @@ public class Combat : MonoBehaviour
         movement = GetComponent<Movement>();
         currentlyAttacking = false;
         rechargingAmmo = false;
+        if (gameObject.CompareTag("Enemy"))
+        {
+            if (fxTrigger != null) fxTrigger = GetComponent<FXTrigger>();
+        }
     }
 
     void Update()
@@ -387,9 +397,12 @@ public class Combat : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         
-        
         //screen shake BABY
-        
+        if (fxTrigger != null)
+        {
+            fxTrigger.VFXTrigger("vfxGraph_CrashImpactSmoke");
+            fxTrigger.VFXTrigger("vfxGraph_CrashImpactSmoke (1)");
+        }
         
         StartCoroutine(MoveAfterCrash());
         crashDownCollider.SetActive(false);
