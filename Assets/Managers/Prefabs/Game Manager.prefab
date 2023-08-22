@@ -3670,8 +3670,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1526756042}
   - {fileID: 2124555810}
+  - {fileID: 1526756042}
   - {fileID: 1130345444}
   m_Father: {fileID: 276064943}
   m_RootOrder: 0
@@ -6815,7 +6815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -13.1}
+  m_AnchoredPosition: {x: 0, y: 23.800009}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130345445
@@ -10535,12 +10535,12 @@ GameObject:
   - component: {fileID: 1526756042}
   - component: {fileID: 1526756043}
   m_Layer: 5
-  m_Name: Title Text
+  m_Name: Boss Killed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1526756042
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10555,12 +10555,12 @@ RectTransform:
   m_Children:
   - {fileID: 1746027648}
   m_Father: {fileID: 715620561}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 74}
-  m_SizeDelta: {x: 319.8, y: 56.2}
+  m_AnchoredPosition: {x: 0, y: -80.3}
+  m_SizeDelta: {x: 411.3, y: 56.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1526756043
 MonoBehaviour:
@@ -10574,7 +10574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a6a0d4dec8a4d4ab47c83b7103c805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverSoundToPlay: Opulence Title
+  hoverSoundToPlay: 
   clickSoundToPlay: 
 --- !u!1 &1535499081
 GameObject:
@@ -11782,7 +11782,7 @@ GameObject:
   - component: {fileID: 1746027650}
   - component: {fileID: 1746027649}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Boss Killed Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11805,7 +11805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 24.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1746027650
@@ -11836,10 +11836,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Opulence
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
-  m_sharedMaterial: {fileID: 1873666951679318708, guid: 5e43d96dc38b33444810c34cba93eefd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 007df41bd9ba24945a6d9c2f36a77e24, type: 2}
+  m_sharedMaterial: {fileID: -8185276878358655293, guid: 007df41bd9ba24945a6d9c2f36a77e24, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11863,8 +11863,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15872,7 +15872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2124555810}
   m_Layer: 5
-  m_Name: Subtitle Text
+  m_Name: 'Your Stats:'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15892,11 +15892,11 @@ RectTransform:
   m_Children:
   - {fileID: 833101783}
   m_Father: {fileID: 715620561}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 71.1}
+  m_AnchoredPosition: {x: 0, y: 95.9}
   m_SizeDelta: {x: 265.8, y: 56.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &185526575568314158
@@ -17038,6 +17038,7 @@ MonoBehaviour:
   enemiesKilled: 0
   deaths: 0
   timeElapsed: 0
+  expoNight: 1
   damageDealtText: {fileID: 828894707}
   damageTakenText: {fileID: 2058288461}
   jumpsText: {fileID: 877008844}
@@ -17045,6 +17046,7 @@ MonoBehaviour:
   enemiesKilledText: {fileID: 661491189}
   deathsText: {fileID: 1823752772}
   timeElapsedText: {fileID: 2072593130}
+  bossKilledText: {fileID: 1746027649}
 --- !u!1 &2893646305027435089
 GameObject:
   m_ObjectHideFlags: 0

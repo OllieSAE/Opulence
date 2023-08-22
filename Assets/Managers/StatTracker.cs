@@ -13,6 +13,8 @@ public class StatTracker : MonoBehaviour
     public int enemiesKilled;
     public int deaths;
     public float timeElapsed;
+    private bool bossKilled;
+    public bool expoNight;
     public TextMeshProUGUI damageDealtText;
     public TextMeshProUGUI damageTakenText;
     public TextMeshProUGUI jumpsText;
@@ -20,7 +22,18 @@ public class StatTracker : MonoBehaviour
     public TextMeshProUGUI enemiesKilledText;
     public TextMeshProUGUI deathsText;
     public TextMeshProUGUI timeElapsedText;
-    
+    public TextMeshProUGUI bossKilledText;
+
+
+    private void Start()
+    {
+        GameManager.Instance.bossKilledEvent += SetBossKilled;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.bossKilledEvent -= SetBossKilled;
+    }
 
     public void ResetAllValues()
     {
@@ -69,5 +82,23 @@ public class StatTracker : MonoBehaviour
         enemiesKilledText.text = enemiesKilled.ToString();
         deathsText.text = deaths.ToString();
         timeElapsedText.text = timeElapsed.ToString();
+        WasBossKilled();
+    }
+
+    public void SetBossKilled()
+    {
+        bossKilled = true;
+    }
+
+    public void WasBossKilled()
+    {
+        if (bossKilled && expoNight)
+        {
+            bossKilledText.text = "Congratulations!<br> Show your stats to the dev team!";
+        }
+        else
+        {
+            bossKilledText.text = "Thank you so much for playing!";
+        }
     }
 }

@@ -61,6 +61,7 @@ public class Health : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.onLevelLoadedEvent -= OnLevelLoad;
+        heartbeatSound.release();
     }
 
     private void OnLevelLoad()

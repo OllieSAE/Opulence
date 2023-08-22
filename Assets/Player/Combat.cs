@@ -270,7 +270,7 @@ public class Combat : MonoBehaviour
         {
             StartCoroutine(ChargerAttackCoroutine());
             animator.SetTrigger("Charge");
-            RuntimeManager.PlayOneShot("event:/SOUND EFFECTS/Boss Charge Attack");
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Boss Charge Attack");
             yield return new WaitForSeconds(meleeHitDelay);
         }
 
@@ -282,18 +282,18 @@ public class Combat : MonoBehaviour
             animator.SetTrigger("Special");
             
             //go up, replace with function that's called via animation event
-            StartCoroutine(ClimbUp());
+            //StartCoroutine(ClimbUp());
 
             //wait for a bit before aligning with player
-            yield return new WaitForSeconds(specialAttackHitDelay/2);
+            //yield return new WaitForSeconds(specialAttackHitDelay/2);
             
             //move to above player
-            transform.position = new Vector3(basicEnemyPatrol.player.transform.position.x,transform.position.y,0);
-            basicEnemyPatrol.playerHiding = 0;
-            yield return new WaitForSeconds(0.01f);
+            //transform.position = new Vector3(basicEnemyPatrol.player.transform.position.x,transform.position.y,0);
+            //basicEnemyPatrol.playerHiding = 0;
+            //yield return new WaitForSeconds(0.01f);
 
-            StartCoroutine(CrashDown());
-            basicEnemyPatrol.playerHiding = 0;
+            //StartCoroutine(CrashDown());
+            //basicEnemyPatrol.playerHiding = 0;
         }
     }
 
@@ -336,9 +336,16 @@ public class Combat : MonoBehaviour
         }
     }
 
+    //call via anim event
+    public void StartClimbUp()
+    {
+        StartCoroutine(ClimbUp());
+    }
+
     private IEnumerator ClimbUp()
     {
         spiderBossTileCollider.SetActive(false);
+        damageAoeTest.damageRate = 0;
         Vector3 goal = new Vector3(transform.position.x, transform.position.y + 20, 0);
         float rateOfMovement = climbUpSpeed;
         while (true)
@@ -348,13 +355,27 @@ public class Combat : MonoBehaviour
             transform.position = Vector3.MoveTowards(start, goal, Time.deltaTime * rateOfMovement);
             yield return new WaitForEndOfFrame();
         }
+        basicEnemyPatrol.playerHiding = 0;
+        //wait for a bit before aligning with player
+        yield return new WaitForSeconds(specialAttackHitDelay/2);
+        
+        
+        //move to above player
+        transform.position = new Vector3(basicEnemyPatrol.player.transform.position.x,transform.position.y,0);
+        basicEnemyPatrol.playerHiding = 0;
+        yield return new WaitForSeconds(0.01f);
+
+        
+        StartCoroutine(CrashDown());
+        basicEnemyPatrol.playerHiding = 0;
         spiderBossTileCollider.SetActive(true);
     }
 
     private IEnumerator CrashDown()
     {
         crashDownCollider.SetActive(true);
-        //int tempDamage = damageAoeTest.damageRate;
+        animator.SetTrigger("EndSpecial");
+        basicEnemyPatrol.playerHiding = 0;
         damageAoeTest.damageRate = 0;
         Vector3 goal = new Vector3(transform.position.x, -0.07f, 0);
         float rateOfMovement = crashDownSpeed;
@@ -365,13 +386,20 @@ public class Combat : MonoBehaviour
             transform.position = Vector3.MoveTowards(start, goal, Time.deltaTime * rateOfMovement);
             yield return new WaitForEndOfFrame();
         }
+        
+        
+        //screen shake BABY
+        
+        
         StartCoroutine(MoveAfterCrash());
         crashDownCollider.SetActive(false);
         damageAoeTest.damageRate = tempDamage;
+        basicEnemyPatrol.playerHiding = 0;
     }
 
     private IEnumerator MoveAfterCrash()
     {
+        animator.SetTrigger("EndCrash");
         yield return new WaitForSeconds(1f);
         currentlyAttacking = false;
         basicEnemyPatrol.BossEndAttackAnimation();
