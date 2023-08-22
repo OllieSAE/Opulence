@@ -90,7 +90,7 @@ public partial class @Cursor: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d4f7f0f0-f45e-4d19-941d-67161c6d25c3"",
-                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""path"": ""<XInputController>/leftStick/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -101,7 +101,7 @@ public partial class @Cursor: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""06e39086-a2e9-47d4-a05b-b329023ab920"",
-                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""path"": ""<DualShockGamepad>/leftStick/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -112,7 +112,7 @@ public partial class @Cursor: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""34590fdd-96ed-44b3-91c8-4851b3354b99"",
-                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""path"": ""<SwitchProControllerHID>/leftStick/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
