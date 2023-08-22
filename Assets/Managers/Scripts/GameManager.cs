@@ -215,11 +215,16 @@ public class GameManager : MonoBehaviour
         {
             levelMusic.setParameterByName("Health", playerHealth.currentHealth);
         }
+        if (FmodExtensions.IsPlaying(bossMusic))
+        {
+            bossMusic.setParameterByName("Health", playerHealth.currentHealth);
+        }
+        ControllerCursor();
     }
 
     private void FixedUpdate()
     {
-        ControllerCursor();
+        
     }
 
 
