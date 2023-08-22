@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 {
     public StatTracker statTracker;
     public GameObject player;
+    public Health playerHealth;
     public Canvas playerCanvas;
     public Vector3 playerRespawnPos;
     public bool isPaused;
@@ -195,6 +196,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         OnLevelLoaded();
+    }
+
+    private void Update()
+    {
+        if (FmodExtensions.IsPlaying(levelMusic))
+        {
+            levelMusic.setParameterByName("Health", playerHealth.currentHealth);
+        }
     }
 
     private void OnDisable()
@@ -464,6 +473,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.GetComponent<Combat>().enabled = true;
+            playerHealth = player.GetComponent<Health>();
             playerRespawnPos = player.transform.position;
             StartCoroutine(UnlockPlayer());
             //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
