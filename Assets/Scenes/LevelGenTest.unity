@@ -1719,6 +1719,10 @@ PrefabInstance:
       propertyPath: exitDoor
       value: 
       objectReference: {fileID: 2102231314589844038}
+    - target: {fileID: 5126965517934278889, guid: 9611666926e94294e8968030fe5895f4, type: 3}
+      propertyPath: startDoor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5126965517934278894, guid: 9611666926e94294e8968030fe5895f4, type: 3}
       propertyPath: m_Name
       value: Start Trigger

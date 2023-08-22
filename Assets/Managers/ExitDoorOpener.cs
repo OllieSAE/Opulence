@@ -12,6 +12,7 @@ public class ExitDoorOpener : MonoBehaviour
     private bool bossDead = false;
     public bool bossDoor;
     public bool startDoor;
+    private bool soundPlayed = false;
 
     private void Start()
     {
@@ -43,13 +44,17 @@ public class ExitDoorOpener : MonoBehaviour
                 spriteRenderer.sprite = spriteToChange;
             }
 
-            if (startDoor)
+            if (startDoor && !soundPlayed)
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Close");
+                print("close sound played");
+                soundPlayed = true;
             }
-            else if (!startDoor)
+            else if (!startDoor && !soundPlayed)
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Open");
+                print("open sound played");
+                soundPlayed = true;
             }
         }
     }
