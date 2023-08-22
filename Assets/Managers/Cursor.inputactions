@@ -22,6 +22,24 @@
                     "processors": "Invert",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CursorControl",
+                    "type": "Value",
+                    "id": "959f1320-48f9-461f-8413-d8b2259ea214",
+                    "expectedControlType": "Stick",
+                    "processors": "StickDeadzone",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseClick",
+                    "type": "Button",
+                    "id": "a398d3af-1788-43cb-a467-e3ae8f7425e5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -29,39 +47,6 @@
                     "name": "",
                     "id": "7cb1f6bb-f8c6-4fb0-9ee6-f0a065da7b30",
                     "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pan",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "11cfec15-bb38-4c69-927e-e6013136621f",
-                    "path": "<XInputController>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pan",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "409fe66a-db81-48ee-9b31-2320f6750f71",
-                    "path": "<DualShockGamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pan",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b7963018-e7e3-454a-b111-d95ee878ccc2",
-                    "path": "<SwitchProControllerHID>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -83,7 +68,7 @@
                 {
                     "name": "",
                     "id": "d4f7f0f0-f45e-4d19-941d-67161c6d25c3",
-                    "path": "<XInputController>/rightStick/y",
+                    "path": "<Gamepad>/leftStick/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -94,7 +79,7 @@
                 {
                     "name": "",
                     "id": "06e39086-a2e9-47d4-a05b-b329023ab920",
-                    "path": "<DualShockGamepad>/rightStick/y",
+                    "path": "<Gamepad>/leftStick/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -105,11 +90,77 @@
                 {
                     "name": "",
                     "id": "34590fdd-96ed-44b3-91c8-4851b3354b99",
-                    "path": "<SwitchProControllerHID>/rightStick/y",
+                    "path": "<Gamepad>/leftStick/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f7a95d2-6a2a-4a24-b5f8-9252ce88a388",
+                    "path": "<XInputController>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CursorControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7dd81a7-ec0c-4523-863e-9226174fd116",
+                    "path": "<DualShockGamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CursorControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "348367e3-992b-4752-9839-edbe4f1492b4",
+                    "path": "<SwitchProControllerHID>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CursorControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d511e9d6-549f-47ac-a343-ea4cd9bfc426",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f38ccb9c-1238-4d3e-9ad7-361161e52713",
+                    "path": "<DualShockGamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "914ae205-99c9-416b-b959-2cb27ff20cac",
+                    "path": "<SwitchProControllerHID>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

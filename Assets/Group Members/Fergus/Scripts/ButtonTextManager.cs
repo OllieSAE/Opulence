@@ -66,6 +66,7 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
         {
             text.color = button.colors.highlightedColor;
         }
+        if(button!=null) GameManager.Instance.currentButton = button;
     }
 
     // Event function for when the mouse clicks down on the script objects space
@@ -89,6 +90,8 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
                 text.color = button.colors.normalColor;
             }
         }
+
+        GameManager.Instance.currentButton = null;
     }
 
     // Event function for when the mouse releases a click on the script objects space

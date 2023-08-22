@@ -6,11 +6,15 @@ using FMODUnity;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class GameManager : MonoBehaviour
@@ -36,6 +40,9 @@ public class GameManager : MonoBehaviour
     public string currentScene;
     public GameObject playerMapClone;
     private int playerHealthEndOfLevel;
+    private Vector2 cursorInputVector;
+    private Cursor cursorActions;
+    public float cursorSpeed;
 
     [Header("Backgrounds")]
     public GameObject mainMenuBG;
@@ -56,6 +63,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseUI;
     public GameObject statsUI;
     public Button stuckButton;
+    public Button currentButton;
     
     
     //public GameObject controlsUI;
@@ -148,6 +156,9 @@ public class GameManager : MonoBehaviour
         _instance = this;
         statTracker = GetComponent<StatTracker>();
         statTracker.ResetAllValues();
+        cursorActions = new Cursor();
+        cursorActions.Mouse.Enable();
+        cursorActions.Mouse.MouseClick.performed += MouseClick;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         if (mainCamera != null) mainCameraBrain = mainCamera.GetComponent<CinemachineBrain>();
         vcam1 = GameObject.FindGameObjectWithTag("vcam1");
@@ -206,12 +217,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        ControllerCursor();
+    }
+
+
+    public void ControllerCursor()
+    {
+        cursorInputVector = cursorActions.Mouse.CursorControl.ReadValue<Vector2>();
+        Vector2 currentPosition = Mouse.current.position.ReadValue();
+        Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
+        Mouse.current.WarpCursorPosition(newPosition);
+    }
+
     private void OnDisable()
     {
         mainMenuMusic.release();
         ambienceMusic.release();
         levelMusic.release();
         bossMusic.release();
+        cursorActions.Mouse.MouseClick.performed -= MouseClick;
+        cursorActions.Disable();
+    }
+
+    private void MouseClick(InputAction.CallbackContext context)
+    {
+        if (context.performed && currentButton !=null)
+        {
+            currentButton.onClick.Invoke();
+        }
     }
 
     #region Level Select/Load

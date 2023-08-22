@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+
 
 public class AudioIPointerHandler : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
@@ -17,6 +19,7 @@ public class AudioIPointerHandler : MonoBehaviour, IPointerEnterHandler, IPointe
             RuntimeManager.PlayOneShot("event:/SOUND EVENTS/" + hoverSoundToPlay);
         }
     }
+    
 
     public void OnPointerDown(PointerEventData eventData)
     {
