@@ -47,13 +47,11 @@ public class ExitDoorOpener : MonoBehaviour
             if (startDoor && !soundPlayed)
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Close");
-                print("close sound played");
                 soundPlayed = true;
             }
             else if (!startDoor && !soundPlayed)
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Open");
-                print("open sound played");
                 soundPlayed = true;
             }
         }

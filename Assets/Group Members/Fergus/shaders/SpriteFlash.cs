@@ -32,6 +32,7 @@ public class SpriteFlash : MonoBehaviour
         if (flashRoutine != null)
         {
             StopCoroutine(flashRoutine);
+            spriteRenderer.material = originalMaterial;
         }
 
         if (vfxToTrigger != null) fxTrigger.VFXTrigger(vfxToTrigger.name);
