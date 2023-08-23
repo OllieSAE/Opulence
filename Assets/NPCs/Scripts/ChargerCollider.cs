@@ -18,7 +18,7 @@ public class ChargerCollider : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             meleeAttackPower = combat.meleeAttackPower;
-            other.GetComponentInParent<Health>().ChangeHealth(meleeAttackPower,this.gameObject);
+            other.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
         }
     }
 }

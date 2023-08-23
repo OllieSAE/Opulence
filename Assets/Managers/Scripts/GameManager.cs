@@ -13,8 +13,10 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
+using Slider = UnityEngine.UI.Slider;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class GameManager : MonoBehaviour
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
     public GameObject statsUI;
     public Button stuckButton;
     public Button currentButton;
+    public Slider currentSlider;
     public Texture2D cursorTexture;
     
     
@@ -272,6 +275,23 @@ public class GameManager : MonoBehaviour
         if (context.performed && currentButton !=null)
         {
             currentButton.onClick.Invoke();
+        }
+
+        if (context.performed && currentSlider != null)
+        {
+            if (currentSlider.handleRect.position.x - Mouse.current.position.x.ReadValue() > 0)
+            {
+                //move left
+                currentSlider.value -= 0.1f;
+                //print(currentSlider.handleRect.position.x - Mouse.current.position.x.ReadValue());
+            }
+            else if (currentSlider.handleRect.position.x - Mouse.current.position.x.ReadValue() < 0)
+            {
+                //move right
+                currentSlider.value += 0.1f;
+                //currentSlider.value = 
+
+            }
         }
     }
 
