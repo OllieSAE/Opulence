@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
     public GameObject statsUI;
     public Button stuckButton;
     public Button currentButton;
+    public Texture2D cursorTexture;
     
     
     //public GameObject controlsUI;
@@ -203,6 +204,8 @@ public class GameManager : MonoBehaviour
         {
             ambienceMusic.start();
         }
+        
+        UnityEngine.Cursor.SetCursor(cursorTexture,new Vector2(15,15), CursorMode.ForceSoftware);
     }
 
     private void Start()
@@ -212,6 +215,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        
         if (FmodExtensions.IsPlaying(levelMusic))
         {
             levelMusic.setParameterByName("Health", playerHealth.currentHealth);
@@ -243,10 +247,10 @@ public class GameManager : MonoBehaviour
             }
             else if (cursorInputVector != Vector2.zero)
             {
-                if (currentPosition.y > Screen.height) currentPosition.y = Screen.height - 10;
-                if (currentPosition.x > Screen.width) currentPosition.x = Screen.width - 10;
-                if (currentPosition.y < 0) currentPosition.y = 10;
-                if (currentPosition.x < 0) currentPosition.x = 10;
+                if (currentPosition.y > Screen.height) currentPosition.y = Screen.height - 5;
+                if (currentPosition.x > Screen.width) currentPosition.x = Screen.width - 5;
+                if (currentPosition.y < 0) currentPosition.y = 5;
+                if (currentPosition.x < 0) currentPosition.x = 5;
                 Vector2 newPosition = currentPosition + (cursorInputVector * cursorSpeed);
                 Mouse.current.WarpCursorPosition(newPosition);
             }
@@ -456,7 +460,7 @@ public class GameManager : MonoBehaviour
         if(vcam1!=null)vcam1.transform.position = new Vector3(0, 0, -20);
         loadingScreenBG.SetActive(true);
         loadingScreen.SetActive(true);
-        
+        UnityEngine.Cursor.visible = false;
         yield return new WaitForSeconds(1f);
         StartCoroutine(LoadSceneAsync());
     }
@@ -478,6 +482,7 @@ public class GameManager : MonoBehaviour
             OnLevelLoaded();
             loadingScreenBG.SetActive(false);
             loadingScreen.SetActive(false);
+            UnityEngine.Cursor.visible = true;
         }
         else if (sceneToLoad == "FirstBossLevel")
         {
@@ -680,6 +685,7 @@ public class GameManager : MonoBehaviour
             if(mainCamera!=null)mainCamera.transform.position = new Vector3(0, 0, -20);
             statsBG.SetActive(true);
             statsUI.SetActive(true);
+            UnityEngine.Cursor.visible = true;
             statTracker.DisplayStats();
         }
 
@@ -823,6 +829,7 @@ public class GameManager : MonoBehaviour
             if (isPaused)
             {
                 pauseUI.SetActive(false);
+                UnityEngine.Cursor.visible = false;
                 globalVolumeWithDoF.gameObject.SetActive(false);
                 globalVolume.gameObject.SetActive(true);
                 pauseEndEvent?.Invoke();
@@ -830,6 +837,7 @@ public class GameManager : MonoBehaviour
             else if (!isPaused)
             {
                 pauseUI.SetActive(true);
+                UnityEngine.Cursor.visible = true;
                 globalVolume.gameObject.SetActive(false);
                 globalVolumeWithDoF.gameObject.SetActive(true);
                 pauseStartEvent?.Invoke();
@@ -851,6 +859,7 @@ public class GameManager : MonoBehaviour
             currentScene = "LevelSelectScene";
             statsBG.SetActive(true);
             statsUI.SetActive(true);
+            UnityEngine.Cursor.visible = true;
             statTracker.DisplayStats();
             vcam1.transform.position = new Vector3(0, 0, -20);
         }
