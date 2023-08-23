@@ -677,11 +677,16 @@ public class GameManager : MonoBehaviour
     {
         player.GetComponent<Movement>().playerInputActions.Disable();
         player.GetComponent<Combat>().playerInputActions.Disable();
+        if (currentScene == "FirstBossLevel")
+        {
+            RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Boss Wins");
+        }
     }
 
     public void BossKilled()
     {
         bossKilledEvent?.Invoke();
+        RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Boss Final DX");
     }
 
     public void EndLevel()

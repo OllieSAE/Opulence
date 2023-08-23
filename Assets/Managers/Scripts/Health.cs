@@ -126,7 +126,7 @@ public class Health : MonoBehaviour
             StartCoroutine(Death(this.gameObject));
             
             //combat tutorial only
-            if(CombatTestManager.Instance != null) CombatTestManager.Instance.KilledEnemy(this.gameObject);
+            //if(CombatTestManager.Instance != null) CombatTestManager.Instance.KilledEnemy(this.gameObject);
         }
     }
 
