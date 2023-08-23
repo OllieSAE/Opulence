@@ -69895,6 +69895,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2053359985, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: clickSoundToPlay
+      value: UI Stuck
+      objectReference: {fileID: 0}
     - target: {fileID: 861644328799837907, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -69943,6 +69947,10 @@ PrefabInstance:
       propertyPath: statsBG
       value: 
       objectReference: {fileID: 2089044190}
+    - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
+      propertyPath: pollyMac
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1785361502933586404, guid: 81df457d65ef04042942728167ca4758, type: 3}
       propertyPath: creditsBG
       value: 
