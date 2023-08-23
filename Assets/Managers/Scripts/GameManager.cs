@@ -720,6 +720,7 @@ public class GameManager : MonoBehaviour
                     mapCameraVC.gameObject.transform.position =
                         playerMapClone.transform.position + new Vector3(0, 0, -20);
                     vcam1VC.gameObject.SetActive(false);
+                    UnityEngine.Cursor.visible = true;
                     pauseStartEvent?.Invoke();
                     mapOpenedEvent?.Invoke();
                 }
@@ -728,6 +729,7 @@ public class GameManager : MonoBehaviour
                     //close the map and trigger pause event to UNLOCK movement/timeScale
                     vcam1VC.gameObject.SetActive(true);
                     mapCameraVC.gameObject.SetActive(false);
+                    UnityEngine.Cursor.visible = false;
                     pauseEndEvent?.Invoke();
                     mapClosedEvent?.Invoke();
                 }
