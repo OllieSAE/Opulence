@@ -59,14 +59,14 @@ Material:
     - _CastShadows: 1
     - _Cull: 0
     - _DstBlend: 10
-    - _EdgeMask: 0.842
+    - _EdgeMask: 0.88
     - _EdgeMaskBlend: 0.058
-    - _EdgeNoiseScale: 29.8
-    - _EdgeNoiseTiling: 74.5
+    - _EdgeNoiseScale: 2.04
+    - _EdgeNoiseTiling: 103.1
     - _EmissivePower: 1
     - _InnerPower: 0.2
     - _NoiseAmount: 0.082
-    - _NoisePower: 1
+    - _NoisePower: 1.46
     - _NoiseScale: 25
     - _OuterHeight: 1
     - _OuterPower: 1
@@ -89,7 +89,7 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _AlbedoColour: {r: 0.006787301, g: 0.0033374857, b: 0.047169805, a: 1}
-    - _EdgeNoiseOffset: {r: 12, g: 0, b: 0, a: 0}
+    - _EdgeNoiseOffset: {r: 40, g: 0, b: 0, a: 0}
     - _EmissiveColour: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
     - _InnerColour: {r: 15.493315, g: 0, b: 0, a: 1}
     - _InnerTiling: {r: 1, g: 1, b: 0, a: 0}
