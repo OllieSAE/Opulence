@@ -165,6 +165,7 @@ public class Health : MonoBehaviour
             if (thisIsPlayer)
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Character Death");
+                heartbeatSound.stop(STOP_MODE.IMMEDIATE);
                 GameManager.Instance.LockPlayer();
             }
             yield return new WaitForSeconds(5f);
