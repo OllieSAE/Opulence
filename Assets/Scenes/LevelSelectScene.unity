@@ -69979,14 +69979,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 5144030513815536219, guid: 81df457d65ef04042942728167ca4758, type: 3}
-      propertyPath: mapCamera
-      value: 
-      objectReference: {fileID: 960251770}
-    - target: {fileID: 5144030513815536219, guid: 81df457d65ef04042942728167ca4758, type: 3}
-      propertyPath: mapCameraConfiner
-      value: 
-      objectReference: {fileID: 960251773}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81df457d65ef04042942728167ca4758, type: 3}
 --- !u!60 &1902371212 stripped
@@ -71521,7 +71513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534557, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: orthographic size
-      value: 10
+      value: 4.2
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534558, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_Name
@@ -71533,7 +71525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534754, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 300
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534754, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -71541,7 +71533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534754, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4741526429948534754, guid: b75ee81b78221cb4e88b74aef55492b0, type: 3}
       propertyPath: m_LocalRotation.w
