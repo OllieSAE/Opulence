@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -619600667, guid: bea749e01971101439519d318cd4b948, type: 3}
+  m_Sprite: {fileID: -1695497594, guid: 1fba893da4f14274b94a877863854183, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -237,6 +237,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   immune: 0
+  iAmTheBoss: 0
 --- !u!114 &3709424751106269471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +281,7 @@ MonoBehaviour:
   climbUpSpeed: 0
   crashDownSpeed: 0
   crashDownPower: 0
+  fxTrigger: {fileID: 0}
   falconMask: 0
   spiderMask: 0
   falconDashCD: 0
