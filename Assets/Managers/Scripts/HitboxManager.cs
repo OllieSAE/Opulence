@@ -113,22 +113,22 @@ public class HitboxManager : MonoBehaviour
 
     public void FalconAttack3Frame1()
     {
-        GenerateHitboxForDamage(falconA3F1.position,falconA3Radius,parentCombat.meleeAttackPower);
+        GenerateHitboxForDamage(falconA3F1.position,falconA3Radius,parentCombat.meleeAttackPower * 2);
     }
 
     public void FalconAttack3Frame2()
     {
-        GenerateHitboxForDamage(falconA3F2.position,falconA3Radius,parentCombat.meleeAttackPower);
+        GenerateHitboxForDamage(falconA3F2.position,falconA3Radius,parentCombat.meleeAttackPower * 2);
     }
 
     public void FalconAttack3Frame3()
     {
-        GenerateHitboxForDamage(falconA3F3.position,falconA3Radius,parentCombat.meleeAttackPower);
+        GenerateHitboxForDamage(falconA3F3.position,falconA3Radius,parentCombat.meleeAttackPower * 2);
     }
 
     public void FalconAttack3Frame4()
     {
-        GenerateHitboxForDamage(falconA3F4.position,falconA3Radius,parentCombat.meleeAttackPower);
+        GenerateHitboxForDamage(falconA3F4.position,falconA3Radius,parentCombat.meleeAttackPower * 2);
     }
 
     #endregion

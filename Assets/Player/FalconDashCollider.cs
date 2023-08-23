@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FalconDashCollider : MonoBehaviour
 {
-    private int meleeAttackPower;
+    private int falconDashAttackPower;
     private Combat combat;
 
     private void Start()
@@ -17,8 +17,8 @@ public class FalconDashCollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            meleeAttackPower = combat.meleeAttackPower;
-            other.GetComponentInParent<Health>().ChangeHealth(-meleeAttackPower,this.gameObject);
+            falconDashAttackPower = combat.rangedAttackPower;
+            other.GetComponentInParent<Health>().ChangeHealth(-falconDashAttackPower,this.gameObject);
         }
     }
 }

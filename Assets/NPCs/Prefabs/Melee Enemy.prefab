@@ -162,7 +162,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0040500164, y: -0.21059895}
+  m_Offset: {x: 0.00031870604, y: -0.21059895}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -173,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.21274424, y: 0.5893879}
+  m_Size: {x: 0.11080694, y: 0.5893879}
   m_EdgeRadius: 0
 --- !u!114 &4331296779273578421
 MonoBehaviour:
@@ -227,6 +227,7 @@ MonoBehaviour:
   targetDirRaw: {x: 0, y: 0, z: 0}
   targetDir: {x: 0, y: 0, z: 0}
   enemyType: 1
+  doNotSetTrue: 0
 --- !u!50 &1834814332
 Rigidbody2D:
   serializedVersion: 4
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentlyAttacking: 0
   attackCooldown: 3
-  meleeAttackPower: 5
+  meleeAttackPower: 15
   meleeAttackPoint: {fileID: 992957323}
   meleeAttackRange: 0.24
   meleeHitDelay: 0.25
@@ -292,7 +293,7 @@ MonoBehaviour:
   internalComboTimeDelay: 0
   externalComboTimeDelay: 0
   whatDoICallThis: 0
-  rangedAttackPower: 2
+  rangedAttackPower: 15
   rangedMaxAmmo: 5
   rechargeAmmoTime: 1
   launchPoint: {fileID: 1173620278182232431}

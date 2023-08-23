@@ -130,7 +130,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.032399446, y: -0.004050255}
+  m_Offset: {x: -0.030413628, y: -0.023905873}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -141,7 +141,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2476812, y: 0.9646816}
+  m_Size: {x: 0.14840221, y: 0.9249704}
   m_EdgeRadius: 0
 --- !u!114 &1158638353165944227
 MonoBehaviour:
@@ -195,6 +195,7 @@ MonoBehaviour:
   targetDirRaw: {x: 0, y: 0, z: 0}
   targetDir: {x: 0, y: 0, z: 0}
   enemyType: 1
+  doNotSetTrue: 0
 --- !u!50 &3174919029024467306
 Rigidbody2D:
   serializedVersion: 4
@@ -229,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 50
+  maxHealth: 40
   healthBar: {fileID: 0}
   playerLayer:
     serializedVersion: 2
@@ -260,7 +261,7 @@ MonoBehaviour:
   internalComboTimeDelay: 0
   externalComboTimeDelay: 0
   whatDoICallThis: 0
-  rangedAttackPower: 10
+  rangedAttackPower: 15
   rangedMaxAmmo: 5
   rechargeAmmoTime: 3
   launchPoint: {fileID: 4343191213374169977}

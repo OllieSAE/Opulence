@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class BasicEnemyPatrol : MonoBehaviour
 {
@@ -110,8 +112,33 @@ public class BasicEnemyPatrol : MonoBehaviour
         Gizmos.DrawWireSphere(wallAheadCheck.position, wallCheckRadius);
     }
 
+    private IEnumerator StartJokeCoroutine()
+    {
+        canStart = false;
+        if (Random.Range(0, 10) < 5)
+        {
+            StartCoroutine(MainMenuJokeCoroutine());
+        }
+        yield return new WaitForSeconds(3f);
+        canStart = true;
+    }
+    private IEnumerator MainMenuJokeCoroutine()
+    {
+        animator.SetBool("HackCharge", true);
+        currentSpeed = aggroSpeed;
+        yield return new WaitForSeconds(3f);
+        animator.SetBool("HackCharge", false);
+        currentSpeed = defaultSpeed;
+    }
+    public bool doNotSetTrue;
+    private bool canStart = true;
     private void FixedUpdate()
     {
+        if (doNotSetTrue && canStart)
+        {
+            StartCoroutine(StartJokeCoroutine());
+        }
+        
         if (!patrolOnly && enemyType != EnemyType.Boss)
         {
             RaycastHit2D frontHit = Physics2D.Raycast(
@@ -207,7 +234,7 @@ public class BasicEnemyPatrol : MonoBehaviour
                 playerHiding++;
                 if (playerHiding > 5)
                 {
-                    print("YOU CANNOT HIDE FROM ME");
+                    RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Boss YCHFM");
                     combat.SpiderAttackOverride();
                     playerHiding = 0;
                     isAttacking = true;
