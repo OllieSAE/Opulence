@@ -37,6 +37,8 @@ public class ExitDoorOpener : MonoBehaviour
             {
                 spriteRenderer = exitDoor.GetComponent<SpriteRenderer>();
                 spriteRenderer.sprite = spriteToChange;
+                RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Open");
+                soundPlayed = true;
             }
             else if (!bossDoor)
             {
