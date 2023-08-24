@@ -103,7 +103,11 @@ public class Movement : MonoBehaviour
 
     private void PauseGame(InputAction.CallbackContext context)
     {
-        if(context.performed) GameManager.Instance.PauseUI();
+        if (context.performed)
+        {
+            GameManager.Instance.PauseUI();
+            GameManager.Instance.currentButton = null;
+        }
     }
 
     private void ToggleMap(InputAction.CallbackContext context)

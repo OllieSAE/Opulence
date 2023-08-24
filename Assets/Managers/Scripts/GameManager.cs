@@ -275,6 +275,7 @@ public class GameManager : MonoBehaviour
         if (context.performed && currentButton !=null)
         {
             currentButton.onClick.Invoke();
+            currentButton = null;
         }
 
         if (context.performed && currentSlider != null)
@@ -856,6 +857,7 @@ public class GameManager : MonoBehaviour
             if (isPaused)
             {
                 pauseUI.SetActive(false);
+                settingsMenuUI.SetActive(false);
                 UnityEngine.Cursor.visible = false;
                 globalVolumeWithDoF.gameObject.SetActive(false);
                 globalVolume.gameObject.SetActive(true);

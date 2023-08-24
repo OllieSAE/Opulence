@@ -78,6 +78,7 @@ public class ButtonTextManager : MonoBehaviour, IPointerEnterHandler, IPointerDo
             buttonImage.color = button.colors.pressedColor;
             parentAudioHandler.OnPointerDown(eventData);
         }
+        GameManager.Instance.currentButton = null;
     }
 
     // Event function for when the mouse exits the script objects space

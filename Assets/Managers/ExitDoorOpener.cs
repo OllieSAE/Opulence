@@ -44,12 +44,12 @@ public class ExitDoorOpener : MonoBehaviour
                 spriteRenderer.sprite = spriteToChange;
             }
 
-            if (startDoor && !soundPlayed)
+            if (startDoor && !soundPlayed && !bossDoor)
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Close");
                 soundPlayed = true;
             }
-            else if (!startDoor && !soundPlayed)
+            else if (!startDoor && !soundPlayed && !bossDoor)
             {
                 RuntimeManager.PlayOneShot("event:/SOUND EVENTS/Door Open");
                 soundPlayed = true;
